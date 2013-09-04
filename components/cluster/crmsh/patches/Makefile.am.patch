@@ -1,0 +1,11 @@
+diff -Nura crmsh-ef3f08547688.orig/doc/Makefile.am crmsh-ef3f08547688/doc/Makefile.am
+--- crmsh-ef3f08547688.orig/doc/Makefile.am	2013-02-11 10:59:11.000000000 +0100
++++ crmsh-ef3f08547688/doc/Makefile.am	2013-08-06 20:31:05.099023993 +0200
+@@ -38,6 +38,6 @@
+ %.html: %.txt
+ 	$(ASCIIDOC) --unsafe --backend=xhtml11 $<
+ %.8: %.8.txt
+-	a2x -f manpage $<
++	a2x -L -f manpage $<
+ clean-local:
+ 	-rm -rf $(generated_docs) $(generated_mans)

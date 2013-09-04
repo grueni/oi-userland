@@ -1,0 +1,126 @@
+#
+# This file and its contents are supplied under the terms of the
+# Common Development and Distribution License ("CDDL)". You may
+# only use this file in accordance with the terms of the CDDL.
+#
+# A full copy of the text of the CDDL should have accompanied this
+# source. A copy of the CDDL is also available via the Internet at
+# http://www.illumos.org/license/CDDL.
+#
+
+#
+# Copyright 2013 Adam Stevko. All rights reserved.
+#
+
+<transform file path=usr/sbin/crm -> default pkg.depend.bypass-generate .*modules.*>
+
+set name=pkg.fmri value=pkg:/application/cluster/crmsh@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary value="Pacemaker command line interface for management and configuration"
+set name=info.classification value="org.opensolaris.category.2008:System/Shells"
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+
+license crmsh.license license='GPLv2'
+
+dir  path=usr
+dir  path=usr/lib
+dir  path=usr/lib/python2.6
+dir  path=usr/lib/python2.6/site-packages
+dir  path=usr/lib/python2.6/site-packages/crmsh
+file path=usr/lib/python2.6/site-packages/crmsh/__init__.py
+file path=usr/lib/python2.6/site-packages/crmsh/cache.py
+file path=usr/lib/python2.6/site-packages/crmsh/cibconfig.py
+file path=usr/lib/python2.6/site-packages/crmsh/cibstatus.py
+file path=usr/lib/python2.6/site-packages/crmsh/clidisplay.py
+file path=usr/lib/python2.6/site-packages/crmsh/cliformat.py
+file path=usr/lib/python2.6/site-packages/crmsh/completion.py
+file path=usr/lib/python2.6/site-packages/crmsh/crm_gv.py
+file path=usr/lib/python2.6/site-packages/crmsh/crm_pssh.py
+file path=usr/lib/python2.6/site-packages/crmsh/help.py
+file path=usr/lib/python2.6/site-packages/crmsh/idmgmt.py
+file path=usr/lib/python2.6/site-packages/crmsh/levels.py
+file path=usr/lib/python2.6/site-packages/crmsh/log_patterns.py
+file path=usr/lib/python2.6/site-packages/crmsh/log_patterns_118.py
+file path=usr/lib/python2.6/site-packages/crmsh/main.py
+file path=usr/lib/python2.6/site-packages/crmsh/msg.py
+file path=usr/lib/python2.6/site-packages/crmsh/pacemaker.py
+file path=usr/lib/python2.6/site-packages/crmsh/parse.py
+file path=usr/lib/python2.6/site-packages/crmsh/ra.py
+file path=usr/lib/python2.6/site-packages/crmsh/report.py
+file path=usr/lib/python2.6/site-packages/crmsh/rsctest.py
+file path=usr/lib/python2.6/site-packages/crmsh/schema.py
+file path=usr/lib/python2.6/site-packages/crmsh/singletonmixin.py
+file path=usr/lib/python2.6/site-packages/crmsh/template.py
+file path=usr/lib/python2.6/site-packages/crmsh/term.py
+file path=usr/lib/python2.6/site-packages/crmsh/ui.py
+file path=usr/lib/python2.6/site-packages/crmsh/userprefs.py
+file path=usr/lib/python2.6/site-packages/crmsh/utils.py
+file path=usr/lib/python2.6/site-packages/crmsh/vars.py
+file path=usr/lib/python2.6/site-packages/crmsh/xmlutil.py
+dir  path=usr/sbin
+file path=usr/sbin/crm pkg.tmp.autopyc=false
+dir  path=usr/share
+dir  path=usr/share/crmsh
+file path=usr/share/crmsh/crm.8.txt
+dir  path=usr/share/crmsh/templates
+file path=usr/share/crmsh/templates/apache
+file path=usr/share/crmsh/templates/clvm
+file path=usr/share/crmsh/templates/filesystem
+file path=usr/share/crmsh/templates/gfs2
+file path=usr/share/crmsh/templates/gfs2-base
+file path=usr/share/crmsh/templates/ocfs2
+file path=usr/share/crmsh/templates/sbd
+file path=usr/share/crmsh/templates/virtual-ip
+dir  path=usr/share/crmsh/tests
+file path=usr/share/crmsh/tests/README.regression
+file path=usr/share/crmsh/tests/crm-interface
+file path=usr/share/crmsh/tests/defaults
+file path=usr/share/crmsh/tests/descriptions
+file path=usr/share/crmsh/tests/empty.xml
+file path=usr/share/crmsh/tests/evaltest.sh
+file path=usr/share/crmsh/tests/history-test.tar.bz2
+file path=usr/share/crmsh/tests/regression.sh
+dir  path=usr/share/crmsh/tests/testcases
+file path=usr/share/crmsh/tests/testcases/acl
+file path=usr/share/crmsh/tests/testcases/acl.exp
+file path=usr/share/crmsh/tests/testcases/basicset
+file path=usr/share/crmsh/tests/testcases/common.excl
+file path=usr/share/crmsh/tests/testcases/confbasic
+file path=usr/share/crmsh/tests/testcases/confbasic-xml
+file path=usr/share/crmsh/tests/testcases/confbasic-xml.exp
+file path=usr/share/crmsh/tests/testcases/confbasic.exp
+file path=usr/share/crmsh/tests/testcases/delete
+file path=usr/share/crmsh/tests/testcases/delete.exp
+file path=usr/share/crmsh/tests/testcases/edit
+file path=usr/share/crmsh/tests/testcases/edit.exp
+file path=usr/share/crmsh/tests/testcases/file
+file path=usr/share/crmsh/tests/testcases/file.exp
+file path=usr/share/crmsh/tests/testcases/history
+file path=usr/share/crmsh/tests/testcases/history.excl
+file path=usr/share/crmsh/tests/testcases/history.exp
+file path=usr/share/crmsh/tests/testcases/history.post
+file path=usr/share/crmsh/tests/testcases/history.pre
+file path=usr/share/crmsh/tests/testcases/node
+file path=usr/share/crmsh/tests/testcases/node.exp
+file path=usr/share/crmsh/tests/testcases/ra
+file path=usr/share/crmsh/tests/testcases/ra.exp
+file path=usr/share/crmsh/tests/testcases/ra.filter
+file path=usr/share/crmsh/tests/testcases/resource
+file path=usr/share/crmsh/tests/testcases/resource.exp
+file path=usr/share/crmsh/tests/testcases/rset
+file path=usr/share/crmsh/tests/testcases/rset-xml
+file path=usr/share/crmsh/tests/testcases/rset-xml.exp
+file path=usr/share/crmsh/tests/testcases/rset.exp
+file path=usr/share/crmsh/tests/testcases/shadow
+file path=usr/share/crmsh/tests/testcases/shadow.exp
+file path=usr/share/crmsh/tests/testcases/xmlonly.sh
+dir  path=usr/share/doc
+dir  path=usr/share/doc/crmsh
+file path=usr/share/doc/crmsh/AUTHORS
+file path=usr/share/doc/crmsh/COPYING
+dir  path=usr/share/man
+dir  path=usr/share/man/man8
+dir  path=var
+dir  path=var/cache
+dir  path=var/cache/crm
