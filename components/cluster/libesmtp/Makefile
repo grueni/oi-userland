@@ -18,7 +18,7 @@ include ../../../make-rules/shared-macros.mk
 COMPONENT_NAME= libesmtp
 COMPONENT_VERSION= 1.0.6
 COMPONENT_FMRI= library/$(COMPONENT_NAME)
-COMPONENT_CLASSIFICATION= org.opensolaris.category.2008:Development/C
+COMPONENT_CLASSIFICATION= Development/C
 COMPONENT_PROJECT_URL=  http://www.stafford.uklinux.net/libesmtp
 COMPONENT_SRC= $(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE= v$(COMPONENT_VERSION).tar.gz

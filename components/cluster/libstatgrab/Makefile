@@ -17,7 +17,7 @@ include ../../../make-rules/shared-macros.mk
 COMPONENT_NAME=   libstatgrab
 COMPONENT_VERSION=  0.91
 COMPONENT_FMRI= library/$(COMPONENT_NAME)
-COMPONENT_CLASSIFICATION= org.opensolaris.category.2008:Development/C
+COMPONENT_CLASSIFICATION= Development/C
 COMPONENT_PROJECT_URL=  http://www.i-scream.org/$(COMPONENT_NAME)
 COMPONENT_SRC= $(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE= $(COMPONENT_SRC).tar.gz

@@ -13,7 +13,8 @@
 # Copyright 2016 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved.
 #
 
-<transform file path=.*\.py$ -> default pkg.tmp.autopyc false>
+<transform file path=usr/lib/stonith/plugins/external/(.+)$  -> default mode 0555 >
+<transform file path=usr/lib/stonith/plugins/stonith2/(.+)$  -> default mode 0555 >
 
 set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
 set name=pkg.summary value="$(COMPONENT_SUMMARY)"

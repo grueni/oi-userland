@@ -10,29 +10,44 @@
 
 #
 # Copyright 2013 Adam Stevko. All rights reserved.
+# Copyright 2016 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved.
 #
 
 include ../../../make-rules/shared-macros.mk
 
-COMPONENT_NAME=		crmsh
-COMPONENT_VERSION=	1.2.5
-COMPONENT_HG_REV=	ef3f08547688
-COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_HG_REV)
-COMPONENT_ARCHIVE=	$(COMPONENT_HG_REV).tar.gz
-COMPONENT_ARCHIVE_HASH= sha256:b0a2feddbec85bb90811bfdfd57ac7fe6731654f7dda36d0b18c5436dc6512f3
-COMPONENT_PROJECT_URL=	https://savannah.nongnu.org/projects/crmsh
-COMPONENT_ARCHIVE_URL=	http://hg.savannah.gnu.org/hgweb/crmsh/archive/$(COMPONENT_ARCHIVE)
+COMPONENT_NAME= crmsh
+COMPONENT_VERSION= 2.2.1
+COMPONENT_FMRI= application/cluster/$(COMPONENT_NAME)
+COMPONENT_CLASSIFICATION= System/Shells
+COMPONENT_PROJECT_URL= https://github.com/ClusterLabs/crmsh
+COMPONENT_SRC= $(COMPONENT_NAME)-$(COMPONENT_VERSION)
+COMPONENT_ARCHIVE= $(COMPONENT_VERSION).tar.gz
+COMPONENT_ARCHIVE_HASH= sha256:2ca71334bb73c98171ebbd299077233be736cf3bbdde48366f2535ed60f10cfc
+COMPONENT_ARCHIVE_URL=  https://github.com/ClusterLabs/$(COMPONENT_NAME)/archive/$(COMPONENT_ARCHIVE)
+COMPONENT_LICENSE= GPLv2
+COMPONENT_SUMMARY= crmsh is a command-line interface for High-Availability cluster management and part of the Clusterlabs project.
 
-include $(WS_TOP)/make-rules/prep.mk
-include $(WS_TOP)/make-rules/configure.mk
-include $(WS_TOP)/make-rules/ips.mk
 
+include $(WS_MAKE_RULES)/prep.mk
+include $(WS_MAKE_RULES)/configure.mk
+include $(WS_MAKE_RULES)/ips.mk
+
+COMPONENT_PREP_ACTION=(cd $(SOURCE_DIR); $(CONFIG_SHELL) autogen.sh )
+
+COMPONENT_PRE_CONFIGURE_ACTION=($(CLONEY) $(SOURCE_DIR) $(@D))
+
+CONFIGURE_SCRIPT= $(@D)/configure
+
+CONFIGURE_OPTIONS += --sysconfdir=/etc
+CONFIGURE_OPTIONS += --libexecdir=$(CONFIGURE_PREFIX)/lib
+CONFIGURE_OPTIONS += --sharedstatedir=/var/cluster
 CONFIGURE_OPTIONS += --localstatedir=/var
 
-COMPONENT_PREP_ACTION=(cd $(SOURCE_DIR); ./autogen.sh)
 
 build:          $(BUILD_32)
 
 install:        $(INSTALL_32)
 
 test:           $(TESTS_32)
+
+REQUIRED_PACKAGES += runtime/python-27
