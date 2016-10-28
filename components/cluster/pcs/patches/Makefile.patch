@@ -1,28 +1,27 @@
---- a/Makefile	2016-10-26 08:21:49.083432826 +0200
-+++ b/Makefile	2016-10-26 11:03:18.406923181 +0200
-@@ -1,5 +1,5 @@
- # Compatibility with GNU/Linux [i.e. Debian] based distros
--UNAME_OS_GNU := $(shell if uname -o | grep -q "GNU/Linux" ; then echo true; else echo false; fi)
-+UNAME_OS_GNU := $(shell if uname | grep -q "GNU/Linux" ; then echo true; else echo false; fi)
- DISTRO_DEBIAN := $(shell if [ -e /etc/debian_version ] ; then echo true; else echo false; fi)
- IS_DEBIAN=false
- DISTRO_DEBIAN_VER_8=false
-@@ -81,12 +81,12 @@
- 	BASH_COMPLETION_DIR=${DESTDIR}/etc/bash_completion.d
+diff -Nura a/Makefile b/Makefile
+--- a/Makefile	2016-10-28 17:52:57.014552276 +0200
++++ b/Makefile	2016-10-28 19:03:50.299333591 +0200
+@@ -78,14 +78,15 @@
+ 
+ 
+ ifndef BASH_COMPLETION_DIR
+-	BASH_COMPLETION_DIR=${DESTDIR}/etc/bash_completion.d
++	BASH_COMPLETION_DIR=/etc/bash_completion.d
  endif
  
 -install:
+-	$(PYTHON) setup.py install --root=$(or ${DESTDIR}, /) ${EXTRA_SETUP_OPTS}
 +install: install_pcsd
- 	$(PYTHON) setup.py install --root=$(or ${DESTDIR}, /) ${EXTRA_SETUP_OPTS}
++	$(PYTHON) setup.py install --root=$(or ${DESTDIR}, /) ${EXTRA_SETUP_OPTS} \
++		--install-lib=$(PYTHON_SITELIB)
  	mkdir -p ${DESTDIR}${PREFIX}/sbin/
  	mv ${DESTDIR}${PREFIX}/bin/pcs ${DESTDIR}${PREFIX}/sbin/pcs
- 	install -D -m644 pcs/bash_completion.sh ${BASH_COMPLETION_DIR}/pcs
--	install -m644 -D pcs/pcs.8 ${DESTDIR}/${MANDIR}/man8/pcs.8
-+	install -m644 -D pcs/pcs.8 ${DESTDIR}${MANDIR}/man8/pcs.8
+-	install -D -m644 pcs/bash_completion.sh ${BASH_COMPLETION_DIR}/pcs
++	install -D -m644 pcs/bash_completion.sh ${DESTDIR}${BASH_COMPLETION_DIR}/pcs
+ 	install -m644 -D pcs/pcs.8 ${DESTDIR}/${MANDIR}/man8/pcs.8
  ifeq ($(IS_DEBIAN),true)
    ifeq ($(install_settings),true)
- 	rm -f  ${DESTDIR}${PYTHON_SITELIB}/pcs/settings.py
-@@ -100,7 +100,7 @@
+@@ -100,7 +101,7 @@
  
  install_pcsd:
  ifeq ($(BUILD_GEMS),true)
@@ -31,7 +30,7 @@
  endif
  	mkdir -p ${DESTDIR}/var/log/pcsd
  ifeq ($(IS_DEBIAN),true)
-@@ -117,25 +117,25 @@
+@@ -117,10 +118,10 @@
  	        rm -f $$tmp_settings_pcsd
    endif
    ifeq ($(IS_SYSTEMCTL),true)
@@ -45,9 +44,7 @@
    endif
  else
  	mkdir -p ${DESTDIR}${PREFIX}/lib/
--	cp -r pcsd ${DESTDIR}${PREFIX}/lib/
-+	cp -L -r pcsd ${DESTDIR}${PREFIX}/lib/
- 	install -m 644 -D pcsd/pcsd.conf ${DESTDIR}/etc/sysconfig/pcsd
+@@ -129,13 +130,13 @@
  	install -d ${DESTDIR}/etc/pam.d
  	install  pcsd/pcsd.pam ${DESTDIR}/etc/pam.d/pcsd
    ifeq ($(IS_SYSTEMCTL),true)
@@ -64,3 +61,15 @@
    endif
  endif
  	install -m 700 -d ${DESTDIR}/var/lib/pcsd
+@@ -150,9 +151,9 @@
+ 	rm -rf ${DESTDIR}${PREFIX}/lib/pcsd
+ endif
+ ifeq ($(IS_SYSTEMCTL),true)
+-	rm -f ${DESTDIR}/${systemddir}/system/pcsd.service
++	rm -f ${DESTDIR}${systemddir}/system/pcsd.service
+ else
+-	rm -f ${DESTDIR}/${initdir}/pcsd
++	rm -f ${DESTDIR}${initdir}/pcsd
+ endif
+ 	rm -f ${DESTDIR}/etc/pam.d/pcsd
+ 	rm -rf ${DESTDIR}/var/lib/pcsd

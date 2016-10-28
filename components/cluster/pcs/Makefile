@@ -32,38 +32,38 @@ include $(WS_MAKE_RULES)/ips.mk
 
 PATH= /usr/gnu/bin:/usr/ruby/1.9/bin/:/usr/bin:/usr/sbin:/sbin
 
-PATCH_LEVEL = 1
+PATCH_LEVEL= 1
 
-PYTHON=python2.7
-PYTHON_SITELIB=PYTHON_SITELIB=${CONFIGURE_PREFIX}/lib/python2.7/site-packages
+# PYTHON=python2.7
+# PYTHON_SITELIB=PYTHON_SITELIB=${CONFIGURE_PREFIX}/lib/python2.7/vendor-packages
+# BASH_COMPLETION_DIR=/usr/share/bash-completion/completions
+COMPONENT_BUILD_GMAKE_ARGS += PYTHON=/usr/bin/python2.7
+COMPONENT_BUILD_GMAKE_ARGS += PYTHON_SITELIB=/usr/lib/python2.7/vendor-packages
+COMPONENT_BUILD_GMAKE_ARGS += BASH_COMPLETION_DIR=/usr/share/bash-completion/completions
 
 # if not defined DESTDIR is blank
 COMPONENT_BUILD_ENV += DESTDIR="$(PROTO_DIR)"
 
 COMPONENT_INSTALL_ENV += DESTDIR="$(PROTO_DIR)"
 
-PKG_PROTO_DIRS += $(COMPONENT_DIR)/files
-
-# copied from components/ruby/puppet/Makefile
-# pass Ruby values onto the package manifest
 PKG_MACROS +=	RUBY_VERSION=$(RUBY_VERSION)
 PKG_MACROS += RUBY_LIB_VERSION=$(RUBY_LIB_VERSION)
 
 # pytthon installation class overwrites the shebang during installation
-$(INSTALL_32): 	$(BUILD_32)
-								grep -q python2.7 ${PROTO_DIR}/usr/sbin/pcs || \
-									gsed -i -- "s~/usr/bin/python~/usr/bin/python2.7~g" ${PROTO_DIR}/usr/sbin/pcs
+$(INSTALL_32):  $(BUILD_32)
+		grep -q python2.7 ${PROTO_DIR}/usr/sbin/pcs || \
+		gsed -i -- "s~/usr/bin/python~/usr/bin/python2.7~g" ${PROTO_DIR}/usr/sbin/pcs
 
 # beware of: the package has a combined build + install 
-build:          ${BUILD_32}
+build:          $(BUILD_32)
 
-install: 				${INSTALL_32}
+install:        $(INSTALL_32)
 
 test:           $(TESTS_32)
 
 
 REQUIRED_PACKAGES += SUNWcs
-# just for installation, not for runtime
+# build dependency, not necessary for runtime
 # REQUIRED_PACKAGES += library/python/setuptools-27
 REQUIRED_PACKAGES += runtime/python-27
 REQUIRED_PACKAGES += runtime/ruby-19
