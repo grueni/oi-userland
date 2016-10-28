@@ -26,7 +26,6 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 
 license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
 
-file path=etc/init.d/logd
 file path=usr/include/clplumbing/GSource.h
 file path=usr/include/clplumbing/GSource_internal.h
 file path=usr/include/clplumbing/Gmain_timeout.h
