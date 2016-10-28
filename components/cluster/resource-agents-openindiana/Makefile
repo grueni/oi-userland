@@ -36,8 +36,6 @@ COMPONENT_SUMMARY= Collection of OCF agents for HA luster which are adapted to I
 
 include ../../../make-rules/ips.mk
 
-PKG_PROTO_DIRS += $(COMPONENT_DIR)/files
-
 build:
 
 install:

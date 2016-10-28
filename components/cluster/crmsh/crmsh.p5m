@@ -278,5 +278,5 @@ file path=usr/share/doc/crmsh/contrib/pacemaker-crm.vim
 file path=usr/share/doc/crmsh/contrib/pcmk.vim
 file path=usr/share/doc/crmsh/crm.8.html
 file path=usr/share/doc/crmsh/crmsh_hb_report.8.html
-file path=usr/share/man/man8/crm.8
-file path=usr/share/man/man8/crmsh_hb_report.8
+file path=usr/share/man/man1m/crm.1m
+file path=usr/share/man/man1m/crmsh_hb_report.1m

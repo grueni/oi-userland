@@ -37,5 +37,5 @@ set name=pkg.description \
 
 license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
 
-file haproxy path=usr/lib/ocf/resource.d/oi/haproxy
-file IPaddr  path=usr/lib/ocf/resource.d/oi/IPaddr
+file files/haproxy path=usr/lib/ocf/resource.d/oi/haproxy
+file files/IPaddr  path=usr/lib/ocf/resource.d/oi/IPaddr

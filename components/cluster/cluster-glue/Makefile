@@ -32,6 +32,8 @@ include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/configure.mk
 include $(WS_MAKE_RULES)/ips.mk
 
+PATCH_LEVEL= 1
+
 CFLAGS += -lssp -lssp_nonshared
 
 CONFIGURE_OPTIONS += --sysconfdir=/etc
