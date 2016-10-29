@@ -1,4 +1,4 @@
-#!/usr/gnu/bin/sh
+#!/usr/bin/bash
 #
 # License:      GNU General Public License (GPL) 
 # Support:      linux-ha@lists.linux-ha.org
@@ -32,19 +32,19 @@
 : ${OCF_FUNCTIONS_DIR=${OCF_ROOT}/lib/heartbeat}
 . ${OCF_FUNCTIONS_DIR}/ocf-shellfuncs
 
-SENDARP=$HA_BIN/send_arp
+SENDARP=${HA_BIN}/send_arp
 SENDARP=/usr/bin/arpsend
 SLEEP=/usr/gnu/bin/sleep
-FINDIF=$HA_BIN/findif
-VLDIR=$HA_RSCTMP
-SENDARPPIDDIR=$HA_RSCTMP
-SENDARPPIDFILE="$SENDARPPIDDIR/send_arp-$OCF_RESKEY_ip"
+FINDIF=${HA_BIN}/findif
+VLDIR=${HA_RSCTMP}
+SENDARPPIDDIR=${HA_RSCTMP}
+SENDARPPIDFILE="${SENDARPPIDDIR}/send_arp-${OCF_RESKEY_ip}"
 USAGE="usage: $0 {start|stop|status|monitor|validate-all|meta-data}";
 
 #######################################################################
 
 SYSTYPE="`uname -s`"
-case "$SYSTYPE" in
+case "${SYSTYPE}" in
     SunOS)
         # `uname -r` = 5.9 -> SYSVERSION = 9
         SYSVERSION="`uname -r | cut -d. -f 2`"
@@ -205,7 +205,7 @@ netmask for ARP - in nonstandard hexadecimal format.
 </actions>
 </resource-agent>
 END
-        exit $OCF_SUCCESS
+        exit ${OCF_SUCCESS}
 }
 
 # The 'ping' command takes highly OS-dependent arguments, so this
@@ -227,22 +227,22 @@ pingargs() {
 	_timeout=1	# seconds
 	_pktcount=1
 	_systype="`uname -s`"
-	case $_systype in
+	case ${_systype} in
 		Linux)
-			# Default is perpetual ping: need "-c $_pktcount".
+			# Default is perpetual ping: need "-c ${_pktcount}".
 			# -c count -t timetolive -q(uiet) -n(umeric) -W timeout
-			_pingargs="-c $_pktcount -q -n $_baseip"
+			_pingargs="-c ${_pktcount} -q -n ${_baseip}"
 			;;
 		SunOS)
 			# Default is immediate (or timeout) return.
-			_pingargs="$_baseip $_timeout"
+			_pingargs="${_baseip} $_timeout"
 			;;
 		*)
-			_pingargs="-c $_pktcount $_baseip"
+			_pingargs="-c ${_pktcount} ${_baseip}"
 			;;
 	esac
 
-	echo "$_pingargs"
+	echo "${_pingargs}"
 }
 
 #      On Linux systems the (hidden) loopback interface may
@@ -255,13 +255,13 @@ lvs_remove_conflicting_loopback() {
 	ipaddr="$1"
 	ifname="$2"
 
-	ocf_log info "Removing conflicting loopback $ifname."
+	ocf_log info "Removing conflicting loopback ${ifname}."
 	if 
-	  echo $ifname > "$VLDIR/$ipaddr"
+	  echo ${ifname} > "${VLDIR}/${ipaddr}"
 	then
-	  : Saved loopback information in $VLDIR/$ipaddr
+	  : Saved loopback information in ${VLDIR}/${ipaddr}
 	else
-	  ocf_log err "Could not save conflicting loopback $ifname." \
+	  ocf_log err "Could not save conflicting loopback ${ifname}." \
 	  "it will not be restored."
 	fi
 
@@ -271,10 +271,10 @@ lvs_remove_conflicting_loopback() {
 		fi
 	fi
 
-	delete_interface "$ifname" "$ipaddr"
+	delete_interface "${ifname}" "${ipaddr}"
 
 	# Forcibly remove the route (if it exists) to the loopback.
-	delete_route "$ipaddr"
+	delete_route "${ipaddr}"
 }
 
 #
@@ -285,27 +285,27 @@ lvs_remove_conflicting_loopback() {
 lvs_restore_loopback() {
     ipaddr="$1"
     
-    if [ ! -s "$VLDIR/$ipaddr" ]; then
+    if [ ! -s "${VLDIR}/${ipaddr}" ]; then
 	return
     fi
 
-    ifname=`cat "$VLDIR/$ipaddr"`
-    ocf_log info "Restoring loopback IP Address $ipaddr on $ifname."
+    ifname=`cat "${VLDIR}/${ipaddr}"`
+    ocf_log info "Restoring loopback IP Address ${ipaddr} on ${ifname}."
     
-    CMD="OCF_RESKEY_cidr_netmask=32 OCF_RESKEY_ip=$1 OCF_RESKEY_nic=$ifname $FINDIF"
+    CMD="OCF_RESKEY_cidr_netmask=32 OCF_RESKEY_ip=$1 OCF_RESKEY_nic=${ifname} ${FINDIF}"
     if
-      NICINFO=`eval $CMD`
-      NICINFO=`echo $NICINFO | tr "	" " " | tr -s " "`
+      NICINFO=`eval ${CMD}`
+      NICINFO=`echo ${NICINFO} | tr "	" " " | tr -s " "`
     then
-	netmask_text=`echo "$NICINFO" | cut -f3 -d " "`
-	broadcast=`echo "$NICINFO" | cut -f5 -d " "`
+	netmask_text=`echo "${NICINFO}" | cut -f3 -d " "`
+	broadcast=`echo "${NICINFO}" | cut -f5 -d " "`
     else
-	echo "ERROR: $CMD failed (rc=$rc)"
-	exit $OCF_ERR_GENERIC
+	echo "ERROR: ${CMD} failed (rc=${rc})"
+	exit ${OCF_ERR_GENERIC}
     fi
     
-    add_interface "$ipaddr" "$ifname" "$ifname" $netmask_text $broadcast
-    rm -f "$VLDIR/$ipaddr"
+    add_interface "${ipaddr}" "${ifname}" "${ifname}" $netmask_text $broadcast
+    rm -f "${VLDIR}/${ipaddr}"
 }
 
 #
@@ -316,10 +316,10 @@ lvs_restore_loopback() {
 find_interface_solaris() {
     ipaddr="$1"
 
-    $IFCONFIG $IFCONFIG_A_OPT | $AWK '{if ($0 ~ /.*: / && NR > 1) {print "\n"$0} else {print}}' |
+    ${IFCONFIG} ${IFCONFIG}_A_OPT | ${AWK} '{if ($0 ~ /.*: / && NR > 1) {print "\n"$0} else {print}}' |
     while read ifname linkstuff
     do
-	: ifname = $ifname
+	: ifname = ${ifname}
 	read inet addr junk
 	: inet = $inet addr = $addr
 	while
@@ -328,7 +328,7 @@ find_interface_solaris() {
 	    : Nothing
 	done
 	
-	case $ifname in
+	case ${ifname} in
 	    *:*)	;;
 	    *)	continue;;
 	esac
@@ -336,18 +336,18 @@ find_interface_solaris() {
     #  This doesn't look right for a box with multiple NICs.
     #  It looks like it always selects the first interface on
     #  a machine.  Yet, we appear to use the results for this case too...
-	ifname=`echo "$ifname" | sed s'%:$%%'`
+	ifname=`echo "${ifname}" | sed s'%:$%%'`
 	
 	case $addr in
-	    addr:$ipaddr) echo $ifname; return $OCF_SUCCESS;;
-            $ipaddr)	  echo $ifname; return $OCF_SUCCESS;;
+	    addr:${ipaddr}) echo ${ifname}; return ${OCF_SUCCESS};;
+            ${ipaddr})	  echo ${ifname}; return ${OCF_SUCCESS};;
 	esac
      done
-  return $OCF_ERR_GENERIC
+  return ${OCF_ERR_GENERIC}
 }
 
 find_interface_bsd() {
-    $IFCONFIG $IFCONFIG_A_OPT | awk -v ip_addr="$ipaddr" '
+    ${IFCONFIG} ${IFCONFIG}_A_OPT | awk -v ip_addr="${ipaddr}" '
 					/UP,/ && $0 ~ /^[a-z]+[0-9]:/ { 
     						if_name=$1; sub(":$","",if_name); 
 					}
@@ -365,10 +365,10 @@ find_interface_bsd() {
 #
 find_interface_generic() {
     ipaddr="$1"
-    $IFCONFIG $IFCONFIG_A_OPT  |
+    ${IFCONFIG} ${IFCONFIG}_A_OPT  |
     while read ifname linkstuff
     do
-	: Read gave us ifname = $ifname
+	: Read gave us ifname = ${ifname}
 	
 	read inet addr junk
 	: Read gave us inet = $inet addr = $addr
@@ -379,18 +379,18 @@ find_interface_generic() {
 	    : Nothing
 	done
 	
-	case $ifname in
-	    *:*)	ifname=`echo $ifname | sed 's/:$//'`;;
+	case ${ifname} in
+	    *:*)	ifname=`echo ${ifname} | sed 's/:$//'`;;
 	    *)	continue;;
 	esac
 	
-	: "comparing $ipaddr to $addr (from ifconfig)"
+	: "comparing ${ipaddr} to $addr (from ifconfig)"
 	case $addr in
-	    addr:$ipaddr)   echo $ifname; return $OCF_SUCCESS;;
-	    $ipaddr)	    echo $ifname; return $OCF_SUCCESS;;
+	    addr:${ipaddr})   echo ${ifname}; return ${OCF_SUCCESS};;
+	    ${ipaddr})	    echo ${ifname}; return ${OCF_SUCCESS};;
 	esac
      done
-     return $OCF_ERR_GENERIC 
+     return ${OCF_ERR_GENERIC} 
 }
 
 #
@@ -400,17 +400,17 @@ find_interface_generic() {
 #
 find_interface() {
     ipaddr="$1"
-    case "$SYSTYPE" in
+    case "${SYSTYPE}" in
 	SunOS)
-	    NIC=`find_interface_solaris $ipaddr`;;
+	    NIC=`find_interface_solaris ${ipaddr}`;;
 	*BSD)
-	    NIC=`find_interface_bsd $ipaddr`;;
+	    NIC=`find_interface_bsd ${ipaddr}`;;
 	*)
-	    NIC=`find_interface_generic $ipaddr`;;
+	    NIC=`find_interface_generic ${ipaddr}`;;
        esac
 
   echo $NIC
-  return $OCF_SUCCESS;
+  return ${OCF_SUCCESS};
 }
 
 #
@@ -422,24 +422,24 @@ find_free_interface() {
     NIC="$1"
 
     if [ "X$NIC" = "X" ]; then
-	ocf_log err "No free interface found for $OCF_RESKEY_ip"
-	return $OCF_ERR_GENERIC;
+	ocf_log err "No free interface found for ${OCF_RESKEY_ip}"
+	return ${OCF_ERR_GENERIC};
     fi
 
-  NICBASE="$VLDIR/IPaddr-$NIC"
+  NICBASE="${VLDIR}/IPaddr-$NIC"
   touch "$NICBASE"
 
-  case "$SYSTYPE" in
+  case "${SYSTYPE}" in
 	*BSD)
 		echo $NIC;
-		return $OCF_SUCCESS;;
+		return ${OCF_SUCCESS};;
 	SunOS)
 		j=1
-		IFLIST=`$IFCONFIG $IFCONFIG_A_OPT | \
+		IFLIST=`${IFCONFIG} ${IFCONFIG}_A_OPT | \
 			grep "^$NIC:[0-9]" | sed 's%: .*%%'`;;
 	*)
 		j=0
-		IFLIST=`$IFCONFIG $IFCONFIG_A_OPT | \
+		IFLIST=`${IFCONFIG} ${IFCONFIG}_A_OPT | \
 			grep "^$NIC:[0-9]" | sed 's% .*%%'`
                 TRYADRCNT=`ls "${NICBASE}:"* 2>/dev/null | wc -w | tr -d ' '`
 		if [ -f "${NICBASE}:${TRYADRCNT}" ]; then
@@ -463,25 +463,25 @@ find_free_interface() {
 		    ln "$NICBASE" "$NICLINK" 2>/dev/null
 		then
 		    echo "$NIC:$j"
-		    return $OCF_SUCCESS
+		    return ${OCF_SUCCESS}
 		fi
 		;;
        esac
        j=`expr $j + 1`
   done
-  return $OCF_ERR_GENERIC
+  return ${OCF_ERR_GENERIC}
 }
 
 delete_route () {
   ipaddr="$1"
 
-  case "$SYSTYPE" in
+  case "${SYSTYPE}" in
 	SunOS)	return 0;;
-	*BSD)	CMD="$ROUTE -n delete -host $ipaddr";;
-	*)	CMD="$ROUTE -n del -host $ipaddr";;
+	*BSD)	CMD="${ROUTE} -n delete -host ${ipaddr}";;
+	*)	CMD="${ROUTE} -n del -host ${ipaddr}";;
   esac
 
-  $CMD
+  ${CMD}
 
   return $?
 }
@@ -490,23 +490,23 @@ delete_interface () {
   ifname="$1"
   ipaddr="$2"
 
-  case "$SYSTYPE" in
+  case "${SYSTYPE}" in
       SunOS)
 		if [ "$SYSVERSION" -ge 8 ] ; then
-		    CMD="$IFCONFIG $ifname unplumb"
+		    CMD="${IFCONFIG} ${ifname} unplumb"
 		else
-		    CMD="$IFCONFIG $ifname 0 down"
+		    CMD="${IFCONFIG} ${ifname} 0 down"
 		fi;;
       Darwin*)
-		CMD="$IFCONFIG $ifname $ipaddr delete";;
+		CMD="${IFCONFIG} ${ifname} ${ipaddr} delete";;
       *BSD)
-		CMD="$IFCONFIG $ifname inet $ipaddr delete";;
+		CMD="${IFCONFIG} ${ifname} inet ${ipaddr} delete";;
       *)
-		CMD="$IFCONFIG $ifname down";;
+		CMD="${IFCONFIG} ${ifname} down";;
   esac
 
-  ocf_log info "$CMD"
-  $CMD
+  ocf_log info "${CMD}"
+  ${CMD}
 
   return $?
 }
@@ -521,87 +521,87 @@ add_interface () {
 
   if [ $# != 5 ]; then
       ocf_log err "Insufficient arguments to add_interface: $*"
-      exit $OCF_ERR_ARGS
+      exit ${OCF_ERR_ARGS}
   fi
 
-  case "$SYSTYPE" in
+  case "${SYSTYPE}" in
     SunOS)
 	  if [ "$SYSVERSION" -ge 10 ] ; then
-        CMD="$IFCONFIG $iface plumb $ipaddr netmask $netmask up"
+        CMD="${IFCONFIG} $iface plumb ${ipaddr} netmask $netmask up"
 	  elif [ "$SYSVERSION" -ge 8 ] ; then
-	      $IFCONFIG $iface plumb
+	      ${IFCONFIG} $iface plumb
 	      rc=$?
-	      if [ $rc -ne 0 ] ; then
-		  echo "ERROR: '$IFCONFIG $iface plumb' failed."
-		  return $rc
+	      if [ ${rc} -ne 0 ] ; then
+		  echo "ERROR: '${IFCONFIG} $iface plumb' failed."
+		  return ${rc}
 	      fi
 	  else
 		  # At Solaris 10, this single-command version sometimes broke.
 		  # Almost certainly an S10 bug.
-		  #	CMD="$IFCONFIG $iface inet $ipaddr $text up"
+		  #	CMD="${IFCONFIG} $iface inet ${ipaddr} $text up"
 		  # So hack the following workaround:
-		  CMD="$IFCONFIG $iface inet $ipaddr"
-		  CMD="$CMD && $IFCONFIG $iface netmask $netmask"
-		  CMD="$CMD && $IFCONFIG $iface up"
+		  CMD="${IFCONFIG} $iface inet ${ipaddr}"
+		  CMD="${CMD} && ${IFCONFIG} $iface netmask $netmask"
+		  CMD="${CMD} && ${IFCONFIG} $iface up"
 	  fi
 	  ;;
       
     *BSD)
 	  # netmask is always set to 255.255.255.255 for an alias 
-	  CMD="$IFCONFIG $iface inet $ipaddr netmask 255.255.255.255 alias";;
+	  CMD="${IFCONFIG} $iface inet ${ipaddr} netmask 255.255.255.255 alias";;
     *)		
-	  CMD="$IFCONFIG $iface $ipaddr netmask $netmask broadcast $broadcast";;
+	  CMD="${IFCONFIG} $iface ${ipaddr} netmask $netmask broadcast $broadcast";;
   esac
 
-  # Use "eval $CMD" (not "$CMD"): it might be a chain of two or more commands.
-  ocf_log info "eval $CMD"
-  eval $CMD
+  # Use "eval ${CMD}" (not "${CMD}"): it might be a chain of two or more commands.
+  ocf_log info "eval ${CMD}"
+  eval ${CMD}
   rc=$?
-  if [ $rc != 0 ]; then
-      echo "ERROR: eval $CMD failed (rc=$rc)"
-	   case "$SYSTYPE" in
+  if [ ${rc} != 0 ]; then
+      echo "ERROR: eval ${CMD} failed (rc=${rc})"
+	   case "${SYSTYPE}" in
 		 SunOS)
-			CMD="$IFCONFIG $iface unplumb"
-			eval $CMD
+			CMD="${IFCONFIG} $iface unplumb"
+			eval ${CMD}
 	  esac 
   else
-	  case "$SYSTYPE" in
+	  case "${SYSTYPE}" in
 		 SunOS)
 			if [ "$SYSVERSION" -ge 11 ] ; then
-				CMD="ipadm show-addr | grep $ipaddr | grep -ie 'TENTATIVE'"
+				CMD="ipadm show-addr | grep ${ipaddr} | grep -ie 'TENTATIVE'"
 				$SLEEP 1
-				eval $CMD
+				eval ${CMD}
 				rc=$?
-				if [ $rc = 0 ]; then
-					$IFCONFIG $iface down
-					$IFCONFIG $iface up
+				if [ ${rc} = 0 ]; then
+					${IFCONFIG} $iface down
+					${IFCONFIG} $iface up
 				fi
-				CMD="ipadm show-addr | grep $ipaddr | grep -ie 'DUPLICATE' -ie 'TENTATIVE'"
+				CMD="ipadm show-addr | grep ${ipaddr} | grep -ie 'DUPLICATE' -ie 'TENTATIVE'"
 			else
-				CMD="$IFCONFIG |grep ^$iface | grep -e 'DUPLICATE' -e 'TENTATIVE'"
+				CMD="${IFCONFIG} |grep ^$iface | grep -e 'DUPLICATE' -e 'TENTATIVE'"
 			fi
-			eval $CMD
+			eval ${CMD}
 			rc=$?
-			if [ $rc = 0 ]; then
-				echo "ERROR: eval $iface DUPLICATE or TENTATIVE (rc=$rc)"
-				CMD="$IFCONFIG $iface unplumb"
-				eval $CMD
-				rc=$OCF_ERR_GENERIC 
+			if [ ${rc} = 0 ]; then
+				echo "ERROR: eval $iface DUPLICATE or TENTATIVE (rc=${rc})"
+				CMD="${IFCONFIG} $iface unplumb"
+				eval ${CMD}
+				rc=${OCF_ERR_GENERIC} 
 			else
 				rc=0
 			fi
 	  esac 
   fi
 
-  return $rc
+  return ${rc}
 }
 
 #
 #	Remove the IP alias for the requested IP address...
 #
 ip_stop() {
-  SENDARPPIDFILE="$SENDARPPIDDIR/send_arp-$OCF_RESKEY_ip"
-  NIC=`find_interface $OCF_RESKEY_ip`
+  SENDARPPIDFILE="${SENDARPPIDDIR}/send_arp-${OCF_RESKEY_ip}"
+  NIC=`find_interface ${OCF_RESKEY_ip}`
 
   if [ -f "$SENDARPPIDFILE" ]; then
 	cat "$SENDARPPIDFILE" | xargs kill
@@ -610,33 +610,33 @@ ip_stop() {
 
   if [ -z "$NIC" ]; then
       : Requested interface not in use
-      return $OCF_SUCCESS
+      return ${OCF_SUCCESS}
   fi
 
   if [ ${OCF_RESKEY_lvs_support} = 1 ]; then 
       case $NIC in
 	  lo*)
 	      : Requested interface is on loopback
-	      return $OCF_SUCCESS;;
+	      return ${OCF_SUCCESS};;
       esac
   fi
 
-  delete_route "$OCF_RESKEY_ip"
-  delete_interface "$NIC" "$OCF_RESKEY_ip"
+  delete_route "${OCF_RESKEY_ip}"
+  delete_interface "$NIC" "${OCF_RESKEY_ip}"
   rc=$?
 
   if [ ${OCF_RESKEY_lvs_support} = 1 ]; then
-      lvs_restore_loopback "$OCF_RESKEY_ip"
+      lvs_restore_loopback "${OCF_RESKEY_ip}"
   fi
 
   # remove lock file...
-  rm -f "$VLDIR/IPaddr-$NIC"
+  rm -f "${VLDIR}/IPaddr-$NIC"
 
-  if [ $rc != 0 ]; then
-      ocf_log warn "IP Address $OCF_RESKEY_ip NOT released: rc=$rc"
-      return $OCF_ERR_GENERIC
+  if [ ${rc} != 0 ]; then
+      ocf_log warn "IP Address ${OCF_RESKEY_ip} NOT released: rc=${rc}"
+      return ${OCF_ERR_GENERIC}
   fi
-  return $OCF_SUCCESS
+  return ${OCF_SUCCESS}
 }
 
 
@@ -652,29 +652,29 @@ ip_start() {
   #	Do we already service this IP address?
   #
     ip_status_internal
-    if [ $? = $OCF_SUCCESS ]; then
+    if [ $? = ${OCF_SUCCESS} ]; then
 	# Nothing to do, the IP is already active
-	return $OCF_SUCCESS;
+	return ${OCF_SUCCESS};
     fi
 
-    NIC_unique=`find_free_interface $OCF_RESKEY_nic`
+    NIC_unique=`find_free_interface ${OCF_RESKEY_nic}`
     if [ -n "$NIC_unique" ]; then
-	: OK got interface [$NIC_unique] for $OCF_RESKEY_ip 
+	: OK got interface [$NIC_unique] for ${OCF_RESKEY_ip} 
     else
-	return $OCF_ERR_GENERIC
+	return ${OCF_ERR_GENERIC}
     fi
     
     # This logic is mostly to support LVS (If I understand it correctly)
     if [ ${OCF_RESKEY_lvs_support} = 1 ]; then
-	NIC_current=`find_interface $OCF_RESKEY_ip`
+	NIC_current=`find_interface ${OCF_RESKEY_ip}`
 	case $NIC_unique in
 	    lo*) 
 		if [ x"$NIC_unique" = x"$NIC_current" ]; then
 		    # Its already "running" and not moving, nothing to do.
-		    ocf_log err "Could not find a non-loopback device to move $OCF_RESKEY_ip to"
-		    return $OCF_ERR_GENERIC
+		    ocf_log err "Could not find a non-loopback device to move ${OCF_RESKEY_ip} to"
+		    return ${OCF_ERR_GENERIC}
 		fi;;
-	    *)   lvs_remove_conflicting_loopback "$OCF_RESKEY_ip" "$NIC_current";;
+	    *)   lvs_remove_conflicting_loopback "${OCF_RESKEY_ip}" "$NIC_current";;
 	esac
     fi
 
@@ -684,34 +684,34 @@ ip_start() {
 		fi
 	fi
 
-    add_interface "$OCF_RESKEY_ip" "$OCF_RESKEY_nic" "$NIC_unique" \
-		 "$OCF_RESKEY_cidr_netmask" "$OCF_RESKEY_broadcast"
+    add_interface "${OCF_RESKEY_ip}" "${OCF_RESKEY_nic}" "$NIC_unique" \
+		 "${OCF_RESKEY_cidr_netmask}" "${OCF_RESKEY_broadcast}"
     rc=$?
-    if [ $rc != 0 ]; then
-	ocf_log err "Could not add $OCF_RESKEY_ip to $OCF_RESKEY_nic: rc=$rc"
-	return $rc
+    if [ ${rc} != 0 ]; then
+	ocf_log err "Could not add ${OCF_RESKEY_ip} to ${OCF_RESKEY_nic}: rc=${rc}"
+	return ${rc}
     fi
 
     # The address is active, now notify others about it using sendarp
 
-    if [ "$SYSTYPE" = "DarwinBSD" -a "$NIC_unique" = "lo0" ]; then
+    if [ "${SYSTYPE}" = "DarwinBSD" -a "$NIC_unique" = "lo0" ]; then
 	# Darwin can't send ARPs on loopback devices
 	SENDARP="x$SENDARP" # Prevent the binary from being found
     fi
 
     if [ -x $SENDARP ]; then
 		TARGET_INTERFACE=`echo $NIC_unique | sed 's%:.*%%'`
-		SENDARPPIDFILE="$SENDARPPIDDIR/send_arp-$OCF_RESKEY_ip"    
+		SENDARPPIDFILE="${SENDARPPIDDIR}/send_arp-${OCF_RESKEY_ip}"    
        
-#	ARGS="-i $OCF_RESKEY_ARP_INTERVAL_MS -r $OCF_RESKEY_ARP_REPEAT"
-#	ARGS="$ARGS -p $SENDARPPIDFILE $TARGET_INTERFACE $OCF_RESKEY_ip"
-#	ARGS="$ARGS auto $OCF_RESKEY_ip $OCF_RESKEY_ARP_NETMASK"
+#	ARGS="-i ${OCF_RESKEY_ARP_INTERVAL_MS} -r ${OCF_RESKEY_ARP_REPEAT}"
+#	ARGS="$ARGS -p $SENDARPPIDFILE $TARGET_INTERFACE ${OCF_RESKEY_ip}"
+#	ARGS="$ARGS auto ${OCF_RESKEY_ip} $OCF_RESKEY_ARP_NETMASK"
 
-		ocf_log debug "Sending Gratuitous Arp for $OCF_RESKEY_ip on $NIC_unique [$TARGET_INTERFACE]"
+		ocf_log debug "Sending Gratuitous Arp for ${OCF_RESKEY_ip} on $NIC_unique [$TARGET_INTERFACE]"
 		IFS=' ' read -ra LINKS <<< `ipmpstat -a -o GROUP,OUTBOUND|grep $TARGET_INTERFACE |gsed -e "s#$TARGET_INTERFACE##g"`
 		for i in "${LINKS[@]}"; do
-			ocf_log debug "Sending Gratuitous Arp for $OCF_RESKEY_ip on $NIC_unique [$TARGET_INTERFACE] over link $i"
-			ARGS="-T ff:ff:ff:ff:fff:ff -t $OCF_RESKEY_ip -i $i"
+			ocf_log debug "Sending Gratuitous Arp for ${OCF_RESKEY_ip} on $NIC_unique [$TARGET_INTERFACE] over link $i"
+			ARGS="-T ff:ff:ff:ff:fff:ff -t ${OCF_RESKEY_ip} -i $i"
 			case $OCF_RESKEY_ARP_BACKGROUND in
 				 yes) ($SENDARP $ARGS || ocf_log err "Could not send gratuitous arps. rc=$?" & ) >&2 ;;
 				 *)   $SENDARP $ARGS || ocf_log err "Could not send gratuitous arps. rc=$?";;
@@ -724,7 +724,7 @@ ip_start() {
 }
 
 ip_status_internal() {
-    NIC=`find_interface "$OCF_RESKEY_ip"`
+    NIC=`find_interface "${OCF_RESKEY_ip}"`
 
     if [ "x$NIC" = x ]; then
 	return $OCF_NOT_RUNNING
@@ -732,32 +732,32 @@ ip_status_internal() {
     elif [ "${OCF_RESKEY_lvs_support}" = "1" ]; then 
 	case $NIC in
 	    lo*) return $OCF_NOT_RUNNING;;
-	    *)	 return $OCF_SUCCESS;;
+	    *)	 return ${OCF_SUCCESS};;
 	esac
     else
-	if [ x$OCF_RESKEY_nic != x ]; then
-	    simple_OCF_NIC=`echo $OCF_RESKEY_nic | awk -F: '{print $1}'`
+	if [ x${OCF_RESKEY_nic} != x ]; then
+	    simple_OCF_NIC=`echo ${OCF_RESKEY_nic} | awk -F: '{print $1}'`
 	    simple_NIC=`echo $NIC | awk -F: '{print $1}'`
 	    if [ $simple_OCF_NIC != $simple_NIC ]; then
-		ocf_log err "$OCF_RESKEY_ip is running an interface ($simple_NIC) instead of the configured one ($simple_OCF_NIC)"
-		return $OCF_ERR_GENERIC
+		ocf_log err "${OCF_RESKEY_ip} is running an interface ($simple_NIC) instead of the configured one ($simple_OCF_NIC)"
+		return ${OCF_ERR_GENERIC}
 	    fi
 	fi
-	return $OCF_SUCCESS
+	return ${OCF_SUCCESS}
     fi
 }
 
 ip_status() {
     ip_status_internal
     rc=$?
-    if [ $rc = $OCF_SUCCESS ]; then
+    if [ ${rc} = ${OCF_SUCCESS} ]; then
 	echo "running"
-    elif [ $rc = $OCF_NOT_RUNNING ]; then
+    elif [ ${rc} = $OCF_NOT_RUNNING ]; then
 	echo "stopped"
     else
 	echo "unknown"
     fi
-    return $rc;
+    return ${rc};
 }
 
 #
@@ -768,22 +768,22 @@ ip_monitor() {
     ip_status_internal
     rc=$?
 
-    if [ $OCF_CHECK_LEVEL = 0 -o $rc != 0 ]; then
-	return $rc
+    if [ $OCF_CHECK_LEVEL = 0 -o ${rc} != 0 ]; then
+	return ${rc}
     fi
     
     ocf_log info "Checking IP stack"
 
-    PINGARGS="`pingargs $OCF_RESKEY_ip`"
+    PINGARGS="`pingargs ${OCF_RESKEY_ip}`"
     for j in 1 2 3 4 5 6 7 8 9 10; do
-        MSG=`$PING $PINGARGS 2>&1`
+        MSG=`${PING} ${PING}ARGS 2>&1`
         if [ $? = 0 ]; then
-            return $OCF_SUCCESS
+            return ${OCF_SUCCESS}
         fi
     done
 
     ocf_log err "$MSG"
-    return $OCF_ERR_GENERIC
+    return ${OCF_ERR_GENERIC}
 }
 
 is_positive_integer() {
@@ -801,103 +801,103 @@ ip_validate_all() {
     : ${OCF_RESKEY_ARP_REPEAT=10}
 
 
-    check_binary $AWK
-    check_binary $IFCONFIG
-    check_binary $ROUTE
-    check_binary $PING
+    check_binary ${AWK}
+    check_binary ${IFCONFIG}
+    check_binary ${ROUTE}
+    check_binary ${PING}
 
-    if is_positive_integer $OCF_RESKEY_ARP_INTERVAL_MS
+    if is_positive_integer ${OCF_RESKEY_ARP_INTERVAL_MS}
     then
-	ocf_log err "Invalid parameter value: ARP_INTERVAL_MS [$OCF_RESKEY_ARP_INTERVAL_MS]"
-	return $OCF_ERR_ARGS
+	ocf_log err "Invalid parameter value: ARP_INTERVAL_MS [${OCF_RESKEY_ARP_INTERVAL_MS}]"
+	return ${OCF_ERR_ARGS}
     fi
 
-    if is_positive_integer $OCF_RESKEY_ARP_REPEAT
+    if is_positive_integer ${OCF_RESKEY_ARP_REPEAT}
     then
-	ocf_log err "Invalid parameter value: ARP_REPEAT [$OCF_RESKEY_ARP_REPEAT]"
-	return $OCF_ERR_ARGS
+	ocf_log err "Invalid parameter value: ARP_REPEAT [${OCF_RESKEY_ARP_REPEAT}]"
+	return ${OCF_ERR_ARGS}
     fi
 
     : ${OCF_RESKEY_lvs_support=0}
-    if [ "$SYSTYPE" = "Linux" -o "$SYSTYPE" = "SunOS" ]; then
+    if [ "${SYSTYPE}" = "Linux" -o "${SYSTYPE}" = "SunOS" ]; then
 	:
     else 
 	if [ "${OCF_RESKEY_lvs_support}" = "1" ]; then
-	    ocf_log err "$SYSTYPE does not support LVS"
-	    return $OCF_ERR_GENERIC
+	    ocf_log err "${SYSTYPE} does not support LVS"
+	    return ${OCF_ERR_GENERIC}
 	fi
     fi
 
-    case $OCF_RESKEY_ip in
+    case ${OCF_RESKEY_ip} in
 	"")	ocf_log err "Required parameter OCF_RESKEY_ip is missing"
 	    return $OCF_ERR_CONFIGURED;;
         [0-9]*.[0-9]*.[0-9]*.*[0-9])	: OK;;
-	*)	ocf_log err "Parameter OCF_RESKEY_ip [$OCF_RESKEY_ip] not an IP address"
+	*)	ocf_log err "Parameter OCF_RESKEY_ip [${OCF_RESKEY_ip}] not an IP address"
 	    return $OCF_ERR_CONFIGURED;;
     esac
 
     # Unconditionally do this?
-    case $OCF_RESKEY_nic in
+    case ${OCF_RESKEY_nic} in
         *:*)
-            OCF_RESKEY_nic=`echo $OCF_RESKEY_nic | sed 's/:.*//'`
+            OCF_RESKEY_nic=`echo ${OCF_RESKEY_nic} | sed 's/:.*//'`
             ;;
     esac
 
-    NICINFO=`$FINDIF`
+    NICINFO=`${FINDIF}`
     rc=$?
 
-    if [ $rc != 0 ]; then
-	ocf_log err "$FINDIF failed [rc=$rc]."
-	return $OCF_ERR_GENERIC
+    if [ ${rc} != 0 ]; then
+	ocf_log err "${FINDIF} failed [rc=${rc}]."
+	return ${OCF_ERR_GENERIC}
     fi
     
-    tmp=`echo "$NICINFO" | cut -f1`
+    tmp=`echo "${NICINFO}" | cut -f1`
     if
-      [ "x$OCF_RESKEY_nic" = "x" ]
+      [ "x${OCF_RESKEY_nic}" = "x" ]
     then
-      ocf_log info "Using calculated nic for ${OCF_RESKEY_ip}: $tmp"
-      OCF_RESKEY_nic=$tmp
+      ocf_log info "Using calculated nic for ${OCF_RESKEY_ip}: ${tmp}"
+      OCF_RESKEY_nic=${tmp}
     elif
-      [ x$tmp != x${OCF_RESKEY_nic} ]
+      [ x${tmp} != x${OCF_RESKEY_nic} ]
     then
-      ocf_log err "Invalid parameter value: nic [$OCF_RESKEY_nic] Calculated nic: [$tmp]"
-      return $OCF_ERR_ARGS
+      ocf_log err "Invalid parameter value: nic [${OCF_RESKEY_nic}] Calculated nic: [${tmp}]"
+      return ${OCF_ERR_ARGS}
     fi
 
-    tmp=`echo "$NICINFO" | cut -f2 | cut -d ' ' -f2`
+    tmp=`echo "${NICINFO}" | cut -f2 | cut -d ' ' -f2`
     if
-      [ "x$OCF_RESKEY_cidr_netmask" != "x$tmp" ]
+      [ "x${OCF_RESKEY_cidr_netmask}" != "x${tmp}" ]
     then
-      ocf_log info "Using calculated netmask for ${OCF_RESKEY_ip}: $tmp"
+      ocf_log info "Using calculated netmask for ${OCF_RESKEY_ip}: ${tmp}"
     fi
 
     # Always use the calculated version becuase it might have been specified 
     #  using CIDR notation which not every system accepts
-    OCF_RESKEY_netmask=$tmp
-    OCF_RESKEY_cidr_netmask=$tmp; export OCF_RESKEY_cidr_netmask
+    OCF_RESKEY_netmask=${tmp}
+    OCF_RESKEY_cidr_netmask=${tmp}; export OCF_RESKEY_cidr_netmask
     
-    tmp=`echo "$NICINFO" | cut -f3 | cut -d ' ' -f2`
+    tmp=`echo "${NICINFO}" | cut -f3 | cut -d ' ' -f2`
     if
-      [ "x$OCF_RESKEY_broadcast" = "x" ]
+      [ "x${OCF_RESKEY_broadcast}" = "x" ]
     then
-      ocf_log debug "Using calculated broadcast for ${OCF_RESKEY_ip}: $tmp"
-      OCF_RESKEY_broadcast=$tmp
+      ocf_log debug "Using calculated broadcast for ${OCF_RESKEY_ip}: ${tmp}"
+      OCF_RESKEY_broadcast=${tmp}
 
-    elif [ x$tmp != x${OCF_RESKEY_broadcast} ]; then
-      ocf_log err "Invalid parameter value: broadcast [$OCF_RESKEY_broadcast] Calculated broadcast: [$tmp]"
-      return $OCF_ERR_ARGS
+    elif [ x${tmp} != x${OCF_RESKEY_broadcast} ]; then
+      ocf_log err "Invalid parameter value: broadcast [${OCF_RESKEY_broadcast}] Calculated broadcast: [${tmp}]"
+      return ${OCF_ERR_ARGS}
     fi
     
-    return $OCF_SUCCESS
+    return ${OCF_SUCCESS}
 }
   
 usage() {
-    echo $USAGE >&2
+    echo ${USAGE} >&2
     return $1
 }
 
 if [ $# -ne 1 ]; then
-    usage $OCF_ERR_ARGS
+    usage ${OCF_ERR_ARGS}
 fi
 
 : ${OCF_RESKEY_lvs_support=0}
@@ -914,9 +914,9 @@ fi
 # Note: We had a version out there for a while which used
 # netmask instead of cidr_netmask. So, don't remove this aliasing code!
 if
-  [ ! -z "$OCF_RESKEY_netmask" -a -z "$OCF_RESKEY_cidr_netmask" ]
+  [ ! -z "${OCF_RESKEY_netmask}" -a -z "${OCF_RESKEY_cidr_netmask}" ]
 then
-  OCF_RESKEY_cidr_netmask=$OCF_RESKEY_netmask
+  OCF_RESKEY_cidr_netmask=${OCF_RESKEY_netmask}
   export OCF_RESKEY_cidr_netmask
 fi
 
@@ -927,8 +927,8 @@ case $1 in
     status)		ip_status;;
     monitor)		ip_monitor;;
     validate-all)	ip_validate_all;;
-    usage)		usage $OCF_SUCCESS;;
-    *)			usage $OCF_ERR_UNIMPLEMENTED;;
+    usage)		usage ${OCF_SUCCESS};;
+    *)			usage ${OCF_ERR_UNIMPLEMENTED};;
 esac
 
 exit $?

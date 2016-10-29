@@ -1,0 +1,11 @@
+diff -Nura a/Makefile.am b/Makefile.am
+--- a/Makefile.am	2016-04-28 01:12:46.000000000 +0200
++++ b/Makefile.am	2016-10-29 16:52:57.219279208 +0200
+@@ -73,6 +73,7 @@
+ install-exec-local:
+ 	-mkdir -p $(DESTDIR)$(pkgpythondir)
+ 	$(PYTHON) $(srcdir)/setup.py install \
++		--install-lib=$(PYTHON_SITELIB) \
+ 		--root $(DESTDIR) \
+ 		$(python_prefix) \
+ 		--record $(DESTDIR)$(pkgpythondir)/install_files.txt \

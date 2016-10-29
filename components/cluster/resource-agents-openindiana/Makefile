@@ -30,7 +30,7 @@ COMPONENT_VERSION= 1.0
 COMPONENT_FMRI= application/cluster/$(COMPONENT_NAME)
 COMPONENT_CLASSIFICATION= System/Services
 COMPONENT_PROJECT_URL= http://www.linux-ha.org/doc/dev-guides/ra-dev-guide.html
-COMPONENT_LICENSE= GPLv2+ and BSD
+COMPONENT_LICENSE= LGPLv2
 COMPONENT_SUMMARY= Collection of OCF agents for HA luster which are adapted to Illumos based distributions like OpenIndiana
 
 
@@ -43,3 +43,6 @@ install:
 
 clean:
 		$(RM) -r $(BUILD_DIR) $(PROTO_DIR)
+
+REQUIRED_PACKAGES += SUNWcs
+REQUIRED_PACKAGES += shell/bash

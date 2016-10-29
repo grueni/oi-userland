@@ -21,10 +21,10 @@ COMPONENT_FMRI= application/cluster/$(COMPONENT_NAME)
 COMPONENT_CLASSIFICATION= System/Services
 COMPONENT_HG_REV= 0a7add1d9996
 COMPONENT_SRC= Reusable-Cluster-Components-glue--$(COMPONENT_HG_REV)
-COMPONENT_ARCHIVE= $(COMPONENT_HG_REV).tar.bz2
+COMPONENT_ARCHIVE= $(COMPONENT_NAME)-$(COMPONENT_HG_REV).tar.bz2
 COMPONENT_ARCHIVE_HASH= sha256:c47bfffbfe11401379d5248fc7518a3de9532c02090d614f314037fc3a7c4ceb
 COMPONENT_PROJECT_URL= http://linux-ha.org/wiki/Cluster_Glue
-COMPONENT_ARCHIVE_URL=  http://hg.linux-ha.org/glue/archive/$(COMPONENT_ARCHIVE)
+COMPONENT_ARCHIVE_URL=  http://hg.linux-ha.org/glue/archive/$(COMPONENT_HG_REV).tar.bz2
 COMPONENT_LICENSE= GPLv2, LGPLv2
 COMPONENT_SUMMARY= Cluster Glue is a set of libraries, tools and utilities suitable for the Heartbeat/Pacemaker cluster stack.
 

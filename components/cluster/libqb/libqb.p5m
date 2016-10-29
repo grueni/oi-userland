@@ -22,6 +22,7 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 
 license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
 
+file path=usr/include/qb/qbarray.h
 file path=usr/include/qb/qbatomic.h
 file path=usr/include/qb/qbconfig.h
 file path=usr/include/qb/qbdefs.h

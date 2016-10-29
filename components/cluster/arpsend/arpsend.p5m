@@ -24,7 +24,7 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 
 license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
 
-file $(COMPONENT_NAME)-exec_attr path=etc/security/exec_attr.d/system:net:$(COMPONENT_NAME)
+file files/$(COMPONENT_NAME)-exec_attr path=etc/security/exec_attr.d/system:net:$(COMPONENT_NAME)
 
 file path=usr/bin/arpsend
 file path=usr/share/man/man1m/arpsend.1m

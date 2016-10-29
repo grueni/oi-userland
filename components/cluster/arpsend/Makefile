@@ -35,8 +35,6 @@ CONFIGURE_OPTIONS += --with-libnet=/usr
 
 COMPONENT_PRE_CONFIGURE_ACTION=($(CLONEY) $(SOURCE_DIR) $(@D)) 
 
-PKG_PROTO_DIRS += $(COMPONENT_DIR)/files
-
 build:          $(BUILD_32)
 
 install:        $(INSTALL_32)
