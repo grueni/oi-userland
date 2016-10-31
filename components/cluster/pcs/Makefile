@@ -34,20 +34,19 @@ PATH= /usr/gnu/bin:/usr/ruby/1.9/bin/:/usr/bin:/usr/sbin:/sbin
 
 PATCH_LEVEL= 1
 
-# PYTHON=python2.7
-# PYTHON_SITELIB=PYTHON_SITELIB=${CONFIGURE_PREFIX}/lib/python2.7/vendor-packages
-# BASH_COMPLETION_DIR=/usr/share/bash-completion/completions
-COMPONENT_BUILD_GMAKE_ARGS += PYTHON=/usr/bin/python2.7
-COMPONENT_BUILD_GMAKE_ARGS += PYTHON_SITELIB=/usr/lib/python2.7/vendor-packages
+ENV += DESTDIR="$(PROTO_DIR)"
+ENV += am_cv_python_pythondir=$(PYTHON_VENDOR_PACKAGES)
+ENV += am_cv_python_pyexecdir=$(PYTHON_VENDOR_PACKAGES)
+ENV += PYTHON_SITELIB=$(PYTHON_VENDOR_PACKAGES)
+ENV += PYTHON=$(PYTHON)
 COMPONENT_BUILD_GMAKE_ARGS += BASH_COMPLETION_DIR=/usr/share/bash-completion/completions
-
-# if not defined DESTDIR is blank
-COMPONENT_BUILD_ENV += DESTDIR="$(PROTO_DIR)"
-
-COMPONENT_INSTALL_ENV += DESTDIR="$(PROTO_DIR)"
 
 PKG_MACROS +=	RUBY_VERSION=$(RUBY_VERSION)
 PKG_MACROS += RUBY_LIB_VERSION=$(RUBY_LIB_VERSION)
+
+COMPONENT_POST_BUILD_ACTION=( \
+    mkdir -p  $(PROTO_DIR)/usr/share/pcs/examples; \
+    mv $(PROTO_DIR)/etc/logrotate.d    $(PROTO_DIR)/usr/share/pcs/examples )
 
 # pytthon installation class overwrites the shebang during installation
 $(INSTALL_32):  $(BUILD_32)
@@ -63,8 +62,7 @@ test:           $(TESTS_32)
 
 
 REQUIRED_PACKAGES += SUNWcs
-# build dependency, not necessary for runtime
-# REQUIRED_PACKAGES += library/python/setuptools-27
+REQUIRED_PACKAGES += library/python/setuptools-27
 REQUIRED_PACKAGES += runtime/python-27
 REQUIRED_PACKAGES += runtime/ruby-19
 REQUIRED_PACKAGES += system/library
