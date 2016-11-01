@@ -20,9 +20,9 @@ COMPONENT_FMRI= application/cluster/$(COMPONENT_NAME)
 COMPONENT_CLASSIFICATION= System/Shells
 COMPONENT_PROJECT_URL= https://github.com/ClusterLabs/pcs
 COMPONENT_SRC= $(COMPONENT_NAME)-$(COMPONENT_VERSION)
-COMPONENT_ARCHIVE= $(COMPONENT_VERSION).tar.gz
+COMPONENT_ARCHIVE= $(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH= sha256:f4720b4d64d8647dcd0e63fd883c5c1ad9bc49a3777f5092f8b3e01f193838a4
-COMPONENT_ARCHIVE_URL= https://github.com/ClusterLabs/$(COMPONENT_NAME)/archive/$(COMPONENT_ARCHIVE) 
+COMPONENT_ARCHIVE_URL= https://github.com/ClusterLabs/$(COMPONENT_NAME)/archive/$(COMPONENT_VERSION).tar.gz 
 COMPONENT_LICENSE= GPLv2
 COMPONENT_SUMMARY= Pacemaker command line interface and GUI.
 
@@ -44,6 +44,9 @@ COMPONENT_BUILD_GMAKE_ARGS += BASH_COMPLETION_DIR=/usr/share/bash-completion/com
 PKG_MACROS +=	RUBY_VERSION=$(RUBY_VERSION)
 PKG_MACROS += RUBY_LIB_VERSION=$(RUBY_LIB_VERSION)
 
+COMPONENT_PRE_BUILD_ACTION=( \
+   gem install bundle ) 														
+														
 COMPONENT_POST_BUILD_ACTION=( \
     mkdir -p  $(PROTO_DIR)/usr/share/pcs/examples; \
     mv $(PROTO_DIR)/etc/logrotate.d    $(PROTO_DIR)/usr/share/pcs/examples )
