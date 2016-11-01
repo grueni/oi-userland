@@ -28,6 +28,7 @@ file path=etc/init.d/ldirectord
 file path=etc/logrotate.d/ldirectord
 file path=usr/include/heartbeat/agent_config.h
 file path=usr/lib/heartbeat/findif
+file path=usr/lib/heartbeat/send_arp
 file path=usr/lib/ocf/lib/heartbeat/apache-conf.sh
 file path=usr/lib/ocf/lib/heartbeat/findif.sh
 file path=usr/lib/ocf/lib/heartbeat/http-mon.sh

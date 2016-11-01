@@ -1,7 +1,15 @@
 diff -Nura a/Makefile.am b/Makefile.am
---- a/Makefile.am	2016-04-28 01:12:46.000000000 +0200
-+++ b/Makefile.am	2016-10-29 16:52:57.219279208 +0200
-@@ -73,6 +73,7 @@
+--- a/Makefile.am	2016-11-01 09:39:09.922378299 +0100
++++ b/Makefile.am	2016-11-01 10:03:43.440098921 +0100
+@@ -48,6 +48,7 @@
+ 
+ %.8: %.8.adoc
+ 	a2x -f manpage $<
++	mv $(@:.8=.1m) $@
+ 
+ # Shared data files
+ install-data-hook:
+@@ -73,6 +74,7 @@
  install-exec-local:
  	-mkdir -p $(DESTDIR)$(pkgpythondir)
  	$(PYTHON) $(srcdir)/setup.py install \

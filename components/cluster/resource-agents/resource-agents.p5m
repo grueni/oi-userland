@@ -13,10 +13,6 @@
 # Copyright 2016 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved.
 #
 
-# make ocf scripts exectuable
-<transform file path=usr/lib/ocf/resource.d/(.+)$  -> default mode 0555 >
-<transform file path=usr/lib/ocf/heartbeat/(.+)$  -> default mode 0555 >
-<transform file path=usr/lib/heartbeat/(.+)$  -> default mode 0555 >
 <transform file path=usr/share/man/man1m/(.+).1m$ -> set action.hash usr/share/man/man8/%<1>.8 >
 
 set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
