@@ -33,6 +33,7 @@ include $(WS_MAKE_RULES)/ips.mk
 
 PATCH_LEVEL= 1
 
+ENV += MAKE=gmake
 CFLAGS += -DNAME_MAX=255 -DHOST_NAME_MAX=255 -I/usr/include  -I/usr/include/heartbeat \
 				 	-lsocket -lnsl -ldladm -lssp_nonshared -lssp -D__EXTENSIONS__ -D_POSIX_PTHREAD_SEMANTICS
 

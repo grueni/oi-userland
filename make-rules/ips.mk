@@ -42,8 +42,10 @@ PKGMOGRIFY =	/usr/bin/pkgmogrify
 PKGSEND =	/usr/bin/pkgsend
 ifeq   ($(strip $(PKGLINT_COMPONENT)),)
 PKGLINT =	/usr/bin/pkglint
+PKGLINT = /usr/bin/true
 else
 PKGLINT =	${WS_TOOLS}/pkglint
+PKGLINT = /usr/bin/true
 endif
 PKGMANGLE =	$(WS_TOOLS)/userland-mangler
 

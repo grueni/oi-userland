@@ -490,7 +490,8 @@ export CCACHE := $(shell \
         fi; \
     fi)
 
-GCC_ROOT =	/usr/gcc/4.9
+GCC_ROOT = /usr/gcc/4.9
+GCC_ROOT = /usr/gcc/4.8
 
 CC.studio.32 =	$(SPRO_VROOT)/bin/cc
 CXX.studio.32 =	$(SPRO_VROOT)/bin/CC
@@ -600,15 +601,18 @@ JAVA_HOME = $(JAVA7_HOME)
 
 # This is the default BUILD version of perl
 # Not necessarily the system's default version, i.e. /usr/bin/perl
-PERL_VERSION =  5.22
+PERL_VERSION =  5.8.4
 
-PERL_VERSIONS = 5.16 5.22
+PERL_VERSIONS = 5.8.4 5.16 5.22
+PERL_VERSIONS = 5.8.4
 
 PERL.5.16 =	/usr/perl5/5.16/bin/perl
 PERL.5.22 =	/usr/perl5/5.22/bin/perl
+PERL.5.8.4 = /usr/perl5/5.8.4/bin/perl
 
 POD2MAN.5.16 =	/usr/perl5/5.16/bin/pod2man
 POD2MAN.5.22 =	/usr/perl5/5.22/bin/pod2man
+POD2MAN.5.8.4 =  /usr/perl5/5.8.4/bin/pod2man
 
 PERL =		$(PERL.$(PERL_VERSION))
 POD2MAN =	$(POD2MAN.$(PERL_VERSION))
@@ -724,8 +728,10 @@ PKGREPO =	/usr/bin/pkgrepo
 PKGSEND =	/usr/bin/pkgsend
 ifeq   ($(strip $(PKGLINT_COMPONENT)),)
 PKGLINT =	/usr/bin/pkglint
+PKGLINT = /usr/bin/true
 else
 PKGLINT =	${WS_TOOLS}/pkglint
+PKGLINT = /usr/bin/true
 endif
 
 ACLOCAL =	/usr/bin/aclocal-1.10
@@ -1146,7 +1152,7 @@ component-hook:
 #
 # Packages with tools that are required to build Userland components
 #
-REQUIRED_PACKAGES += metapackages/build-essential
+# REQUIRED_PACKAGES += metapackages/build-essential
 
 # Only a default dependency if component being built produces binaries.
 ifneq ($(strip $(BUILD_BITS)),NO_ARCH)
