@@ -1,0 +1,58 @@
+#!/usr/sbin/sh
+#
+# Copyright 2016 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved. 
+#
+# Method script for the pools service.
+#
+
+function checkWebmincrons {
+mkdir -p ${WEBMINCRONS}
+if [ "$(ls -A ${WEBMINCRONS})" ]; then
+  exit
+fi
+
+ID=`date +%s%N`
+ID=${ID%????}
+cat <<EOF>${WEBMINCRONS}/${ID}.cron
+func=scheduled_collect_system_info
+id=${ID}
+interval=300
+module=system-status
+EOF
+
+sleep 1
+
+ID=`date +%s%N`
+ID=${ID%????}
+cat <<EOF>${WEBMINCRONS}/${ID}.cron
+func=cleanup_temp_files
+id=${ID}
+nterval=3600
+module=cron
+EOF
+
+}
+
+. /lib/svc/share/smf_include.sh
+
+unset PERLIO LANG 
+export PERLLIB=/opt/webmin
+export WEBMINCRONS=/etc/webmin/webmincron/crons
+
+case "$1" in
+'start')
+  checkWebmincrons
+  /opt/webmin/miniserv.pl $* /etc/webmin/miniserv.conf
+  err=$?
+  if [ $err -ne 0 ]; then
+    echo "webmin failed to start: error $err"
+    exit $SMF_EXIT_ERR_FATAL
+  fi
+  ;;
+*)
+  echo "Usage: $0 { start }"
+  exit $SMF_EXIT_ERR_FATAL
+  ;;
+esac
+
+exit $SMF_EXIT_OK

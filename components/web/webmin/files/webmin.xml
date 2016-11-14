@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE service_bundle SYSTEM "/usr/share/lib/xml/dtd/service_bundle.dtd.1">
+
+<service_bundle type='manifest' name='application/webmin'>
+
+<service name='application/webmin' type='service' version='1'>
+
+<create_default_instance enabled='true' />
+
+<single_instance />
+
+<dependency name='multi-user' grouping='require_all' restart_on='none' type='service'>
+<service_fmri value='svc:/milestone/multi-user:default' />
+</dependency>
+
+<exec_method
+  type='method'
+  name='start'
+	exec='/lib/svc/method/svc-webmin'
+  timeout_seconds='360'>
+  <method_context>
+    <method_credential user='root'/>
+  </method_context>
+</exec_method>
+
+<exec_method type="method" name="stop" exec=":kill" timeout_seconds="60" />
+
+<exec_method type="method" name="refresh" exec=":kill -USR1" timeout_seconds="60" />
+
+</service>
+</service_bundle>
+
