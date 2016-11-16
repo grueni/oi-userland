@@ -118,7 +118,6 @@ file path=usr/lib/pcsd/vendor/bundle/ruby/1.9.1/extensions/amd64-solaris-2.11/1.
 file path=usr/lib/pcsd/vendor/bundle/ruby/1.9.1/extensions/amd64-solaris-2.11/1.9.1/json-1.8.3/json/ext/parser.so mode=0555
 file path=usr/lib/pcsd/vendor/bundle/ruby/1.9.1/extensions/amd64-solaris-2.11/1.9.1/rpam-ruby19-1.2.1/gem.build_complete
 file path=usr/lib/pcsd/vendor/bundle/ruby/1.9.1/extensions/amd64-solaris-2.11/1.9.1/rpam-ruby19-1.2.1/gem_make.out
-file path=usr/lib/pcsd/vendor/bundle/ruby/1.9.1/extensions/amd64-solaris-2.11/1.9.1/rpam-ruby19-1.2.1/mkmf.log
 file path=usr/lib/pcsd/vendor/bundle/ruby/1.9.1/extensions/amd64-solaris-2.11/1.9.1/rpam-ruby19-1.2.1/rpam_ext.so mode=0555
 file path=usr/lib/pcsd/vendor/bundle/ruby/1.9.1/gems/backports-3.6.8/.document
 file path=usr/lib/pcsd/vendor/bundle/ruby/1.9.1/gems/backports-3.6.8/.gitignore
