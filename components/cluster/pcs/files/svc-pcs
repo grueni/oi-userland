@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 # Start/stop PCSD WebGUI daemon
 #
+# we need bundler-1.13.6.gem => gem19 update bundler
+
 . /lib/svc/share/smf_include.sh
 
 export CLUSTER_USER=hacluster
@@ -11,7 +13,6 @@ config=/var/lib/pcsd
 pidfile=/var/run/pcsd.pid
 params=" -C${config} -I${binpath} -- ${binpath}/ssl.rb"
 
-export GEM_PATH=${binpath}/vendor/bundle/ruby/1.9.1
 export PATH=/usr/ruby/1.9/bin:${binpath}:/usr/gnu/bin:/usr/bin:/usr/sbin:${PATH}
 
 # runtime folder for sockets etc.
