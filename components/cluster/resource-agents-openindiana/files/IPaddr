@@ -316,7 +316,7 @@ lvs_restore_loopback() {
 find_interface_solaris() {
     ipaddr="$1"
 
-    ${IFCONFIG} ${IFCONFIG}_A_OPT | ${AWK} '{if ($0 ~ /.*: / && NR > 1) {print "\n"$0} else {print}}' |
+    ${IFCONFIG} ${IFCONFIG_A_OPT} | ${AWK} '{if ($0 ~ /.*: / && NR > 1) {print "\n"$0} else {print}}' |
     while read ifname linkstuff
     do
 	: ifname = ${ifname}
@@ -347,7 +347,7 @@ find_interface_solaris() {
 }
 
 find_interface_bsd() {
-    ${IFCONFIG} ${IFCONFIG}_A_OPT | awk -v ip_addr="${ipaddr}" '
+    ${IFCONFIG} ${IFCONFIG_A_OPT} | awk -v ip_addr="${ipaddr}" '
 					/UP,/ && $0 ~ /^[a-z]+[0-9]:/ { 
     						if_name=$1; sub(":$","",if_name); 
 					}
@@ -365,7 +365,7 @@ find_interface_bsd() {
 #
 find_interface_generic() {
     ipaddr="$1"
-    ${IFCONFIG} ${IFCONFIG}_A_OPT  |
+    ${IFCONFIG} ${IFCONFIG_A_OPT}  |
     while read ifname linkstuff
     do
 	: Read gave us ifname = ${ifname}
@@ -435,11 +435,11 @@ find_free_interface() {
 		return ${OCF_SUCCESS};;
 	SunOS)
 		j=1
-		IFLIST=`${IFCONFIG} ${IFCONFIG}_A_OPT | \
+		IFLIST=`${IFCONFIG} ${IFCONFIG_A_OPT} | \
 			grep "^$NIC:[0-9]" | sed 's%: .*%%'`;;
 	*)
 		j=0
-		IFLIST=`${IFCONFIG} ${IFCONFIG}_A_OPT | \
+		IFLIST=`${IFCONFIG} ${IFCONFIG_A_OPT} | \
 			grep "^$NIC:[0-9]" | sed 's% .*%%'`
                 TRYADRCNT=`ls "${NICBASE}:"* 2>/dev/null | wc -w | tr -d ' '`
 		if [ -f "${NICBASE}:${TRYADRCNT}" ]; then
