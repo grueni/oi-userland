@@ -1,0 +1,54 @@
+#
+# This file and its contents are supplied under the terms of the
+# Common Development and Distribution License ("CDDL"), version 1.0.
+# You may only use this file in accordance with the terms of version
+# 1.0 of the CDDL.
+#
+# A full copy of the text of the CDDL should have accompanied this
+# source.  A copy of the CDDL is also available via the Internet at
+# http://www.illumos.org/license/CDDL.
+#
+
+#
+# Copyright 2016 Grüninger GmbH, Andreas Grüninger (grueni)
+#
+
+set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)-$(RUBYV)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=info.classification value="$(COMPONENT_CLASSIFICATION)"
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+set name=pkg.summary value="Bundler manages gem dependencies in ruby projects"
+set name=pkg.description value="Bundler provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed."
+
+
+license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
+
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/bin/bundle
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/bin/bundler
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/cache/bundler-$(COMPONENT_VERSION).gem
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/exe/bundle
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/exe/bundler
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-binstubs
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-binstubs.txt
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-config
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-config.txt
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-exec
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-exec.txt
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-gem
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-gem.txt
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-install
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-install.txt
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-lock
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-lock.txt
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-package
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-package.txt
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-platform
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-platform.txt
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-update
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle-update.txt
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/bundle.txt
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/gemfile.5
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/gems/bundler-$(COMPONENT_VERSION)/lib/bundler/man/gemfile.5.txt
+file path=usr/ruby/$(RUBY_VERSION)/lib/ruby/vendor_ruby/gems/$(RUBY_LIB_VERSION)/specifications/bundler-$(COMPONENT_VERSION).gemspec
