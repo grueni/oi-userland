@@ -22,6 +22,12 @@
 #
 include ../../../make-rules/shared-macros.mk
 
+RUBY_VERSION = 2.2
+RUBY_LIB_VERSION = 2.2.0
+RUBY.2.2 = /usr/ruby/2.2/bin/ruby
+RUBY = $(RUBY.$(RUBY_VERSION))
+RUBY_VERSIONS = $(RUBY_LIB_VERSION)
+
 COMPONENT_NAME=           bundler
 COMPONENT_VERSION=        1.13.6
 COMPONENT_FMRI=           library/ruby/$(COMPONENT_NAME)
@@ -37,21 +43,6 @@ include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/ips.mk
 include $(WS_MAKE_RULES)/gem.mk
 
-# symlink support is supported by ruby >= 2.3
-# to generate bundler.p5m do the following:
-# - add macro $(BUILD_DIR)/%/.built from gem.mk and replace ${CLONEY} .. with
-# $(RM) -r $(BUILD_DIR_32) ; $(CP) -r $(SOURCE_DIR) $(@D)
-# - create afterwards manifest with gmake sample-manifest
-$(BUILD_DIR)/%/.built:  $(SOURCE_DIR)/.prep
-	$(RM) -r $(@D) ; $(MKDIR) $(@D)
-	$(RM) -r $(BUILD_DIR_32) ; $(CP) -r $(SOURCE_DIR) $(@D)
-	$(COMPONENT_PRE_BUILD_ACTION)
-	# Build the gem and cause the generation of a new gem spec
-	# file in $(COMPONENT_SRC)
-	$(GEM_BUILD_ACTION)
-	$(COMPONENT_POST_BUILD_ACTION)
-	$(TOUCH) $@
-
 # common targets
 build:		$(BUILD_32)
 
@@ -60,4 +51,4 @@ install:	$(INSTALL_32)
 test:		  $(TESTS_32)
 
 
-REQUIRED_PACKAGES += runtime/ruby-19
+REQUIRED_PACKAGES += runtime/ruby-22
