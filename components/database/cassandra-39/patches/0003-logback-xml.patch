@@ -1,0 +1,13 @@
+diff -Nur a/conf/logback.xml b/conf/logback.xml
+--- a/conf/logback.xml	2016-12-06 16:58:01.751021583 +0100
++++ b/conf/logback.xml	2016-12-06 16:58:42.451107902 +0100
+@@ -89,7 +89,9 @@
+ 
+   <root level="INFO">
+     <appender-ref ref="SYSTEMLOG" />
++<!--
+     <appender-ref ref="STDOUT" />
++-->
+     <appender-ref ref="ASYNCDEBUGLOG" /> <!-- Comment this line to disable debug.log -->
+     <!--
+     <appender-ref ref="LogbackMetrics" />

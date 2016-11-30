@@ -1,0 +1,174 @@
+diff -Nur a/bin/cassandra b/bin/cassandra
+--- a/bin/cassandra	2016-12-03 18:30:50.395457152 +0100
++++ b/bin/cassandra	2016-12-03 18:30:50.418154710 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+ # distributed with this work for additional information
+diff -Nur a/bin/cqlsh b/bin/cqlsh
+--- a/bin/cqlsh	2016-12-03 18:30:50.396441948 +0100
++++ b/bin/cqlsh	2016-12-03 18:30:50.419226825 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+ # distributed with this work for additional information
+diff -Nur a/bin/debug-cql b/bin/debug-cql
+--- a/bin/debug-cql	2016-12-03 18:30:50.397437330 +0100
++++ b/bin/debug-cql	2016-12-03 18:30:50.420465842 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+ # distributed with this work for additional information
+diff -Nur a/bin/nodetool b/bin/nodetool
+--- a/bin/nodetool	2016-12-03 18:30:50.398434638 +0100
++++ b/bin/nodetool	2016-12-03 18:30:50.421876575 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/bin/sstableloader b/bin/sstableloader
+--- a/bin/sstableloader	2016-12-03 18:30:50.399430120 +0100
++++ b/bin/sstableloader	2016-12-03 18:30:50.423101165 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/bin/sstablescrub b/bin/sstablescrub
+--- a/bin/sstablescrub	2016-12-03 18:30:50.400420186 +0100
++++ b/bin/sstablescrub	2016-12-03 18:30:50.424326881 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/bin/sstableupgrade b/bin/sstableupgrade
+--- a/bin/sstableupgrade	2016-12-03 18:30:50.401402884 +0100
++++ b/bin/sstableupgrade	2016-12-03 18:30:50.425527573 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/bin/sstableutil b/bin/sstableutil
+--- a/bin/sstableutil	2016-12-03 18:30:50.402390863 +0100
++++ b/bin/sstableutil	2016-12-03 18:30:50.426748519 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/bin/sstableverify b/bin/sstableverify
+--- a/bin/sstableverify	2016-12-03 18:30:50.403385195 +0100
++++ b/bin/sstableverify	2016-12-03 18:30:50.427977230 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/conf/cassandra-env.sh b/conf/cassandra-env.sh
+--- a/conf/cassandra-env.sh	2016-12-03 18:30:50.394439376 +0100
++++ b/conf/cassandra-env.sh	2016-12-03 18:30:50.416169366 +0100
+@@ -263,7 +263,7 @@
+ # jmx authentication and authorization options. By default, auth is only
+ # activated for remote connections but they can also be enabled for local only JMX
+ ## Basic file based authn & authz
+-JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.password.file=/etc/cassandra/jmxremote.password"
++JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.password.file=/etc/cassandra/3.9/jmxremote.password"
+ #JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.access.file=/etc/cassandra/jmxremote.access"
+ ## Custom auth settings which can be used as alternatives to JMX's out of the box auth utilities.
+ ## JAAS login modules can be used for authentication by uncommenting these two properties.
+diff -Nur a/tools/bin/cassandra-stress b/tools/bin/cassandra-stress
+--- a/tools/bin/cassandra-stress	2016-12-03 18:30:50.404394013 +0100
++++ b/tools/bin/cassandra-stress	2016-12-03 18:30:50.429173312 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/tools/bin/cassandra-stressd b/tools/bin/cassandra-stressd
+--- a/tools/bin/cassandra-stressd	2016-12-03 18:30:50.405387178 +0100
++++ b/tools/bin/cassandra-stressd	2016-12-03 18:30:50.430509133 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/tools/bin/sstabledump b/tools/bin/sstabledump
+--- a/tools/bin/sstabledump	2016-12-03 18:30:50.406394742 +0100
++++ b/tools/bin/sstabledump	2016-12-03 18:30:50.431753177 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/tools/bin/sstableexpiredblockers b/tools/bin/sstableexpiredblockers
+--- a/tools/bin/sstableexpiredblockers	2016-12-03 18:30:50.407395253 +0100
++++ b/tools/bin/sstableexpiredblockers	2016-12-03 18:30:50.432983083 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/tools/bin/sstablelevelreset b/tools/bin/sstablelevelreset
+--- a/tools/bin/sstablelevelreset	2016-12-03 18:30:50.408381049 +0100
++++ b/tools/bin/sstablelevelreset	2016-12-03 18:30:50.434194547 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/tools/bin/sstablemetadata b/tools/bin/sstablemetadata
+--- a/tools/bin/sstablemetadata	2016-12-03 18:30:50.409375824 +0100
++++ b/tools/bin/sstablemetadata	2016-12-03 18:30:50.435413457 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/tools/bin/sstableofflinerelevel b/tools/bin/sstableofflinerelevel
+--- a/tools/bin/sstableofflinerelevel	2016-12-03 18:30:50.410387365 +0100
++++ b/tools/bin/sstableofflinerelevel	2016-12-03 18:30:50.436636733 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/tools/bin/sstablerepairedset b/tools/bin/sstablerepairedset
+--- a/tools/bin/sstablerepairedset	2016-12-03 18:30:50.411385828 +0100
++++ b/tools/bin/sstablerepairedset	2016-12-03 18:30:50.437842596 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
+diff -Nur a/tools/bin/sstablesplit b/tools/bin/sstablesplit
+--- a/tools/bin/sstablesplit	2016-12-03 18:30:50.412387558 +0100
++++ b/tools/bin/sstablesplit	2016-12-03 18:30:50.439070913 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ # Licensed to the Apache Software Foundation (ASF) under one
+ # or more contributor license agreements.  See the NOTICE file
