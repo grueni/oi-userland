@@ -1,0 +1,24 @@
+--- apache-couchdb-1.6.1/bin/couchdb.tpl.in.orig	2017-10-09 20:42:39.445857376 +0000
++++ apache-couchdb-1.6.1/bin/couchdb.tpl.in	2017-10-09 20:43:21.027274011 +0000
+@@ -1,4 +1,4 @@
+-#! /bin/sh -e
++#!/usr/bin/bash
+ 
+ # Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ # use this file except in compliance with the License. You may obtain a copy of
+--- apache-couchdb-1.6.1/src/couchdb/priv/spawnkillable/couchspawnkillable.sh,orig	2017-10-09 20:44:51.403033605 +0000
++++ apache-couchdb-1.6.1/src/couchdb/priv/spawnkillable/couchspawnkillable.sh	2017-10-09 20:45:01.337711313 +0000
+@@ -1,4 +1,4 @@
+-#! /bin/sh -e
++#!/usr/bin/bash
+ 
+ # Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ # use this file except in compliance with the License. You may obtain a copy of
+--- apache-couchdb-1.6.1/test/javascript/run.tpl.orig	2017-10-09 20:45:52.498330903 +0000
++++ apache-couchdb-1.6.1/test/javascript/run.tpl	2017-10-09 20:46:08.472567814 +0000
+@@ -1,4 +1,4 @@
+-#!/bin/sh -e
++#!/usr/bin/bash
+ 
+ # Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ # use this file except in compliance with the License. You may obtain a copy of
