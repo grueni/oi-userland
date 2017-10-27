@@ -13,11 +13,11 @@
 # Copyright 2014 Alexander Pyhalov.  All rights reserved.
 #
 
-include ../../make-rules/shared-macros.mk
+include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME= gobby
 COMPONENT_VERSION= 0.4.94
-COMPONENT_REVISION= 1
+COMPONENT_REVISION= 2
 COMPONENT_CLASSIFICATION=System/Text Tools
 COMPONENT_FMRI=editor/gobby
 COMPONENT_SUMMARY= A collaborative text editor
@@ -31,13 +31,14 @@ COMPONENT_PROJECT_URL = http://gobby.0x539.de
 COMPONENT_LICENSE= GPLv2
 COMPONENT_LICENSE_FILE= COPYING
 
-include ../../make-rules/prep.mk
-include ../../make-rules/configure.mk
-include ../../make-rules/ips.mk
+include $(WS_MAKE_RULES)/prep.mk
+include $(WS_MAKE_RULES)/configure.mk
+include $(WS_MAKE_RULES)/ips.mk
 
-PATH=/usr/gnu/bin:/usr/bin
+PATH=$(PATH.gnu)
 
 LDFLAGS += -lnsl -lsocket
+CXXFLAGS += -std=c++11
 
 COMPONENT_PRE_CONFIGURE_ACTION =        ($(CLONEY) $(SOURCE_DIR) $(@D))
 
@@ -49,3 +50,20 @@ build: $(BUILD_32)
 install: $(INSTALL_32)
 
 test: $(NO_TESTS)
+
+# Auto-generated dependencies
+REQUIRED_PACKAGES += library/c++/glibmm
+REQUIRED_PACKAGES += library/c++/libxml++
+REQUIRED_PACKAGES += library/c++/sigcpp
+REQUIRED_PACKAGES += library/desktop/c++/atkmm
+REQUIRED_PACKAGES += library/desktop/c++/gtkmm
+REQUIRED_PACKAGES += library/desktop/c++/pangomm
+REQUIRED_PACKAGES += library/desktop/gtk2
+REQUIRED_PACKAGES += library/desktop/gtksourceview
+REQUIRED_PACKAGES += library/glib2
+REQUIRED_PACKAGES += library/libinfinity
+REQUIRED_PACKAGES += library/libunique
+REQUIRED_PACKAGES += system/library
+REQUIRED_PACKAGES += system/library/g++-4-runtime
+REQUIRED_PACKAGES += system/library/gcc-4-runtime
+REQUIRED_PACKAGES += system/library/math
