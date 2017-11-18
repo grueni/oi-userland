@@ -1,0 +1,5 @@
+Redis Administration:solaris:cmd:::/usr/redis-40/bin/redis-benchmark:uid=redis
+Redis Administration:solaris:cmd:::/usr/redis-40/bin/redis-check-aof:uid=redis
+Redis Administration:solaris:cmd:::/usr/redis-40/bin/redis-check-rdb:uid=redis
+Redis Administration:solaris:cmd:::/usr/redis-40/bin/redis-cli:uid=redis
+Redis Administration:solaris:cmd:::/usr/redis-40/bin/redis-server:uid=redis

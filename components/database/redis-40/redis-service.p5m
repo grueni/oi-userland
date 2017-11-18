@@ -1,0 +1,39 @@
+#
+# This file and its contents are supplied under the terms of the
+# Common Development and Distribution License ("CDDL"), version 1.0.
+# You may only use this file in accordance with the terms of version
+# 1.0 of the CDDL.
+#
+# A full copy of the text of the CDDL should have accompanied this
+# source.  A copy of the CDDL is also available via the Internet at
+# http://www.illumos.org/license/CDDL.
+#
+
+#
+# Copyright 2017 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved.
+#
+
+set name=pkg.fmri value=pkg:/service/database/$(COMPONENT_NAME)-40@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary value="$(COMPONENT_SUMMARY)"
+set name=info.classification value="$(COMPONENT_CLASSIFICATION)"
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+
+license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
+
+depend type=require fmri=database/redis-40
+depend type=require fmri=database/redis-common
+
+file files/redis.conf path=etc/redis-40/redis.conf
+file files/auth_attr  path=etc/security/auth_attr.d/redis-40
+file files/exec_attr  path=etc/security/exec_attr.d/redis-40
+file files/prof_attr  path=etc/security/prof_attr.d/redis-40
+file files/user_attr  path=etc/user_attr.d/redis-40
+
+file files/redis-40.xml path=lib/svc/manifest/application/redis-40.xml restart_fmri=svc:/system/manifest-import:default
+
+dir  path=var/redis-40/data  owner=redis group=redis mode=0755
+dir  path=var/redis-40/run   owner=redis group=redis mode=0755
+dir  path=var/redis-40/log   owner=redis group=redis mode=0755
+
