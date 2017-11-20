@@ -1,0 +1,7 @@
+#!/bin/bash
+export JAVA_HOME=/usr/jdk/openjdk1.8.0
+export MAX_HEAP_SIZE=8G
+export HEAP_NEWSIZE=2G
+export JVM_OPTS=-Dcassandra.config=file:///etc/cassandra/3.11/cassandra.yaml
+export LOG_PATH=/var/cassandra/3.11/log
+export LOCAL_JMX=no

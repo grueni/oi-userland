@@ -1,0 +1,12 @@
+diff -Nur a/conf/cassandra-env.sh b/conf/cassandra-env.sh
+--- a/conf/cassandra-env.sh	2016-11-30 19:21:24.109418870 +0100
++++ b/conf/cassandra-env.sh	2016-11-30 19:22:17.362030308 +0100
+@@ -27,7 +27,7 @@
+             system_cpu_cores=`sysctl hw.ncpu | awk '{print $2}'`
+         ;;
+         SunOS)
+-            system_memory_in_mb=`prtconf | awk '/Memory size:/ {print $3}'`
++            system_memory_in_mb=`kstat -n system_pages -p -s physmem|nawk -v pagesize=$(pagesize) '{print int($2*pagesize/1024/1024) ""}'`
+             system_cpu_cores=`psrinfo | wc -l`
+         ;;
+         Darwin)

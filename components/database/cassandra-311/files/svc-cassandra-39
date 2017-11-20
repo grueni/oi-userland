@@ -1,0 +1,38 @@
+#!/bin/bash
+# Start/stop /cassandra service
+#
+. /lib/svc/share/smf_include.sh
+
+APPPATH=/usr/cassandra/3.11/bin/cassandra
+CASSANDRA_USER=cassandra
+CASSANDRA_PID=/var/run/cassandra.pid
+CASSANDRA_INCLUDE=/usr/cassandra/3.11/bin/env
+
+touch ${CASSANDRA_PID}
+chown ${CASSANDRA_USER}  ${CASSANDRA_PID}
+mkdir -p ${LOG_PATH}
+chown -R ${CASSANDRA_USER} ${LOG_PATH}
+while read -r CASSANDRA_DBPATH; do
+  [ -d "${CASSANDRA_DBPATH}" ] && chown -R ${CASSANDRA_USER} "${CASSANDRA_DBPATH}"
+done <<< ${CASSANDRA_DBPATHS}
+
+case "$1" in
+  'start')
+    ulimit -n 64000
+    su - ${CASSANDRA_USER} -c ". ${CASSANDRA_ENV}; ${APPPATH} -p ${CASSANDRA_PID}"  &
+    ;;
+  'restart')
+     stop
+     sleep 3
+     start
+    ;;
+  'stop')
+     [[ -s ${CASSANDRA_PID} ]] && kill -9 $(cat ${CASSANDRA_PID}) 2>/dev/null
+    ;;
+  *)
+    echo "Usage: $0 { start | stop | restart}"
+    exit 1
+    ;;
+esac
+exit 0
+
