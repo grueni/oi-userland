@@ -25,15 +25,15 @@
 
 include ../../../make-rules/shared-macros.mk
 
-COMPONENT_NAME=		graphviz
-COMPONENT_VERSION=	2.38.0
-COMPONENT_REVISION=	8
+COMPONENT_NAME=		      graphviz
+COMPONENT_VERSION=	    2.40.1
 COMPONENT_PROJECT_URL=	http://www.graphviz.org/
-COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
-COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
-COMPONENT_ARCHIVE_HASH=	\
-    sha256:81aa238d9d4a010afa73a9d2a704fc3221c731e1e06577c2ab3496bdef67859e
-COMPONENT_ARCHIVE_URL=	$(COMPONENT_PROJECT_URL)pub/graphviz/stable/SOURCES/$(COMPONENT_ARCHIVE)
+COMPONENT_SRC=		      $(COMPONENT_NAME)-$(COMPONENT_VERSION)
+COMPONENT_ARCHIVE=	    $(COMPONENT_SRC).tar.gz
+# I hope the project will change the attitude to use an IP address, name resolution doesn't work
+COMPONENT_ARCHIVE_URL=  http://204.178.9.49/pub/graphviz/stable/SOURCES/$(COMPONENT_ARCHIVE)
+COMPONENT_ARCHIVE_HASH= sha256:ca5218fade0204d59947126c38439f432853543b0818d9d728c589dfe7f3a421
+# COMPONENT_SIG_URL=      http://204.178.9.49/pub/graphviz/stable/SOURCES/$(COMPONENT_ARCHIVE).md5 	
 
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/configure.mk
@@ -52,16 +52,17 @@ CPPFLAGS +=	-I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/solaris
 CPPFLAGS_PHP.32 =	$(shell /usr/php/5.6/bin/php-config --includes)
 CPPFLAGS_PHP.64 =	$(shell /usr/php/5.6/bin/$(MACH64)/php-config --includes)
 CPPFLAGS += $(CPPFLAGS_PHP.$(BITS))
-#CXX +=		$(studio_NORUNPATH)
 
-COMPONENT_PREP_ACTION = (cd $(@D) && libtoolize -cf && \
+xCOMPONENT_PREP_ACTION = (cd $(@D) && libtoolize -cf && \
 				aclocal && \
 				autoconf -f -I m4 && \
 				autoheader && \
 				automake --add-missing)
 
 # Can't find headers without this.
-COMPONENT_PRE_CONFIGURE_ACTION =        ($(CLONEY) $(SOURCE_DIR) $(@D))
+COMPONENT_PRE_CONFIGURE_ACTION = ( \
+   $(CLONEY) $(SOURCE_DIR) $(@D); \
+   cd $(@D) && ./autogen.sh )
 
 CONFIGURE_ENV +=	CPPFLAGS="$(CPPFLAGS)"
 CONFIGURE_ENV +=	PERL=$(PERL)

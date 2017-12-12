@@ -25,6 +25,7 @@ COMPONENT_CLASSIFICATION=	System/Administration and Configuration
 COMPONENT_FMRI=	service/management/sysding
 
 COMPONENT_REVISION=$(shell cd $(COMPONENT_SRC); git rev-list HEAD --count)
+COMPONENT_REVISION=32
 
 COMPONENT_SUMMARY=	Simple tool for initial system configuration
 
