@@ -1,0 +1,14 @@
+--- apache-couchdb-2.1.1/dev/run.orig	2018-01-01 17:44:45.450094105 +0000
++++ apache-couchdb-2.1.1/dev/run	2018-01-01 17:49:46.997649259 +0000
+@@ -304,7 +305,10 @@
+     else:
+         user, pswd = ctx['admin']
+ 
+-    return contents + "\n%s = %s" % (user, hashify(pswd))
++    previous_line = "[admins]\n"
++    user_line = "\n%s = %s\n" % (user, hashify(pswd))
++
++    return contents.replace(previous_line, previous_line + user_line)
+ 
+ 
+ def gen_password():

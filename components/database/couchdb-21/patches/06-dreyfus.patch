@@ -1,0 +1,122 @@
+--- apache-couchdb-2.1.1/dev/run.orig	2017-12-30 09:56:13.254783240 +0000
++++ apache-couchdb-2.1.1/dev/run	2017-12-30 09:58:29.895331098 +0000
+@@ -193,6 +193,7 @@
+             "cluster_port": cluster_port,
+             "backend_port": backend_port,
+             "fauxton_root": fauxton_root,
++            "clouseau_name": "clouseau%d@127.0.0.1" % (idx+1),
+             "uuid": "fake_uuid_for_dev",
+             "_default": "",
+             "compaction_daemon": "{}"
+--- apache-couchdb-2.1.1/rebar.config.script.orig	2017-12-30 10:10:20.879036953 +0000
++++ apache-couchdb-2.1.1/rebar.config.script	2017-12-30 10:33:05.022510821 +0000
+@@ -64,8 +64,8 @@
+ {ibrowse,          "ibrowse",          {tag, "CouchDB-4.0.1"}},
+ {jiffy,            "jiffy",            {tag, "CouchDB-0.14.11-2"}},
+ {mochiweb,         "mochiweb",         {tag, "CouchDB-2.12.0-1"}},
+-{meck,             "meck",             {tag, "0.8.8"}}
+-
++{meck,             "meck",             {tag, "0.8.8"}},
++{dreyfus,          "dreyfus",          {commit, "30b0556047d54795a5b5cfe96a7bc4b75145bb06"}}
+ ],
+ 
+ 
+@@ -79,6 +79,9 @@
+     ({AppName, RepoName, Version}) ->
+         Url = BaseUrl ++ "couchdb-" ++ RepoName ++ ".git",
+         {AppName, ".*", {git, Url, Version}};
++    ({AppName, RepoName, Version}) when AppName == dreyfus ->
++        Url = "https://github.com/cloudant-labs/" ++ RepoName ++ ".git",
++        {AppName, ".*", {git, Url, Version}};
+     ({AppName, RepoName, Version, Options}) ->
+         Url = BaseUrl ++ "couchdb-" ++ RepoName ++ ".git",
+         {AppName, ".*", {git, Url, Version}, Options}
+--- apache-couchdb-2.1.1/rel/apps/couch_epi.config.orig	2017-12-31 08:36:19.598586427 +0000
++++ apache-couchdb-2.1.1/rel/apps/couch_epi.config	2017-12-31 08:36:52.474037927 +0000
+@@ -14,6 +14,7 @@
+     couch_db_epi,
+     chttpd_epi,
+     couch_index_epi,
++    dreyfus_epi,
+     global_changes_epi,
+     mango_epi,
+     mem3_epi,
+--- apache-couchdb-2.1.1/rel/reltool.config.orig	2017-12-31 08:37:47.529360966 +0000
++++ apache-couchdb-2.1.1/rel/reltool.config	2017-12-31 08:38:52.951721167 +0000
+@@ -42,6 +42,7 @@
+         couch_event,
+         couch_peruser,
+         ddoc_cache,
++        dreyfus,
+         ets_lru,
+         fabric,
+         folsom,
+@@ -95,6 +96,7 @@
+     {app, couch_event, [{incl_cond, include}]},
+     {app, couch_peruser, [{incl_cond, include}]},
+     {app, ddoc_cache, [{incl_cond, include}]},
++    {app, dreyfus, [{incl_cond, include}]},
+     {app, ets_lru, [{incl_cond, include}]},
+     {app, fabric, [{incl_cond, include}]},
+     {app, folsom, [{incl_cond, include}]},
+--- apache-couchdb-2.1.1/support/build_js.escript.orig	2017-12-31 08:39:54.129093965 +0000
++++ apache-couchdb-2.1.1/support/build_js.escript	2017-12-31 08:40:45.206054375 +0000
+@@ -27,6 +27,7 @@
+                "share/server/util.js",
+                "share/server/validate.js",
+                "share/server/views.js",
++               "share/server/dreyfus.js",
+                "share/server/loop.js"],
+ 
+     CoffeeFiles = ["share/server/json2.js",
+@@ -37,6 +38,7 @@
+                    "share/server/util.js",
+                    "share/server/validate.js",
+                    "share/server/views.js",
++                   "share/server/dreyfus.js",
+                    "share/server/coffee-script.js",
+                    "share/server/loop.js"],
+ 
+--- apache-couchdb-2.1.1/share/server/loop.js.orig	2017-12-31 08:41:31.717253792 +0000
++++ apache-couchdb-2.1.1/share/server/loop.js	2017-12-31 08:44:35.987480737 +0000
+@@ -25,6 +25,7 @@
+     sandbox.send = Render.send;
+     sandbox.getRow = Render.getRow;
+     sandbox.isArray = isArray;
++    sandbox.index = Dreyfus.index;
+   } catch (e) {
+     var sandbox = {};
+   }
+@@ -115,7 +116,8 @@
+     "add_lib"  : State.addLib,
+     "map_doc"  : Views.mapDoc,
+     "reduce"   : Views.reduce,
+-    "rereduce" : Views.rereduce
++    "rereduce" : Views.rereduce,
++    "index_doc": Dreyfus.indexDoc
+   };
+   function handleError(e) {
+     var type = e[0];
+--- apache-couchdb-2.1.1/rel/overlay/etc/local.ini.~1~	2017-11-01 03:52:10.000000000 +0000
++++ apache-couchdb-2.1.1/rel/overlay/etc/local.ini	2017-12-31 10:27:11.553822767 +0000
+@@ -103,6 +103,9 @@
+ [update_notification]
+ ;unique notifier name=/full/path/to/exe -with "cmd line arg"
+ 
++[dreyfus]
++name = {{clouseau_name}}
++
+ ; To create an admin account uncomment the '[admins]' section below and add a
+ ; line in the format 'username = password'. When you next start CouchDB, it
+ ; will change the password to a hash (so that your passwords don't linger
+--- apache-couchdb-2.1.1/test/build/test-run-couch-for-mango.sh.orig	2017-12-31 12:48:55.856103554 +0000
++++ apache-couchdb-2.1.1/test/build/test-run-couch-for-mango.sh	2017-12-31 12:50:37.404866212 +0000
+@@ -25,7 +25,7 @@
+ done
+ 
+ cd src/mango/
+-nosetests
++MANGO_TEXT_INDEXES=1 nosetests
+ 
+ EXIT_STATUS=$?
+ if [ ! -z "$SERVER_PID" ]; then

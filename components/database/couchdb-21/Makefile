@@ -19,6 +19,7 @@ PATH= $(USRBINDIR64):$(PATH.illumos)
 COMPONENT_NAME=           couchdb
 COMPONENT_VERSION=        2.1.1
 COMPONENT_VERSION_MAJOR=  2.1
+COMPONENT_REVISION=       1
 COMPONENT_FMRI=           database/$(COMPONENT_NAME)-21
 COMPONENT_CLASSIFICATION= System/Databases
 COMPONENT_PROJECT_URL=    http://couchdb.apache.org/
@@ -29,6 +30,15 @@ COMPONENT_ARCHIVE_URL=    http://apache.mirror.iphh.net/$(COMPONENT_NAME)/source
 COMPONENT_SUMMARY=        Apache CouchDB is a document-oriented database.
 COMPONENT_LICENSE=        Apache 2.0
 COMPONENT_LICENSE_FILE=   $(USRDIR)/couchdb/$(COMPONENT_VERSION_MAJOR)/LICENSE
+
+GIT_COMMIT_1=             30b0556047d54795a5b5cfe96a7bc4b75145bb06
+COMPONENT_SRC_1=          $(COMPONENT_SRC)/src/dreyfus
+COMPONENT_ARCHIVE_1=      dreyfus_$(GIT_COMMIT_1).tar.gz
+COMPONENT_ARCHIVE_HASH_1= sha256:4fe3c10b5867e613daeea292e6d10913729afb530161fb49df342573f8015336
+COMPONENT_ARCHIVE_URL_1=  https://github.com/cloudant-labs/dreyfus/archive/$(GIT_COMMIT_1).tar.gz
+UNPACK_ARGS_1+=           -r $(COMPONENT_SRC_1)
+
+COMPONENT_POST_UNPACK_ACTION_1= ($(MV) $(COMPONENT_SRC_1)/dreyfus-$(GIT_COMMIT_1)/* $(COMPONENT_SRC_1)/)
 
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/configure.mk
@@ -51,6 +61,7 @@ COMPONENT_PRE_CONFIGURE_ACTION=($(CLONEY) $(SOURCE_DIR) $(@D))
 CONFIGURE_SCRIPT= $(@D)/configure
 
 COMPONENT_PREP_ACTION = ( \
+	$(CP) $(COMPONENT_DIR)/files/dreyfus.js $(@D)/share/server; \
 	$(CP) $(COMPONENT_DIR)/files/Makefile.openindiana $(@D); \
 	$(CP) $(COMPONENT_DIR)/files/default.ini $(@D); )
 
