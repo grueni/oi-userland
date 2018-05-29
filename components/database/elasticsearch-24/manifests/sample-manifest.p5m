@@ -1,0 +1,81 @@
+#
+# This file and its contents are supplied under the terms of the
+# Common Development and Distribution License ("CDDL"), version 1.0.
+# You may only use this file in accordance with the terms of version
+# 1.0 of the CDDL.
+#
+# A full copy of the text of the CDDL should have accompanied this
+# source.  A copy of the CDDL is also available via the Internet at
+# http://www.illumos.org/license/CDDL.
+#
+
+#
+# Copyright 2016 <contributor>
+#
+
+set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary value="$(COMPONENT_SUMMARY)"
+set name=info.classification value="$(COMPONENT_CLASSIFICATION)"
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+
+license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
+
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/LICENSE.txt
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/NOTICE.txt
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/README.textile
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/bin/elasticsearch
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/bin/elasticsearch.in.sh
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/bin/plugin
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/config/elasticsearch.yml
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/config/logging.yml
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/HdrHistogram-2.1.6.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/apache-log4j-extras-1.2.17.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/commons-cli-1.3.1.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/compiler-0.8.13.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/compress-lzf-1.0.2.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/elasticsearch-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/guava-18.0.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/hppc-0.7.1.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/jackson-core-2.8.1.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/jackson-dataformat-cbor-2.8.1.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/jackson-dataformat-smile-2.8.1.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/jackson-dataformat-yaml-2.8.1.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/jna-4.1.0.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/joda-time-2.9.5.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/jsr166e-1.1.0.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/jts-1.13.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/log4j-1.2.17.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-analyzers-common-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-backward-codecs-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-core-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-grouping-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-highlighter-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-join-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-memory-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-misc-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-queries-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-queryparser-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-sandbox-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-spatial-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-spatial3d-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/lucene-suggest-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/netty-3.10.6.Final.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/securesm-1.0.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/snakeyaml-1.15.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/spatial4j-0.5.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/lib/t-digest-3.0.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/lang-expression/antlr4-runtime-4.5.1-1.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/lang-expression/asm-5.0.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/lang-expression/asm-commons-5.0.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/lang-expression/lang-expression-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/lang-expression/lucene-expressions-5.5.4.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/lang-expression/plugin-descriptor.properties
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/lang-expression/plugin-security.policy
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/lang-groovy/groovy-$(COMPONENT_VERSION)-indy.jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/lang-groovy/lang-groovy-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/lang-groovy/plugin-descriptor.properties
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/lang-groovy/plugin-security.policy
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/reindex/plugin-descriptor.properties
+file path=usr/elasticsearch/$(COMPONENT_VERSION)/modules/reindex/reindex-$(COMPONENT_VERSION).jar

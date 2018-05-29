@@ -1,0 +1,2 @@
+solaris.smf.value.elasticsearch:::Change Elasticsearch value properties::
+solaris.smf.manage.elasticsearch:::Manage Elasticsearch service states::
