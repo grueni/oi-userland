@@ -43,4 +43,6 @@ install:  $(INSTALL_64)
 
 test:     $(TESTS_64)
 
-REQUIRED_PACKAGES += developer/java/openjdk8
+REQUIRED_PACKAGES += SUNWcs
+REQUIRED_PACKAGES += runtime/java/openjdk8
+REQUIRED_PACKAGES += shell/bash
