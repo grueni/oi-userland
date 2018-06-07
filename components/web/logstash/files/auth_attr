@@ -1,0 +1,2 @@
+solaris.smf.value.logstash:::Change logstash value properties::
+solaris.smf.manage.logstash:::Manage logstash service states::

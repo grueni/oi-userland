@@ -1,0 +1,11 @@
+--- logstash-6.4.3/config/logstash.yml.~1~	2018-11-10 16:15:11.559514045 +0000
++++ logstash-6.4.3/config/logstash.yml	2018-11-10 16:20:33.458861045 +0000
+@@ -26,6 +26,8 @@
+ # for any persistent needs. Defaults to LOGSTASH_HOME/data
+ #
+ # path.data:
++path.data: "/var/lib/logstash/6.4"
++
+ #
+ # ------------ Pipeline Settings --------------
+ #

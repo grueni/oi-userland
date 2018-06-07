@@ -1,0 +1,12 @@
+# if you like cp this file to /etc/default or /etc/sysconfig
+
+LS_HOME="/usr/share/logstash/6.4"
+LS_SETTINGS_DIR="/usr/share/logstash/6.4/config"
+LS_PIDFILE="/var/lib/logstash/6.4/logstash.pid"
+LS_USER="logstash"
+LS_GROUP="logstash"
+LS_GC_LOG_FILE="/var/log/logstash/6.4/gc.log"
+LS_OPEN_FILES="16384"
+LS_NICE="19"
+SERVICE_NAME="logstash-64"
+SERVICE_DESCRIPTION="logstash-64"

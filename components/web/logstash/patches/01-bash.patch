@@ -1,0 +1,24 @@
+--- logstash-6.2.4/vendor/bundle/jruby/2.3.0/gems/bundler-1.9.10/lib/bundler/templates/newgem/bin/setup.tt.org	2018-06-08 07:58:27.078569429 +0000
++++ logstash-6.2.4/vendor/bundle/jruby/2.3.0/gems/bundler-1.9.10/lib/bundler/templates/newgem/bin/setup.tt	2018-06-08 07:59:01.492825397 +0000
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/usr/bin/env bash
+ set -euo pipefail
+ IFS=$'\n\t'
+ 
+--- logstash-6.2.4/bin/logstash.org	2018-06-08 07:57:21.849912043 +0000
++++ logstash-6.2.4/bin/logstash	2018-06-08 08:00:17.861412001 +0000
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/usr/bin/env bash
+ # Run logstash from source
+ #
+ # This is most useful when done from a git checkout.
+--- logstash-6.2.4/bin/system-install.org	2018-06-08 07:57:34.743235581 +0000
++++ logstash-6.2.4/bin/system-install	2018-06-08 08:00:53.628249397 +0000
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/usr/bin/env bash
+ 
+ unset CDPATH
+ . "$(cd `dirname $0`/..; pwd)/bin/logstash.lib.sh"

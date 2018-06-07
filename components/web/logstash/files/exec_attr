@@ -1,0 +1,11 @@
+Logstash Administration:solaris:cmd:RO::/usr/logstash/6.4/bin/benchmark.sh:uid=logstash;gid=logstash
+Logstash Administration:solaris:cmd:RO::/usr/logstash/6.4/bin/cpdump:uid=logstash;gid=logstash
+Logstash Administration:solaris:cmd:RO::/usr/logstash/6.4/bin/dependencies-report:uid=logstash;gid=logstash
+Logstash Administration:solaris:cmd:RO::/usr/logstash/6.4/bin/ingest-convert.sh:uid=logstash;gid=logstash
+Logstash Administration:solaris:cmd:RO::/usr/logstash/6.4/bin/logstash:uid=logstash;gid=logstash
+Logstash Administration:solaris:cmd:RO::/usr/logstash/6.4/bin/logstash-keystore:uid=logstash;gid=logstash
+Logstash Administration:solaris:cmd:RO::/usr/logstash/6.4/bin/logstash-plugin:uid=logstash;gid=logstash
+Logstash Administration:solaris:cmd:RO::/usr/logstash/6.4/bin/logstash.lib.sh:uid=logstash;gid=logstash
+Logstash Administration:solaris:cmd:RO::/usr/logstash/6.4/bin/pqcheck:uid=logstash;gid=logstash
+Logstash Administration:solaris:cmd:RO::/usr/logstash/6.4/bin/ruby:uid=logstash;gid=logstash
+

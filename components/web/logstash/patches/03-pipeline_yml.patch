@@ -1,0 +1,14 @@
+--- logstash-6.2.4/config/pipelines.yml.org	2018-06-08 16:05:25.420789569 +0000
++++ logstash-6.2.4/config/pipelines.yml	2018-06-08 16:00:17.985346944 +0000
+@@ -77,4 +77,9 @@
+ #   If using dead_letter_queue.enable: true, the directory path where the data files will be stored.
+ #   Default is path.data/dead_letter_queue
+ #
+-#   path.dead_letter_queue:
+\ No newline at end of file
++#   path.dead_letter_queue:
++
++- pipeline.id: main
++  path.config: "/etc/logstash/6.4/conf.d/"
++  queue.type: persisted
++  pipeline.workers: 3

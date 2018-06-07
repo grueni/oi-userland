@@ -1,0 +1,21 @@
+/var/log/logstash/6.4/logstash-plain.log {
+    rotate 5
+    weekly
+    missingok
+    notifempty
+    compress
+    delaycompress
+    copytruncate
+    create 0600 logstash logstash
+}
+/var/log/logstash/6.4/logstash-slowlog-plain.log {
+    rotate 5
+    weekly
+    missingok
+    notifempty
+    compress
+    delaycompress
+    copytruncate
+    create 0600 logstash logstash
+}
+

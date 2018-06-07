@@ -1,0 +1,1 @@
+Logstash Administration:RO::Logstash Service Administration:auths=solaris.smf.manage.logstash,solaris.smf.value.logstash

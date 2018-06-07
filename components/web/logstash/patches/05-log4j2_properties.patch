@@ -1,0 +1,19 @@
+--- logstash-6.2.4/config/log4j2.properties.org	2018-06-09 07:23:26.893519863 +0000
++++ logstash-6.2.4/config/log4j2.properties	2018-06-09 07:23:46.507518675 +0000
+@@ -41,7 +41,7 @@
+ 
+ 
+ rootLogger.level = ${sys:ls.log.level}
+-rootLogger.appenderRef.console.ref = ${sys:ls.log.format}_console
++# rootLogger.appenderRef.console.ref = ${sys:ls.log.format}_console
+ rootLogger.appenderRef.rolling.ref = ${sys:ls.log.format}_rolling
+ 
+ # Slowlog
+@@ -86,6 +86,6 @@
+ 
+ logger.slowlog.name = slowlog
+ logger.slowlog.level = trace
+-logger.slowlog.appenderRef.console_slowlog.ref = ${sys:ls.log.format}_console_slowlog
++# logger.slowlog.appenderRef.console_slowlog.ref = ${sys:ls.log.format}_console_slowlog
+ logger.slowlog.appenderRef.rolling_slowlog.ref = ${sys:ls.log.format}_rolling_slowlog
+ logger.slowlog.additivity = false
