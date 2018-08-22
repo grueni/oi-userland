@@ -29,7 +29,7 @@ PID_DIR=/var/run/${NAME}
 
 # End of variables that can be overwritten in $DEFAULT
 
-GRAYLOG_ENV=${GRAYLOG_HOME}/config/env
+GRAYLOG_ENV=${GRAYLOG_HOME}/bin/env
 
 [ -f ${GRAYLOG_ENV} ] && . ${GRAYLOG_ENV}
 
