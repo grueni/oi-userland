@@ -27,15 +27,16 @@ GRAYLOG_CONF=/etc/${NAME}/${VERSION}/graylog.conf
 # PID file
 PID_DIR=/var/run/${NAME}
 
+# Define other required variables
+LOG_FILE=${LOG_DIR}/${NAME}.log
+GRAYLOG_PID="${PID_DIR}/${NAME}.pid"
+
 # End of variables that can be overwritten in $DEFAULT
 
 GRAYLOG_ENV=${GRAYLOG_HOME}/bin/env
 
 [ -f ${GRAYLOG_ENV} ] && . ${GRAYLOG_ENV}
 
-# Define other required variables
-LOG_FILE=${LOG_DIR}/${NAME}.log
-GRAYLOG_PID="${PID_DIR}/${NAME}.pid"
 DAEMON=${GRAYLOG_HOME}/bin/graylogctl
 
 export JAVA_HOME
