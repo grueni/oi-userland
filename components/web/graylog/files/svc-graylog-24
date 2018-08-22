@@ -29,8 +29,7 @@ PID_DIR=/var/run/${NAME}
 
 # End of variables that can be overwritten in $DEFAULT
 
-GRAYLOG_ENV=${GRAYLOG_HOME}/bin/env
-APPPATH=${GRAYLOG_HOME}/bin/elasticsearch
+GRAYLOG_ENV=${GRAYLOG_HOME}/config/env
 
 [ -f ${GRAYLOG_ENV} ] && . ${GRAYLOG_ENV}
 
