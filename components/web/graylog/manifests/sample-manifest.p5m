@@ -10,7 +10,7 @@
 #
 
 #
-# Copyright 2017 <contributor>
+# Copyright 2018 <contributor>
 #
 
 set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
@@ -33,6 +33,7 @@ file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-amd64-solaris.so
 file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-sparc-solaris.so
 file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-sparc64-solaris.so
 file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-x86-solaris.so
+file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-auth-sso-2.4.2.jar
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-aws-$(COMPONENT_VERSION).jar
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-beats-$(COMPONENT_VERSION).jar
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-cef-$(COMPONENT_VERSION).jar

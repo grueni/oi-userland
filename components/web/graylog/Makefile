@@ -26,6 +26,14 @@ COMPONENT_ARCHIVE_URL=    https://packages.graylog2.org/releases/$(COMPONENT_NAM
 COMPONENT_ARCHIVE_HASH=	  sha256:fcfaf44c3faea8297f340ddc6ed19e5b1fe8f3de3c1b2a1078119565fe2f751d
 COMPONENT_LICENSE=	      GPL 3.0
 
+# get SSO plugin
+COMPONENT_NAME_1=       graylog-plugin-auth-sso
+COMPONENT_VERSION_1=    2.4.2
+COMPONENT_SRC_1=        $(COMPONENT_NAME_1)-$(COMPONENT_VERSION_1)
+COMPONENT_ARCHIVE_1=    $(COMPONENT_SRC_1).jar
+COMPONENT_ARCHIVE_HASH_1= sha256:e8b29f7588a70ab33e4729f8ae9af087020462ba5d7189e4b6fa0adcdae19f5b
+COMPONENT_ARCHIVE_URL_1=  https://github.com/Graylog2/$(COMPONENT_NAME_1)/releases/download/$(COMPONENT_VERSION_1)/$(COMPONENT_ARCHIVE_1)
+
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/justmake.mk
 include $(WS_MAKE_RULES)/ips.mk
@@ -34,7 +42,14 @@ COMPONENT_POST_UNPACK_ACTION = ( \
 	$(FIND) $(SOURCE_DIR)/lib/sigar -type f -not -name '*solaris*' -delete; \
   $(MKDIR) $(SOURCE_DIR)/config; \
   $(MV) $(SOURCE_DIR)/graylog.conf.example $(SOURCE_DIR)/config/; \
+  $(CP) $(USERLAND_ARCHIVES)$(COMPONENT_ARCHIVE_1) $(SOURCE_DIR)/plugin/; \
 	$(CP) files/Makefile $(SOURCE_DIR) )
+
+# no need to unpack, it is a jar file
+$(SOURCE_DIR_1)/.unpacked:        download Makefile $(PATCHES)
+	$(RM) -r $(SOURCE_DIR_1)
+	$(MKDIR) $(SOURCE_DIR_1)
+	$(TOUCH) $@
 
 COMPONENT_INSTALL_ARGS += COMPONENT_DIR=$(USRDIR)/$(COMPONENT_NAME)/$(COMPONENT_VERSION)
 

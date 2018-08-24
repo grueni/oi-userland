@@ -32,6 +32,8 @@ file files/svc-graylog-24 path=lib/svc/method/svc-graylog-24
 file files/env            path=usr/$(COMPONENT_NAME)/$(COMPONENT_VERSION)/bin/env preserve=renameold mode=0444
 file files/graylog.conf   path=usr/$(COMPONENT_NAME)/$(COMPONENT_VERSION)/config/$(COMPONENT_NAME).conf preserve=renameold mode=0444
 
+depend type=require fmri=__TBD pkg.debug.depend.file=usr/jdk/openjdk1.8.0/bin/java
+
 file path=usr/graylog/$(COMPONENT_VERSION)/COPYING
 file path=usr/graylog/$(COMPONENT_VERSION)/README.markdown
 file path=usr/graylog/$(COMPONENT_VERSION)/UPGRADING.rst
@@ -43,6 +45,7 @@ file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-amd64-solaris.so  
 file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-sparc-solaris.so   pkg.linted=true
 file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-sparc64-solaris.so pkg.linted=true
 file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-x86-solaris.so     pkg.linted=true
+file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-auth-sso-2.4.2.jar
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-aws-$(COMPONENT_VERSION).jar
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-beats-$(COMPONENT_VERSION).jar
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-cef-$(COMPONENT_VERSION).jar
@@ -52,5 +55,3 @@ file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-map-widget-$(CO
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-netflow-$(COMPONENT_VERSION).jar
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-pipeline-processor-$(COMPONENT_VERSION).jar
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-threatintel-$(COMPONENT_VERSION).jar
-
-depend type=require fmri=__TBD pkg.debug.depend.file=usr/jdk/openjdk1.8.0/bin/java
