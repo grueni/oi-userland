@@ -40,10 +40,16 @@ include $(WS_MAKE_RULES)/configure.mk
 include $(WS_MAKE_RULES)/ips.mk
 
 PATCH_LEVEL=0
+CORES=$(shell psrinfo -v|grep '^Status of'|tail -1|awk '{print $$5}')
+
+# we need to patch mod_auth_gss
+COMPONENT_POST_UNPACK_ACTION= \
+	($(CP) mod_auth_gss/mod_auth_gss.c $(@D)/modules/aaa);
+
 
 # Some patches need configure script re-creation.
 #COMPONENT_PREP_ACTION +=($(CP) mod_sed/* $(@D)/modules/filters);
-COMPONENT_PREP_ACTION +=($(CP) mod_auth_gss/mod_auth_gss.c $(@D)/modules/aaa);
+#COMPONENT_PREP_ACTION +=($(CP) mod_auth_gss/mod_auth_gss.c $(@D)/modules/aaa);
 COMPONENT_PREP_ACTION +=($(CP) mod_auth_gss/mod_auth_gss.html $(@D)/docs/manual/mod);
 COMPONENT_PREP_ACTION +=(cd $(@D); autoreconf);
 
@@ -101,6 +107,8 @@ CONFIGURE_OPTIONS.32 +=	--with-apr=/usr/apr/bin/apr-1-config
 CONFIGURE_OPTIONS.64 +=	--with-apr=/usr/apr/bin/$(MACH64)/apr-1-config
 CONFIGURE_OPTIONS.32 +=	--with-apr-util=/usr/apr-util/bin/apu-1-config
 CONFIGURE_OPTIONS.64 +=	--with-apr-util=/usr/apr-util/bin/$(MACH64)/apu-1-config
+
+COMPONENT_BUILD_ARGS += -j $(CORES)
 
 PATH=$(SPRO_VROOT)/bin:/usr/bin:/usr/gnu/bin
 

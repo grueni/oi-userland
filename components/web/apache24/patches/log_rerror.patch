@@ -1,0 +1,40 @@
+https://blogs.nologin.es/rickyepoderi/uploads/KerberosApache2.4andSolaris10ParteII/mod_auth_gss_apache24.patch
+
+--- modules/aaa/mod_auth_gss.c.0	Fri Mar 28 21:40:19 2014
++++ modules/aaa/mod_auth_gss.c	Fri Mar 28 21:40:27 2014
+@@ -94,6 +94,11 @@
+ #include <gssapi/gssapi.h>
+ #include <gssapi/gssapi_ext.h>
+ 
++#if MODULE_MAGIC_NUMBER_MAJOR >= 20100606
++/* 2.4.x or later */
++#define WITH_HTTPD24 1
++#endif
++
+ module auth_gss_module;
+ 
+ static void *gss_create_dir_config(apr_pool_t *, char *);
+@@ -178,7 +183,11 @@
+ 	return rec;
+ }
+ 
+-void log_rerror(const char *file, int line, int level, int status,
++void log_rerror(const char *file, int line, 
++#ifdef WITH_HTTPD24
++                int module_index,
++#endif
++                int level, int status,
+                 const request_rec *r, const char *fmt, ...)
+ {
+ 	char errstr[1024];
+@@ -188,7 +197,12 @@
+ 	vsnprintf(errstr, sizeof(errstr), fmt, ap);
+ 	va_end(ap);
+ 
++#if defined(WITH_HTTPD24)
++	ap_log_rerror(file, line, 0, level, status, r, "%s", errstr);
++#else
+	ap_log_rerror(file, line, APLOG_MODULE_INDEX, level | APLOG_NOERRNO, NULL, r, "%s", errstr);
++#endif
++
+ }
