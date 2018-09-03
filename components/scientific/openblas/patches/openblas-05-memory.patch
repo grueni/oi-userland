@@ -1,0 +1,21 @@
+--- OpenBLAS-0.3.3/driver/others/memory.c.orig	2018-09-02 15:23:37.831119220 +0000
++++ OpenBLAS-0.3.3/driver/others/memory.c	2018-09-02 15:29:57.196261778 +0000
+@@ -193,6 +193,10 @@
+ #else
+ int get_num_procs(void) {
+   static int nums = 0;
++#if defined(OS_SUNOS)
++  if (!nums) nums = sysconf(_SC_NPROCESSORS_ONLN);
++  return nums;
++#else
+ cpu_set_t *cpusetp;
+ size_t size;
+ int ret;
+@@ -233,6 +237,7 @@
+   CPU_FREE(cpusetp);
+   return nums;
+  #endif
++ #endif
+ #endif
+ }
+ #endif

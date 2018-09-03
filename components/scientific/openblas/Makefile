@@ -19,22 +19,23 @@
 # CDDL HEADER END
 #
 # Copyright (c) 2014-2017, Aurelien Larcher. All rights reserved.
+# Copyright 2018 Grüninger GmbH, Andreas Grüninger (grueni)
 #
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		openblas
-COMPONENT_VERSION=	0.2.19
-COMPONENT_VERSION_REV=	0
+COMPONENT_VERSION=	0.3.3
 COMPONENT_VERSION_TAG=	ga7126c2
-COMPONENT_REVISION_TAG= 9a7e0ec
+#COMPONENT_REVISION_TAG= fd8d186
 COMPONENT_FMRI=     	library/math/openblas
 COMPONENT_CLASSIFICATION=Development/High Performance Computing
-COMPONENT_SRC=		xianyi-OpenBLAS-$(COMPONENT_REVISION_TAG)
+COMPONENT_SRC=		OpenBLAS-$(COMPONENT_VERSION)
 COMPONENT_PROJECT_URL=	http://www.openblas.net
-COMPONENT_ARCHIVE=	xianyi-OpenBLAS-v$(COMPONENT_VERSION)-$(COMPONENT_VERSION_REV)-$(COMPONENT_VERSION_TAG).tar.gz
+#COMPONENT_ARCHIVE=	OpenBLAS-v$(COMPONENT_VERSION)-$(COMPONENT_VERSION_REV)-$(COMPONENT_VERSION_TAG).tar.gz
+COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:878353b52940e0d5be32011cd5ba8440758f5270c3fa0f6f6200c26eabc53f1c
-COMPONENT_ARCHIVE_URL=	http://github.com/xianyi/OpenBLAS/tarball/v$(COMPONENT_VERSION)
+    sha256:49d88f4494ae780e3d7fa51769c00d982d7cdb73e696054ac3baa81d42f13bab
+COMPONENT_ARCHIVE_URL=	http://github.com/xianyi/OpenBLAS/archive/v$(COMPONENT_VERSION).tar.gz
 COMPONENT_LICENSE=      BSD 3-Clause
 COMPONENT_SUMMARY=     	Optimized BLAS library based on GotoBLAS2
 
@@ -50,7 +51,7 @@ PATH=$(PATH.gnu)
 # Do not define NO_STATIC nor NO_SHARED to build both libraries
 COMPONENT_BUILD_GMAKE_ARGS= PREFIX=$(USRDIR) \
                             DYNAMIC_ARCH=1 \
-                            TARGET=PRESCOTT \
+														TARGET=SKYLAKEX \
                             BINARY=$(BITS) \
                             CROSS_SUFFIX="" \
                             FC=$(FC) CC=$(CC) \
@@ -60,16 +61,22 @@ COMPONENT_BUILD_GMAKE_ARGS= PREFIX=$(USRDIR) \
                             USE_THREAD=1 \
                             NUM_THREADS=64
 
+COMPONENT_TEST_TARGETS= blas-test lapack-test
+
+COMPONENT_TEST_ARGS= $(COMPONENT_BUILD_GMAKE_ARGS) \
+										CROSS=0
+
+COMPONENT_INSTALL_ARGS += PREFIX=$(PROTOUSRDIR) MACHDIR=$(MACHDIR.$(BITS)) \
+											$(COMPONENT_BUILD_GMAKE_ARGS)
+
 MACHDIR.32=
 MACHDIR.64=$(MACH64)
-
-COMPONENT_INSTALL_ARGS= PREFIX=$(PROTOUSRDIR) MACHDIR=$(MACHDIR.$(BITS)) 
 
 build: $(BUILD_32_and_64)
 
 install: $(INSTALL_32_and_64)
 
-test: $(NO_TESTS)
+test: $(TEST_32_and_64)
 
 # Auto-generated dependencies
 REQUIRED_PACKAGES += system/library
