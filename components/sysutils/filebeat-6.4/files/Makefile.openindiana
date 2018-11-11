@@ -1,0 +1,10 @@
+ 
+install:
+	/bin/mkdir -p $(DESTDIR)$(ETCDIR)/modules.d
+	/bin/mkdir -p $(DESTDIR)$(ETCDIR)/configs.d
+	/bin/mkdir -p $(DESTDIR)$(BINDIR)
+	/bin/mkdir -p $(DESTDIR)$(USRSHAREDIR)/bin 
+	/bin/mkdir -p $(DESTDIR)/var/lib/filebeat
+	/bin/mkdir -p $(DESTDIR)/var/log/filebeat
+	cp filebeat/filebeat     $(DESTDIR)$(USRSHAREDIR)/bin
+	cp filebeat/filebeat.yml $(DESTDIR)$(ETCDIR)

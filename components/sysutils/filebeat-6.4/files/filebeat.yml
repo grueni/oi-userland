@@ -1,0 +1,12 @@
+filebeat.config.inputs:
+  enabled: true
+  path: ${path.config}/configs.d/*.yml
+  reload.enabled: true
+  reload.period: 10s
+
+filebeat.config.modules:
+  enabled: true
+  path: ${path.config}/modules.d/*.yml  
+  reload.enabled: true
+  reload.period: 10s
+
