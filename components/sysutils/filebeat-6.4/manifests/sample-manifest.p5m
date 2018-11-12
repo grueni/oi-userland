@@ -22,5 +22,22 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 
 license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
 
+file path=etc/filebeat/filebeat.reference.yml
 file path=etc/filebeat/filebeat.yml
+file path=etc/filebeat/modules.d/apache2.yml.disabled
+file path=etc/filebeat/modules.d/auditd.yml.disabled
+file path=etc/filebeat/modules.d/elasticsearch.yml.disabled
+file path=etc/filebeat/modules.d/icinga.yml.disabled
+file path=etc/filebeat/modules.d/iis.yml.disabled
+file path=etc/filebeat/modules.d/kafka.yml.disabled
+file path=etc/filebeat/modules.d/kibana.yml.disabled
+file path=etc/filebeat/modules.d/logstash.yml.disabled
+file path=etc/filebeat/modules.d/mongodb.yml.disabled
+file path=etc/filebeat/modules.d/mysql.yml.disabled
+file path=etc/filebeat/modules.d/nginx.yml.disabled
+file path=etc/filebeat/modules.d/osquery.yml.disabled
+file path=etc/filebeat/modules.d/postgresql.yml.disabled
+file path=etc/filebeat/modules.d/redis.yml.disabled
+file path=etc/filebeat/modules.d/system.yml.disabled
+file path=etc/filebeat/modules.d/traefik.yml.disabled
 file path=usr/share/filebeat/bin/filebeat

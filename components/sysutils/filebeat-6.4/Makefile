@@ -41,7 +41,7 @@ COMPONENT_POST_UNPACK_ACTION = ( \
 COMPONENT_PREP_ACTION = ( \
   $(CP) $(COMPONENT_DIR)/files/Makefile.openindiana $(@D)/src/github.com/elastic/$(COMPONENT_SRC))
 
-GOPATH = $(@D)
+ENV += GOPATH=$(@D)
 
 COMPONENT_BUILD_ARGS =-C filebeat
 
@@ -57,11 +57,9 @@ COMPONENT_INSTALL_ACTION = \
 		ETCDIR=$(ETCDIR)/$(COMPONENT_NAME) \
 		USRSHAREDIR=$(USRSHAREDIR)/$(COMPONENT_NAME) 
 
-COMPONENT_PRE_TEST_ACTION = echo "Hallo Welt"
+# COMPONENT_TEST_TARGETS =-C filebeat testsuite
 
-COMPONENT_TEST_TARGETS =-C filebeat testsuite
-
-COMPONENT_TEST_DIR =$(@D)/src/github.com/elastic/$(COMPONENT_SRC)
+# COMPONENT_TEST_DIR =$(@D)/src/github.com/elastic/$(COMPONENT_SRC)
 
 build:          $(BUILD_64)
 

@@ -10,7 +10,7 @@
 #
 
 #
-# Copyright 2018 <contributor>
+# Copyright 2018 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved. 
 #
 
 set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
@@ -27,6 +27,22 @@ file files/filebeat.xml \
 
 link path=usr/bin/filebeat target=../share/filebeat/bin/filebeat
 
+file path=etc/filebeat/filebeat.reference.yml
 file path=etc/filebeat/filebeat.yml
+file path=etc/filebeat/modules.d/apache2.yml.disabled
+file path=etc/filebeat/modules.d/auditd.yml.disabled
+file path=etc/filebeat/modules.d/elasticsearch.yml.disabled
+file path=etc/filebeat/modules.d/icinga.yml.disabled
+file path=etc/filebeat/modules.d/iis.yml.disabled
+file path=etc/filebeat/modules.d/kafka.yml.disabled
+file path=etc/filebeat/modules.d/kibana.yml.disabled
+file path=etc/filebeat/modules.d/logstash.yml.disabled
+file path=etc/filebeat/modules.d/mongodb.yml.disabled
+file path=etc/filebeat/modules.d/mysql.yml.disabled
+file path=etc/filebeat/modules.d/nginx.yml.disabled
+file path=etc/filebeat/modules.d/osquery.yml.disabled
+file path=etc/filebeat/modules.d/postgresql.yml.disabled
+file path=etc/filebeat/modules.d/redis.yml.disabled
+file path=etc/filebeat/modules.d/system.yml.disabled
+file path=etc/filebeat/modules.d/traefik.yml.disabled
 file path=usr/share/filebeat/bin/filebeat
-

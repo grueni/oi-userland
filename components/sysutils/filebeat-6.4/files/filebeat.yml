@@ -1,3 +1,5 @@
+# look in /usr/share/filebeat/filebeat.reference.yml for the complete reference
+
 filebeat.config.inputs:
   enabled: true
   path: ${path.config}/configs.d/*.yml

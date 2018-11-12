@@ -6,5 +6,8 @@ install:
 	/bin/mkdir -p $(DESTDIR)$(USRSHAREDIR)/bin 
 	/bin/mkdir -p $(DESTDIR)/var/lib/filebeat
 	/bin/mkdir -p $(DESTDIR)/var/log/filebeat
-	cp filebeat/filebeat     $(DESTDIR)$(USRSHAREDIR)/bin
-	cp filebeat/filebeat.yml $(DESTDIR)$(ETCDIR)
+	cp filebeat/filebeat                $(DESTDIR)$(USRSHAREDIR)/bin
+	cp filebeat/filebeat.yml            $(DESTDIR)$(ETCDIR)
+	cp filebeat/filebeat.reference.yml  $(DESTDIR)$(ETCDIR)
+	cp filebeat/modules.d/*             $(DESTDIR)$(ETCDIR)/modules.d
+
