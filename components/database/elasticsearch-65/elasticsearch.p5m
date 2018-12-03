@@ -1,0 +1,156 @@
+#
+# This file and its contents are supplied under the terms of the
+# Common Development and Distribution License ("CDDL"), version 1.0.
+# You may only use this file in accordance with the terms of version
+# 1.0 of the CDDL.
+#
+# A full copy of the text of the CDDL should have accompanied this
+# source.  A copy of the CDDL is also available via the Internet at
+# http://www.illumos.org/license/CDDL.
+#
+
+#
+# Copyright 2018 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved.
+#
+
+<transform file path=usr/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_VERSION)/bin/+ -> default mode 0555>
+
+set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary value="$(COMPONENT_SUMMARY)"
+set name=info.classification value="$(COMPONENT_CLASSIFICATION)"
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+
+license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
+
+# mediators
+link path=usr/bin/elasticsearch target=../elasticsearch/$(COMPONENT_MAJOR_VERSION)/bin/elasticsearch \
+    mediator=elasticsearch mediator-version=$(COMPONENT_MAJOR_VERSION)
+link path=usr/bin/elasticsearch-cli target=../elasticsearch/$(COMPONENT_MAJOR_VERSION)/bin/elasticsearch-cli \
+    mediator=elasticsearch mediator-version=$(COMPONENT_MAJOR_VERSION)
+link path=usr/bin/elasticsearch-env target=../elasticsearch/$(COMPONENT_MAJOR_VERSION)/bin/elasticsearch-env \
+    mediator=elasticsearch mediator-version=$(COMPONENT_MAJOR_VERSION)
+link path=usr/bin/elasticsearch-keystore target=../elasticsearch/$(COMPONENT_MAJOR_VERSION)/bin/elasticsearch-keystore \
+    mediator=elasticsearch mediator-version=$(COMPONENT_MAJOR_VERSION)
+link path=usr/bin/elasticsearch-plugin target=../elasticsearch/$(COMPONENT_MAJOR_VERSION)/bin/elasticsearch-plugin \
+    mediator=elasticsearch mediator-version=$(COMPONENT_MAJOR_VERSION)
+link path=usr/bin/elasticsearch-shard target=../elasticsearch/$(COMPONENT_MAJOR_VERSION)/bin/elasticsearch-shard \
+    mediator=elasticsearch mediator-version=$(COMPONENT_MAJOR_VERSION)
+link path=usr/bin/elasticsearch-translog target=../elasticsearch/$(COMPONENT_MAJOR_VERSION)/bin/elasticsearch-translog \
+    mediator=elasticsearch mediator-version=$(COMPONENT_MAJOR_VERSION)
+
+# from sample-manifest
+file path=usr/elasticsearch/6.5/LICENSE.txt
+file path=usr/elasticsearch/6.5/NOTICE.txt
+file path=usr/elasticsearch/6.5/README.textile
+file path=usr/elasticsearch/6.5/bin/elasticsearch
+file path=usr/elasticsearch/6.5/bin/elasticsearch-cli
+file path=usr/elasticsearch/6.5/bin/elasticsearch-env
+file path=usr/elasticsearch/6.5/bin/elasticsearch-keystore
+file path=usr/elasticsearch/6.5/bin/elasticsearch-plugin
+file path=usr/elasticsearch/6.5/bin/elasticsearch-shard
+file path=usr/elasticsearch/6.5/bin/elasticsearch-translog
+file path=usr/elasticsearch/6.5/lib/HdrHistogram-2.1.9.jar
+file path=usr/elasticsearch/6.5/lib/elasticsearch-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/lib/elasticsearch-cli-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/lib/elasticsearch-core-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/lib/elasticsearch-launchers-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/lib/elasticsearch-secure-sm-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/lib/elasticsearch-x-content-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/lib/hppc-0.7.1.jar
+file path=usr/elasticsearch/6.5/lib/jackson-core-2.8.11.jar
+file path=usr/elasticsearch/6.5/lib/jackson-dataformat-cbor-2.8.11.jar
+file path=usr/elasticsearch/6.5/lib/jackson-dataformat-smile-2.8.11.jar
+file path=usr/elasticsearch/6.5/lib/jackson-dataformat-yaml-2.8.11.jar
+file path=usr/elasticsearch/6.5/lib/java-version-checker-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/lib/jna-4.5.1.jar
+file path=usr/elasticsearch/6.5/lib/joda-time-2.10.1.jar
+file path=usr/elasticsearch/6.5/lib/jopt-simple-5.0.2.jar
+file path=usr/elasticsearch/6.5/lib/jts-core-1.15.0.jar
+file path=usr/elasticsearch/6.5/lib/log4j-1.2-api-2.11.1.jar
+file path=usr/elasticsearch/6.5/lib/log4j-api-2.11.1.jar
+file path=usr/elasticsearch/6.5/lib/log4j-core-2.11.1.jar
+file path=usr/elasticsearch/6.5/lib/lucene-analyzers-common-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-backward-codecs-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-core-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-grouping-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-highlighter-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-join-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-memory-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-misc-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-queries-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-queryparser-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-sandbox-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-spatial-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-spatial-extras-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-spatial3d-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/lucene-suggest-7.5.0.jar
+file path=usr/elasticsearch/6.5/lib/plugin-classloader-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/lib/snakeyaml-1.17.jar
+file path=usr/elasticsearch/6.5/lib/spatial4j-0.7.jar
+file path=usr/elasticsearch/6.5/lib/t-digest-3.2.jar
+file path=usr/elasticsearch/6.5/lib/tools/plugin-cli/bcpg-jdk15on-1.59.jar
+file path=usr/elasticsearch/6.5/lib/tools/plugin-cli/bcprov-jdk15on-1.59.jar
+file path=usr/elasticsearch/6.5/lib/tools/plugin-cli/elasticsearch-plugin-cli-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/aggs-matrix-stats/aggs-matrix-stats-client-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/aggs-matrix-stats/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/analysis-common/analysis-common-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/analysis-common/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/ingest-common/elasticsearch-dissect-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/ingest-common/elasticsearch-grok-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/ingest-common/ingest-common-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/ingest-common/jcodings-1.0.12.jar
+file path=usr/elasticsearch/6.5/modules/ingest-common/joni-2.1.6.jar
+file path=usr/elasticsearch/6.5/modules/ingest-common/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/lang-expression/antlr4-runtime-4.5.1-1.jar
+file path=usr/elasticsearch/6.5/modules/lang-expression/asm-5.0.4.jar
+file path=usr/elasticsearch/6.5/modules/lang-expression/asm-commons-5.0.4.jar
+file path=usr/elasticsearch/6.5/modules/lang-expression/asm-tree-5.0.4.jar
+file path=usr/elasticsearch/6.5/modules/lang-expression/lang-expression-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/lang-expression/lucene-expressions-7.5.0.jar
+file path=usr/elasticsearch/6.5/modules/lang-expression/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/lang-expression/plugin-security.policy
+file path=usr/elasticsearch/6.5/modules/lang-mustache/compiler-0.9.3.jar
+file path=usr/elasticsearch/6.5/modules/lang-mustache/lang-mustache-client-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/lang-mustache/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/lang-mustache/plugin-security.policy
+file path=usr/elasticsearch/6.5/modules/lang-painless/antlr4-runtime-4.5.3.jar
+file path=usr/elasticsearch/6.5/modules/lang-painless/asm-debug-all-5.1.jar
+file path=usr/elasticsearch/6.5/modules/lang-painless/elasticsearch-scripting-painless-spi-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/lang-painless/lang-painless-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/lang-painless/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/lang-painless/plugin-security.policy
+file path=usr/elasticsearch/6.5/modules/mapper-extras/mapper-extras-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/mapper-extras/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/parent-join/parent-join-client-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/parent-join/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/percolator/percolator-client-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/percolator/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/rank-eval/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/rank-eval/rank-eval-client-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/reindex/commons-codec-1.10.jar
+file path=usr/elasticsearch/6.5/modules/reindex/commons-logging-1.1.3.jar
+file path=usr/elasticsearch/6.5/modules/reindex/elasticsearch-rest-client-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/reindex/httpasyncclient-4.1.2.jar
+file path=usr/elasticsearch/6.5/modules/reindex/httpclient-4.5.2.jar
+file path=usr/elasticsearch/6.5/modules/reindex/httpcore-4.4.5.jar
+file path=usr/elasticsearch/6.5/modules/reindex/httpcore-nio-4.4.5.jar
+file path=usr/elasticsearch/6.5/modules/reindex/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/reindex/plugin-security.policy
+file path=usr/elasticsearch/6.5/modules/reindex/reindex-client-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/repository-url/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/repository-url/plugin-security.policy
+file path=usr/elasticsearch/6.5/modules/repository-url/repository-url-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/transport-netty4/netty-buffer-4.1.30.Final.jar
+file path=usr/elasticsearch/6.5/modules/transport-netty4/netty-codec-4.1.30.Final.jar
+file path=usr/elasticsearch/6.5/modules/transport-netty4/netty-codec-http-4.1.30.Final.jar
+file path=usr/elasticsearch/6.5/modules/transport-netty4/netty-common-4.1.30.Final.jar
+file path=usr/elasticsearch/6.5/modules/transport-netty4/netty-handler-4.1.30.Final.jar
+file path=usr/elasticsearch/6.5/modules/transport-netty4/netty-resolver-4.1.30.Final.jar
+file path=usr/elasticsearch/6.5/modules/transport-netty4/netty-transport-4.1.30.Final.jar
+file path=usr/elasticsearch/6.5/modules/transport-netty4/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/transport-netty4/plugin-security.policy
+file path=usr/elasticsearch/6.5/modules/transport-netty4/transport-netty4-client-$(COMPONENT_VERSION).jar
+file path=usr/elasticsearch/6.5/modules/tribe/plugin-descriptor.properties
+file path=usr/elasticsearch/6.5/modules/tribe/tribe-$(COMPONENT_VERSION).jar

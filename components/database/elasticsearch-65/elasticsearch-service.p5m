@@ -1,0 +1,48 @@
+#
+# This file and its contents are supplied under the terms of the
+# Common Development and Distribution License ("CDDL"), version 1.0.
+# You may only use this file in accordance with the terms of version
+# 1.0 of the CDDL.
+#
+# A full copy of the text of the CDDL should have accompanied this
+# source.  A copy of the CDDL is also available via the Internet at
+# http://www.illumos.org/license/CDDL.
+#
+
+#
+# Copyright 2018 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved.
+#
+
+<transform file path=usr/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_VERSION)/bin/+ -> default mode 0555>
+
+set name=pkg.fmri value=pkg:/service/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary value="$(COMPONENT_SUMMARY) - server"
+set name=info.classification value="$(COMPONENT_CLASSIFICATION)"
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+
+license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
+
+depend type=require fmri=$(COMPONENT_FMRI)
+depend type=require fmri=database/$(COMPONENT_NAME)-common
+depend type=require fmri=__TBD pkg.debug.depend.file=usr/jdk/openjdk1.8.0/bin/java
+
+file files/elasticsearch-65.xml   path=lib/svc/manifest/database/elasticsearch-65.xml restart_fmri=svc:/system/manifest-import:default
+file files/svc-elasticsearch-65   path=lib/svc/method/svc-elasticsearch-65
+file files/env                    path=usr/elasticsearch/$(COMPONENT_MAJOR_VERSION)/config/env preserve=renamenew mode=0444
+file files/elasticsearch.keystore path=usr/elasticsearch/$(COMPONENT_MAJOR_VERSION)/config/elasticsearch.keystore
+file files/elasticsearch.yml      path=usr/elasticsearch/$(COMPONENT_MAJOR_VERSION)/config/elasticsearch.yml preserve=renamenew
+
+# used in env, if not created and defined in env ES fails to start
+dir  path=var/log/$(COMPONENT_NAME)                           owner=elasticsearch
+dir  path=var/elasticsearch/$(COMPONENT_MAJOR_VERSION)/temp   owner=elasticsearch
+dir  path=var/elasticsearch/$(COMPONENT_MAJOR_VERSION)/data   owner=elasticsearch
+dir  path=usr/elasticsearch/$(COMPONENT_MAJOR_VERSION)/plugins
+dir  path=usr/elasticsearch/$(COMPONENT_MAJOR_VERSION)/config/scripts
+
+link path=etc/elasticsearch/$(COMPONENT_MAJOR_VERSION)      target=../../usr/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_VERSION)/config pkg.linted=true
+link path=usr/elasticsearch/$(COMPONENT_MAJOR_VERSION)/logs target=../../../var/log/$(COMPONENT_NAME) pkg.linted=true
+
+file path=usr/elasticsearch/$(COMPONENT_MAJOR_VERSION)/config/log4j2.properties     preserve=renamenew
+file path=usr/elasticsearch/$(COMPONENT_MAJOR_VERSION)/config/jvm.options           preserve=renamenew

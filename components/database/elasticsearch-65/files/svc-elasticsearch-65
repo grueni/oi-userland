@@ -1,0 +1,119 @@
+#!/bin/bash
+# Start/stop Elasticsearch service
+#
+. /lib/svc/share/smf_include.sh
+
+NAME=elasticsearch
+VERSION=6.5
+
+# The following variables can be overwritten in $DEFAULT
+
+# Run Elasticsearch as this user ID and group ID
+ES_USER=elasticsearch
+ES_GROUP=elasticsearch
+
+# Directory where the Elasticsearch binary distribution resides
+ES_HOME=/usr/${NAME}/${VERSION}
+
+# Heap size defaults to 256m min, 1g max
+# Set ES_HEAP_SIZE to 50% of available RAM, but no more than 31g
+#ES_HEAP_SIZE=2g
+
+# Heap new generation
+#ES_HEAP_NEWSIZE=
+
+# max direct memory
+#ES_DIRECT_SIZE=
+
+# Additional Java OPTS
+#ES_JAVA_OPTS=
+
+# Maximum number of open files
+MAX_OPEN_FILES=65536
+
+# Maximum amount of locked memory
+#MAX_LOCKED_MEMORY=
+
+# Elasticsearch log directory
+LOG_DIR=/var/${NAME}/${VERSION}/logs
+
+# Elasticsearch data directory
+DATA_DIR=/var/${NAME}/${VERSION}/data
+
+# Elasticsearch configuration directory
+CONF_DIR=/etc/${NAME}/${VERSION}
+
+# Path to the GC log file
+ES_GC_LOG_FILE=${LOG_DIR}/gc.log
+
+# Elasticsearch PID file directory
+PID_DIR=/var/run
+
+# End of variables that can be overwritten in $DEFAULT
+
+#ES_ENV=${ES_HOME}/bin/env
+ES_ENV=${CONF_DIR}/env
+APPPATH=${ES_HOME}/bin/elasticsearch
+
+[ -f ${ES_ENV} ] && . ${ES_ENV}
+
+# Define other required variables
+PID_FILE="${PID_DIR}/${NAME}.pid"
+DAEMON=${ES_HOME}/bin/elasticsearch
+DAEMON_OPTS="-d -p ${PID_FILE}"
+
+export ES_HEAP_SIZE
+export ES_HEAP_NEWSIZE
+export ES_DIRECT_SIZE
+export ES_JAVA_OPTS
+export ES_GC_LOG_FILE
+export JAVA_HOME
+
+# Check DAEMON exists
+test -x ${DAEMON} || exit ${SMF_EXIT_ERR_FATAL}
+
+checkJava() {
+	if [ -x "${JAVA_HOME}/bin/java" ]; then
+		JAVA="${JAVA_HOME}/bin/java"
+	else
+		JAVA=`which java`
+	fi
+
+	if [ ! -x "${JAVA}" ]; then
+		echo "Could not find any executable java binary. Please install java in your PATH or set JAVA_HOME"
+		exit ${SMF_EXIT_ERR_FATAL}
+	fi
+}
+
+case "$1" in
+	'start')
+		checkJava
+		mkdir -p ${LOG_DIR}
+		chown ${ES_USER}:${ES_GROUP} ${LOG_DIR}
+		touch ${PID_FILE}
+		chown ${ES_USER}:${ES_GROUP} ${PID_FILE}
+		while IFS=',' read -ra i ; do
+			for j in "${i[@]}"; do
+				mkdir -p $j
+				chown ${ES_USER}:${ES_GROUP} $j
+			done
+		done <<< "${DATA_DIR}"
+		if [ -n "${MAX_OPEN_FILES}" ]; then
+			ulimit -n ${MAX_OPEN_FILES}
+		fi
+    su - ${ES_USER} -c "[ -f ${ES_ENV} ] && . ${ES_ENV}; ${DAEMON} ${DAEMON_OPTS}" &
+	 ;;
+'restart')
+  stop
+  start
+  ;;
+'stop')
+ 	[[ -s ${PID_FILE} ]] && kill -9 $(cat ${PID_FILE}) 2>/dev/null
+  ;;
+*)
+  echo "Usage: $0 { start | stop | restart}"
+  exit ${SMF_EXIT_ERR_FATAL}
+  ;;
+esac
+
+exit ${SMF_EXIT_OK}
