@@ -1,0 +1,29 @@
+--- elasticsearch-5.6.10/config/jvm.options.orig	2018-11-27 18:36:05.827959374 +0000
++++ elasticsearch-5.6.10/config/jvm.options	2018-11-27 18:36:31.601885923 +0000
+@@ -33,9 +33,9 @@
+ ################################################################
+ 
+ ## GC configuration
+--XX:+UseConcMarkSweepGC
+--XX:CMSInitiatingOccupancyFraction=75
+--XX:+UseCMSInitiatingOccupancyOnly
++# -XX:+UseConcMarkSweepGC
++# -XX:CMSInitiatingOccupancyFraction=75
++# -XX:+UseCMSInitiatingOccupancyOnly
+ 
+ ## optimizations
+ 
+@@ -109,3 +109,13 @@
+ # WARNING: This option will be removed in Elasticsearch 6.0.0 and is provided
+ # only for migration purposes.
+ #-Delasticsearch.json.allow_unquoted_field_names=true
++
++# for heavy loaded systems with JDK 8
++-XX:-UseParNewGC
++-XX:-UseConcMarkSweepGC
++-XX:+UseCondCardMark
++-XX:MaxGCPauseMillis=400
++-XX:+UseG1GC
++-XX:GCPauseIntervalMillis=1000
++-XX:InitiatingHeapOccupancyPercent=35
++
