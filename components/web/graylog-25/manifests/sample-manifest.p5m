@@ -1,0 +1,45 @@
+#
+# This file and its contents are supplied under the terms of the
+# Common Development and Distribution License ("CDDL"), version 1.0.
+# You may only use this file in accordance with the terms of version
+# 1.0 of the CDDL.
+#
+# A full copy of the text of the CDDL should have accompanied this
+# source.  A copy of the CDDL is also available via the Internet at
+# http://www.illumos.org/license/CDDL.
+#
+
+#
+# Copyright 2018 <contributor>
+#
+
+set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary value="$(COMPONENT_SUMMARY)"
+set name=info.classification value="$(COMPONENT_CLASSIFICATION)"
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+
+license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
+
+file path=usr/graylog/2.5/COPYING
+file path=usr/graylog/2.5/README.markdown
+file path=usr/graylog/2.5/UPGRADING.rst
+file path=usr/graylog/2.5/bin/graylogctl
+file path=usr/graylog/2.5/config/graylog.conf.example
+file path=usr/graylog/2.5/data/contentpacks/grok-patterns.json
+file path=usr/graylog/2.5/graylog.jar
+file path=usr/graylog/2.5/lib/sigar/libsigar-amd64-solaris.so
+file path=usr/graylog/2.5/lib/sigar/libsigar-sparc-solaris.so
+file path=usr/graylog/2.5/lib/sigar/libsigar-sparc64-solaris.so
+file path=usr/graylog/2.5/lib/sigar/libsigar-x86-solaris.so
+file path=usr/graylog/2.5/plugin/graylog-plugin-auth-sso-2.4.2.jar
+file path=usr/graylog/2.5/plugin/graylog-plugin-aws-$(COMPONENT_VERSION).jar
+file path=usr/graylog/2.5/plugin/graylog-plugin-beats-$(COMPONENT_VERSION).jar
+file path=usr/graylog/2.5/plugin/graylog-plugin-cef-$(COMPONENT_VERSION).jar
+file path=usr/graylog/2.5/plugin/graylog-plugin-collector-$(COMPONENT_VERSION).jar
+file path=usr/graylog/2.5/plugin/graylog-plugin-enterprise-integration-$(COMPONENT_VERSION).jar
+file path=usr/graylog/2.5/plugin/graylog-plugin-map-widget-$(COMPONENT_VERSION).jar
+file path=usr/graylog/2.5/plugin/graylog-plugin-netflow-$(COMPONENT_VERSION).jar
+file path=usr/graylog/2.5/plugin/graylog-plugin-pipeline-processor-$(COMPONENT_VERSION).jar
+file path=usr/graylog/2.5/plugin/graylog-plugin-threatintel-$(COMPONENT_VERSION).jar

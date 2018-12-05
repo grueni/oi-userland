@@ -1,0 +1,38 @@
+#
+# This file and its contents are supplied under the terms of the
+# Common Development and Distribution License ("CDDL"), version 1.0.
+# You may only use this file in accordance with the terms of version
+# 1.0 of the CDDL.
+#
+# A full copy of the text of the CDDL should have accompanied this
+# source.  A copy of the CDDL is also available via the Internet at
+# http://www.illumos.org/license/CDDL.
+#
+
+#
+# Copyright 2018 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved.
+#
+
+<transform file path=usr/$(COMPONENT_NAME)/$(COMPONENT_VERSION)/bin/+ -> default mode 0555>
+
+set name=pkg.fmri value=pkg:/service/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary value="$(COMPONENT_SUMMARY) - service"
+set name=info.classification value="$(COMPONENT_CLASSIFICATION)"
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+
+license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
+
+depend type=require fmri=$(COMPONENT_FMRI)
+depend type=require fmri=__TBD pkg.debug.depend.file=usr/jdk/openjdk1.8.0/bin/java
+
+dir path=etc/$(COMPONENT_NAME)
+link path=etc/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_VERSION) target=/usr/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_VERSION)/config pkg.linted=true
+
+file files/graylog-25.xml path=lib/svc/manifest/web/analiytics/graylog-25.xml restart_fmri=svc:/system/manifest-import:default
+file files/svc-graylog-25 path=lib/svc/method/svc-graylog-25
+file files/env            path=usr/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_VERSION)/bin/env preserve=renameold mode=0444
+file files/graylog.conf   path=usr/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_VERSION)/config/$(COMPONENT_NAME).conf preserve=renameold mode=0444
+
+
