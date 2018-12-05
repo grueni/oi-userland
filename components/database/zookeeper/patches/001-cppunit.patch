@@ -1,0 +1,11 @@
+--- zookeeper-3.4.13/src/c/configure.ac.orig	2018-12-05 09:36:18.074709204 +0000
++++ zookeeper-3.4.13/src/c/configure.ac	2018-12-05 09:40:23.465957889 +0000
+@@ -34,7 +34,7 @@
+    CPPUNIT_INCLUDE=
+    CPPUNIT_LIBS=
+ else
+-   AM_PATH_CPPUNIT(1.10.2)
++   PKG_CHECK_MODULES(CPPUNIT,[cppunit >= 1.10.2],,[no_cppunit="yes"])
+ fi
+ 
+ if test "$CALLER" = "ANT" ; then

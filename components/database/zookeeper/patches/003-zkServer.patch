@@ -1,0 +1,18 @@
+--- zookeeper-3.4.13/bin/zkServer.sh.orig	2018-12-05 14:31:04.057643288 +0000
++++ zookeeper-3.4.13/bin/zkServer.sh	2018-12-05 14:32:16.324921101 +0000
+@@ -69,7 +69,14 @@
+     echo "ZooKeeper remote JMX authenticate set to $JMXAUTH" >&2
+     echo "ZooKeeper remote JMX ssl set to $JMXSSL" >&2
+     echo "ZooKeeper remote JMX log4j set to $JMXLOG4J" >&2
+-    ZOOMAIN="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=$JMXPORT -Dcom.sun.management.jmxremote.authenticate=$JMXAUTH -Dcom.sun.management.jmxremote.ssl=$JMXSSL -Dzookeeper.jmx.log4j.disable=$JMXLOG4J org.apache.zookeeper.server.quorum.QuorumPeerMain"
++    ZOOMAIN="-Djava.io.tmpdir=${ZOO_TMP_DIR}"
++    ZOOMAIN="$ZOOMAIN -Dcom.sun.management.jmxremote.authenticate=$JMXAUTH"
++    ZOOMAIN="$ZOOMAIN -Dcom.sun.management.jmxremote.password.file=${ZOOCFGDIR}/jmx.password"
++    ZOOMAIN="$ZOOMAIN -Dcom.sun.management.jmxremote.access.file=${ZOOCFGDIR}/jmx.access"
++    ZOOMAIN="$ZOOMAIN -Dcom.sun.management.jmxremote.ssl=$JMXSSL"
++    ZOOMAIN="$ZOOMAIN -Dcom.sun.management.jmxremote.port=$JMXPORT"
++    ZOOMAIN="$ZOOMAIN -Dzookeeper.jmx.log4j.disable=$JMXLOG4J"
++    ZOOMAIN="$ZOOMAIN org.apache.zookeeper.server.quorum.QuorumPeerMain"
+   fi
+ else
+     echo "JMX disabled by user request" >&2

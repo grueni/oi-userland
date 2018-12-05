@@ -1,0 +1,143 @@
+#
+# This file and its contents are supplied under the terms of the
+# Common Development and Distribution License ("CDDL"), version 1.0.
+# You may only use this file in accordance with the terms of version
+# 1.0 of the CDDL.
+#
+# A full copy of the text of the CDDL should have accompanied this
+# source.  A copy of the CDDL is also available via the Internet at
+# http://www.illumos.org/license/CDDL.
+#
+
+#
+# Copyright 2018 <contributor>
+#
+
+set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary value="$(COMPONENT_SUMMARY)"
+set name=info.classification value="$(COMPONENT_CLASSIFICATION)"
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+
+license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
+
+file path=etc/zookeeper/configuration.xsl
+file path=etc/zookeeper/jmx.access
+file path=etc/zookeeper/jmx.password
+file path=etc/zookeeper/log4j.properties
+file path=etc/zookeeper/zoo.cfg
+file path=etc/zookeeper/zoo_sample.cfg
+file path=etc/zookeeper/zookeeper-env.sh
+file path=usr/bin/cli_mt
+file path=usr/bin/cli_st
+file path=usr/bin/load_gen
+file path=usr/bin/update-zookeeper-env.sh
+file path=usr/bin/zkCli.sh
+file path=usr/bin/zkEnv.sh
+file path=usr/bin/zkServer.sh
+file path=usr/include/zookeeper/proto.h
+file path=usr/include/zookeeper/recordio.h
+file path=usr/include/zookeeper/zookeeper.h
+file path=usr/include/zookeeper/zookeeper.jute.h
+file path=usr/include/zookeeper/zookeeper_log.h
+file path=usr/include/zookeeper/zookeeper_version.h
+file path=usr/lib/$(MACH64)/libzookeeper_mt.so
+file path=usr/lib/$(MACH64)/libzookeeper_mt.so.2
+file path=usr/lib/$(MACH64)/libzookeeper_mt.so.2.0.0
+file path=usr/lib/$(MACH64)/libzookeeper_st.so
+file path=usr/lib/$(MACH64)/libzookeeper_st.so.2
+file path=usr/lib/$(MACH64)/libzookeeper_st.so.2.0.0
+file path=usr/share/zookeeper/audience-annotations-0.5.0.jar
+file path=usr/share/zookeeper/cobertura/README.txt
+file path=usr/share/zookeeper/contrib/ZooInspector/zookeeper-$(COMPONENT_VERSION)-ZooInspector.jar
+file path=usr/share/zookeeper/contrib/fatjar/zookeeper-$(COMPONENT_VERSION)-fatjar.jar
+file path=usr/share/zookeeper/contrib/loggraph/zookeeper-$(COMPONENT_VERSION)-loggraph.jar
+file path=usr/share/zookeeper/contrib/rest/conf/keys/README
+file path=usr/share/zookeeper/contrib/rest/conf/keys/rest.cer
+file path=usr/share/zookeeper/contrib/rest/conf/keys/rest.jks
+file path=usr/share/zookeeper/contrib/rest/conf/log4j.properties
+file path=usr/share/zookeeper/contrib/rest/conf/rest.properties
+file path=usr/share/zookeeper/contrib/rest/lib/activation-1.1.jar
+file path=usr/share/zookeeper/contrib/rest/lib/asm-3.1.jar
+file path=usr/share/zookeeper/contrib/rest/lib/grizzly-framework-1.9.8.jar
+file path=usr/share/zookeeper/contrib/rest/lib/grizzly-http-1.9.8.jar
+file path=usr/share/zookeeper/contrib/rest/lib/grizzly-http-servlet-1.9.8.jar
+file path=usr/share/zookeeper/contrib/rest/lib/grizzly-portunif-1.9.8.jar
+file path=usr/share/zookeeper/contrib/rest/lib/grizzly-rcm-1.9.8.jar
+file path=usr/share/zookeeper/contrib/rest/lib/grizzly-servlet-webserver-1.9.8.jar
+file path=usr/share/zookeeper/contrib/rest/lib/grizzly-utils-1.9.8.jar
+file path=usr/share/zookeeper/contrib/rest/lib/jackson-core-asl-1.1.1.jar
+file path=usr/share/zookeeper/contrib/rest/lib/jaxb-api-2.1.jar
+file path=usr/share/zookeeper/contrib/rest/lib/jaxb-impl-2.1.12.jar
+file path=usr/share/zookeeper/contrib/rest/lib/jersey-core-1.1.5.1.jar
+file path=usr/share/zookeeper/contrib/rest/lib/jersey-json-1.1.5.1.jar
+file path=usr/share/zookeeper/contrib/rest/lib/jersey-server-1.1.5.1.jar
+file path=usr/share/zookeeper/contrib/rest/lib/jettison-1.1.jar
+file path=usr/share/zookeeper/contrib/rest/lib/jsr311-api-1.1.1.jar
+file path=usr/share/zookeeper/contrib/rest/lib/log4j-1.2.15.jar
+file path=usr/share/zookeeper/contrib/rest/lib/servlet-api-2.5.jar
+file path=usr/share/zookeeper/contrib/rest/lib/slf4j-api-1.6.1.jar
+file path=usr/share/zookeeper/contrib/rest/lib/slf4j-log4j12-1.6.1.jar
+file path=usr/share/zookeeper/contrib/rest/lib/stax-api-1.0-2.jar
+file path=usr/share/zookeeper/contrib/rest/lib/stax-api-1.0.1.jar
+file path=usr/share/zookeeper/contrib/rest/zookeeper-$(COMPONENT_VERSION)-rest.jar
+file path=usr/share/zookeeper/jdiff/zookeeper_$(COMPONENT_VERSION).xml
+file path=usr/share/zookeeper/jdiff/zookeeper_3.1.1.xml
+file path=usr/share/zookeeper/jline-0.9.94.LICENSE.txt
+file path=usr/share/zookeeper/jline-0.9.94.jar
+file path=usr/share/zookeeper/log4j-1.2.17.LICENSE.txt
+file path=usr/share/zookeeper/log4j-1.2.17.jar
+file path=usr/share/zookeeper/netty-3.10.6.Final.jar
+file path=usr/share/zookeeper/recipes/election/zookeeper-$(COMPONENT_VERSION)-recipes-election.jar
+file path=usr/share/zookeeper/recipes/lock/build.xml
+file path=usr/share/zookeeper/recipes/lock/src/c/INSTALL
+file path=usr/share/zookeeper/recipes/lock/src/c/LICENSE
+file path=usr/share/zookeeper/recipes/lock/src/c/Makefile.am
+file path=usr/share/zookeeper/recipes/lock/src/c/README.txt
+file path=usr/share/zookeeper/recipes/lock/src/c/acinclude.m4
+file path=usr/share/zookeeper/recipes/lock/src/c/aminclude.am
+file path=usr/share/zookeeper/recipes/lock/src/c/c-doc.Doxyfile
+file path=usr/share/zookeeper/recipes/lock/src/c/configure.ac
+file path=usr/share/zookeeper/recipes/lock/src/c/include/zoo_lock.h
+file path=usr/share/zookeeper/recipes/lock/src/c/src/zoo_lock.c
+file path=usr/share/zookeeper/recipes/lock/src/c/tests/TestClient.cc
+file path=usr/share/zookeeper/recipes/lock/src/c/tests/TestDriver.cc
+file path=usr/share/zookeeper/recipes/lock/src/c/tests/Util.cc
+file path=usr/share/zookeeper/recipes/lock/src/c/tests/Util.h
+file path=usr/share/zookeeper/recipes/lock/src/c/tests/zkServer.sh
+file path=usr/share/zookeeper/recipes/lock/src/java/org/apache/zookeeper/recipes/lock/LockListener.java
+file path=usr/share/zookeeper/recipes/lock/src/java/org/apache/zookeeper/recipes/lock/ProtocolSupport.java
+file path=usr/share/zookeeper/recipes/lock/src/java/org/apache/zookeeper/recipes/lock/WriteLock.java
+file path=usr/share/zookeeper/recipes/lock/src/java/org/apache/zookeeper/recipes/lock/ZNodeName.java
+file path=usr/share/zookeeper/recipes/lock/src/java/org/apache/zookeeper/recipes/lock/ZooKeeperOperation.java
+file path=usr/share/zookeeper/recipes/lock/test/org/apache/zookeeper/recipes/lock/WriteLockTest.java
+file path=usr/share/zookeeper/recipes/lock/test/org/apache/zookeeper/recipes/lock/ZNodeNameTest.java
+file path=usr/share/zookeeper/recipes/lock/zookeeper-$(COMPONENT_VERSION)-recipes-lock.jar
+file path=usr/share/zookeeper/recipes/queue/build.xml
+file path=usr/share/zookeeper/recipes/queue/src/c/INSTALL
+file path=usr/share/zookeeper/recipes/queue/src/c/LICENSE
+file path=usr/share/zookeeper/recipes/queue/src/c/Makefile.am
+file path=usr/share/zookeeper/recipes/queue/src/c/README.txt
+file path=usr/share/zookeeper/recipes/queue/src/c/acinclude.m4
+file path=usr/share/zookeeper/recipes/queue/src/c/aminclude.am
+file path=usr/share/zookeeper/recipes/queue/src/c/c-doc.Doxyfile
+file path=usr/share/zookeeper/recipes/queue/src/c/configure.ac
+file path=usr/share/zookeeper/recipes/queue/src/c/include/zoo_queue.h
+file path=usr/share/zookeeper/recipes/queue/src/c/src/zoo_queue.c
+file path=usr/share/zookeeper/recipes/queue/src/c/tests/TestClient.cc
+file path=usr/share/zookeeper/recipes/queue/src/c/tests/TestDriver.cc
+file path=usr/share/zookeeper/recipes/queue/src/c/tests/Util.cc
+file path=usr/share/zookeeper/recipes/queue/src/c/tests/Util.h
+file path=usr/share/zookeeper/recipes/queue/src/c/tests/zkServer.sh
+file path=usr/share/zookeeper/recipes/queue/src/java/org/apache/zookeeper/recipes/queue/DistributedQueue.java
+file path=usr/share/zookeeper/recipes/queue/test/org/apache/zookeeper/recipes/queue/DistributedQueueTest.java
+file path=usr/share/zookeeper/recipes/queue/zookeeper-$(COMPONENT_VERSION)-recipes-queue.jar
+file path=usr/share/zookeeper/slf4j-1.7.25.LICENSE.txt
+file path=usr/share/zookeeper/slf4j-api-1.7.25.jar
+file path=usr/share/zookeeper/slf4j-log4j12-1.7.25.jar
+file path=usr/share/zookeeper/templates/conf/zoo.cfg
+file path=usr/share/zookeeper/templates/conf/zookeeper-env.sh
+file path=usr/share/zookeeper/zookeeper-$(COMPONENT_VERSION).jar
+file path=usr/share/zookeeper/zookeeper-$(COMPONENT_VERSION).jar.md5
+file path=usr/share/zookeeper/zookeeper-$(COMPONENT_VERSION).jar.sha1

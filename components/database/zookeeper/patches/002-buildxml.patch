@@ -1,0 +1,21 @@
+--- zookeeper-3.4.13/build.xml.orig	2018-12-05 09:54:10.145641778 +0000
++++ zookeeper-3.4.13/build.xml	2018-12-05 09:58:47.696257914 +0000
+@@ -487,8 +487,9 @@
+       <exec executable="${c.src.dir}/configure" dir="${build.dir}/c"
+             failonerror="yes">
+         <env key="base_dir" value="${basedir}"/>
++        <env key="CPPUNIT_CFLAGS" value="-m64"/>
+         <env key="CALLER" value="ANT"/>
+-        <arg value="--prefix=${build.dir}/c/build/${package.prefix}"/>
++        <arg value="--prefix=${package.prefix}"/>
+         <arg line="${enable.gcov.arg}"/>
+       </exec>
+       <property name="c.build" value="${build.dir}/c/build"/>
+@@ -496,6 +497,7 @@
+         <arg value="install"/>
+         <env key="LD_LIBRARY_PATH" value="${env.LD_LIBRARY_PATH};${c.build}"/>
+         <env key="PATH" path="${env.PATH};${c.src.dir};"/>
++        <env key="DESTDIR" value="${build.dir}/c/build"/>
+         <env key="CALLER" value="ANT"/>
+         <env key="base_dir" value="${basedir}"/>
+       </exec>
