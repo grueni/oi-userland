@@ -1,0 +1,155 @@
+#
+# This file and its contents are supplied under the terms of the
+# Common Development and Distribution License ("CDDL"), version 1.0.
+# You may only use this file in accordance with the terms of version
+# 1.0 of the CDDL.
+#
+# A full copy of the text of the CDDL should have accompanied this
+# source.  A copy of the CDDL is also available via the Internet at
+# http://www.illumos.org/license/CDDL.
+#
+
+#
+# Copyright 2018 <contributor>
+#
+
+set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary value="$(COMPONENT_SUMMARY)"
+set name=info.classification value="$(COMPONENT_CLASSIFICATION)"
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+
+license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
+
+file path=usr/kafka/2.1/LICENSE
+file path=usr/kafka/2.1/NOTICE
+file path=usr/kafka/2.1/bin/connect-distributed.sh
+file path=usr/kafka/2.1/bin/connect-standalone.sh
+file path=usr/kafka/2.1/bin/kafka-acls.sh
+file path=usr/kafka/2.1/bin/kafka-broker-api-versions.sh
+file path=usr/kafka/2.1/bin/kafka-configs.sh
+file path=usr/kafka/2.1/bin/kafka-console-consumer.sh
+file path=usr/kafka/2.1/bin/kafka-console-producer.sh
+file path=usr/kafka/2.1/bin/kafka-consumer-groups.sh
+file path=usr/kafka/2.1/bin/kafka-consumer-perf-test.sh
+file path=usr/kafka/2.1/bin/kafka-delegation-tokens.sh
+file path=usr/kafka/2.1/bin/kafka-delete-records.sh
+file path=usr/kafka/2.1/bin/kafka-dump-log.sh
+file path=usr/kafka/2.1/bin/kafka-log-dirs.sh
+file path=usr/kafka/2.1/bin/kafka-mirror-maker.sh
+file path=usr/kafka/2.1/bin/kafka-preferred-replica-election.sh
+file path=usr/kafka/2.1/bin/kafka-producer-perf-test.sh
+file path=usr/kafka/2.1/bin/kafka-reassign-partitions.sh
+file path=usr/kafka/2.1/bin/kafka-replica-verification.sh
+file path=usr/kafka/2.1/bin/kafka-run-class.sh
+file path=usr/kafka/2.1/bin/kafka-server-start.sh
+file path=usr/kafka/2.1/bin/kafka-server-stop.sh
+file path=usr/kafka/2.1/bin/kafka-streams-application-reset.sh
+file path=usr/kafka/2.1/bin/kafka-topics.sh
+file path=usr/kafka/2.1/bin/kafka-verifiable-consumer.sh
+file path=usr/kafka/2.1/bin/kafka-verifiable-producer.sh
+file path=usr/kafka/2.1/bin/trogdor.sh
+file path=usr/kafka/2.1/bin/zookeeper-security-migration.sh
+file path=usr/kafka/2.1/bin/zookeeper-server-start.sh
+file path=usr/kafka/2.1/bin/zookeeper-server-stop.sh
+file path=usr/kafka/2.1/bin/zookeeper-shell.sh
+file path=usr/kafka/2.1/config/connect-console-sink.properties
+file path=usr/kafka/2.1/config/connect-console-source.properties
+file path=usr/kafka/2.1/config/connect-distributed.properties
+file path=usr/kafka/2.1/config/connect-file-sink.properties
+file path=usr/kafka/2.1/config/connect-file-source.properties
+file path=usr/kafka/2.1/config/connect-log4j.properties
+file path=usr/kafka/2.1/config/connect-standalone.properties
+file path=usr/kafka/2.1/config/consumer.properties
+file path=usr/kafka/2.1/config/log4j.properties
+file path=usr/kafka/2.1/config/producer.properties
+file path=usr/kafka/2.1/config/server.properties
+file path=usr/kafka/2.1/config/tools-log4j.properties
+file path=usr/kafka/2.1/config/trogdor.conf
+file path=usr/kafka/2.1/config/zookeeper.properties
+file path=usr/kafka/2.1/libs/activation-1.1.1.jar
+file path=usr/kafka/2.1/libs/aopalliance-repackaged-2.5.0-b42.jar
+file path=usr/kafka/2.1/libs/argparse4j-0.7.0.jar
+file path=usr/kafka/2.1/libs/audience-annotations-0.5.0.jar
+file path=usr/kafka/2.1/libs/commons-lang3-3.5.jar
+file path=usr/kafka/2.1/libs/compileScala.mapping
+file path=usr/kafka/2.1/libs/compileScala.mapping.asc
+file path=usr/kafka/2.1/libs/connect-api-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/connect-basic-auth-extension-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/connect-file-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/connect-json-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/connect-runtime-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/connect-transforms-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/guava-20.0.jar
+file path=usr/kafka/2.1/libs/hk2-api-2.5.0-b42.jar
+file path=usr/kafka/2.1/libs/hk2-locator-2.5.0-b42.jar
+file path=usr/kafka/2.1/libs/hk2-utils-2.5.0-b42.jar
+file path=usr/kafka/2.1/libs/jackson-annotations-2.9.7.jar
+file path=usr/kafka/2.1/libs/jackson-core-2.9.7.jar
+file path=usr/kafka/2.1/libs/jackson-databind-2.9.7.jar
+file path=usr/kafka/2.1/libs/jackson-jaxrs-base-2.9.7.jar
+file path=usr/kafka/2.1/libs/jackson-jaxrs-json-provider-2.9.7.jar
+file path=usr/kafka/2.1/libs/jackson-module-jaxb-annotations-2.9.7.jar
+file path=usr/kafka/2.1/libs/javassist-3.22.0-CR2.jar
+file path=usr/kafka/2.1/libs/javax.annotation-api-1.2.jar
+file path=usr/kafka/2.1/libs/javax.inject-1.jar
+file path=usr/kafka/2.1/libs/javax.inject-2.5.0-b42.jar
+file path=usr/kafka/2.1/libs/javax.servlet-api-3.1.0.jar
+file path=usr/kafka/2.1/libs/javax.ws.rs-api-2.1.1.jar
+file path=usr/kafka/2.1/libs/javax.ws.rs-api-2.1.jar
+file path=usr/kafka/2.1/libs/jaxb-api-2.3.0.jar
+file path=usr/kafka/2.1/libs/jersey-client-2.27.jar
+file path=usr/kafka/2.1/libs/jersey-common-2.27.jar
+file path=usr/kafka/2.1/libs/jersey-container-servlet-2.27.jar
+file path=usr/kafka/2.1/libs/jersey-container-servlet-core-2.27.jar
+file path=usr/kafka/2.1/libs/jersey-hk2-2.27.jar
+file path=usr/kafka/2.1/libs/jersey-media-jaxb-2.27.jar
+file path=usr/kafka/2.1/libs/jersey-server-2.27.jar
+file path=usr/kafka/2.1/libs/jetty-client-9.4.12.v$(COMPONENT_VERSION)830.jar
+file path=usr/kafka/2.1/libs/jetty-continuation-9.4.12.v$(COMPONENT_VERSION)830.jar
+file path=usr/kafka/2.1/libs/jetty-http-9.4.12.v$(COMPONENT_VERSION)830.jar
+file path=usr/kafka/2.1/libs/jetty-io-9.4.12.v$(COMPONENT_VERSION)830.jar
+file path=usr/kafka/2.1/libs/jetty-security-9.4.12.v$(COMPONENT_VERSION)830.jar
+file path=usr/kafka/2.1/libs/jetty-server-9.4.12.v$(COMPONENT_VERSION)830.jar
+file path=usr/kafka/2.1/libs/jetty-servlet-9.4.12.v$(COMPONENT_VERSION)830.jar
+file path=usr/kafka/2.1/libs/jetty-servlets-9.4.12.v$(COMPONENT_VERSION)830.jar
+file path=usr/kafka/2.1/libs/jetty-util-9.4.12.v$(COMPONENT_VERSION)830.jar
+file path=usr/kafka/2.1/libs/jopt-simple-5.0.4.jar
+file path=usr/kafka/2.1/libs/kafka-clients-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/kafka-log4j-appender-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/kafka-streams-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/kafka-streams-examples-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/kafka-streams-scala_2.12-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/kafka-streams-test-utils-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/kafka-tools-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION)-javadoc.jar
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION)-javadoc.jar.asc
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION)-scaladoc.jar
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION)-scaladoc.jar.asc
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION)-sources.jar
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION)-sources.jar.asc
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION)-test-sources.jar
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION)-test-sources.jar.asc
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION)-test.jar
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION)-test.jar.asc
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION).jar
+file path=usr/kafka/2.1/libs/kafka_2.12-$(COMPONENT_VERSION).jar.asc
+file path=usr/kafka/2.1/libs/log4j-1.2.17.jar
+file path=usr/kafka/2.1/libs/lz4-java-1.5.0.jar
+file path=usr/kafka/2.1/libs/maven-artifact-3.5.4.jar
+file path=usr/kafka/2.1/libs/metrics-core-2.2.0.jar
+file path=usr/kafka/2.1/libs/osgi-resource-locator-1.0.1.jar
+file path=usr/kafka/2.1/libs/plexus-utils-3.1.0.jar
+file path=usr/kafka/2.1/libs/reflections-0.9.11.jar
+file path=usr/kafka/2.1/libs/rocksdbjni-5.14.2.jar
+file path=usr/kafka/2.1/libs/scala-library-2.12.7.jar
+file path=usr/kafka/2.1/libs/scala-logging_2.12-3.9.0.jar
+file path=usr/kafka/2.1/libs/scala-reflect-2.12.7.jar
+file path=usr/kafka/2.1/libs/slf4j-api-1.7.25.jar
+file path=usr/kafka/2.1/libs/slf4j-log4j12-1.7.25.jar
+file path=usr/kafka/2.1/libs/snappy-java-1.1.7.2.jar
+file path=usr/kafka/2.1/libs/validation-api-1.1.0.Final.jar
+file path=usr/kafka/2.1/libs/zkclient-0.10.jar
+file path=usr/kafka/2.1/libs/zookeeper-3.4.13.jar
+file path=usr/kafka/2.1/libs/zstd-jni-1.3.5-4.jar
