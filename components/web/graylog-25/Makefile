@@ -16,7 +16,7 @@ include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=	          graylog
 COMPONENT_MAJOR_VERSION=  2.5
-COMPONENT_MINOR_VERSION=  0
+COMPONENT_MINOR_VERSION=  1
 COMPONENT_VERSION=        $(COMPONENT_MAJOR_VERSION).$(COMPONENT_MINOR_VERSION)
 COMPONENT_SUMMARY=        central management of logs with analytics engine
 COMPONENT_PROJECT_URL=    https://www.graylog.org/
@@ -25,7 +25,7 @@ COMPONENT_CLASSIFICATION= Web Services/Application and Web Servers
 COMPONENT_SRC=      $(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tgz
 COMPONENT_ARCHIVE_URL=    https://packages.graylog2.org/releases/$(COMPONENT_NAME)/$(COMPONENT_ARCHIVE)
-COMPONENT_ARCHIVE_HASH=	  sha256:dc7576ec88adc3f6ab465629cfed72618c36e17e1beabba0acc96ccb0e21bcc2
+COMPONENT_ARCHIVE_HASH=	  sha256:6bda2ceb39ff06c27c865dfc102125dcf4a7fa7ec796ef8e908de86c8634fad8
 COMPONENT_LICENSE=	      GPL 3.0
 
 # get SSO plugin
