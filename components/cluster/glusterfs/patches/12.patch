@@ -1,0 +1,41 @@
+--- glusterfs-5.3/contrib/mount/mntent.c.orig	2019-01-18 16:16:48.004855803 +0000
++++ glusterfs-5.3/contrib/mount/mntent.c	2019-01-18 16:24:18.165519157 +0000
+@@ -202,6 +202,7 @@
+ {
+         int f_flags;
+ 
++#ifndef GF_SOLARIS_HOST_OS
+         mntent->mnt_fsname = mntbuf->f_mntfromname;
+         mntent->mnt_dir = mntbuf->f_mntonname;
+         mntent->mnt_type = mntbuf->f_fstypename;
+@@ -214,6 +215,7 @@
+         mntent->mnt_opts = flags2opts (f_flags, buf, buflen);
+ 
+         mntent->mnt_freq = mntent->mnt_passno = 0;
++#endif
+ }
+ 
+ struct mntent *
+@@ -225,7 +227,9 @@
+                 return NULL;
+         }
+ 
++#ifndef GF_SOLARIS_HOST_OS
+         statfs_to_mntent(mntent, &state->statfs[state->pos++], buf, buflen);
++#endif
+ 
+         return mntent;
+ }
+@@ -249,10 +253,12 @@
+          */
+ 
+         state = malloc(sizeof(mntent_state_t));
++#ifndef GF_SOLARIS_HOST_OS
+         if (state != NULL) {
+                 state->pos = 0;
+                 state->count = getmntinfo(&state->statfs, MNT_NOWAIT);
+         }
++#endif
+ 
+         return (FILE *)state;
+ }

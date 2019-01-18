@@ -1,0 +1,17 @@
+--- glusterfs-5.3/contrib/mount/mntent_compat.h.orig	2019-01-18 13:09:41.915769123 +0000
++++ glusterfs-5.3/contrib/mount/mntent_compat.h	2019-01-18 13:13:19.322202351 +0000
+@@ -14,6 +14,14 @@
+ #if !defined(GF_LINUX_HOST_OS)
+ #include <stdio.h>
+ 
++#ifdef GF_SOLARIS_HOST_OS
++#define MNT_RDONLY MS_RDONLY
++#define MNT_NOSUID MS_NOSUID
++#define MNT_NODEV  0
++#define MNT_NOEXEC 0
++#define MNT_NOWAIT 0
++#endif
++
+ struct mntent {
+         char *mnt_fsname;
+         char *mnt_dir;

@@ -1,0 +1,14 @@
+--- glusterfs-5.3/libglusterfs/src/glusterfs-acl.h.orig	2019-01-18 19:42:34.734922865 +0000
++++ glusterfs-5.3/libglusterfs/src/glusterfs-acl.h	2019-01-18 19:44:19.784163892 +0000
+@@ -124,6 +124,11 @@
+ 
+ #include <sys/acl.h>
+ 
++#ifdef GF_SOLARIS_HOST_OS
++#define ACL_TYPE_ACCESS         (0x8000)
++#define ACL_TYPE_DEFAULT        (0x4000)
++#endif
++
+ static inline const char *
+ gf_posix_acl_get_key(const acl_type_t type)
+ {

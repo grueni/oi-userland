@@ -1,0 +1,46 @@
+--- glusterfs-5.3/libglusterfs/src/compat.c.~1~	2019-01-16 21:27:32.000000000 +0000
++++ glusterfs-5.3/libglusterfs/src/compat.c	2019-01-18 18:30:55.789202547 +0000
+@@ -29,6 +29,17 @@
+ #include "libglusterfs-messages.h"
+ 
+ #ifdef GF_SOLARIS_HOST_OS
++int __attribute__((format(printf, 2, 3))) dprintf(int fd, const char *fmt, ...) 
++{
++  va_list ap;
++  FILE *f = fdopen(fd, "a");
++  va_start(ap, fmt);
++  int rc = vfprintf(f, fmt, ap);
++  fclose(f);
++  va_end(ap);
++  return rc;
++}
++
+ int
+ solaris_fsetxattr(int fd, const char *key, const char *value, size_t size,
+                   int flags)
+@@ -367,6 +378,25 @@
+ }
+ 
+ int
++solaris_fremovexattr(int fd, const char *key)
++{
++    int ret = -1;
++    int attrfd = -1;
++
++    attrfd = fd;
++    if (attrfd >= 0) {
++        ret = unlinkat(attrfd, key, 0);
++        close(attrfd);
++    } else {
++        if (errno == ENOENT)
++            errno = ENODATA;
++        ret = -1;
++    }
++
++    return ret;
++}
++
++int
+ solaris_removexattr(const char *path, const char *key)
+ {
+     int ret = -1;

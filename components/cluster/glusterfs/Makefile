@@ -34,6 +34,11 @@ include $(WS_MAKE_RULES)/ips.mk
 
 COMPONENT_PREP_ACTION=(cd $(SOURCE_DIR); $(CONFIG_SHELL) autogen.sh )
 
+CFLAGS += -D__EXTENSIONS__ -D_POSIX_PTHREAD_SEMANTICS -D_BSD_SOURCE
+
+#CONFIGURE_OPTIONS += --disable-fusermount
+#CONFIGURE_OPTIONS += --disable-fuse-client
+	
 build:          $(BUILD_64)
 
 install:        $(INSTALL_64)

@@ -1,0 +1,17 @@
+--- glusterfs-5.3/api/src/glfs-handleops.c.orig	2019-01-18 20:08:28.696579767 +0000
++++ glusterfs-5.3/api/src/glfs-handleops.c	2019-01-18 20:13:35.416760504 +0000
+@@ -2376,8 +2376,14 @@
+ pub_glfs_h_acl_get(struct glfs *fs, struct glfs_object *object,
+                    const acl_type_t type)
+ {
++#ifdef GF_SOLARIS_HOST_OS
++		struct acl_info rc = {};
++    errno = ENOTSUP;
++    return rc;
++#else
+     errno = ENOTSUP;
+     return NULL;
++#endif
+ }
+ 
+ int

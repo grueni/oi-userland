@@ -1,0 +1,13 @@
+--- glusterfs-5.3/libglusterfs/src/common-utils.c.orig	2019-01-17 21:38:26.677742198 +0000
++++ glusterfs-5.3/libglusterfs/src/common-utils.c	2019-01-17 21:39:28.875591974 +0000
+@@ -32,6 +32,10 @@
+ #include <libgen.h> /* for dirname() */
+ #include <grp.h>
+ 
++#if defined(GF_SOLARIS_HOST_OS)
++#include <strings.h>
++#endif
++
+ #if defined(GF_BSD_HOST_OS) || defined(GF_DARWIN_HOST_OS)
+ #include <sys/sysctl.h>
+ #endif

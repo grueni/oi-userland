@@ -1,0 +1,36 @@
+--- glusterfs-5.3/contrib/mount/mntent.c.~1~	2019-01-16 21:27:32.000000000 +0000
++++ glusterfs-5.3/contrib/mount/mntent.c	2019-01-18 10:39:22.793944429 +0000
+@@ -40,7 +40,11 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <sys/param.h>
++#ifdef GF_SOLARIS_HOST_OS
++#include <ucred.h>
++#else
+ #include <sys/ucred.h>
++#endif
+ #include <sys/mount.h>
+ #include "mntent_compat.h"
+ 
+@@ -68,9 +72,12 @@
+ 
+ static mntflag_t mntflags[] = {
+         { MNT_RDONLY,      "ro",          "rw" },
+-        { MNT_SYNCHRONOUS, "sync",        NULL },
+         { MNT_NOEXEC,      "noexec",      NULL },
+         { MNT_NOSUID,      "nosuid",      NULL },
++#ifdef GF_SOLARIS_HOST_OS
++        { MNT_NODEV,       "nodevices",   NULL },
++#else
++        { MNT_SYNCHRONOUS, "sync",        NULL },
+ #if !defined(__FreeBSD__)
+         { MNT_NODEV,       "nodev",       NULL },
+ #endif /* __FreeBSD__ */
+@@ -86,6 +93,7 @@
+ #endif /* !__NetBSD__ */
+ #endif /* !GF_DARWIN_HOST_OS */
+         { 0,               NULL,          NULL }
++#endif
+ };
+ 
+ char *

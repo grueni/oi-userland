@@ -1,0 +1,12 @@
+--- glusterfs-5.3/libglusterfs/src/monitoring.h.orig	2019-01-18 17:01:46.582363983 +0000
++++ glusterfs-5.3/libglusterfs/src/monitoring.h	2019-01-18 17:02:44.649985132 +0000
+@@ -12,6 +12,9 @@
+ #define __MONITORING_H__
+ 
+ #include "glusterfs.h"
++#ifdef GF_SOLARIS_HOST_OS
++#include "compat.h"
++#endif
+ 
+ #define GLUSTER_METRICS_DIR "/var/run/gluster/metrics"
+ 

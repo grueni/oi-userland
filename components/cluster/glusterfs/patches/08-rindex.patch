@@ -1,0 +1,11 @@
+--- glusterfs-5.3/libglusterfs/src/graph.c.orig	2019-01-18 10:13:41.089607915 +0000
++++ glusterfs-5.3/libglusterfs/src/graph.c	2019-01-18 10:14:14.988033312 +0000
+@@ -1214,7 +1214,7 @@
+ 
+     volfile_id = strstr(path, "/snaps/");
+     if (!volfile_id) {
+-        volfile_id = rindex(path, '/');
++        volfile_id = strrchr(path, '/');
+         if (volfile_id) {
+             ++volfile_id;
+         }

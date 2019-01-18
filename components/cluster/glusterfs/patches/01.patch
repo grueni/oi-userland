@@ -1,0 +1,67 @@
+--- glusterfs-5.3/libglusterfs/src/compat.h.~1~	2019-01-16 21:27:32.000000000 +0000
++++ glusterfs-5.3/libglusterfs/src/compat.h	2019-01-18 18:31:05.715618655 +0000
+@@ -275,6 +275,7 @@
+ #define UNIX_PATH_MAX 108
+ #define EUCLEAN 117
+ 
++#include <stdarg.h>
+ #include <sys/un.h>
+ #include <limits.h>
+ #include <sys/stat.h>
+@@ -287,6 +288,7 @@
+ #define lchmod chmod
+ #endif
+ 
++#undef lgetxattr
+ #define lgetxattr(path, key, value, size)                                      \
+     solaris_getxattr(path, key, value, size)
+ enum {
+@@ -296,11 +298,6 @@
+ #define XATTR_REPLACE ATTR_REPLACE
+ };
+ 
+-/* This patch is not present in Solaris 10 and before */
+-#ifndef dirfd
+-#define dirfd(dirp) ((dirp)->dd_fd)
+-#endif
+-
+ /* Posix dictates NAME_MAX to be used */
+ #ifndef NAME_MAX
+ #ifdef MAXNAMLEN
+@@ -364,6 +361,11 @@
+ #define FTW_CONTINUE 0
+ #endif
+ 
++#define GF_XATTR_NAME_MAX NAME_MAX
++
++int
++dprintf(int fd, const char *fmt, ...);
++
+ int
+ asprintf(char **string_ptr, const char *format, ...);
+ 
+@@ -381,6 +383,8 @@
+ solaris_setxattr(const char *path, const char *key, const char *value,
+                  size_t size, int flags);
+ int
++solaris_fremovexattr(int fd, const char *key);
++int
+ solaris_fgetxattr(int fd, const char *key, char *value, size_t size);
+ int
+ solaris_fsetxattr(int fd, const char *key, const char *value, size_t size,
+@@ -402,6 +406,15 @@
+ int
+ solaris_xattr_resolve_path(const char *real_path, char **path);
+ 
++# define TIMEVAL_TO_TIMESPEC(tv, ts) {                                   \
++        (ts)->tv_sec = (tv)->tv_sec;                                    \
++        (ts)->tv_nsec = (tv)->tv_usec * 1000;                           \
++}
++# define TIMESPEC_TO_TIMEVAL(tv, ts) {                                   \
++        (tv)->tv_sec = (ts)->tv_sec;                                    \
++        (tv)->tv_usec = (ts)->tv_nsec / 1000;                           \
++}
++
+ #endif /* GF_SOLARIS_HOST_OS */
+ 
+ #ifndef HAVE_ARGP

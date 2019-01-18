@@ -1,0 +1,16 @@
+--- glusterfs-5.3/contrib/fuse-lib/mount-gluster-compat.h.~1~	2019-01-16 21:27:32.000000000 +0000
++++ glusterfs-5.3/contrib/fuse-lib/mount-gluster-compat.h	2019-01-18 13:01:55.120320610 +0000
+@@ -51,6 +51,13 @@
+ #define umount2(dir, flags) unmount(dir, ((flags) != 0) ? MNT_FORCE : 0)
+ #endif
+ 
++#ifdef GF_SOLARIS_HOST_OS
++#define MNT_RDONLY MS_RDONLY
++#define MNT_NOSUID MS_NOSUID
++#define MNT_NODEV  0 
++#define MNT_NOEXEC 0
++#endif
++
+ #if defined(__FreeBSD__)
+ #define MS_RDONLY MNT_RDONLY
+ #define MS_NOSUID MNT_NOSUID

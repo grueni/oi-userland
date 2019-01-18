@@ -1,0 +1,26 @@
+--- glusterfs-5.3/libglusterfs/src/syscall.c.orig	2019-01-18 08:18:57.188680235 +0000
++++ glusterfs-5.3/libglusterfs/src/syscall.c	2019-01-18 09:21:44.055319134 +0000
+@@ -19,6 +19,9 @@
+ #include <fcntl.h>
+ #include <unistd.h>
+ #include <stdarg.h>
++#ifdef GF_SOLARIS_HOST_OS
++#include <sys/stat.h>
++#endif
+ 
+ #define FS_ERROR_LOG(result)                                                   \
+     do {                                                                       \
+@@ -309,7 +309,13 @@
+ int
+ sys_futimes(int fd, const struct timeval times[2])
+ {
++#ifdef GF_SOLARIS_HOST_OS
++		struct timespec Times[2];
++		TIMEVAL_TO_TIMESPEC(times,Times);
++   return futimens(fd, Times);
++#else
+     return futimes(fd, times);
++#endif
+ }
+ 
+ int

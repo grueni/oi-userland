@@ -1,0 +1,14 @@
+--- glusterfs-5.3/rpc/xdr/src/nlm4-xdr.x.~1~	2019-01-16 21:27:32.000000000 +0000
++++ glusterfs-5.3/rpc/xdr/src/nlm4-xdr.x	2019-01-18 20:45:23.637021184 +0000
+@@ -8,6 +8,11 @@
+   cases as published by the Free Software Foundation.
+ */
+ 
++%#include <sys/types.h>
++%#include <libnet/libnet-types.h>
++%#define xdr_u_int32_t xdr_uint32_t
++%#define xdr_u_int64_t xdr_uint64_t
++
+ #ifdef RPC_XDR
+ %#include "rpc-pragmas.h"
+ #endif

@@ -1,0 +1,13 @@
+--- glusterfs-5.3/rpc/xdr/src/msg-nfs3.c.orig	2019-01-18 18:43:08.830188422 +0000
++++ glusterfs-5.3/rpc/xdr/src/msg-nfs3.c	2019-01-18 18:42:47.269051791 +0000
+@@ -13,6 +13,10 @@
+ #include <rpc/xdr.h>
+ #include <sys/types.h>
+ 
++#ifdef GF_SOLARIS_HOST_OS
++#include <libnet/libnet-types.h>
++#endif
++
+ #include "xdr-nfs3.h"
+ #include "msg-nfs3.h"
+ #include "xdr-generic.h"
