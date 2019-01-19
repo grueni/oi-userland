@@ -1,0 +1,13 @@
+--- glusterfs-5.3/xlators/storage/posix/src/posix-helpers.c.orig	2019-01-18 22:29:02.418174786 +0000
++++ glusterfs-5.3/xlators/storage/posix/src/posix-helpers.c	2019-01-18 22:30:00.535222953 +0000
+@@ -32,6 +32,10 @@
+ #include <alloca.h>
+ #endif /* GF_BSD_HOST_OS */
+ 
++#if defined(GF_SOLARIS_HOST_OS)
++#include <strings.h>
++#endif
++
+ #include <fnmatch.h>
+ #include "glusterfs.h"
+ #include "checksum.h"

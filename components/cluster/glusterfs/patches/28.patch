@@ -1,0 +1,13 @@
+--- glusterfs-5.3/xlators/storage/posix/src/posix-metadata.c.orig	2019-01-19 20:25:28.676478130 +0000
++++ glusterfs-5.3/xlators/storage/posix/src/posix-metadata.c	2019-01-19 20:35:44.350182825 +0000
+@@ -8,6 +8,10 @@
+    cases as published by the Free Software Foundation.
+ */
+ 
++#ifdef GF_SOLARIS_HOST_OS
++#include <endian.h>
++#endif
++
+ #include "xlator.h"
+ #include "posix-metadata.h"
+ #include "posix-metadata-disk.h"

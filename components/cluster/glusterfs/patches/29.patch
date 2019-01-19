@@ -1,0 +1,13 @@
+--- glusterfs-5.3/xlators/encryption/crypt/src/crypt.h.orig	2019-01-19 20:40:42.220466757 +0000
++++ glusterfs-5.3/xlators/encryption/crypt/src/crypt.h	2019-01-19 20:41:19.341708010 +0000
+@@ -11,6 +11,10 @@
+ #ifndef __CRYPT_H__
+ #define __CRYPT_H__
+ 
++#ifdef GF_SOLARIS_HOST_OS
++#include <endian.h>
++#endif
++
+ #include <openssl/aes.h>
+ #include <openssl/evp.h>
+ #include <openssl/sha.h>

@@ -1,0 +1,23 @@
+--- glusterfs-5.3/xlators/mgmt/glusterd/src/glusterd-quota.c.orig	2019-01-19 21:08:47.610894332 +0000
++++ glusterfs-5.3/xlators/mgmt/glusterd/src/glusterd-quota.c	2019-01-19 21:34:16.498896026 +0000
+@@ -35,6 +35,9 @@
+ #ifdef __NetBSD__
+ #define _PATH_SETFATTR "/usr/pkg/bin/setfattr"
+ #endif
++#ifdef GF_SOLARIS_HOST_OS
++#define _PATH_SETFATTR "/usr/bin/runat"
++#endif
+ #endif
+ 
+ /* Any negative pid to make it special client */
+@@ -372,6 +375,10 @@
+                             "/usr/sbin/setextattr", EXTATTR_NAMESPACE_USER,
+                             VIRTUAL_QUOTA_XATTR_CLEANUP_KEY, "1", "{}", "\\",
+                             ";", NULL);
++#elif defined(GF_SOLARIS_HOST_OS)
++            runner_add_args(&runner, "find", ".", "-exec", _PATH_SETFATTR, 
++                            "echo","1","\\>",VIRTUAL_QUOTA_XATTR_CLEANUP_KEY,
++                            "{}","\\", ";", NULL);
+ #else
+             runner_add_args(&runner, "find", ".", "-exec", _PATH_SETFATTR, "-n",
+                             VIRTUAL_QUOTA_XATTR_CLEANUP_KEY, "-v", "1", "{}",

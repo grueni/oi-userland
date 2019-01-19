@@ -1,0 +1,56 @@
+--- glusterfs-5.3/xlators/storage/posix/src/posix-inode-fd-ops.c.orig	2019-01-19 19:13:28.391576986 +0000
++++ glusterfs-5.3/xlators/storage/posix/src/posix-inode-fd-ops.c	2019-01-19 19:32:16.447009731 +0000
+@@ -29,6 +29,10 @@
+ #include <ftw.h>
+ #include <regex.h>
+ 
++#ifdef GF_SOLARIS_HOST_OS
++#include <strings.h>
++#endif
++
+ #ifndef GF_BSD_HOST_OS
+ #include <alloca.h>
+ #endif /* GF_BSD_HOST_OS */
+@@ -4838,6 +4842,9 @@
+     struct stat stbuf = {
+         0,
+     };
++    struct stat stbufh = {
++        0,
++    };
+     char *hpath = NULL;
+     int len = 0;
+     int ret = 0;
+@@ -4938,14 +4945,16 @@
+         }
+ 
+         if (skip_dirs) {
+-            if (DT_ISDIR(entry->d_type)) {
++            if (sys_lstat(entry->d_name, &stbuf)) 
++                continue;
++            if (S_ISDIR(stbuf.st_mode))
+                 continue;
+             } else if (hpath) {
+                 strcpy(&hpath[len + 1], entry->d_name);
+-                ret = sys_lstat(hpath, &stbuf);
+-                if (!ret && S_ISDIR(stbuf.st_mode))
++                if (sys_lstat(hpath, &stbufh))
++                    continue;
++                if (S_ISDIR(stbufh.st_mode))
+                     continue;
+-            }
+         }
+ 
+         this_size = max(sizeof(gf_dirent_t), sizeof(gfs3_dirplist)) +
+@@ -4988,7 +4997,10 @@
+         last_off = (u_long)telldir(dir);
+         this_entry->d_off = last_off;
+         this_entry->d_ino = entry->d_ino;
+-        this_entry->d_type = entry->d_type;
++/*
++ * TODO: DT.. value of stbuf.st_mod
++ */
++        this_entry->d_type = stbuf.st_mode;
+ 
+         list_add_tail(&this_entry->list, &entries->list);
+ 

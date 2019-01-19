@@ -1,0 +1,13 @@
+--- glusterfs-5.3/xlators/mgmt/glusterd/src/glusterd-utils.c.orig	2019-01-19 20:52:43.273922020 +0000
++++ glusterfs-5.3/xlators/mgmt/glusterd/src/glusterd-utils.c	2019-01-19 20:54:43.263108464 +0000
+@@ -20,6 +20,10 @@
+ #include <libxml/xmlwriter.h>
+ #endif
+ 
++#ifdef GF_SOLARIS_HOST_OS
++#include <sys/sysmacros.h>
++#endif
++
+ #include "glusterfs.h"
+ #include "compat.h"
+ #include "dict.h"

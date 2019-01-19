@@ -1,0 +1,36 @@
+--- glusterfs-5.3/xlators/storage/posix/src/posix-helpers.c.orig	2019-01-19 12:58:34.765298698 +0000
++++ glusterfs-5.3/xlators/storage/posix/src/posix-helpers.c	2019-01-19 13:52:33.166494012 +0000
+@@ -1017,6 +1017,7 @@
+ posix_pacl_set(const char *path, const char *key, const char *acl_s)
+ {
+     int ret = -1;
++#ifndef GF_SOLARIS_HOST_OS
+     acl_t acl = NULL;
+     acl_type_t type = 0;
+ 
+@@ -1029,7 +1030,7 @@
+         ret = -errno;
+ 
+     acl_free(acl);
+-
++#endif
+     return ret;
+ }
+ 
+@@ -1037,6 +1038,7 @@
+ posix_pacl_get(const char *path, const char *key, char **acl_s)
+ {
+     int ret = -1;
++#ifndef GF_SOLARIS_HOST_OS
+     acl_t acl = NULL;
+     acl_type_t type = 0;
+     char *acl_tmp = NULL;
+@@ -1065,7 +1067,7 @@
+     acl_free(acl_tmp);
+ free_acl:
+     acl_free(acl);
+-
++#endif
+     return ret;
+ }
+ #else /* !HAVE_SYS_ACL_H (NetBSD) */

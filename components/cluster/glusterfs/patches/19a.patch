@@ -1,0 +1,27 @@
+--- glusterfs-5.3/configure.ac.orig	2019-01-18 21:32:48.456136542 +0000
++++ glusterfs-5.3/configure.ac	2019-01-19 15:35:52.718677676 +0000
+@@ -496,6 +496,14 @@
+ 
+ AC_CHECK_HEADERS([openssl/ecdh.h])
+ 
++AC_CHECK_HEADER([endian.h],
++		AC_DEFINE([HAVE_ENDIAN_H], [1], [Define to 1 if you have the <endian.h> header file.]),
++		AC_CHECK_HEADER([sys/endian.h],
++				AC_DEFINE([HAVE_SYS_ENDIAN_H], [1], [Define to 1 if you have the <sys/endian.h> header file.]),
++				AC_MSG_WARN([Couldn't find endian.h or sys/endian.h files: doing compile-time tests.])
++				)
++		)
++
+ dnl Math library
+ AC_CHECK_LIB([m], [pow], [MATH_LIB='-lm'], [MATH_LIB=''])
+ AC_SUBST(MATH_LIB)
+@@ -1330,6 +1338,9 @@
+      darwin*)
+         GFAPI_EXTRA_LDFLAGS='-Wl,-alias_list,$(top_srcdir)/api/src/gfapi.aliases'
+         ;;
++     solaris*)
++        GFAPI_EXTRA_LDFLAGS=''
++        ;;
+      *)
+         GFAPI_EXTRA_LDFLAGS='-Wl,--version-script=$(top_srcdir)/api/src/gfapi.map'
+         ;;

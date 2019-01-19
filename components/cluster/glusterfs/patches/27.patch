@@ -1,0 +1,13 @@
+--- glusterfs-5.3/xlators/features/shard/src/shard.c.orig	2019-01-19 19:56:48.294329025 +0000
++++ glusterfs-5.3/xlators/features/shard/src/shard.c	2019-01-19 19:57:31.716672950 +0000
+@@ -10,6 +10,10 @@
+ 
+ #include <unistd.h>
+ 
++#ifdef GF_SOLARIS_HOST_OS
++#include <strings.h>
++#endif
++
+ #include "shard.h"
+ #include "shard-mem-types.h"
+ #include "byte-order.h"

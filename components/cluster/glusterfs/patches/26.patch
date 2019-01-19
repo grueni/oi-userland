@@ -1,0 +1,41 @@
+--- glusterfs-5.3/xlators/features/snapview-server/src/snapview-server.c.orig	2019-01-19 19:45:57.512157055 +0000
++++ glusterfs-5.3/xlators/features/snapview-server/src/snapview-server.c	2019-01-19 19:55:09.925496851 +0000
+@@ -1417,6 +1417,7 @@
+     struct stat statbuf = {
+         0,
+     };
++    struct stat stat;
+     off_t in_case = -1;
+ 
+     GF_VALIDATE_OR_GOTO("svs", this, out);
+@@ -1457,15 +1458,22 @@
+             }
+             entry->d_off = glfs_telldir(glfd);
+             entry->d_ino = de.d_ino;
+-            entry->d_type = de.d_type;
+-            if (readdirplus) {
+-                iatt_from_stat(buf, &statbuf);
+-                entry->d_stat = *buf;
+-            }
+-            list_add_tail(&entry->list, &entries->list);
++            if (sys_lstat(entry->d_name, &stat)) 
++               break;
++            else {
++/*
++ * TODO function to get DT.. values
++ */
++               entry->d_type = stat.st_mode;
++               if (readdirplus) {
++                   iatt_from_stat(buf, &statbuf);
++                   entry->d_stat = *buf;
++               }
++               list_add_tail(&entry->list, &entries->list);
+ 
+-            filled_size += this_size;
+-            count++;
++               filled_size += this_size;
++               count++;
++            }
+         } else if (ret == 0 && dirents == NULL) {
+             *op_errno = ENOENT;
+             break;

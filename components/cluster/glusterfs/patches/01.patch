@@ -1,6 +1,22 @@
 --- glusterfs-5.3/libglusterfs/src/compat.h.~1~	2019-01-16 21:27:32.000000000 +0000
-+++ glusterfs-5.3/libglusterfs/src/compat.h	2019-01-18 18:31:05.715618655 +0000
-@@ -275,6 +275,7 @@
++++ glusterfs-5.3/libglusterfs/src/compat.h	2019-01-19 18:11:50.805055040 +0000
+@@ -25,15 +25,10 @@
+ #include <linux/limits.h>
+ #include <sys/xattr.h>
+ #include <linux/xattr.h>
+-#include <endian.h>
+ #ifdef HAVE_LINUX_FALLOC_H
+ #include <linux/falloc.h>
+ #endif
+ 
+-#ifdef HAVE_ENDIAN_H
+-#include <endian.h>
+-#endif
+-
+ #ifndef _PATH_UMOUNT
+ #define _PATH_UMOUNT "/bin/umount"
+ #endif
+@@ -275,6 +289,7 @@
  #define UNIX_PATH_MAX 108
  #define EUCLEAN 117
  
@@ -8,7 +24,7 @@
  #include <sys/un.h>
  #include <limits.h>
  #include <sys/stat.h>
-@@ -287,6 +288,7 @@
+@@ -287,6 +302,7 @@
  #define lchmod chmod
  #endif
  
@@ -16,7 +32,7 @@
  #define lgetxattr(path, key, value, size)                                      \
      solaris_getxattr(path, key, value, size)
  enum {
-@@ -296,11 +298,6 @@
+@@ -296,11 +312,6 @@
  #define XATTR_REPLACE ATTR_REPLACE
  };
  
@@ -28,7 +44,7 @@
  /* Posix dictates NAME_MAX to be used */
  #ifndef NAME_MAX
  #ifdef MAXNAMLEN
-@@ -364,6 +361,11 @@
+@@ -364,6 +375,11 @@
  #define FTW_CONTINUE 0
  #endif
  
@@ -40,7 +56,7 @@
  int
  asprintf(char **string_ptr, const char *format, ...);
  
-@@ -381,6 +383,8 @@
+@@ -381,6 +397,8 @@
  solaris_setxattr(const char *path, const char *key, const char *value,
                   size_t size, int flags);
  int
@@ -49,7 +65,7 @@
  solaris_fgetxattr(int fd, const char *key, char *value, size_t size);
  int
  solaris_fsetxattr(int fd, const char *key, const char *value, size_t size,
-@@ -402,6 +406,15 @@
+@@ -402,6 +420,15 @@
  int
  solaris_xattr_resolve_path(const char *real_path, char **path);
  

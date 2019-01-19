@@ -1,0 +1,11 @@
+--- glusterfs-5.3/xlators/performance/io-threads/src/io-threads.c.orig	2019-01-19 19:43:22.662119199 +0000
++++ glusterfs-5.3/xlators/performance/io-threads/src/io-threads.c	2019-01-19 19:43:40.332189247 +0000
+@@ -189,7 +189,7 @@
+                     break;
+                 }
+ 
+-                clock_gettime(CLOCK_REALTIME_COARSE, &sleep_till);
++                clock_gettime(CLOCK_REALTIME, &sleep_till);
+                 sleep_till.tv_sec += conf->idle_time;
+ 
+                 conf->sleep_count++;
