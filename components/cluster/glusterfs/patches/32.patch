@@ -1,0 +1,97 @@
+--- glusterfs-5.3/libglusterfs/src/Makefile.am.orig	2019-01-20 16:28:34.485979541 +0000
++++ glusterfs-5.3/libglusterfs/src/Makefile.am	2019-01-20 16:29:33.336841310 +0000
+@@ -37,7 +37,7 @@
+ 	$(CONTRIBDIR)/timer-wheel/timer-wheel.c \
+ 	$(CONTRIBDIR)/timer-wheel/find_last_bit.c default-args.c locking.c \
+ 	$(CONTRIBDIR)/xxhash/xxhash.c \
+-	compound-fop-utils.c throttle-tbf.c monitoring.c
++	compound-fop-utils.c throttle-tbf.c monitoring.c compat-uuid.c
+ 
+ nodist_libglusterfs_la_SOURCES = y.tab.c graph.lex.c defaults.c
+ nodist_libglusterfs_la_HEADERS = y.tab.h protocol-common.h
+--- glusterfs-5.3/libglusterfs/src/compat-uuid.h.~1~	2019-01-16 21:27:32.000000000 +0000
++++ glusterfs-5.3/libglusterfs/src/compat-uuid.h	2019-01-20 16:28:20.136479718 +0000
+@@ -13,6 +13,7 @@
+ 
+ #include <uuid/uuid.h>
+ 
++#ifndef GF_SOLARIS_HOST_OS
+ static inline void
+ gf_uuid_clear(uuid_t uuid)
+ {
+@@ -54,6 +55,17 @@
+ {
+     uuid_unparse(uuid, out);
+ }
++#endif
++
++#ifdef GF_SOLARIS_HOST_OS
++extern void gf_uuid_clear(uuid_t uuid);
++extern int gf_uuid_compare(uuid_t u1, uuid_t u2);
++extern void gf_uuid_copy(uuid_t dst, const uuid_t src);
++extern void gf_uuid_generate(uuid_t uuid);
++extern int gf_uuid_is_null(uuid_t uuid);
++extern int gf_uuid_parse(const char *in, uuid_t uuid);
++extern void gf_uuid_unparse(const uuid_t uuid, char *out);
++#endif
+ 
+ /* TODO: add more uuid APIs, use constructs like this:
+ #if defined(__NetBSD__) * NetBSD libc *
+--- glusterfs-5.3/libglusterfs/src/compat-uuid.c.orig	2019-01-20 16:31:19.078608183 +0000
++++ glusterfs-5.3/libglusterfs/src/compat-uuid.c	2019-01-20 16:25:34.852521307 +0000
+@@ -0,0 +1,55 @@
++/*
++ * Copyright (c) 2015 Red Hat, Inc. <http://www.redhat.com>
++ * This file is part of GlusterFS.
++ *
++ * This file is licensed to you under your choice of the GNU Lesser
++ * General Public License, version 3 or any later version (LGPLv3 or
++ * later), or the GNU General Public License, version 2 (GPLv2), in all
++ * cases as published by the Free Software Foundation.
++ */
++
++#include <uuid/uuid.h>
++
++#ifdef GF_SOLARIS_HOST_OS
++void
++gf_uuid_clear(uuid_t uuid)
++{
++    uuid_clear(uuid);
++}
++
++int
++gf_uuid_compare(uuid_t u1, uuid_t u2)
++{
++    return uuid_compare(u1, u2);
++}
++
++void
++gf_uuid_copy(uuid_t dst, const uuid_t src)
++{
++    uuid_copy(dst, src);
++}
++
++void
++gf_uuid_generate(uuid_t uuid)
++{
++    uuid_generate(uuid);
++}
++
++int
++gf_uuid_is_null(uuid_t uuid)
++{
++    return uuid_is_null(uuid);
++}
++
++int
++gf_uuid_parse(const char *in, uuid_t uuid)
++{
++    return uuid_parse(in, uuid);
++}
++
++void
++gf_uuid_unparse(const uuid_t uuid, char *out)
++{
++    uuid_unparse(uuid, out);
++}
++#endif

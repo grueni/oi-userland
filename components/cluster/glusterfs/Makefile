@@ -34,11 +34,22 @@ include $(WS_MAKE_RULES)/ips.mk
 
 COMPONENT_PREP_ACTION=(cd $(SOURCE_DIR); $(CONFIG_SHELL) autogen.sh )
 
-CFLAGS += -D__EXTENSIONS__ -D_POSIX_PTHREAD_SEMANTICS -D_BSD_SOURCE
+CORES=$(shell psrinfo -v|grep '^Status of'|tail -1|awk '{print $$5}')
 
-#CONFIGURE_OPTIONS += --disable-fusermount
-#CONFIGURE_OPTIONS += --disable-fuse-client
-	
+CFLAGS += -D__EXTENSIONS__ -D_POSIX_PTHREAD_SEMANTICS -D_BSD_SOURCE
+#CFLAGS += $(gcc_C99_ENABLE)
+#CFLAGS += -std=gnu99
+#CFLAGS += -fgnu89-inline -Winline -finline
+CFLAGS += -Wall -std=c99
+CFLAGS += -Dasm=__asm__
+CFLAGS += -Dtypeof=__typeof__
+
+LDFLAGS +=  -lsocket -lnsl -lresolv -lrpcsvc -lrt -lcrypt -lpthread
+
+COMPONENT_BUILD_ARGS += UUID_CFLAGS=-I/usr/include/uuid
+COMPONENT_BUILD_ARGS += UUID_LIBS=-luuid
+COMPONENT_BUILD_ARGS += -j$(CORES)
+ 
 build:          $(BUILD_64)
 
 install:        $(INSTALL_64)

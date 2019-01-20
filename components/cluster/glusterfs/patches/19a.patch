@@ -1,5 +1,5 @@
---- glusterfs-5.3/configure.ac.orig	2019-01-18 21:32:48.456136542 +0000
-+++ glusterfs-5.3/configure.ac	2019-01-19 15:35:52.718677676 +0000
+--- glusterfs-5.3/configure.ac.~1~	2019-01-16 21:27:32.000000000 +0000
++++ glusterfs-5.3/configure.ac	2019-01-20 18:25:35.425312199 +0000
 @@ -496,6 +496,14 @@
  
  AC_CHECK_HEADERS([openssl/ecdh.h])
