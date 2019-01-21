@@ -1,0 +1,42 @@
+--- glusterfs-5.3/api/src/gfapi.map.~1~	2019-01-16 21:27:32.000000000 +0000
++++ glusterfs-5.3/api/src/gfapi.map	2019-01-22 00:13:15.756563236 +0000
+@@ -41,8 +41,8 @@
+ 		glfs_lstat;
+ 		glfs_stat;
+ 		glfs_fstat;
+-                glfs_fsync_async;
+-                glfs_fdatasync_async;
++    glfs_fsync_async;
++    glfs_fdatasync_async;
+ 		glfs_access;
+ 		glfs_symlink;
+ 		glfs_readlink;
+@@ -120,7 +120,6 @@
+ 		glfs_h_create_from_handle;
+ 		glfs_h_opendir;
+ 		glfs_h_open;
+-		glfs_h_lookupat;
+ } GFAPI_3.4.0;
+ 
+ GFAPI_3.5.0 {
+@@ -170,7 +169,6 @@
+ 
+ GFAPI_3.7.4 {
+ 	global:
+-		glfs_h_lookupat;
+ } GFAPI_PRIVATE_3.7.0;
+ 
+ GFAPI_3.7.15 {
+@@ -192,12 +190,10 @@
+ 		glfs_upcall_inode_get_pstat;
+ 		glfs_upcall_inode_get_oldpobject;
+ 		glfs_upcall_inode_get_oldpstat;
+-		glfs_h_poll_upcall;
+ } GFAPI_3.7.15;
+ 
+ GFAPI_3.7.17 {
+ 	global:
+-		glfs_realpath;
+ } GFAPI_3.7.16;
+ 
+ GFAPI_3.10.0 {

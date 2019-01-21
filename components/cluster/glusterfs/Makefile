@@ -36,23 +36,30 @@ CORES=$(shell psrinfo -v|grep '^Status of'|tail -1|awk '{print $$5}')
 
 COMPONENT_PREP_ACTION=(cd $(SOURCE_DIR); $(CONFIG_SHELL) autogen.sh )
 
-COMPONENT_PRE_CONFIGURE_ACTION=($(CLONEY) $(SOURCE_DIR) $(@D))
+COMPONENT_PRE_CONFIGURE_ACTION=($(CLONEY) $(SOURCE_DIR) $(@D)) 
+
+##COMPONENT_POST_CONFIGURE_ACTION=(cd $(@D) && make gitclean)
 
 CONFIGURE_SCRIPT= $(@D)/configure
 
-CFLAGS += $(gcc_C99_ENABLE)
+#ENV += LD_ALTEXEC=/usr/gnu/bin/ld
+
+#CFLAGS += $(gcc_C99_ENABLE)
 CFLAGS += $(gcc_PIC)
-CFLAGS += $(CPP_XPG7MODE)
+#CFLAGS += $(CPP_XPG7MODE)
 CFLAGS += -Wall
 CFLAGS += -Dasm=__asm__
 CFLAGS += -Dtypeof=__typeof__
-CFLAGS += -D_BSD_SOURCE
-#CFLAGS += -D_POSIX_PTHREAD_SEMANTICS
+CFLAGS += -D_GNU_SOURCE
+CFLAGS += -std=gnu89 -fgnu89-inline  
+CFLAGS += -O2 -g -pipe -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -grecord-gcc-switches -mtune=generic -g -rdynamic
 
 LDFLAGS +=  -lsocket -lnsl -lresolv -lrpcsvc -lrt -lcrypt -lpthread
 
 CONFIGURE_OPTIONS += --disable-silent-rules
 CONFIGURE_OPTIONS += --enable-dependency-tracking
+CONFIGURE_OPTIONS += --without-libtirpc
+#CONFIGURE_OPTIONS += --enable-cmocka
  
 CONFIGURE_ENV += UUID_CFLAGS=-I/usr/include/uuid
 CONFIGURE_ENV += UUID_LIBS=-luuid

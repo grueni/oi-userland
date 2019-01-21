@@ -1,0 +1,88 @@
+--- glusterfs-5.3/libglusterfs/src/libglusterfs.sym.orig	2019-01-21 20:04:05.817478819 +0000
++++ glusterfs-5.3/libglusterfs/src/libglusterfs.sym	2019-01-21 20:13:35.629799276 +0000
+@@ -419,7 +419,6 @@
+ dict_set_static_ptr
+ dict_set_str
+ dict_set_strn
+-dict_setn_nstrn
+ dict_set_nstrn
+ dict_set_uint32
+ dict_set_uint64
+@@ -717,13 +716,6 @@
+ gf_uint64_2human_readable
+ gf_umount_lazy
+ gf_update_latency
+-gf_uuid_clear
+-gf_uuid_compare
+-gf_uuid_copy
+-gf_uuid_is_null
+-gf_uuid_generate
+-gf_uuid_parse
+-gf_uuid_unparse
+ gf_valid_pid
+ gf_vasprintf
+ gf_volfile_reconfigure
+@@ -1133,6 +1125,4 @@
+ glusterfs_leaseid_exist
+ gf_replace_old_iatt_in_dict
+ gf_replace_new_iatt_in_dict
+-gf_changelog_init
+-gf_changelog_register_generic
+-gf_gfid_generate_from_xxh64
+\ No newline at end of file
++gf_gfid_generate_from_xxh64
+--- glusterfs-5.3/rpc/xdr/src/libgfxdr.sym.orig	2019-01-21 20:29:34.664286165 +0000
++++ glusterfs-5.3/rpc/xdr/src/libgfxdr.sym	2019-01-21 20:31:55.747596470 +0000
+@@ -79,7 +79,6 @@
+ xdr_gfs3_flush_req
+ xdr_gfs3_fremovexattr_req
+ xdr_gfs3_fsetattr_req
+-xdr_gfs3_fsetattr_req_v2
+ xdr_gfs3_fsetattr_rsp
+ xdr_gfs3_fsetxattr_req
+ xdr_gfs3_fstat_req
+@@ -115,7 +114,6 @@
+ xdr_gfs3_open_req
+ xdr_gfs3_open_rsp
+ xdr_gfs3_rchecksum_req
+-xdr_gfs3_rchecksum_req_v2
+ xdr_gfs3_rchecksum_rsp
+ xdr_gfs3_readdirp_req
+ xdr_gfs3_readdirp_rsp
+@@ -157,13 +155,7 @@
+ xdr_gfs3_zerofill_req
+ xdr_gfs3_zerofill_rsp
+ xdr_gfs4_entrylk_contention_req
+-xdr_gfs4_entrylk_contention_rsp
+-xdr_gfs4_icreate_req
+-xdr_gfs4_icreate_rsp
+ xdr_gfs4_inodelk_contention_req
+-xdr_gfs4_inodelk_contention_rsp
+-xdr_gfs4_namelink_req
+-xdr_gfs4_namelink_rsp
+ xdr_gf_set_lk_ver_req
+ xdr_gf_set_lk_ver_rsp
+ xdr_gf_setvolume_req
+--- glusterfs-5.3/rpc/rpc-lib/src/libgfrpc.sym.orig	2019-01-21 20:37:36.344971483 +0000
++++ glusterfs-5.3/rpc/rpc-lib/src/libgfrpc.sym	2019-01-21 20:44:36.379406598 +0000
+@@ -30,10 +30,8 @@
+ rpcsvc_listener_destroy
+ rpcsvc_program_register
+ rpcsvc_program_register_portmap
+-rpcsvc_program_register_rpcbind6
+ rpcsvc_program_unregister
+ rpcsvc_program_unregister_portmap
+-rpcsvc_program_unregister_rpcbind6
+ rpcsvc_reconfigure_options
+ rpcsvc_register_notify
+ rpcsvc_register_portmap_enabled
+@@ -46,9 +44,6 @@
+ rpcsvc_transport_peername
+ rpcsvc_transport_privport_check
+ rpcsvc_transport_unix_options_build
+-rpcsvc_transport_volume_allowed
+-rpcsvc_transport_connect
+-rpcsvc_transport_getpeeraddr
+ rpcsvc_unregister_notify
+ rpcsvc_volume_allowed
+ rpcsvc_ownthread_reconf
