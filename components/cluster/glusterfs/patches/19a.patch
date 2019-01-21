@@ -40,7 +40,7 @@
      GF_NO_UNDEFINED='-Wl,--no-undefined'
      ;;
 +  solaris*)
-+    GF_NO_UNDEFINED='-Wl,--no-undefined'
++    GF_NO_UNDEFINED=''
 +    ;;
    darwin*)
      GF_NO_UNDEFINED='-Wl,-undefined'
