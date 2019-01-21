@@ -32,24 +32,33 @@ include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/configure.mk
 include $(WS_MAKE_RULES)/ips.mk
 
-COMPONENT_PREP_ACTION=(cd $(SOURCE_DIR); $(CONFIG_SHELL) autogen.sh )
-
 CORES=$(shell psrinfo -v|grep '^Status of'|tail -1|awk '{print $$5}')
 
-CFLAGS += -D__EXTENSIONS__ -D_POSIX_PTHREAD_SEMANTICS -D_BSD_SOURCE
-#CFLAGS += $(gcc_C99_ENABLE)
-#CFLAGS += -std=gnu99
-#CFLAGS += -fgnu89-inline -Winline -finline
-CFLAGS += -Wall -std=c99
+COMPONENT_PREP_ACTION=(cd $(SOURCE_DIR); $(CONFIG_SHELL) autogen.sh )
+
+COMPONENT_PRE_CONFIGURE_ACTION=($(CLONEY) $(SOURCE_DIR) $(@D))
+
+CONFIGURE_SCRIPT= $(@D)/configure
+
+CFLAGS += $(gcc_C99_ENABLE)
+CFLAGS += $(gcc_PIC)
+CFLAGS += $(CPP_XPG7MODE)
+CFLAGS += -Wall
 CFLAGS += -Dasm=__asm__
 CFLAGS += -Dtypeof=__typeof__
+CFLAGS += -D_BSD_SOURCE
+#CFLAGS += -D_POSIX_PTHREAD_SEMANTICS
 
 LDFLAGS +=  -lsocket -lnsl -lresolv -lrpcsvc -lrt -lcrypt -lpthread
 
-COMPONENT_BUILD_ARGS += UUID_CFLAGS=-I/usr/include/uuid
-COMPONENT_BUILD_ARGS += UUID_LIBS=-luuid
-COMPONENT_BUILD_ARGS += -j$(CORES)
+CONFIGURE_OPTIONS += --disable-silent-rules
+CONFIGURE_OPTIONS += --enable-dependency-tracking
  
+CONFIGURE_ENV += UUID_CFLAGS=-I/usr/include/uuid
+CONFIGURE_ENV += UUID_LIBS=-luuid
+
+COMPONENT_BUILD_ARGS += -j$(CORES)
+
 build:          $(BUILD_64)
 
 install:        $(INSTALL_64)
