@@ -1,0 +1,17 @@
+--- argp-standalone-1.3/mempcpy.c.orig	2019-01-22 13:58:56.492773709 +0000
++++ argp-standalone-1.3/mempcpy.c	2019-01-22 13:59:03.542122557 +0000
+@@ -9,10 +9,13 @@
+ 
+ #include <string.h>
+ 
++#ifndef HAVE_MEMPCPY
++void *mempcpy (void *to, const void *from, size_t size);
++
+ void *
+ mempcpy (void *to, const void *from, size_t size)
+ {
+   memcpy(to, from, size);
+   return (char *) to + size;
+ }
+-
++#endif

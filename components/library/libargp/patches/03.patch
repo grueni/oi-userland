@@ -1,0 +1,106 @@
+--- argp-standalone-1.3/argp-parse.c.~1~	2003-12-11 09:37:05.000000000 +0000
++++ argp-standalone-1.3/argp-parse.c	2019-01-22 13:02:54.736305383 +0000
+@@ -26,19 +26,8 @@
+ #include <config.h>
+ #endif
+ 
+-/* AIX requires this to be the first thing in the file.  */
+-#ifndef __GNUC__
+-# if HAVE_ALLOCA_H
+-#  include <alloca.h>
+-# else
+-#  ifdef _AIX
+- #pragma alloca
+-#  else
+-#   ifndef alloca /* predefined by HP cc +Olibcalls */
+-char *alloca ();
+-#   endif
+-#  endif
+-# endif
++#ifdef HAVE_ALLOCA_H
++#include <alloca.h>
+ #endif
+ 
+ #include <stdlib.h>
+--- argp-standalone-1.3/argp-help.c.~1~	2003-12-11 09:37:05.000000000 +0000
++++ argp-standalone-1.3/argp-help.c	2019-01-22 13:23:33.389489042 +0000
+@@ -26,19 +26,9 @@
+ #include <config.h>
+ #endif
+ 
+-/* AIX requires this to be the first thing in the file.  */
+-#ifndef __GNUC__
+-# if HAVE_ALLOCA_H
+-#  include <alloca.h>
+-# else
+-#  ifdef _AIX
+- #pragma alloca
+-#  else
+-#   ifndef alloca /* predefined by HP cc +Olibcalls */
+-char *alloca ();
+-#   endif
+-#  endif
+-# endif
++
++#ifdef HAVE_ALLOCA_H
++#include <alloca.h>
+ #endif
+ 
+ #include <stddef.h>
+@@ -66,7 +56,6 @@
+ #include "argp.h"
+ #include "argp-fmtstream.h"
+ #include "argp-namefrob.h"
+-
+ 
+ #ifndef _LIBC
+ # ifndef __strchrnul
+@@ -89,22 +78,21 @@
+ # define STRERROR strerror
+ #endif
+ 
+-#if !_LIBC
+-# if !HAVE_STRNDUP
++#ifndef _LIBC
++#ifndef HAVE_STRNDUP
+ char *strndup (const char *s, size_t size);
+-# endif /* !HAVE_STRNDUP */
++#endif /* !HAVE_STRNDUP */
+ 
+-# if !HAVE_MEMPCPY
++#ifndef HAVE_MEMPCPY
+ void *mempcpy (void *to, const void *from, size_t size);
+-# endif /* !HAVE_MEMPCPY */
++#endif /* !HAVE_MEMPCPY */
+ 
+-# if !HAVE_STRCHRNUL
++#ifndef HAVE_STRCHRNUL
+ char *strchrnul(const char *s, int c);
+-# endif /* !HAVE_STRCHRNUL */
++#endif /* !HAVE_STRCHRNUL */
+ 
+ #endif /* !_LIBC */
+ 
+-
+ /* User-selectable (using an environment variable) formatting parameters.
+ 
+    These may be specified in an environment variable called `ARGP_HELP_FMT',
+@@ -186,7 +174,7 @@
+ fill_in_uparams (const struct argp_state *state)
+ {
+   /* FIXME: Can we get away without an explicit cast? */
+-  const unsigned char *var = (unsigned char *) getenv ("ARGP_HELP_FMT");
++  const char *var = (char *) getenv ("ARGP_HELP_FMT");
+ 
+ #define SKIPWS(p) do { while (isspace (*p)) p++; } while (0);
+ 
+@@ -201,7 +189,7 @@
+ 	    size_t var_len;
+ 	    const struct uparam_name *un;
+ 	    int unspec = 0, val = 0;
+-	    const unsigned char *arg = var;
++	    const char *arg = var;
+ 
+ 	    while (isalnum (*arg) || *arg == '-' || *arg == '_')
+ 	      arg++;
+
