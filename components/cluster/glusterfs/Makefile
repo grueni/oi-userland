@@ -28,6 +28,22 @@ COMPONENT_ARCHIVE_URL= https://github.com/gluster/$(COMPONENT_NAME)/archive/v$(C
 COMPONENT_LICENSE= GPLV2, LGPLV3+
 COMPONENT_SUMMARY= Gluster Filesystem.
 
+COMPONENT_NAME_1= argp-standalone
+COMPONENT_VERSION_1= 1.3
+COMPONENT_SRC_1= $(COMPONENT_NAME_1)-$(COMPONENT_VERSION_1)
+COMPONENT_ARCHIVE_1= $(COMPONENT_SRC_1).tar.gz
+COMPONENT_ARCHIVE_HASH_1= sha256:dec79694da1319acd2238ce95df57f3680fea2482096e483323fddf3d818d8be
+COMPONENT_PROJECT_URL_1= https://www.lysator.liu.se/~nisse/
+COMPONENT_ARCHIVE_URL_1= https://www.lysator.liu.se/~nisse/misc/$(COMPONENT_ARCHIVE_1)
+COMPONENT_LICENSE_1= GPL
+
+
+COMPONENT_POST_UNPACK_ACTION_1 = ( \
+  cd $(COMPONENT_SRC); $(LN) -s ../$(COMPONENT_SRC_1) $(COMPONENT_SRC_1); \
+  cd $(COMPONENT_SRC_1); \
+	patch -p1 -i ../files/argp-standalone.patch; \
+	./configure && make )
+
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/configure.mk
 include $(WS_MAKE_RULES)/ips.mk
@@ -42,8 +58,6 @@ COMPONENT_PRE_CONFIGURE_ACTION=($(CLONEY) $(SOURCE_DIR) $(@D))
 
 CONFIGURE_SCRIPT= $(@D)/configure
 
-#ENV += LD_ALTEXEC=/usr/gnu/bin/ld
-
 #CFLAGS += $(gcc_C99_ENABLE)
 CFLAGS += $(gcc_PIC)
 #CFLAGS += $(CPP_XPG7MODE)
@@ -53,8 +67,10 @@ CFLAGS += -Dtypeof=__typeof__
 CFLAGS += -D_GNU_SOURCE
 CFLAGS += -std=gnu99 -fgnu89-inline  
 CFLAGS += -O2 -g -pipe -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -grecord-gcc-switches -mtune=generic -g -rdynamic
+CFLAGS += -I$(SOURCE_DIR)/$(COMPONENT_SRC_1)
 
 LDFLAGS +=  -lsocket -lnsl -lresolv -lrpcsvc -lrt -lcrypt -lpthread
+LDFLAGS += -L$(SOURCE_DIR)/$(COMPONENT_SRC_1)
 
 CONFIGURE_OPTIONS += --disable-silent-rules
 CONFIGURE_OPTIONS += --enable-dependency-tracking

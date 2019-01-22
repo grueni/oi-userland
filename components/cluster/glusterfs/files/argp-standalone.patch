@@ -1,0 +1,204 @@
+# https://gfiber.googlesource.com/buildroot/+/master/package/argp-standalone/argp-standalone-fix_build_with_c99_compilers.patch
+
+From b2dfa011a3fdcb7d22764d143517d0fbd1c2a201 Mon Sep 17 00:00:00 2001
+From: Emmanuel Dreyfus <manu@netbsd.org>
+Date: Wed, 22 Jan 2014 14:47:23 +0100
+Subject: [PATCH] Fix build with c99 compilers
+BUG: 764655
+Change-Id: If5dfdc9c7427bd3d39d8da8f79e33ae2da6a3137
+Signed-off-by: Emmanuel Dreyfus <manu@netbsd.org>
+Reviewed-on: http://review.gluster.org/6034
+Reviewed-by: Harshavardhana <harsha@harshavardhana.net>
+Tested-by: Gluster Build System <jenkins@build.gluster.com>
+---
+
+diff --git a/argp-fmtstream.c b/argp-fmtstream.c
+index 7f79285..494b6b3 100644
+--- a/argp-fmtstream.c
++++ b/argp-fmtstream.c
+@@ -389,6 +389,7 @@
+ weak_alias (__argp_fmtstream_printf, argp_fmtstream_printf)
+ #endif
+ 
++#if __STDC_VERSION__ - 199900L < 1
+ /* Duplicate the inline definitions in argp-fmtstream.h, for compilers
+  * that don't do inlining. */
+ size_t
+@@ -471,5 +472,6 @@
+     __argp_fmtstream_update (__fs);
+   return __fs->point_col >= 0 ? __fs->point_col : 0;
+ }
++#endif /* __STDC_VERSION__ - 199900L < 1 */
+ 
+ #endif /* !ARGP_FMTSTREAM_USE_LINEWRAP */
+diff --git a/argp-fmtstream.h b/argp-fmtstream.h
+index e797b11..828f435 100644
+--- a/argp-fmtstream.h
++++ b/argp-fmtstream.h
+@@ -153,6 +153,7 @@
+ 				      __const char *__fmt, ...)
+      PRINTF_STYLE(2,3);
+ 
++#if __STDC_VERSION__ - 199900L < 1
+ extern int __argp_fmtstream_putc (argp_fmtstream_t __fs, int __ch);
+ extern int argp_fmtstream_putc (argp_fmtstream_t __fs, int __ch);
+ 
+@@ -163,6 +164,7 @@
+ 				      __const char *__str, size_t __len);
+ extern size_t argp_fmtstream_write (argp_fmtstream_t __fs,
+ 				    __const char *__str, size_t __len);
++#endif /* __STDC_VERSION__ - 199900L < 1 */
+ 
+ /* Access macros for various bits of state.  */
+ #define argp_fmtstream_lmargin(__fs) ((__fs)->lmargin)
+@@ -172,6 +174,7 @@
+ #define __argp_fmtstream_rmargin argp_fmtstream_rmargin
+ #define __argp_fmtstream_wmargin argp_fmtstream_wmargin
+ 
++#if __STDC_VERSION__ - 199900L < 1
+ /* Set __FS's left margin to LMARGIN and return the old value.  */
+ extern size_t argp_fmtstream_set_lmargin (argp_fmtstream_t __fs,
+ 					  size_t __lmargin);
+@@ -193,6 +196,7 @@
+ /* Return the column number of the current output point in __FS.  */
+ extern size_t argp_fmtstream_point (argp_fmtstream_t __fs);
+ extern size_t __argp_fmtstream_point (argp_fmtstream_t __fs);
++#endif /* __STDC_VERSION__ - 199900L < 1 */
+ 
+ /* Internal routines.  */
+ extern void _argp_fmtstream_update (argp_fmtstream_t __fs);
+@@ -216,7 +220,11 @@
+ #endif
+ 
+ #ifndef ARGP_FS_EI
++#if defined(__GNUC__) && !defined(__GNUC_STDC_INLINE__)
+ #define ARGP_FS_EI extern inline
++#else
++#define ARGP_FS_EI inline
++#endif
+ #endif
+ 
+ ARGP_FS_EI size_t
+--- argp-standalone-1.3/mempcpy.c.orig	2019-01-22 13:58:56.492773709 +0000
++++ argp-standalone-1.3/mempcpy.c	2019-01-22 13:59:03.542122557 +0000
+@@ -9,10 +9,13 @@
+ 
+ #include <string.h>
+ 
++#ifndef HAVE_MEMPCPY
++void *mempcpy (void *to, const void *from, size_t size);
++
+ void *
+ mempcpy (void *to, const void *from, size_t size)
+ {
+   memcpy(to, from, size);
+   return (char *) to + size;
+ }
+-
++#endif
+--- argp-standalone-1.3/argp-parse.c.~1~	2003-12-11 09:37:05.000000000 +0000
++++ argp-standalone-1.3/argp-parse.c	2019-01-22 13:02:54.736305383 +0000
+@@ -26,19 +26,8 @@
+ #include <config.h>
+ #endif
+ 
+-/* AIX requires this to be the first thing in the file.  */
+-#ifndef __GNUC__
+-# if HAVE_ALLOCA_H
+-#  include <alloca.h>
+-# else
+-#  ifdef _AIX
+- #pragma alloca
+-#  else
+-#   ifndef alloca /* predefined by HP cc +Olibcalls */
+-char *alloca ();
+-#   endif
+-#  endif
+-# endif
++#ifdef HAVE_ALLOCA_H
++#include <alloca.h>
+ #endif
+ 
+ #include <stdlib.h>
+--- argp-standalone-1.3/argp-help.c.~1~	2003-12-11 09:37:05.000000000 +0000
++++ argp-standalone-1.3/argp-help.c	2019-01-22 13:23:33.389489042 +0000
+@@ -26,19 +26,9 @@
+ #include <config.h>
+ #endif
+ 
+-/* AIX requires this to be the first thing in the file.  */
+-#ifndef __GNUC__
+-# if HAVE_ALLOCA_H
+-#  include <alloca.h>
+-# else
+-#  ifdef _AIX
+- #pragma alloca
+-#  else
+-#   ifndef alloca /* predefined by HP cc +Olibcalls */
+-char *alloca ();
+-#   endif
+-#  endif
+-# endif
++
++#ifdef HAVE_ALLOCA_H
++#include <alloca.h>
+ #endif
+ 
+ #include <stddef.h>
+@@ -66,7 +56,6 @@
+ #include "argp.h"
+ #include "argp-fmtstream.h"
+ #include "argp-namefrob.h"
+-
+ 
+ #ifndef _LIBC
+ # ifndef __strchrnul
+@@ -89,22 +78,21 @@
+ # define STRERROR strerror
+ #endif
+ 
+-#if !_LIBC
+-# if !HAVE_STRNDUP
++#ifndef _LIBC
++#ifndef HAVE_STRNDUP
+ char *strndup (const char *s, size_t size);
+-# endif /* !HAVE_STRNDUP */
++#endif /* !HAVE_STRNDUP */
+ 
+-# if !HAVE_MEMPCPY
++#ifndef HAVE_MEMPCPY
+ void *mempcpy (void *to, const void *from, size_t size);
+-# endif /* !HAVE_MEMPCPY */
++#endif /* !HAVE_MEMPCPY */
+ 
+-# if !HAVE_STRCHRNUL
++#ifndef HAVE_STRCHRNUL
+ char *strchrnul(const char *s, int c);
+-# endif /* !HAVE_STRCHRNUL */
++#endif /* !HAVE_STRCHRNUL */
+ 
+ #endif /* !_LIBC */
+ 
+-
+ /* User-selectable (using an environment variable) formatting parameters.
+ 
+    These may be specified in an environment variable called `ARGP_HELP_FMT',
+@@ -186,7 +174,7 @@
+ fill_in_uparams (const struct argp_state *state)
+ {
+   /* FIXME: Can we get away without an explicit cast? */
+-  const unsigned char *var = (unsigned char *) getenv ("ARGP_HELP_FMT");
++  const char *var = (char *) getenv ("ARGP_HELP_FMT");
+ 
+ #define SKIPWS(p) do { while (isspace (*p)) p++; } while (0);
+ 
+@@ -201,7 +189,7 @@
+ 	    size_t var_len;
+ 	    const struct uparam_name *un;
+ 	    int unspec = 0, val = 0;
+-	    const unsigned char *arg = var;
++	    const char *arg = var;
+ 
+ 	    while (isalnum (*arg) || *arg == '-' || *arg == '_')
+ 	      arg++;
+
