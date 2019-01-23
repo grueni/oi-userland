@@ -1,0 +1,22 @@
+--- argp-standalone-1.3/argp.h.orig	2019-01-22 20:00:04.997515228 +0000
++++ argp-standalone-1.3/argp.h	2019-01-22 20:02:24.177483139 +0000
+@@ -561,7 +561,7 @@
+ # endif
+ 
+ # ifndef ARGP_EI
+-#  define ARGP_EI extern inline
++#  define ARGP_EI static inline
+ # endif
+ 
+ ARGP_EI void
+--- argp-standalone-1.3/argp-fmtstream.h.orig	2019-01-22 20:06:36.292011757 +0000
++++ argp-standalone-1.3/argp-fmtstream.h	2019-01-22 20:06:52.321605622 +0000
+@@ -212,7 +212,7 @@
+ #endif
+ 
+ #ifndef ARGP_FS_EI
+-#define ARGP_FS_EI extern inline
++#define ARGP_FS_EI static inline
+ #endif
+ 
+ ARGP_FS_EI size_t

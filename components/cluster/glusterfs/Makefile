@@ -37,12 +37,27 @@ COMPONENT_PROJECT_URL_1= https://www.lysator.liu.se/~nisse/
 COMPONENT_ARCHIVE_URL_1= https://www.lysator.liu.se/~nisse/misc/$(COMPONENT_ARCHIVE_1)
 COMPONENT_LICENSE_1= GPL
 
+COMPONENT_NAME_2= cmocka
+COMPONENT_VERSION_2= 1.1.3
+COMPONENT_SRC_2= $(COMPONENT_NAME_2)-$(COMPONENT_VERSION_2)
+COMPONENT_ARCHIVE_2= $(COMPONENT_SRC_2).tar.xz
+COMPONENT_ARCHIVE_HASH_2= sha256:43eabcf72a9c80e3d03f7c8a1c04e408c18d2db5121eb058a3ef732a9dfabfaf
+COMPONENT_PROJECT_URL_2= https://cmocka.org
+COMPONENT_ARCHIVE_URL_2= https://cmocka.org/files/1.1/$(COMPONENT_ARCHIVE_2)
+COMPONENT_LICENSE_2= GPL
+
+
+CCFLAGS=$(gcc_PIC) -std=gnu99 -fgnu89-inline -m64 -O2
 
 COMPONENT_POST_UNPACK_ACTION_1 = ( \
   cd $(COMPONENT_SRC); $(LN) -s ../$(COMPONENT_SRC_1) $(COMPONENT_SRC_1); \
   cd $(COMPONENT_SRC_1); \
+	patch -p1 -i ../files/1.patch; \
+	patch -p1 -i ../files/2.patch; \
+	patch -p1 -i ../files/3.patch; \
+	patch -p1 -i ../files/4.patch; \
 	patch -p1 -i ../files/argp-standalone.patch; \
-	./configure && make )
+	CFLAGS="$(CCFLAGS)" ./configure && make )
 
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/configure.mk
@@ -58,14 +73,14 @@ COMPONENT_PRE_CONFIGURE_ACTION=($(CLONEY) $(SOURCE_DIR) $(@D))
 
 CONFIGURE_SCRIPT= $(@D)/configure
 
-#CFLAGS += $(gcc_C99_ENABLE)
-CFLAGS += $(gcc_PIC)
 #CFLAGS += $(CPP_XPG7MODE)
+#CFLAGS += $(gcc_PIC)
+CFLAGS += $(CCFLAGS)  
 CFLAGS += -Wall
 CFLAGS += -Dasm=__asm__
 CFLAGS += -Dtypeof=__typeof__
 CFLAGS += -D_GNU_SOURCE
-CFLAGS += -std=gnu99 -fgnu89-inline  
+CFLAGS += -DPATH_MAX=1024
 CFLAGS += -O2 -g -pipe -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -grecord-gcc-switches -mtune=generic -g -rdynamic
 CFLAGS += -I$(SOURCE_DIR)/$(COMPONENT_SRC_1)
 
