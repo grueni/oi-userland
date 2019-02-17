@@ -1,0 +1,51 @@
+--- gitlab-runner-v11.7.0/commands/config_unix.go.orig	2019-02-13 17:47:23.448429775 +0000
++++ gitlab-runner-v11.7.0/commands/config_unix.go	2019-02-13 17:49:03.842122892 +0000
+@@ -1,4 +1,4 @@
+-// +build linux darwin freebsd openbsd
++// +build linux darwin freebsd openbsd solaris
+ 
+ package commands
+ 
+--- gitlab-runner-v11.7.0/helpers/archives/zip_extra_unix.go.orig	2019-02-13 17:47:37.567853264 +0000
++++ gitlab-runner-v11.7.0/helpers/archives/zip_extra_unix.go	2019-02-13 17:48:48.458310920 +0000
+@@ -1,4 +1,4 @@
+-// +build linux darwin freebsd openbsd
++// +build linux darwin freebsd openbsd solaris
+ 
+ package archives
+ 
+--- gitlab-runner-v11.7.0/helpers/process_group_unix.go.orig	2019-02-13 17:47:55.919505096 +0000
++++ gitlab-runner-v11.7.0/helpers/process_group_unix.go	2019-02-13 17:48:18.860241721 +0000
+@@ -1,4 +1,4 @@
+-// +build darwin dragonfly freebsd linux netbsd openbsd
++// +build darwin dragonfly freebsd linux netbsd openbsd solaris
+ 
+ package helpers
+ 
+--- gitlab-runner-v11.7.0/log/dump_unix.go.orig	2019-02-14 23:36:33.259997523 +0000
++++ gitlab-runner-v11.7.0/log/dump_unix.go	2019-02-14 23:37:33.410938903 +0000
+@@ -1,4 +1,4 @@
+-// +build darwin dragonfly freebsd linux netbsd openbsd
++// +build darwin dragonfly freebsd linux netbsd openbsd solaris
+ 
+ package log
+ 
+--- gitlab-runner-v11.7.0/log/dump_unix_test.go.orig	2019-02-14 23:37:03.092477761 +0000
++++ gitlab-runner-v11.7.0/log/dump_unix_test.go	2019-02-14 23:37:20.535889255 +0000
+@@ -1,4 +1,4 @@
+-// +build darwin dragonfly freebsd linux netbsd openbsd
++// +build darwin dragonfly freebsd linux netbsd openbsd solaris
+ 
+ package log
+ 
+--- gitlab-runner-v11.7.0/vendor/github.com/ayufan/golang-kardianos-service/service_unix.go.orig	2019-02-15 18:10:51.519647018 +0000
++++ gitlab-runner-v11.7.0/vendor/github.com/ayufan/golang-kardianos-service/service_unix.go	2019-02-15 18:11:03.209685412 +0000
+@@ -2,7 +2,7 @@
+ // Use of this source code is governed by a zlib-style
+ // license that can be found in the LICENSE file.
+ 
+-// +build linux darwin
++// +build linux darwin solaris
+ 
+ package service
+ 

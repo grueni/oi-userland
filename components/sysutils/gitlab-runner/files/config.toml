@@ -1,0 +1,9 @@
+concurrent = 4
+log_file_path= "/var/log/gitlab-runner/gitlab-runner.log"
+log_level = "warning"   #  (options: debug, info, warn, error, fatal, panic) 
+log_format = "text"     #  (options: runner, text, json)
+check_interval = 3      #  default: 3
+
+[session_server]
+  listen_address = "0.0.0.0:8093" #  listen on all available interfaces on port 8093
+  session_timeout = 1800

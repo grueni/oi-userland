@@ -1,0 +1,30 @@
+--- gitlab-runner-v11.7.0/commands/multi.go.~1~	2019-01-22 12:06:07.000000000 +0000
++++ gitlab-runner-v11.7.0/commands/multi.go	2019-02-17 11:20:10.905876335 +0000
+@@ -29,6 +29,8 @@
+ 	"gitlab.com/gitlab-org/gitlab-runner/session"
+ )
+ 
++var isLogFilePathOpened bool = false
++
+ var (
+ 	concurrentDesc = prometheus.NewDesc(
+ 		"gitlab_runner_concurrent",
+@@ -303,6 +305,18 @@
+ 		reloadNeeded = true
+ 	}
+ 
++	if mr.config.LogFilePath != nil && !isLogFilePathOpened {
++		f, err := os.OpenFile(*mr.config.LogFilePath, os.O_WRONLY | os.O_APPEND | os.O_CREATE, 0640)
++		if err != nil {
++				// Cannot open log file. Logging to stderr
++				fmt.Println(err)
++		} else {
++				logrus.SetOutput(f)
++				isLogFilePathOpened = true
++				reloadNeeded = true
++		}
++	}
++
+ 	if reloadNeeded {
+ 		log.Configuration().ReloadConfiguration()
+ 	}

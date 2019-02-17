@@ -1,0 +1,10 @@
+--- gitlab-runner-v11.7.0/common/config.go.orig	2019-02-16 19:49:21.320091044 +0000
++++ gitlab-runner-v11.7.0/common/config.go	2019-02-16 19:58:11.251718899 +0000
+@@ -309,6 +309,7 @@
+ 	CheckInterval int             `toml:"check_interval" json:"check_interval" description:"Define active checking interval of jobs"`
+ 	LogLevel      *string         `toml:"log_level" json:"log_level" description:"Define log level (one of: panic, fatal, error, warning, info, debug)"`
+ 	LogFormat     *string         `toml:"log_format" json:"log_format" description:"Define log format (one of: runner, text, json)"`
++	LogFilePath   *string         `toml:"log_file_path" json:"log_file_path" description:"Define log file path"`
+ 	User          string          `toml:"user,omitempty" json:"user"`
+ 	Runners       []*RunnerConfig `toml:"runners" json:"runners"`
+ 	SentryDSN     *string         `toml:"sentry_dsn"`
