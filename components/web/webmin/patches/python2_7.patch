@@ -1,0 +1,30 @@
+Common subdirectories: a/ajaxterm and b/ajaxterm
+Common subdirectories: a/webmin and b/webmin
+Common subdirectories: a/ajaxterm/ajaxterm and b/ajaxterm/ajaxterm
+diff -nur a/ajaxterm/ajaxterm/ajaxterm.py b/ajaxterm/ajaxterm/ajaxterm.py
+--- a/ajaxterm/ajaxterm/ajaxterm.py	Sun Nov 13 10:32:17 2016
++++ b/ajaxterm/ajaxterm/ajaxterm.py	Sun Nov 13 10:34:08 2016
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2.7
+ 
+ """ Ajaxterm """
+ 
+diff -nur a/ajaxterm/ajaxterm/qweb.py b/ajaxterm/ajaxterm/qweb.py
+--- a/ajaxterm/ajaxterm/qweb.py	Sun Nov 13 10:32:00 2016
++++ b/ajaxterm/ajaxterm/qweb.py	Sun Nov 13 10:34:21 2016
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python2.3
++#!/usr/bin/python2.7
+ #
+ # vim:set et ts=4 fdc=0 fdn=2 fdl=0:
+ #
+diff -nur a/webmin/acme_tiny.py b/webmin/acme_tiny.py
+--- a/webmin/acme_tiny.py	Sun Nov 13 10:33:02 2016
++++ b/webmin/acme_tiny.py	Sun Nov 13 10:33:48 2016
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2.7
+ import argparse, subprocess, json, os, sys, base64, binascii, time, hashlib, re, copy, textwrap, logging
+ try:
+     from urllib.request import urlopen # Python 3

@@ -1,0 +1,146 @@
+--- webmin-1.820-solaris/acl/Authen-SolarisRBAC-0.1/Makefile.orig	2019-03-10 12:32:11.638318024 +0000
++++ webmin-1.820-solaris/acl/Authen-SolarisRBAC-0.1/Makefile	2019-03-10 12:35:17.963545405 +0000
+@@ -25,13 +25,13 @@
+ 
+ # --- MakeMaker const_config section:
+ 
+-# These definitions are from config.sh (via /usr/perl5/5.8.4/lib/sun4-solaris-64int/Config.pm)
++# These definitions are from config.sh (via /usr/perl5/5.22/lib/sun4-solaris-64int/Config.pm)
+ 
+ # They may have been overridden via Makefile.PL or on the command line
+ AR = ar
+ CC = cc
+ CCCDLFLAGS =  
+-CCDLFLAGS = -R /usr/perl5/5.8.4/lib/sun4-solaris-64int/CORE
++CCDLFLAGS = -R /usr/perl5/5.22/lib/sun4-solaris-64int/CORE
+ DLEXT = so
+ DLSRC = dl_dlopen.xs
+ LD = cc
+@@ -43,13 +43,13 @@
+ OSNAME = solaris
+ OSVERS = 2.10
+ RANLIB = :
+-SITELIBEXP = /usr/perl5/site_perl/5.8.4
+-SITEARCHEXP = /usr/perl5/site_perl/5.8.4/sun4-solaris-64int
++SITELIBEXP = /usr/perl5/site_perl/5.22
++SITEARCHEXP = /usr/perl5/site_perl/5.22/sun4-solaris-64int
+ SO = so
+ EXE_EXT = 
+ FULL_AR = /usr/ccs/bin/ar
+-VENDORARCHEXP = /usr/perl5/vendor_perl/5.8.4/sun4-solaris-64int
+-VENDORLIBEXP = /usr/perl5/vendor_perl/5.8.4
++VENDORARCHEXP = /usr/perl5/vendor_perl/5.22/sun4-solaris-64int
++VENDORLIBEXP = /usr/perl5/vendor_perl/5.22
+ 
+ 
+ # --- MakeMaker constants section:
+@@ -75,20 +75,20 @@
+ INSTALLDIRS = site
+ DESTDIR = 
+ PREFIX = 
+-PERLPREFIX = /usr/perl5/5.8.4
+-SITEPREFIX = /usr/perl5/5.8.4
+-VENDORPREFIX = /usr/perl5/5.8.4
++PERLPREFIX = /usr/perl5/5.22
++SITEPREFIX = /usr/perl5/5.22
++VENDORPREFIX = /usr/perl5/5.22
+ INSTALLPRIVLIB = $(PERLPREFIX)/lib
+ DESTINSTALLPRIVLIB = $(DESTDIR)$(INSTALLPRIVLIB)
+-INSTALLSITELIB = /usr/perl5/site_perl/5.8.4
++INSTALLSITELIB = /usr/perl5/site_perl/5.22
+ DESTINSTALLSITELIB = $(DESTDIR)$(INSTALLSITELIB)
+-INSTALLVENDORLIB = /usr/perl5/vendor_perl/5.8.4
++INSTALLVENDORLIB = /usr/perl5/vendor_perl/5.22
+ DESTINSTALLVENDORLIB = $(DESTDIR)$(INSTALLVENDORLIB)
+ INSTALLARCHLIB = $(PERLPREFIX)/lib/sun4-solaris-64int
+ DESTINSTALLARCHLIB = $(DESTDIR)$(INSTALLARCHLIB)
+-INSTALLSITEARCH = /usr/perl5/site_perl/5.8.4/sun4-solaris-64int
++INSTALLSITEARCH = /usr/perl5/site_perl/5.22/sun4-solaris-64int
+ DESTINSTALLSITEARCH = $(DESTDIR)$(INSTALLSITEARCH)
+-INSTALLVENDORARCH = /usr/perl5/vendor_perl/5.8.4/sun4-solaris-64int
++INSTALLVENDORARCH = /usr/perl5/vendor_perl/5.22/sun4-solaris-64int
+ DESTINSTALLVENDORARCH = $(DESTDIR)$(INSTALLVENDORARCH)
+ INSTALLBIN = $(PERLPREFIX)/bin
+ DESTINSTALLBIN = $(DESTDIR)$(INSTALLBIN)
+@@ -110,14 +110,14 @@
+ DESTINSTALLSITEMAN3DIR = $(DESTDIR)$(INSTALLSITEMAN3DIR)
+ INSTALLVENDORMAN3DIR = $(VENDORPREFIX)/man/man3
+ DESTINSTALLVENDORMAN3DIR = $(DESTDIR)$(INSTALLVENDORMAN3DIR)
+-PERL_LIB = /usr/perl5/5.8.4/lib
+-PERL_ARCHLIB = /usr/perl5/5.8.4/lib/sun4-solaris-64int
++PERL_LIB = /usr/perl5/5.22/lib
++PERL_ARCHLIB = /usr/perl5/5.22/lib/sun4-solaris-64int
+ LIBPERL_A = libperl.a
+ FIRST_MAKEFILE = Makefile
+ MAKEFILE_OLD = $(FIRST_MAKEFILE).old
+ MAKE_APERL_FILE = $(FIRST_MAKEFILE).aperl
+ PERLMAINCC = $(CC)
+-PERL_INC = /usr/perl5/5.8.4/lib/sun4-solaris-64int/CORE
++PERL_INC = /usr/perl5/5.22/lib/sun4-solaris-64int/CORE
+ PERL = /usr/local/bin/perl
+ FULLPERL = /usr/local/bin/perl
+ ABSPERL = $(PERL)
+@@ -131,7 +131,7 @@
+ PERM_RW = 644
+ PERM_RWX = 755
+ 
+-MAKEMAKER   = /usr/perl5/5.8.4/lib/ExtUtils/MakeMaker.pm
++MAKEMAKER   = /usr/perl5/5.22/lib/ExtUtils/MakeMaker.pm
+ MM_VERSION  = 6.17
+ MM_REVISION = 1.133
+ 
+@@ -197,11 +197,11 @@
+ 
+ # --- MakeMaker tool_xsubpp section:
+ 
+-XSUBPPDIR = /usr/perl5/5.8.4/lib/ExtUtils
++XSUBPPDIR = /usr/perl5/5.22/lib/ExtUtils
+ XSUBPP = $(XSUBPPDIR)/xsubpp
+ XSPROTOARG = 
+-XSUBPPDEPS = /usr/perl5/5.8.4/lib/ExtUtils/typemap $(XSUBPP)
+-XSUBPPARGS = -typemap /usr/perl5/5.8.4/lib/ExtUtils/typemap
++XSUBPPDEPS = /usr/perl5/5.22/lib/ExtUtils/typemap $(XSUBPP)
++XSUBPPARGS = -typemap /usr/perl5/5.22/lib/ExtUtils/typemap
+ XSUBPP_EXTRA_ARGS = 
+ 
+ 
+@@ -366,21 +366,21 @@
+ config :: $(INST_AUTODIR)$(DIRFILESEP).exists
+ 	$(NOECHO) $(NOOP)
+ 
+-$(INST_AUTODIR)/.exists :: /usr/perl5/5.8.4/lib/sun4-solaris-64int/CORE/perl.h
++$(INST_AUTODIR)/.exists :: /usr/perl5/5.22/lib/sun4-solaris-64int/CORE/perl.h
+ 	$(NOECHO) $(MKPATH) $(INST_AUTODIR)
+-	$(NOECHO) $(EQUALIZE_TIMESTAMP) /usr/perl5/5.8.4/lib/sun4-solaris-64int/CORE/perl.h $(INST_AUTODIR)/.exists
++	$(NOECHO) $(EQUALIZE_TIMESTAMP) /usr/perl5/5.22/lib/sun4-solaris-64int/CORE/perl.h $(INST_AUTODIR)/.exists
+ 
+ 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_AUTODIR)
+ 
+-$(INST_LIBDIR)/.exists :: /usr/perl5/5.8.4/lib/sun4-solaris-64int/CORE/perl.h
++$(INST_LIBDIR)/.exists :: /usr/perl5/5.22/lib/sun4-solaris-64int/CORE/perl.h
+ 	$(NOECHO) $(MKPATH) $(INST_LIBDIR)
+-	$(NOECHO) $(EQUALIZE_TIMESTAMP) /usr/perl5/5.8.4/lib/sun4-solaris-64int/CORE/perl.h $(INST_LIBDIR)/.exists
++	$(NOECHO) $(EQUALIZE_TIMESTAMP) /usr/perl5/5.22/lib/sun4-solaris-64int/CORE/perl.h $(INST_LIBDIR)/.exists
+ 
+ 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_LIBDIR)
+ 
+-$(INST_ARCHAUTODIR)/.exists :: /usr/perl5/5.8.4/lib/sun4-solaris-64int/CORE/perl.h
++$(INST_ARCHAUTODIR)/.exists :: /usr/perl5/5.22/lib/sun4-solaris-64int/CORE/perl.h
+ 	$(NOECHO) $(MKPATH) $(INST_ARCHAUTODIR)
+-	$(NOECHO) $(EQUALIZE_TIMESTAMP) /usr/perl5/5.8.4/lib/sun4-solaris-64int/CORE/perl.h $(INST_ARCHAUTODIR)/.exists
++	$(NOECHO) $(EQUALIZE_TIMESTAMP) /usr/perl5/5.22/lib/sun4-solaris-64int/CORE/perl.h $(INST_ARCHAUTODIR)/.exists
+ 
+ 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_ARCHAUTODIR)
+ 
+@@ -388,9 +388,9 @@
+ 	$(NOECHO) $(NOOP)
+ 
+ 
+-$(INST_MAN3DIR)/.exists :: /usr/perl5/5.8.4/lib/sun4-solaris-64int/CORE/perl.h
++$(INST_MAN3DIR)/.exists :: /usr/perl5/5.22/lib/sun4-solaris-64int/CORE/perl.h
+ 	$(NOECHO) $(MKPATH) $(INST_MAN3DIR)
+-	$(NOECHO) $(EQUALIZE_TIMESTAMP) /usr/perl5/5.8.4/lib/sun4-solaris-64int/CORE/perl.h $(INST_MAN3DIR)/.exists
++	$(NOECHO) $(EQUALIZE_TIMESTAMP) /usr/perl5/5.22/lib/sun4-solaris-64int/CORE/perl.h $(INST_MAN3DIR)/.exists
+ 
+ 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_MAN3DIR)
+ 

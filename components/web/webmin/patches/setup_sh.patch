@@ -1,0 +1,30 @@
+diff -nur a/setup.sh b/setup.sh
+--- a/setup.sh	Fri Nov 11 20:27:08 2016
++++ b/setup.sh	Sat Nov 12 16:17:27 2016
+@@ -166,7 +166,7 @@
+ 	# Copy files to target directory
+ 	if [ "$wadir" != "$srcdir" ]; then
+ 		echo "Copying files to $wadir .."
+-		(cd "$srcdir" ; tar cf - . | (cd "$wadir" ; tar xf -))
++		(cd "$srcdir" ; $tar cf - | (cd "$wadir" ; $tar xf -))
+ 		echo "..done"
+ 		echo ""
+ 	fi
+@@ -461,7 +461,7 @@
+ 	echo "***********************************************************************"
+ 	if [ "$wadir" != "$srcdir" ]; then
+ 		echo "Copying files to $wadir .."
+-		(cd "$srcdir" ; tar cf - . | (cd "$wadir" ; tar xf -))
++		(cd "$srcdir" ; $tar cf - . | (cd "$wadir" ; $tar xf -))
+ 		echo "..done"
+ 		echo ""
+ 	fi
+@@ -589,7 +589,7 @@
+ 
+ if [ "$noperlpath" = "" ]; then
+ 	echo "Inserting path to perl into scripts.."
+-	(find "$wadir" -name '*.cgi' -print ; find "$wadir" -name '*.pl' -print) | $perl "$wadir/perlpath.pl" $perl -
++	(find "$wadir" -name 'OsChooser.pm' -print ; find "$wadir" -name '*.cgi' -print ; find "$wadir" -name '*.pl' -print) | $perl "$wadir/perlpath.pl" $perl -
+ 	echo "..done"
+ 	echo ""
+ fi
