@@ -3,7 +3,7 @@
 
 <service_bundle type='manifest' name='application/webmin'>
 
-<service name='application/webmin' type='service' version='1'>
+<service name='system/webmin' type='service' version='1'>
 
 <create_default_instance enabled='true' />
 
@@ -16,8 +16,8 @@
 <exec_method
   type='method'
   name='start'
-	exec='/lib/svc/method/svc-webmin'
-  timeout_seconds='360'>
+	exec='/lib/svc/method/svc-webmin start'
+  timeout_seconds='60'>
   <method_context>
     <method_credential user='root'/>
   </method_context>

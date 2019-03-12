@@ -25,16 +25,18 @@
 
 include ../../../make-rules/shared-macros.mk
 
+PATH = $(PATH.gnu)
+
 COMPONENT_NAME= webmin
-COMPONENT_VERSION= 1.820
-COMPONENT_FMRI= web/$(COMPONENT_NAME)
+COMPONENT_VERSION= 1.900
+COMPONENT_FMRI= system/management/$(COMPONENT_NAME)
 COMPONENT_CLASSIFICATION= Applications/System Utilities
 COMPONENT_PROJECT_URL= http://www.webmin.com/
-COMPONENT_SRC= $(COMPONENT_NAME)-$(COMPONENT_VERSION)-solaris
+COMPONENT_SRC= $(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE= $(COMPONENT_NAME)-$(COMPONENT_VERSION).tar.gz
-COMPONENT_ARCHIVE_HASH= sha256:130088ed78b3800d0aed2912ab37c12936347b32ece83e7a692caa8dfb1175cb
-#COMPONENT_ARCHIVE_URL= https://github.com/$(COMPONENT_NAME)/$(COMPONENT_NAME)/archive/$(COMPONENT_VERSION).tar.gz
-COMPONENT_ARCHIVE_URL= https://github.com/grueni/$(COMPONENT_NAME)/archive/v$(COMPONENT_VERSION)-solaris.tar.gz
+COMPONENT_ARCHIVE_HASH= sha256:44269655a736d14e41f1a95663b1c7d6f908bd5248ae5f4c4caad0a26998fe1b
+COMPONENT_ARCHIVE_URL= https://github.com/$(COMPONENT_NAME)/$(COMPONENT_NAME)/archive/$(COMPONENT_VERSION).tar.gz
+#COMPONENT_ARCHIVE_URL= https://github.com/grueni/$(COMPONENT_NAME)/archive/v$(COMPONENT_VERSION)-solaris.tar.gz
 #	https://github.com/grueni/webmin/archive/v1.820-solaris.tar.gz
 COMPONENT_LICENSE= BSD-3-Clause 
 COMPONENT_SUMMARY= Webmin is a web-based interface for system administration for Unix. 
@@ -55,7 +57,7 @@ ENV += atboot=0
 ENV += nostart=1
 ENV += tar=${GTAR}
 
-WEBMINDIR=/opt/webmin
+WEBMINDIR=/usr/webmin
 GREP= /usr/gnu/bin/grep
 
 WP2D += .built .unpacked .patched .prep setup_sh.patch
@@ -76,6 +78,7 @@ COMPONENT_INSTALL_ACTION = \
 	${MKDIR} $(PROTO_DIR)/var/webmin; \
 	${MKDIR} $(PROTO_DIR)${WEBMINDIR}; \
 	${ENV} ./setup.sh ${PROTO_DIR}${WEBMINDIR} ; \
+	$(FIND) $(PROTO_DIR)${WEBMINDIR} -type f -iname '.*' -delete ; \
 	(cd $(PROTO_DIR)${WEBMINDIR} ; for WORD in `echo "${WP2D}"` ; do ${RM} -r $${WORD} ; done ;); \
 	${GREP} -irl "${PROTO_DIR}" ${PROTO_DIR} | xargs $(GSED) -i -- "s~${PROTO_DIR}~~g"
 

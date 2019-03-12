@@ -1,7 +1,6 @@
-diff -nur a/makepackage.pl b/makepackage.pl
---- a/makepackage.pl	Sun Nov 13 08:11:38 2016
-+++ b/makepackage.pl	Sun Nov 13 09:26:48 2016
-@@ -1,136 +1,32 @@
+--- webmin-1.900/makepackage.pl.~1~	2018-11-16 17:05:37.000000000 +0000
++++ webmin-1.900/makepackage.pl	2019-03-10 15:36:21.973823128 +0000
+@@ -1,136 +1,31 @@
  #!/usr/bin/perl
  # makepackage.pl <version>
 -# Copy files from some directory to /opt/webmin and build a package
@@ -12,7 +11,6 @@ diff -nur a/makepackage.pl b/makepackage.pl
 +@ARGV || die "usage: makepackage.pl <source> <target>";
 +$dir = $ARGV[0];
 +$tgt = $ARGV[1]; 
-+$tar = "tar";
  $> == 0 || die "makepackage.pl must be run as root";
  -r "$dir/version" || die "$dir does not look like a webmin directory";
  chop($v = `cat $dir/version`);
@@ -25,7 +23,7 @@ diff -nur a/makepackage.pl b/makepackage.pl
 +print "Copying $dir to $tgt ..\n";
 +system("rm -rf $tgt");
 +mkdir("$tgt", 0755);
-+system("cd $dir ; $ENV{$tar} cf - . | (cd $tgt ; $ENV{$tar} xf -)");
++system("cd $dir ; tar cf - . | (cd $tgt ; tar xf -)");
 +open(MODE, ">$tgt/install-type");
  print MODE "solaris-pkg\n";
  close(MODE);

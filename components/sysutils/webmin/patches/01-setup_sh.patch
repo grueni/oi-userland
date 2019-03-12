@@ -1,0 +1,11 @@
+--- webmin-1.900/setup.sh.~1~	2018-11-16 17:05:37.000000000 +0000
++++ webmin-1.900/setup.sh	2019-03-10 15:15:11.512967327 +0000
+@@ -592,7 +592,7 @@
+ 
+ if [ "$noperlpath" = "" ]; then
+ 	echo "Inserting path to perl into scripts.."
+-	(find "$wadir" -name '*.cgi' -print ; find "$wadir" -name '*.pl' -print) | $perl "$wadir/perlpath.pl" $perl -
++	(find "$wadir" -name 'OsChooser.pm' -print ; find "$wadir" -name '*.cgi' -print ; find "$wadir" -name '*.pl' -print) | $perl "$wadir/perlpath.pl" $perl -
+ 	echo "..done"
+ 	echo ""
+ fi

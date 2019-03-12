@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright 2016 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved. 
+# Copyright 2019 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved. 
 #
 # Method script for the pools service.
 #
@@ -36,13 +36,13 @@ EOF
 . /lib/svc/share/smf_include.sh
 
 unset PERLIO LANG 
-export PERLLIB=/opt/webmin
+export PERLLIB=/usr/webmin
 export WEBMINCRONS=/etc/webmin/webmincron/crons
 
 case "$1" in
 'start')
   checkWebmincrons
-  /opt/webmin/miniserv.pl $* /etc/webmin/miniserv.conf
+  exec '/usr/webmin/miniserv.pl' /etc/webmin/miniserv.conf
   err=$?
   if [ $err -ne 0 ]; then
     echo "webmin failed to start: error $err"
