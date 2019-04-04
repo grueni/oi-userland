@@ -41,15 +41,22 @@ COMPONENT_ARCHIVE_URL= https://github.com/$(COMPONENT_NAME)/$(COMPONENT_NAME)/ar
 COMPONENT_LICENSE= BSD-3-Clause 
 COMPONENT_SUMMARY= Webmin is a web-based interface for system administration for Unix. 
 
+
+# http://github.com/authentic-theme/authentic-theme/releases/download/19.31/authentic-theme-19.31.wbt.gz
+# cd /usr/webmin;tar xf 
+
+# files/Makefile.PL: how to create files/Makefile
+
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/justmake.mk
 include $(WS_MAKE_RULES)/ips.mk
 
+# automatic installation webmin
 ENV += login=admin
 ENV += password=admin
-ENV += tempdir=${PROTO_DIR}/var/tmp/webmin
-ENV += config_dir=${PROTO_DIR}/etc/webmin
-ENV += var_dir=${PROTO_DIR}/var/webmin
+ENV += tempdir=${PROTO_DIR}/$(VARDIR)/tmp/webmin
+ENV += config_dir=${PROTO_DIR}/$(ETCDIR)/webmin
+ENV += var_dir=${PROTO_DIR}/$(VARDIR)/webmin
 ENV += perl=/usr/bin/perl
 ENV += port=10000
 ENV += ssl=1
@@ -60,8 +67,6 @@ ENV += tar=${GTAR}
 WEBMINDIR=/usr/webmin
 GREP= /usr/gnu/bin/grep
 
-WP2D += .built .unpacked .patched .prep setup_sh.patch
-
 $(BUILD_DIR)/%/.built:  $(SOURCE_DIR)/.prep
 	$(RM) -r $(@D) ; $(MKDIR) $(@D)
 	${FIND} $(SOURCE_DIR) -type f -print0|xargs -0 file|${GREP} ELF|cut -d: -f1|xargs ${RM}
@@ -69,18 +74,23 @@ $(BUILD_DIR)/%/.built:  $(SOURCE_DIR)/.prep
 ifeq   ($(strip $(PARFAIT_BUILD)),yes)
 	-$(PARFAIT) build
 endif
+	$(CP)    $(COMPONENT_DIR)/files/Makefile* $(@D) 
+	$(CP)    $(COMPONENT_DIR)/files/config $(@D) 
 	$(TOUCH) $@
 
-COMPONENT_INSTALL_ACTION = \
-	cd $(@D) ; \
-	${MKDIR} $(PROTO_DIR)/var/tmp/webmin; \
-	${MKDIR} $(PROTO_DIR)/etc/webmin; \
-	${MKDIR} $(PROTO_DIR)/var/webmin; \
-	${MKDIR} $(PROTO_DIR)${WEBMINDIR}; \
-	${ENV} ./setup.sh ${PROTO_DIR}${WEBMINDIR} ; \
-	$(FIND) $(PROTO_DIR)${WEBMINDIR} -type f -iname '.*' -delete ; \
-	(cd $(PROTO_DIR)${WEBMINDIR} ; for WORD in `echo "${WP2D}"` ; do ${RM} -r $${WORD} ; done ;); \
-	${GREP} -irl "${PROTO_DIR}" ${PROTO_DIR} | xargs $(GSED) -i -- "s~${PROTO_DIR}~~g"
+COMPONENT_INSTALL_ARGS += DESTDIR=$(PROTO_DIR)
+COMPONENT_INSTALL_ARGS += WEBMINDIR=$(WEBMINDIR)
+COMPONENT_INSTALL_ARGS += RELDIR=$(@D)
+COMPONENT_INSTALL_ARGS += ETCDIR=$(ETCDIR)
+COMPONENT_INSTALL_ARGS += VARDIR=$(VARDIR)
+
+# make install repeatable  
+COMPONENT_PRE_INSTALL_ACTION = \
+	$(RM) -r $(PROTO_DIR); \
+	${MKDIR} $(PROTO_DIR)  
+
+COMPONENT_POST_INSTALL_ACTION = \
+	${CP}    $(COMPONENT_DIR)/files/defaultacl.system-status $(PROTO_DIR)${WEBMINDIR}/system-status/defaultacl  
 
 # common targets
 build:          $(BUILD_32)

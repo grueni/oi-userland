@@ -180,6 +180,7 @@ file path=etc/webmin/stunnel/config
 file path=etc/webmin/syslog-ng/config
 file path=etc/webmin/syslog/config
 file path=etc/webmin/system-status/config
+file path=usr/webmin/system-status/defaultacl
 file path=etc/webmin/system-status/enable-collection.pl
 file path=etc/webmin/tcpwrappers/config
 file path=etc/webmin/telnet/config

@@ -8,7 +8,7 @@
 function checkWebmincrons {
 mkdir -p ${WEBMINCRONS}
 if [ "$(ls -A ${WEBMINCRONS})" ]; then
-  exit
+  return
 fi
 
 ID=`date +%s%N`
