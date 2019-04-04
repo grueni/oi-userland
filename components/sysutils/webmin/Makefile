@@ -41,6 +41,13 @@ COMPONENT_ARCHIVE_URL= https://github.com/$(COMPONENT_NAME)/$(COMPONENT_NAME)/ar
 COMPONENT_LICENSE= BSD-3-Clause 
 COMPONENT_SUMMARY= Webmin is a web-based interface for system administration for Unix. 
 
+COMPONENT_NAME_1=       authentic-theme
+COMPONENT_VERSION_1=    19.31
+COMPONENT_SRC_1=        $(COMPONENT_NAME_1)
+COMPONENT_ARCHIVE_1=    $(COMPONENT_SRC_1)-$(COMPONENT_VERSION_1).wbt.gz
+COMPONENT_ARCHIVE_URL_1=https://github.com/$(COMPONENT_NAME_1)/$(COMPONENT_NAME_1)/releases/download/$(COMPONENT_VERSION_1)/$(COMPONENT_ARCHIVE_1)
+COMPONENT_ARCHIVE_HASH_1= sha256:0d57475b7cdb7c62984cd7b861b56cabd395415701bfa3a7c1ea03ac4f29cd52
+COMPONENT_LICENSE_1= MIT
 
 # http://github.com/authentic-theme/authentic-theme/releases/download/19.31/authentic-theme-19.31.wbt.gz
 # cd /usr/webmin;tar xf 
@@ -54,10 +61,10 @@ include $(WS_MAKE_RULES)/ips.mk
 # automatic installation webmin
 ENV += login=admin
 ENV += password=admin
-ENV += tempdir=${PROTO_DIR}/$(VARDIR)/tmp/webmin
-ENV += config_dir=${PROTO_DIR}/$(ETCDIR)/webmin
-ENV += var_dir=${PROTO_DIR}/$(VARDIR)/webmin
-ENV += perl=/usr/bin/perl
+ENV += tempdir=${PROTO_DIR}$(VARDIR)/tmp/webmin
+ENV += config_dir=${PROTO_DIR}$(ETCDIR)/webmin
+ENV += var_dir=${PROTO_DIR}$(VARDIR)/webmin
+ENV += perl=$(PERL)
 ENV += port=10000
 ENV += ssl=1
 ENV += atboot=0
@@ -83,6 +90,7 @@ COMPONENT_INSTALL_ARGS += WEBMINDIR=$(WEBMINDIR)
 COMPONENT_INSTALL_ARGS += RELDIR=$(@D)
 COMPONENT_INSTALL_ARGS += ETCDIR=$(ETCDIR)
 COMPONENT_INSTALL_ARGS += VARDIR=$(VARDIR)
+COMPONENT_INSTALL_ARGS += THEME=$(USERLAND_ARCHIVES)$(COMPONENT_ARCHIVE_1)
 
 # make install repeatable  
 COMPONENT_PRE_INSTALL_ACTION = \
