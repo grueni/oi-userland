@@ -1,0 +1,64 @@
+--- webmin-1.900/zones/edit_zone.cgi.org	2019-03-30 18:31:50.799792107 +0000
++++ webmin-1.900/zones/edit_zone.cgi	2019-03-30 18:34:36.387070008 +0000
+@@ -13,6 +13,21 @@
+ $gform = &get_zone_form(\%in, $zinfo);
+ $p->add_form($gform);
+ 
++# Show datasets
++$p->add_separator();
++$fform = new WebminUI::Form("edit_dataset.cgi");
++$p->add_form($fform);
++$fform->set_input(\%in);
++$ftable = new WebminUI::Table([ $text{'edit_dataset'}, ], "100%", "ftable");
++$fform->add_section($ftable);
++$ftable->set_heading($text{'edit_additional_dataset'});
++foreach $ds (@{$zinfo->{'dataset'}}) {
++  $ftable->add_row([
++    &ui_link("/zfsmanager/status.cgi?zfs=$ds->{'name'}",$ds->{'name'}),
++    ]);
++  }
++$ftable->set_emptymsg($text{'edit_fsnone'});
++
+ # Show network interfaces
+ $p->add_separator();
+ $nform = new WebminUI::Form();
+@@ -29,7 +44,7 @@
+ 	($address, $netmask) = &get_address_netmask($net, $active);
+ 	$ntable->add_row([
+ 		&ui_link("edit_net.cgi?zone=$in{'zone'}&old=$net->{'address'}",$address),
+-		$active->{'fullname'} || $text{'edit_netdown'},
++		exists $net->{'physical'} ? $net->{'physical'} : $active->{'fullname'} || $text{'edit_netdown'},
+ 		$netmask,
+ 		$active->{'broadcast'} ]);
+ 	}
+--- webmin-1.900/zones/zones-lib.pl.org	2019-03-30 18:36:00.945348379 +0000
++++ webmin-1.900/zones/zones-lib.pl	2019-03-30 18:37:00.482285841 +0000
+@@ -8,6 +8,7 @@
+ &foreign_require("mount", "mount-lib.pl");
+ 
+ %thing_key_map = ( "net" => "address",
++       "dataset" => "zfs",
+ 		   "fs" => "dir",
+ 		   "inherit-pkg-dir" => "dir",
+ 		   "capped-cpu" => "ncpus",
+@@ -71,7 +72,7 @@
+ 
+ # Add lists of things
+ foreach $r ("fs", "inherit-pkg-dir", "net", "device", "rctl", "attr",
+-	    "capped-cpu", "capped-memory") {
++	    "dataset", "capped-cpu", "capped-memory") {
+ 	local @lines;
+ 	eval {
+ 		$main::error_must_die = 1;
+--- webmin-1.900/zones/lang/en.org	2019-03-30 18:35:11.621225203 +0000
++++ webmin-1.900/zones/lang/en	2019-03-30 18:35:32.829367322 +0000
+@@ -6,6 +6,9 @@
+ index_zones=Existing Zones
+ 
+ edit_title=Edit Zone
++edit_dataset=Dataset
++edit_additional_dataset=Additional datasets
++edit_dsnone=No additional datasets have been defined yet.
+ edit_common=General zone configuration
+ edit_name=Zone name
+ edit_status=Current status

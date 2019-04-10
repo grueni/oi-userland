@@ -6,6 +6,7 @@ install:
 	/bin/mkdir -p  $(DESTDIR)$(WEBMINDIR)
 	./setup.sh $(DESTDIR)$(WEBMINDIR)
 	mv config $(DESTDIR)$(ETCDIR)/webmin/config
+	sed -i -- "s~ zones~ zones authentic-theme~g" $(DESTDIR)$(ETCDIR)/webmin/webmin.acl
 	cd $(DESTDIR)$(WEBMINDIR); tar xzf $(THEME)
 	tar zxf acl/Authen-SolarisRBAC-0.1.tar.gz
 	cp Makefile.Authen-SolarisRBAC Authen-SolarisRBAC-0.1/Makefile
