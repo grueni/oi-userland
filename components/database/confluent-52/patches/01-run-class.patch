@@ -1,7 +1,7 @@
 diff --git a/confluent-5.2.1/bin/ksql-run-class.org b/confluent-5.2.1/bin/ksql-run-class
 index e77942dee..5793e5bd4 100755
---- a/confluent-5.2.1/bin/ksql-run-class.org
-+++ b/confluent-5.2.1/bin/ksql-run-class
+--- a/bin/ksql-run-class.org
++++ b/bin/ksql-run-class
 @@ -3,6 +3,10 @@
  
  # Use shellcheck to lint this file
@@ -15,8 +15,8 @@ index e77942dee..5793e5bd4 100755
  # Log directory to use
 diff --git a/confluent-5.2.1/bin/kafka-run-class.org b/confluent-5.2.1/bin/kafka-run-class
 index 02a984651..0572087f0 100755
---- a/confluent-5.2.1/bin/kafka-run-class.org
-+++ b/confluent-5.2.1/bin/kafka-run-class
+--- a/bin/kafka-run-class.org
++++ b/bin/kafka-run-class
 @@ -14,6 +14,10 @@
  # See the License for the specific language governing permissions and
  # limitations under the License.
@@ -30,8 +30,8 @@ index 02a984651..0572087f0 100755
    echo "USAGE: $0 [-daemon] [-name servicename] [-loggc] classname [opts]"
 diff --git a/confluent-5.2.1/bin/kafka-rest-run-class.org b/confluent-5.2.1/bin/kafka-rest-run-class
 index ad8c3cd3b..f7b545170 100755
---- a/confluent-5.2.1/bin/kafka-rest-run-class.org
-+++ b/confluent-5.2.1/bin/kafka-rest-run-class
+--- a/bin/kafka-rest-run-class.org
++++ b/bin/kafka-rest-run-class
 @@ -14,6 +14,10 @@
  # specific language governing permissions and limitations under the License.
  #
@@ -45,8 +45,8 @@ index ad8c3cd3b..f7b545170 100755
  # Development jars. `mvn package` should collect all the required dependency jars here
 diff --git a/confluent-5.2.1/bin/schema-registry-run-class.org b/confluent-5.2.1/bin/schema-registry-run-class
 index 1a1f96ad6..9343ef2ce 100755
---- a/confluent-5.2.1/bin/schema-registry-run-class.org
-+++ b/confluent-5.2.1/bin/schema-registry-run-class
+--- a/bin/schema-registry-run-class.org
++++ b/bin/schema-registry-run-class
 @@ -15,6 +15,10 @@
  # limitations under the License.
  #

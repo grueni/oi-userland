@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <!DOCTYPE service_bundle SYSTEM '/usr/share/lib/xml/dtd/service_bundle.dtd.1'>
-<service_bundle type='manifest' name='Kafka 2.1.2'>
-  <service name='database/kafka-21' type='service' version='1'>
+<service_bundle type='manifest' name='Zookeeper 3.4.1Zookeeper 3.4.13'>
+  <service name='database/zookeeper' type='service' version='1'>
 	  <create_default_instance enabled='true'/>
     <single_instance/>
 		<dependency
@@ -10,9 +10,6 @@
 			 type='service'
 			 restart_on='none'>
 			 <service_fmri value='svc:/milestone/multi-user-server' />
-		</dependency>
-		<dependency name='zookeeper' grouping='require_all' restart_on='error' type='service'>
-			<service_fmri value='svc:/database/zookeeper:default'/>
 		</dependency>
 		<dependency name='network' grouping='require_all' restart_on='error' type='service'>
 			<service_fmri value='svc:/milestone/network:default'/>
@@ -29,21 +26,21 @@
         <envvar name="LOG_DIR" value="/tmp" />
       </method_environment>
 		</method_context>
-		<exec_method name='start' type='method' exec='/usr/bin/kafka-server-start %{options/config}' timeout_seconds='30'/>
+		<exec_method name='start' type='method' exec='/usr/bin/zookeeper-server-start %{options/config}' timeout_seconds='30'/>
 		<exec_method name='stop'  type='method' exec=':kill'  timeout_seconds='15'/>
 		<property_group name='startd' type='framework'>
 			 <propval name='ignore_error' type='astring' value='core,signal'/>
 		</property_group>
     <property_group name='options' type='application'>
-       <propval name='config' type='astring' value='/etc/kafka/server.properties' />
+       <propval name='config' type='astring' value='/etc/kafka/zookeeper.properties' />
     </property_group>
 		<stability value='Evolving'/>
 		<template>
 			 <common_name>
-				 <loctext xml:lang='C'>Kafka</loctext>
+				 <loctext xml:lang='C'>Zookeeper</loctext>
 			 </common_name>
 			 <documentation>
-				 <doc_link name='Kafka' uri='https://kafka.apache.org'/>
+				 <doc_link name='Zookeeper' uri='https://zookeeper.apache.org'/>
 			 </documentation>
 		</template>
   </service>

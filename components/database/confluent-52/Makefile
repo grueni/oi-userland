@@ -37,6 +37,7 @@ include $(WS_MAKE_RULES)/ips.mk
 PKG_MACROS += COMPONENT_MAJOR_VERSION=$(COMPONENT_MAJOR_VERSION)
 
 COMPONENT_POST_UNPACK_ACTION = ( \
+	$(RM) -r $(SOURCE_DIR)/bin/windows/; \
 	cat $(SOURCE_DIR)/share/doc/kafka/LICENSE > $(SOURCE_DIR)/LICENSE; \
 	cat $(SOURCE_DIR)/share/doc/ksql/LICENSE >> $(SOURCE_DIR)/LICENSE; \
 	$(CP)    files/Makefile $(SOURCE_DIR) )
