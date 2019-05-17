@@ -1,0 +1,60 @@
+diff --git a/confluent-5.2.1/bin/ksql-run-class.org b/confluent-5.2.1/bin/ksql-run-class
+index e77942dee..5793e5bd4 100755
+--- a/confluent-5.2.1/bin/ksql-run-class.org
++++ b/confluent-5.2.1/bin/ksql-run-class
+@@ -3,6 +3,10 @@
+ 
+ # Use shellcheck to lint this file
+ 
++if [ -f /etc/ksql/env ];
++	. /etc/ksql/env
++fi
++
+ base_dir=$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
+ 
+ # Log directory to use
+diff --git a/confluent-5.2.1/bin/kafka-run-class.org b/confluent-5.2.1/bin/kafka-run-class
+index 02a984651..0572087f0 100755
+--- a/confluent-5.2.1/bin/kafka-run-class.org
++++ b/confluent-5.2.1/bin/kafka-run-class
+@@ -14,6 +14,10 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
++if [ -f /etc/kafka/env ];
++	. /etc/kafka/env
++fi
++
+ if [ $# -lt 1 ];
+ then
+   echo "USAGE: $0 [-daemon] [-name servicename] [-loggc] classname [opts]"
+diff --git a/confluent-5.2.1/bin/kafka-rest-run-class.org b/confluent-5.2.1/bin/kafka-rest-run-class
+index ad8c3cd3b..f7b545170 100755
+--- a/confluent-5.2.1/bin/kafka-rest-run-class.org
++++ b/confluent-5.2.1/bin/kafka-rest-run-class
+@@ -14,6 +14,10 @@
+ # specific language governing permissions and limitations under the License.
+ #
+ 
++if [ -f /etc/kafka-rest/env ];
++	. /etc/kafka-rest/env
++fi
++
+ base_dir=$(dirname $0)/..
+ 
+ # Development jars. `mvn package` should collect all the required dependency jars here
+diff --git a/confluent-5.2.1/bin/schema-registry-run-class.org b/confluent-5.2.1/bin/schema-registry-run-class
+index 1a1f96ad6..9343ef2ce 100755
+--- a/confluent-5.2.1/bin/schema-registry-run-class.org
++++ b/confluent-5.2.1/bin/schema-registry-run-class
+@@ -15,6 +15,10 @@
+ # limitations under the License.
+ #
+ 
++if [ -f /etc/schema-registry/env ];
++	. /etc/schema-registr/env
++fi
++
+ if [ $# -lt 1 ];
+ then
+   echo "USAGE: $0 [-daemon] [-name servicename] [-loggc] classname [opts]"
