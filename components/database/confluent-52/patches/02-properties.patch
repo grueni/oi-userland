@@ -1,0 +1,38 @@
+--- confluent-5.2.1/etc/kafka/zookeeper.properties.orig	2019-05-22 20:08:30.332240855 +0000
++++ confluent-5.2.1/etc/kafka/zookeeper.properties	2019-05-22 20:11:01.057168388 +0000
+@@ -13,7 +13,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ # the directory where the snapshot is stored.
+-dataDir=/tmp/zookeeper
++dataDir=/var/lib/confluent/5.2/zookeeper
+ # the port at which the clients will connect
+ clientPort=2181
+ # disable the per-ip limit on the number of connections since this is a non-production config
+--- confluent-5.2.1/etc/kafka/server.properties.~1~	2019-04-02 07:09:20.000000000 +0000
++++ confluent-5.2.1/etc/kafka/server.properties	2019-05-22 20:41:00.864311410 +0000
+@@ -57,7 +57,7 @@
+ ############################# Log Basics #############################
+ 
+ # A comma separated list of directories under which to store log files
+-log.dirs=/tmp/kafka-logs
++log.dirs=/var/lib/confluent/5.2/kafka-logs
+ 
+ # The default number of log partitions per topic. More partitions allow greater
+ # parallelism for consumption, but this will also result in more files across
+@@ -143,7 +143,7 @@
+ # then the feature to collect and report support metrics
+ # ("Metrics") is enabled.  If set to false, the feature is disabled.
+ #
+-confluent.support.metrics.enable=true
++confluent.support.metrics.enable=false
+ 
+ 
+ # The customer ID under which support metrics will be collected and
+@@ -167,4 +167,4 @@
+ # The default value for this is 3 seconds.
+ # We override this to 0 here as it makes for a better out-of-the-box experience for development and testing.
+ # However, in production environments the default value of 3 seconds is more suitable as this will help to avoid unnecessary, and potentially expensive, rebalances during application startup.
+-group.initial.rebalance.delay.ms=0
+\ No newline at end of file
++group.initial.rebalance.delay.ms=0
