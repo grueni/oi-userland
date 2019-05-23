@@ -5,7 +5,7 @@
  # limitations under the License.
  # the directory where the snapshot is stored.
 -dataDir=/tmp/zookeeper
-+dataDir=/var/lib/confluent/5.2/zookeeper
++dataDir=/var/confluent/data/zookeeper
  # the port at which the clients will connect
  clientPort=2181
  # disable the per-ip limit on the number of connections since this is a non-production config
@@ -16,7 +16,7 @@
  
  # A comma separated list of directories under which to store log files
 -log.dirs=/tmp/kafka-logs
-+log.dirs=/var/lib/confluent/5.2/kafka-logs
++log.dirs=/var/confluent/data/kafka-logs
  
  # The default number of log partitions per topic. More partitions allow greater
  # parallelism for consumption, but this will also result in more files across
@@ -36,3 +36,12 @@
 -group.initial.rebalance.delay.ms=0
 \ No newline at end of file
 +group.initial.rebalance.delay.ms=0
+--- confluent-5.2.1/etc/ksql/ksql-server.properties.~1~ 2019-05-23 11:46:05.001698048 +0000
++++ confluent-5.2.1/etc/ksql/ksql-server.properties     2019-05-23 11:46:29.558887089 +0000
+@@ -50,3 +50,5 @@
+
+ # Uncomment and complete the following to enable KSQL's integration to the Confluent Schema Registry:
+ #ksql.schema.registry.url=?
++
++confluent.support.metrics.enable=false
+

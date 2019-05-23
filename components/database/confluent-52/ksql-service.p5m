@@ -26,4 +26,3 @@ depend type=require fmri=services/$(COMPONENT_FMRI)-schema-registry@$(IPS_COMPON
 
 file files/ksql.xml path=lib/svc/manifest/database/ksql.xml restart_fmri=svc:/system/manifest-import:default pkg.depend.bypass-generate=.*
 
-link path=etc/ksql     target=../usr/share/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_VERSION)/etc/ksql pkg.linted=true

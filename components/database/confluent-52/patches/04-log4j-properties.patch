@@ -1,0 +1,133 @@
+--- confluent-5.2.1/etc/schema-registry/log4j.properties.~1~	2019-05-23 17:30:40.714032318 +0000
++++ confluent-5.2.1/etc/schema-registry/log4j.properties	2019-05-23 17:42:31.382717318 +0000
+@@ -1,4 +1,4 @@
+-log4j.rootLogger=INFO, stdout, file
++log4j.rootLogger=INFO, fileDaily
+ 
+ log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+ log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+@@ -17,3 +17,10 @@
+ log4j.appender.file.File=${schema-registry.log.dir}/schema-registry.log
+ log4j.appender.file.layout=org.apache.log4j.PatternLayout
+ log4j.appender.file.layout.ConversionPattern=[%d] %p %m (%c)%n
++
++log4j.appender.fileDaily=org.apache.log4j.DailyRollingFileAppender
++log4j.appender.fileDaily.DatePattern='.'yyyy-MM-dd-HH
++log4j.appender.fileDaily.File=${schema-registry.log.dir}/schema-registry.log
++log4j.appender.fileDaily.layout=org.apache.log4j.PatternLayout
++log4j.appender.fileDaily.layout.ConversionPattern=[%d] %p %m (%c)%n
++
+--- confluent-5.2.1/etc/kafka-rest/log4j.properties.~1~	2019-05-23 17:39:32.191699437 +0000
++++ confluent-5.2.1/etc/kafka-rest/log4j.properties	2019-05-23 17:41:18.135497494 +0000
+@@ -1,4 +1,4 @@
+-log4j.rootLogger=INFO, stdout, file
++log4j.rootLogger=INFO, fileDaily
+ 
+ log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+ log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+@@ -10,3 +10,10 @@
+ log4j.appender.file.File=${kafka-rest.log.dir}/kafka-rest.log
+ log4j.appender.file.layout=org.apache.log4j.PatternLayout
+ log4j.appender.file.layout.ConversionPattern=[%d] %p %m (%c)%n
++
++log4j.appender.fileDaily=org.apache.log4j.DailyRollingFileAppender
++log4j.appender.fileDaily.DatePattern='.'yyyy-MM-dd-HH
++log4j.appender.fileDaily.File=${kafka-rest.log.dir}/kafka-rest.log
++log4j.appender.fileDaily.layout=org.apache.log4j.PatternLayout
++log4j.appender.fileDaily.layout.ConversionPattern=[%d] %p %m (%c)%n
++
+--- confluent-5.2.1/etc/kafka/connect-log4j.properties.~1~	2019-05-23 17:49:17.931287543 +0000
++++ confluent-5.2.1/etc/kafka/connect-log4j.properties	2019-05-23 17:53:31.058768613 +0000
+@@ -13,8 +13,13 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-log4j.rootLogger=INFO, stdout
++log4j.rootLogger=INFO, fileDaily
+ 
++log4j.appender.fileDaily=org.apache.log4j.DailyRollingFileAppender
++log4j.appender.fileDaily.DatePattern='.'yyyy-MM-dd-HH
++log4j.appender.fileDaily.File=${kafka.log.dir}/connect-distributed.log
++log4j.appender.fileDaily.layout=org.apache.log4j.PatternLayout
++log4j.appender.fileDaily.layout.ConversionPattern=[%d] %p %m (%c)%n
+ 
+ log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+ log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+--- confluent-5.2.1/etc/ksql/log4j-rolling.properties.~1~	2019-05-23 17:55:58.192723005 +0000
++++ confluent-5.2.1/etc/ksql/log4j-rolling.properties	2019-05-23 17:59:57.902585952 +0000
+@@ -19,26 +19,23 @@
+ log4j.rootLogger=INFO, main
+ 
+ # appenders
+-log4j.appender.main=org.apache.log4j.RollingFileAppender
++log4j.appender.main=org.apache.log4j.DailyRollingFileAppender
++log4j.appender.main.DatePattern='.'yyyy-MM-dd-HH
+ log4j.appender.main.File=${ksql.log.dir}/ksql.log
+ log4j.appender.main.layout=org.apache.log4j.PatternLayout
+ log4j.appender.main.layout.ConversionPattern=[%d] %p %m (%c:%L)%n
+-log4j.appender.main.MaxFileSize=10MB
+-log4j.appender.main.MaxBackupIndex=5
+-log4j.appender.main.append=true
+ 
+-log4j.appender.streams=org.apache.log4j.RollingFileAppender
++log4j.appender.streams=org.apache.log4j.DailyRollingFileAppender
++log4j.appender.streams.DatePattern='.'yyyy-MM-dd-HH
+ log4j.appender.streams.File=${ksql.log.dir}/ksql-streams.log
+ log4j.appender.streams.layout=org.apache.log4j.PatternLayout
+ log4j.appender.streams.layout.ConversionPattern=[%d] %p %m (%c:%L)%n
+ 
+-log4j.appender.kafka=org.apache.log4j.RollingFileAppender
++log4j.appender.kafka=org.apache.log4j.DailyRollingFileAppender
++log4j.appender.kafka.DatePattern='.'yyyy-MM-dd-HH
+ log4j.appender.kafka.File=${ksql.log.dir}/ksql-kafka.log
+ log4j.appender.kafka.layout=org.apache.log4j.PatternLayout
+ log4j.appender.kafka.layout.ConversionPattern=[%d] %p %m (%c:%L)%n
+-log4j.appender.kafka.MaxFileSize=10MB
+-log4j.appender.kafka.MaxBackupIndex=5
+-log4j.appender.kafka.append=true
+ 
+ log4j.appender.kafka_appender=org.apache.kafka.log4jappender.KafkaLog4jAppender
+ log4j.appender.kafka_appender.layout=io.confluent.common.logging.log4j.StructuredJsonLayout
+--- confluent-5.2.1/etc/kafka/log4j.properties.~1~	2019-04-02 07:09:20.000000000 +0000
++++ confluent-5.2.1/etc/kafka/log4j.properties	2019-05-23 18:38:30.696154631 +0000
+@@ -15,7 +15,7 @@
+ 
+ # Unspecified loggers and loggers with additivity=true output to server.log and stdout
+ # Note that INFO only applies to unspecified loggers, the log level of the child logger is used otherwise
+-log4j.rootLogger=INFO, stdout, kafkaAppender
++log4j.rootLogger=INFO, kafkaAppender
+ 
+ log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+ log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+@@ -23,13 +23,13 @@
+ 
+ log4j.appender.kafkaAppender=org.apache.log4j.DailyRollingFileAppender
+ log4j.appender.kafkaAppender.DatePattern='.'yyyy-MM-dd-HH
+-log4j.appender.kafkaAppender.File=${kafka.logs.dir}/server.log
++log4j.appender.kafkaAppender.File=${kafka.logs.dir}/kafka-server.log
+ log4j.appender.kafkaAppender.layout=org.apache.log4j.PatternLayout
+ log4j.appender.kafkaAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
+ 
+ log4j.appender.stateChangeAppender=org.apache.log4j.DailyRollingFileAppender
+ log4j.appender.stateChangeAppender.DatePattern='.'yyyy-MM-dd-HH
+-log4j.appender.stateChangeAppender.File=${kafka.logs.dir}/state-change.log
++log4j.appender.stateChangeAppender.File=${kafka.logs.dir}/kafka-state-change.log
+ log4j.appender.stateChangeAppender.layout=org.apache.log4j.PatternLayout
+ log4j.appender.stateChangeAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
+ 
+@@ -41,13 +41,13 @@
+ 
+ log4j.appender.cleanerAppender=org.apache.log4j.DailyRollingFileAppender
+ log4j.appender.cleanerAppender.DatePattern='.'yyyy-MM-dd-HH
+-log4j.appender.cleanerAppender.File=${kafka.logs.dir}/log-cleaner.log
++log4j.appender.cleanerAppender.File=${kafka.logs.dir}/kafka-log-cleaner.log
+ log4j.appender.cleanerAppender.layout=org.apache.log4j.PatternLayout
+ log4j.appender.cleanerAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
+ 
+ log4j.appender.controllerAppender=org.apache.log4j.DailyRollingFileAppender
+ log4j.appender.controllerAppender.DatePattern='.'yyyy-MM-dd-HH
+-log4j.appender.controllerAppender.File=${kafka.logs.dir}/controller.log
++log4j.appender.controllerAppender.File=${kafka.logs.dir}/kafka-controller.log
+ log4j.appender.controllerAppender.layout=org.apache.log4j.PatternLayout
+ log4j.appender.controllerAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
+ 

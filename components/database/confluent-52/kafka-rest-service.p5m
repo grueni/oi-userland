@@ -26,4 +26,3 @@ depend type=require fmri=services/$(COMPONENT_FMRI)-kafka@$(IPS_COMPONENT_VERSIO
 
 file files/kafka-rest.xml path=lib/svc/manifest/database/kafka-rest.xml restart_fmri=svc:/system/manifest-import:default pkg.depend.bypass-generate=.*
 
-link path=etc/kafka-rest     target=../usr/share/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_VERSION)/etc/kafka-rest pkg.linted=true

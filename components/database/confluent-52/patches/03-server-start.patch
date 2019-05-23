@@ -1,0 +1,13 @@
+--- confluent-5.2.1/bin/ksql-server-start.~1~	2019-05-23 12:34:43.362601329 +0000
++++ confluent-5.2.1/bin/ksql-server-start	2019-05-23 12:36:45.375315049 +0000
+@@ -5,6 +5,10 @@
+ # Use shellcheck to lint this file
+ #
+ 
++if [ -f /etc/ksql/env ]; then
++ . /etc/ksql/env
++fi
++
+ if [ $# -lt 1 ]; 
+ then
+     echo "USAGE: $0 [-daemon] ksql-server.properties"

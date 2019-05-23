@@ -26,4 +26,3 @@ depend type=require fmri=services/$(COMPONENT_FMRI)-kafka@$(IPS_COMPONENT_VERSIO
 
 file files/schema-registry.xml path=lib/svc/manifest/database/schema-registry.xml restart_fmri=svc:/system/manifest-import:default pkg.depend.bypass-generate=.*
 
-link path=etc/schema-registry     target=../usr/share/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_VERSION)/etc/schema-registry pkg.linted=true

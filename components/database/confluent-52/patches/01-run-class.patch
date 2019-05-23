@@ -11,63 +11,42 @@
  if [ $# -lt 1 ];
  then
    echo "USAGE: $0 [-daemon] [-name servicename] [-loggc] classname [opts]"
-@@ -45,7 +49,7 @@
-   fi
- }
- 
--base_dir=$(dirname $0)/..
-+base_dir=$(dirname $0)/$(dirname `readlink $0`)/..
- 
- if [ -z "$SCALA_VERSION" ]; then
-   SCALA_VERSION=2.12.8
---- confluent-5.2.1/bin/kafka-rest-run-class.~1~	2019-04-02 07:46:04.000000000 +0000
-+++ confluent-5.2.1/bin/kafka-rest-run-class	2019-05-22 19:11:37.951607640 +0000
-@@ -14,7 +14,11 @@
+--- confluent-5.2.1/bin/kafka-rest-run-class.~1~        2019-05-23 10:38:01.857541388 +0000
++++ confluent-5.2.1/bin/kafka-rest-run-class    2019-05-23 10:38:25.396946348 +0000
+@@ -14,6 +14,10 @@
  # specific language governing permissions and limitations under the License.
  #
- 
--base_dir=$(dirname $0)/..
+
 +if [ -f /etc/kafka-rest/env ]; then
-+	. /etc/kafka-rest/env
++  . /etc/kafka-rest/env
 +fi
 +
-+base_dir=$(dirname $0)/$(dirname `readlink $0`)/..
- 
+ base_dir=$(dirname $0)/..
+
  # Development jars. `mvn package` should collect all the required dependency jars here
- for dir in $base_dir/kafka-rest/target/kafka-rest-*-development; do
---- confluent-5.2.1/bin/schema-registry-run-class.~1~	2019-04-02 07:40:54.000000000 +0000
-+++ confluent-5.2.1/bin/schema-registry-run-class	2019-05-22 19:11:12.436424332 +0000
-@@ -15,13 +15,17 @@
+--- confluent-5.2.1/bin/schema-registry-run-class.~1~   2019-05-23 10:40:21.464570836 +0000
++++ confluent-5.2.1/bin/schema-registry-run-class       2019-05-23 10:40:38.677152767 +0000
+@@ -15,6 +15,10 @@
  # limitations under the License.
  #
- 
+
 +if [ -f /etc/schema-registry/env ]; then
-+	. /etc/schema-registr/env
++  . /etc/schema-registry/env
 +fi
 +
  if [ $# -lt 1 ];
  then
    echo "USAGE: $0 [-daemon] [-name servicename] [-loggc] classname [opts]"
-   exit 1
- fi
- 
--base_dir=$(dirname $0)/..
-+base_dir=$(dirname $0)/$(dirname `readlink $0`)/..
- 
- # CYGINW == 1 if Cygwin is detected, else 0.
- if [[ $(uname -a) =~ "CYGWIN" ]]; then
---- confluent-5.2.1/bin/ksql-run-class.~1~	2019-04-02 08:41:03.000000000 +0000
-+++ confluent-5.2.1/bin/ksql-run-class	2019-05-22 19:13:26.748349776 +0000
-@@ -3,7 +3,11 @@
- 
+--- confluent-5.2.1/bin/ksql-run-class.~1~      2019-05-23 10:42:11.705388907 +0000
++++ confluent-5.2.1/bin/ksql-run-class  2019-05-23 10:42:28.597062827 +0000
+@@ -3,6 +3,10 @@
+
  # Use shellcheck to lint this file
- 
--base_dir=$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
+
 +if [ -f /etc/ksql/env ]; then
-+	. /etc/ksql/env
++ . /etc/ksql/env
 +fi
 +
-+base_dir=$(dirname $0)/$(dirname `readlink $0`)/..
- 
+ base_dir=$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
+
  # Log directory to use
- if [ "x$LOG_DIR" = "x" ]; then
