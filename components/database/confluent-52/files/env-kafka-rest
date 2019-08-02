@@ -1,1 +1,2 @@
 export LOG_DIR=/var/confluent/log
+export JMX_PORT=3182

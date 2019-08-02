@@ -13,7 +13,7 @@
 # Copyright 2019 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved.
 #
 
-set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.fmri value=pkg:/database/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
 set name=pkg.summary value="$(COMPONENT_SUMMARY)"
 set name=info.classification value="$(COMPONENT_CLASSIFICATION)"
 set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
@@ -42,12 +42,10 @@ file mode=0644 preserve=true path=etc/kafka-rest/log4j.properties
 file mode=0644 preserve=true path=etc/kafka/connect-console-sink.properties
 file mode=0644 preserve=true path=etc/kafka/connect-console-source.properties
 file mode=0644 preserve=true path=etc/kafka/connect-distributed.properties
-file mode=0644 preserve=true path=etc/kafka/connect-distributed.properties.orig
 file mode=0644 preserve=true path=etc/kafka/connect-file-sink.properties
 file mode=0644 preserve=true path=etc/kafka/connect-file-source.properties
 file mode=0644 preserve=true path=etc/kafka/connect-log4j.properties
 file mode=0644 preserve=true path=etc/kafka/connect-standalone.properties
-file mode=0644 preserve=true path=etc/kafka/connect-standalone.properties.orig
 file mode=0644 preserve=true path=etc/kafka/consumer.properties
 file mode=0644 preserve=true path=etc/kafka/log4j.properties
 file mode=0644 preserve=true path=etc/kafka/producer.properties

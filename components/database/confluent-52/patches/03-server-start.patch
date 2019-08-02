@@ -1,13 +1,91 @@
---- confluent-5.2.1/bin/ksql-server-start.~1~	2019-05-23 12:34:43.362601329 +0000
-+++ confluent-5.2.1/bin/ksql-server-start	2019-05-23 12:36:45.375315049 +0000
-@@ -5,6 +5,10 @@
- # Use shellcheck to lint this file
- #
+diff --git a/bin/connect-distributed.old b/bin/connect-distributed
+index 2e7c03aec..23b7c97cf 100755
+--- a/bin/connect-distributed.old
++++ b/bin/connect-distributed
+@@ -22,6 +22,10 @@ fi
  
-+if [ -f /etc/ksql/env ]; then
-+ . /etc/ksql/env
+ base_dir=$(dirname $0)
+ 
++if [ -f $basedir/env ]; then
++  . $basedir/env
 +fi
 +
- if [ $# -lt 1 ]; 
- then
-     echo "USAGE: $0 [-daemon] ksql-server.properties"
+ ###
+ ### Classpath additions for Confluent Platform releases (LSB-style layout)
+ ###
+diff --git a/bin/ksql-server-start.old b/bin/ksql-server-start
+index 4ec6f23eb..1ccce4e40 100755
+--- a/bin/ksql-server-start.old
++++ b/bin/ksql-server-start
+@@ -12,6 +12,11 @@ then
+ fi
+ 
+ base_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
++
++if [ -f $basedir/env ]; then
++  . $basedir/env
++fi
++
+ : "${KSQL_CONFIG_DIR:="$base_dir/config"}"
+ 
+ : "${KSQL_LOG4J_OPTS:=""}"
+diff --git a/bin/kafka-server-start.old b/bin/kafka-server-start
+index b31cd3204..5c86a34d6 100755
+--- a/bin/kafka-server-start.old
++++ b/bin/kafka-server-start
+@@ -21,6 +21,10 @@ then
+ fi
+ base_dir=$(dirname $0)
+ 
++if [ -f $basedir/env ]; then
++  . $basedir/env
++fi
++
+ if [ "x$KAFKA_LOG4J_OPTS" = "x" ]; then
+   LOG4J_CONFIG_NORMAL_INSTALL="/etc/kafka/log4j.properties"
+   LOG4J_CONFIG_ZIP_INSTALL="$base_dir/../etc/kafka/log4j.properties"
+diff --git a/bin/zookeeper-server-start.old b/bin/zookeeper-server-start
+index 115dbd6ea..c4124d759 100755
+--- a/bin/zookeeper-server-start.old
++++ b/bin/zookeeper-server-start
+@@ -21,6 +21,10 @@ then
+ fi
+ base_dir=$(dirname $0)
+ 
++if [ -f $basedir/env ]; then
++  . $basedir/env
++fi
++
+ if [ "x$KAFKA_LOG4J_OPTS" = "x" ]; then
+   LOG4J_CONFIG_NORMAL_INSTALL="/etc/kafka/log4j.properties"
+   LOG4J_CONFIG_ZIP_INSTALL="$base_dir/../etc/kafka/log4j.properties"
+diff --git a/bin/schema-registry-start.old b/bin/schema-registry-start
+index d1e98a4f9..8a3aa603e 100755
+--- a/bin/schema-registry-start.old
++++ b/bin/schema-registry-start
+@@ -19,6 +19,11 @@ print_synopsis() {
+ 	echo "USAGE: $0 [-daemon] schema-registry.properties"
+ }
+ 
++base_dir=$(dirname $0)
++if [ -f $basedir/env ]; then
++  . $basedir/env
++fi
++
+ EXTRA_ARGS=${EXTRA_ARGS-'-name schemaRegistry'}
+ # EXTRA_ARGS=${EXTRA_ARGS-'-name schemaRegistry -loggc'}
+ 
+diff --git a/bin/kafka-rest-start.old b/bin/kafka-rest-start
+index 873d47e31..410bce66a 100755
+--- a/bin/kafka-rest-start.old
++++ b/bin/kafka-rest-start
+@@ -14,4 +14,9 @@
+ # specific language governing permissions and limitations under the License.
+ #
+ 
++base_dir=$(dirname $0)
++if [ -f $basedir/env ]; then
++  . $basedir/env
++fi
++
+ exec $(dirname $0)/kafka-rest-run-class io.confluent.kafkarest.KafkaRestMain "$@"
