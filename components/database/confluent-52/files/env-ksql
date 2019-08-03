@@ -1,5 +1,5 @@
 export LOG_DIR=/var/confluent/log
-export JMX_PORT=3183
+export JMX_PORT=3186
 export KSQL_CONFIG_DIR=/etc/ksql
 export KSQL_LOG4J_OPTS="-Dlog4j.configuration=file:$KSQL_CONFIG_DIR/log4j-rolling.properties"
 export KSQL_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false "

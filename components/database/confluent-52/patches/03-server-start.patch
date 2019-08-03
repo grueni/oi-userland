@@ -6,8 +6,8 @@ index 2e7c03aec..23b7c97cf 100755
  
  base_dir=$(dirname $0)
  
-+if [ -f $basedir/env ]; then
-+  . $basedir/env
++if [ -f /etc/kafka/env-connect ]; then
++  . /etc/kafka/env-connect
 +fi
 +
  ###
@@ -22,8 +22,8 @@ index 4ec6f23eb..1ccce4e40 100755
  
  base_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
 +
-+if [ -f $basedir/env ]; then
-+  . $basedir/env
++if [ -f /etc/ksql/env ]; then
++  . /etc/ksql/env
 +fi
 +
  : "${KSQL_CONFIG_DIR:="$base_dir/config"}"
@@ -37,8 +37,8 @@ index b31cd3204..5c86a34d6 100755
  fi
  base_dir=$(dirname $0)
  
-+if [ -f $basedir/env ]; then
-+  . $basedir/env
++if [ -f /etc/kafka/env-kafka ]; then
++  . /etc/kafka/env-kafka
 +fi
 +
  if [ "x$KAFKA_LOG4J_OPTS" = "x" ]; then
@@ -52,8 +52,8 @@ index 115dbd6ea..c4124d759 100755
  fi
  base_dir=$(dirname $0)
  
-+if [ -f $basedir/env ]; then
-+  . $basedir/env
++if [ -f /etc/kafka/env-zookeeper ]; then
++  . /etc/kafka/env-zookeeper
 +fi
 +
  if [ "x$KAFKA_LOG4J_OPTS" = "x" ]; then
@@ -68,8 +68,8 @@ index d1e98a4f9..8a3aa603e 100755
  }
  
 +base_dir=$(dirname $0)
-+if [ -f $basedir/env ]; then
-+  . $basedir/env
++if [ -f /etc/schema-registry/env ]; then
++  . /etc/schema-registry/env
 +fi
 +
  EXTRA_ARGS=${EXTRA_ARGS-'-name schemaRegistry'}
@@ -84,8 +84,8 @@ index 873d47e31..410bce66a 100755
  #
  
 +base_dir=$(dirname $0)
-+if [ -f $basedir/env ]; then
-+  . $basedir/env
++if [ -f /etc/kafka-rest/env ]; then
++  . /etc/kafka-rest/env
 +fi
 +
  exec $(dirname $0)/kafka-rest-run-class io.confluent.kafkarest.KafkaRestMain "$@"

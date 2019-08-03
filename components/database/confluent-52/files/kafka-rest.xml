@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <!DOCTYPE service_bundle SYSTEM '/usr/share/lib/xml/dtd/service_bundle.dtd.1'>
 <service_bundle type='manifest' name='Kafka rest'>
-  <service name='application/database/confluent-52-kafka-rest' type='service' version='1'>
+  <service name='application/database/confluent-53/kafka-rest' type='service' version='1'>
 	  <create_default_instance enabled='true'/>
     <single_instance/>
 		<dependency
@@ -12,7 +12,7 @@
 			 <service_fmri value='svc:/milestone/multi-user-server' />
 		</dependency>
 		<dependency name='zookeeper' grouping='require_all' restart_on='error' type='service'>
-			<service_fmri value='svc:/application/database/confluent-52-kafka:default'/>
+			<service_fmri value='svc:/application/database/confluent-53/kafka:default'/>
 		</dependency>
 		<dependency name='network' grouping='require_all' restart_on='error' type='service'>
 			<service_fmri value='svc:/milestone/network:default'/>
