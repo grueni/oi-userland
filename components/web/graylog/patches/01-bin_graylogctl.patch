@@ -1,10 +1,11 @@
---- graylog-2.4.6/bin/graylogctl.orig	2018-11-27 18:51:54.728067938 +0000
-+++ graylog-2.4.6/bin/graylogctl	2018-11-27 18:53:22.014951324 +0000
-@@ -52,6 +52,7 @@
- LOG_FILE=${LOG_FILE:=log/graylog-server.log}
- LOG4J=${LOG4J:=}
- DEFAULT_JAVA_OPTS="-Djava.library.path=${GRAYLOGCTL_DIR}/../lib/sigar -Xms1g -Xmx1g -XX:NewRatio=1 -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow"
-+DEFAULT_JAVA_OPTS="$DEFAULT_JAVA_OPTS -XX:-UseParNewGC -XX:-UseConcMarkSweepGC -XX:+UseCondCardMark -XX:MaxGCPauseMillis=400 -XX:+UseG1GC -XX:GCPauseIntervalMillis=1000 -XX:InitiatingHeapOccupancyPercent=35"
- JAVA_OPTS="${JAVA_OPTS:="$DEFAULT_JAVA_OPTS"}"
+--- graylog-3.1.0/bin/graylogctl.~1~	2019-08-27 09:13:50.427481701 +0000
++++ graylog-3.1.0/bin/graylogctl	2019-08-27 09:17:18.027555196 +0000
+@@ -55,7 +55,7 @@
+ if $JAVA_CMD -XX:+PrintFlagsFinal 2>&1 |grep -q UseParNewGC; then
+ 	DEFAULT_JAVA_OPTS="${DEFAULT_JAVA_OPTS} -XX:+UseParNewGC"
+ fi
+-JAVA_OPTS="${JAVA_OPTS:="$DEFAULT_JAVA_OPTS"}"
++JAVA_OPTS="${JAVA_OPTS:="$DEFAULT_JAVA_OPTS $MY_JAVA_OPTS}"}"
  
  start() {
+     echo "Starting graylog-server ..."

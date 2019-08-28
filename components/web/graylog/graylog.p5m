@@ -24,11 +24,11 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 
 license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
 
-dir path=etc/$(COMPONENT_NAME)
-link path=etc/$(COMPONENT_NAME)/$(COMPONENT_VERSION) target=/usr/$(COMPONENT_NAME)/$(COMPONENT_VERSION)/config pkg.linted=true
+# dir path=etc/$(COMPONENT_NAME)
+# link path=etc/$(COMPONENT_NAME)/$(COMPONENT_VERSION) target=/usr/$(COMPONENT_NAME)/$(COMPONENT_VERSION)/config pkg.linted=true
 
-file files/graylog-24.xml path=lib/svc/manifest/web/analiytics/graylog-24.xml restart_fmri=svc:/system/manifest-import:default
-file files/svc-graylog-24 path=lib/svc/method/svc-graylog-24
+file files/graylog-31.xml path=lib/svc/manifest/web/analytics/graylog-31.xml restart_fmri=svc:/system/manifest-import:default
+file files/svc-graylog-31 path=lib/svc/method/svc-graylog-31
 file files/env            path=usr/$(COMPONENT_NAME)/$(COMPONENT_VERSION)/bin/env preserve=renameold mode=0444
 file files/graylog.conf   path=usr/$(COMPONENT_NAME)/$(COMPONENT_VERSION)/config/$(COMPONENT_NAME).conf preserve=renameold mode=0444
 
@@ -40,18 +40,11 @@ file path=usr/graylog/$(COMPONENT_VERSION)/UPGRADING.rst
 file path=usr/graylog/$(COMPONENT_VERSION)/graylog.jar
 file path=usr/graylog/$(COMPONENT_VERSION)/bin/graylogctl
 file path=usr/graylog/$(COMPONENT_VERSION)/config/graylog.conf.example
-file path=usr/graylog/$(COMPONENT_VERSION)/data/contentpacks/grok-patterns.json
 file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-amd64-solaris.so   pkg.linted=true
 file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-sparc-solaris.so   pkg.linted=true
 file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-sparc64-solaris.so pkg.linted=true
 file path=usr/graylog/$(COMPONENT_VERSION)/lib/sigar/libsigar-x86-solaris.so     pkg.linted=true
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-auth-sso-2.4.2.jar
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-aws-$(COMPONENT_VERSION).jar
-file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-beats-$(COMPONENT_VERSION).jar
-file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-cef-$(COMPONENT_VERSION).jar
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-collector-$(COMPONENT_VERSION).jar
-file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-enterprise-integration-$(COMPONENT_VERSION).jar
-file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-map-widget-$(COMPONENT_VERSION).jar
-file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-netflow-$(COMPONENT_VERSION).jar
-file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-pipeline-processor-$(COMPONENT_VERSION).jar
 file path=usr/graylog/$(COMPONENT_VERSION)/plugin/graylog-plugin-threatintel-$(COMPONENT_VERSION).jar

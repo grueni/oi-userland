@@ -4,7 +4,7 @@
 . /lib/svc/share/smf_include.sh
 
 NAME=graylog
-VERSION=2.4.6
+VERSION=3.1.0
 
 GRAYLOG_HOME=/usr/${NAME}/${VERSION}
 GRAYLOG_USER=root

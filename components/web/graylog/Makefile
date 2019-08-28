@@ -9,21 +9,21 @@
 #
 
 #
-# Copyright 2016 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved. 
+# Copyright 2019 Andreas Grueninger, Grueninger GmbH, (grueni). All rights reserved. 
 #
 
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=	          graylog
-COMPONENT_VERSION=        2.4.6
+COMPONENT_VERSION=        3.1.0
 COMPONENT_SUMMARY=        central management of logs with analytics engine
 COMPONENT_PROJECT_URL=    https://www.graylog.org/
-COMPONENT_FMRI=	          web/analytics/graylog-24
+COMPONENT_FMRI=	          web/analytics/graylog-31
 COMPONENT_CLASSIFICATION= Web Services/Application and Web Servers
 COMPONENT_SRC=      $(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tgz
 COMPONENT_ARCHIVE_URL=    https://packages.graylog2.org/releases/$(COMPONENT_NAME)/$(COMPONENT_ARCHIVE)
-COMPONENT_ARCHIVE_HASH=	  sha256:fcfaf44c3faea8297f340ddc6ed19e5b1fe8f3de3c1b2a1078119565fe2f751d
+COMPONENT_ARCHIVE_HASH=	  sha256:cd83dac40864843cd3eaa797ff8e12bef486aa929c55b91e1436dbd22c23667f
 COMPONENT_LICENSE=	      GPL 3.0
 
 # get SSO plugin
