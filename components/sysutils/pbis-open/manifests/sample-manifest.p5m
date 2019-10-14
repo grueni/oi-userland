@@ -1,0 +1,1589 @@
+#
+# This file and its contents are supplied under the terms of the
+# Common Development and Distribution License ("CDDL"), version 1.0.
+# You may only use this file in accordance with the terms of version
+# 1.0 of the CDDL.
+#
+# A full copy of the text of the CDDL should have accompanied this
+# source.  A copy of the CDDL is also available via the Internet at
+# http://www.illumos.org/license/CDDL.
+#
+
+#
+# Copyright 2018 <contributor>
+#
+
+set name=pkg.fmri value=pkg:/$(COMPONENT_FMRI)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary value="$(COMPONENT_SUMMARY)"
+set name=info.classification value="$(COMPONENT_CLASSIFICATION)"
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+
+license $(COMPONENT_LICENSE_FILE) license='$(COMPONENT_LICENSE)'
+
+file path=etc/pbis/djpbps.config.template
+file path=etc/pbis/group-ignore
+file path=etc/pbis/gss/mech
+file path=etc/pbis/pbis-krb5-ad.conf
+file path=etc/pbis/solaris/lwsmd
+file path=etc/pbis/solaris/lwsmd.xml
+file path=etc/pbis/user-ignore
+link path=opt/bin/$(MACH64)/ad-cache target=lsa
+link path=opt/bin/$(MACH64)/add-group target=lsa
+link path=opt/bin/$(MACH64)/add-user target=lsa
+file path=opt/bin/$(MACH64)/adtool
+file path=opt/bin/$(MACH64)/config
+link path=opt/bin/$(MACH64)/del-group target=lsa
+link path=opt/bin/$(MACH64)/del-user target=lsa
+file path=opt/bin/$(MACH64)/domainjoin-cli
+file path=opt/bin/$(MACH64)/edit-reg
+link path=opt/bin/$(MACH64)/enum-groups target=lsa
+link path=opt/bin/$(MACH64)/enum-members target=lsa
+link path=opt/bin/$(MACH64)/enum-objects target=lsa
+link path=opt/bin/$(MACH64)/enum-users target=lsa
+file path=opt/bin/$(MACH64)/eventlog-cli
+link path=opt/bin/$(MACH64)/find-by-sid target=lsa
+link path=opt/bin/$(MACH64)/find-group-by-id target=lsa
+link path=opt/bin/$(MACH64)/find-group-by-name target=lsa
+link path=opt/bin/$(MACH64)/find-objects target=lsa
+link path=opt/bin/$(MACH64)/find-user-by-id target=lsa
+link path=opt/bin/$(MACH64)/find-user-by-name target=lsa
+file path=opt/bin/$(MACH64)/get-dc-list
+file path=opt/bin/$(MACH64)/get-dc-name
+file path=opt/bin/$(MACH64)/get-dc-time
+link path=opt/bin/$(MACH64)/get-metrics target=lsa
+link path=opt/bin/$(MACH64)/get-status target=lsa
+file path=opt/bin/$(MACH64)/kdestroy
+file path=opt/bin/$(MACH64)/kinit
+file path=opt/bin/$(MACH64)/klist
+file path=opt/bin/$(MACH64)/ktutil
+file path=opt/bin/$(MACH64)/kvno
+file path=opt/bin/$(MACH64)/ldapsearch
+link path=opt/bin/$(MACH64)/list-groups-for-user target=lsa
+file path=opt/bin/$(MACH64)/lsa
+file path=opt/bin/$(MACH64)/lwio-copy
+file path=opt/bin/$(MACH64)/lwio-driver
+file path=opt/bin/$(MACH64)/lwsm
+link path=opt/bin/$(MACH64)/mod-group target=lsa
+link path=opt/bin/$(MACH64)/mod-user target=lsa
+file path=opt/bin/$(MACH64)/passwd
+link path=opt/bin/$(MACH64)/pbis-status target=lsa
+file path=opt/bin/$(MACH64)/postinstall.sh
+link path=opt/bin/$(MACH64)/query-member-of target=lsa
+file path=opt/bin/$(MACH64)/regshell
+file path=opt/bin/$(MACH64)/samba-interop-install
+file path=opt/bin/$(MACH64)/sqlite3
+file path=opt/bin/$(MACH64)/uninstall.sh
+file path=opt/bin/$(MACH64)/update-dns
+link path=opt/bin/$(MACH64)/ypcat target=lsa
+link path=opt/bin/$(MACH64)/ypmatch target=lsa
+link path=opt/bin/ad-cache target=lsa
+link path=opt/bin/add-group target=lsa
+link path=opt/bin/add-user target=lsa
+file path=opt/bin/adtool
+file path=opt/bin/config
+link path=opt/bin/del-group target=lsa
+link path=opt/bin/del-user target=lsa
+file path=opt/bin/domainjoin-cli
+file path=opt/bin/edit-reg
+link path=opt/bin/enum-groups target=lsa
+link path=opt/bin/enum-members target=lsa
+link path=opt/bin/enum-objects target=lsa
+link path=opt/bin/enum-users target=lsa
+file path=opt/bin/eventlog-cli
+link path=opt/bin/find-by-sid target=lsa
+link path=opt/bin/find-group-by-id target=lsa
+link path=opt/bin/find-group-by-name target=lsa
+link path=opt/bin/find-objects target=lsa
+link path=opt/bin/find-user-by-id target=lsa
+link path=opt/bin/find-user-by-name target=lsa
+file path=opt/bin/get-dc-list
+file path=opt/bin/get-dc-name
+file path=opt/bin/get-dc-time
+link path=opt/bin/get-metrics target=lsa
+link path=opt/bin/get-status target=lsa
+file path=opt/bin/kdestroy
+file path=opt/bin/kinit
+file path=opt/bin/klist
+file path=opt/bin/ktutil
+file path=opt/bin/kvno
+file path=opt/bin/ldapsearch
+link path=opt/bin/list-groups-for-user target=lsa
+file path=opt/bin/lsa
+file path=opt/bin/lwio-copy
+file path=opt/bin/lwio-driver
+file path=opt/bin/lwsm
+link path=opt/bin/mod-group target=lsa
+link path=opt/bin/mod-user target=lsa
+file path=opt/bin/passwd
+link path=opt/bin/pbis-status target=lsa
+file path=opt/bin/postinstall.sh
+link path=opt/bin/query-member-of target=lsa
+file path=opt/bin/regshell
+file path=opt/bin/samba-interop-install
+file path=opt/bin/sqlite3
+file path=opt/bin/uninstall.sh
+file path=opt/bin/update-dns
+link path=opt/bin/ypcat target=lsa
+link path=opt/bin/ypmatch target=lsa
+file path=opt/data/COPYING
+file path=opt/data/LICENSES
+file path=opt/data/VERSION
+file path=opt/include/adtool/types.h
+file path=opt/include/btkrb5.h
+file path=opt/include/com_err.h
+file path=opt/include/compat/baserpc.h
+file path=opt/include/compat/dce2msrpc.h
+file path=opt/include/compat/dcerpc.h
+file path=opt/include/compat/dcerpc.idl.include
+file path=opt/include/compat/rpcfields.h
+file path=opt/include/ctarray.h
+file path=opt/include/ctbase.h
+file path=opt/include/ctdef.h
+file path=opt/include/ctdistroinfo.h
+file path=opt/include/ctexec.h
+file path=opt/include/ctfileutils.h
+file path=opt/include/cthash.h
+file path=opt/include/ctmem.h
+file path=opt/include/ctprocutils.h
+file path=opt/include/ctrwlock.h
+file path=opt/include/ctshell.h
+file path=opt/include/ctstrutils.h
+file path=opt/include/ctsys.h
+file path=opt/include/ctsysfuncs.h
+file path=opt/include/cttext.h
+file path=opt/include/ctuser.h
+file path=opt/include/curl/curl.h
+file path=opt/include/curl/curlbuild.h
+file path=opt/include/curl/curlrules.h
+file path=opt/include/curl/curlver.h
+file path=opt/include/curl/easy.h
+file path=opt/include/curl/mprintf.h
+file path=opt/include/curl/multi.h
+file path=opt/include/curl/stdcheaders.h
+file path=opt/include/curl/typecheck-gcc.h
+file path=opt/include/curl/types.h
+file path=opt/include/dce/$(MACH)/marshall.h
+file path=opt/include/dce/$(MACH)/ndr_rep.h
+file path=opt/include/dce/$(MACH)/ndrtypes.h
+file path=opt/include/dce/codesets.h
+file path=opt/include/dce/codesets.idl
+file path=opt/include/dce/codesets_stub.h
+file path=opt/include/dce/conv.h
+file path=opt/include/dce/conv.idl
+file path=opt/include/dce/convc.h
+file path=opt/include/dce/convc.idl
+file path=opt/include/dce/dce.h
+file path=opt/include/dce/dce_error.h
+file path=opt/include/dce/dce_utils.h
+file path=opt/include/dce/dcethread.h
+file path=opt/include/dce/ep.h
+file path=opt/include/dce/ep.idl
+file path=opt/include/dce/id_base.h
+file path=opt/include/dce/id_base.idl
+file path=opt/include/dce/idl_es.h
+file path=opt/include/dce/idlbase.h
+file path=opt/include/dce/idlddefs.h
+file path=opt/include/dce/iovector.h
+file path=opt/include/dce/iovector.idl
+file path=opt/include/dce/lbase.h
+file path=opt/include/dce/lbase.idl
+file path=opt/include/dce/lrpc.h
+file path=opt/include/dce/marshall.h
+file path=opt/include/dce/mgmt.h
+file path=opt/include/dce/mgmt.idl
+file path=opt/include/dce/nbase.h
+file path=opt/include/dce/nbase.idl
+file path=opt/include/dce/ncastat.h
+file path=opt/include/dce/ncastat.idl
+file path=opt/include/dce/ndr_rep.h
+file path=opt/include/dce/ndrold.h
+file path=opt/include/dce/ndrold.idl
+file path=opt/include/dce/ndrtypes.h
+file path=opt/include/dce/rpc.h
+file path=opt/include/dce/rpc.idl
+file path=opt/include/dce/rpcbase.h
+file path=opt/include/dce/rpcbase.idl
+file path=opt/include/dce/rpcexc.h
+file path=opt/include/dce/rpcpvt.h
+file path=opt/include/dce/rpcpvt.idl
+file path=opt/include/dce/rpcsts.h
+file path=opt/include/dce/rpcsts.idl
+file path=opt/include/dce/rpctypes.h
+file path=opt/include/dce/rpctypes.idl
+file path=opt/include/dce/schannel.h
+file path=opt/include/dce/sec_authn.h
+file path=opt/include/dce/smb.h
+file path=opt/include/dce/solaris2.11/dce.h
+file path=opt/include/dce/solaris2.11/dce_error.h
+file path=opt/include/dce/stubbase.h
+file path=opt/include/dce/twr.h
+file path=opt/include/dce/twr.idl
+file path=opt/include/dce/uuid.h
+file path=opt/include/dce/uuid.idl
+file path=opt/include/dce/x86_64/marshall.h
+file path=opt/include/dce/x86_64/ndr_rep.h
+file path=opt/include/dce/x86_64/ndrtypes.h
+file path=opt/include/djdistroinfo.h
+file path=opt/include/eventlog-record.h
+file path=opt/include/eventlog.h
+file path=opt/include/gssapi.h
+file path=opt/include/gssapi/gssapi.h
+file path=opt/include/gssapi/gssapi_err_generic.h
+file path=opt/include/gssapi/gssapi_ext.h
+file path=opt/include/gssapi/gssapi_generic.h
+file path=opt/include/gssapi/gssapi_krb5.h
+file path=opt/include/gssapi/mechglue.h
+file path=opt/include/iconv.h
+file path=opt/include/kdb.h
+file path=opt/include/keytab.h
+file path=opt/include/krb5.h
+file path=opt/include/krb5/krb5.h
+file path=opt/include/krb5/locate_plugin.h
+file path=opt/include/krb5/preauth_plugin.h
+file path=opt/include/ktldap.h
+file path=opt/include/lber.h
+file path=opt/include/lber_types.h
+file path=opt/include/ldap.h
+file path=opt/include/ldap_cdefs.h
+file path=opt/include/ldap_features.h
+file path=opt/include/ldap_schema.h
+file path=opt/include/ldap_utf8.h
+file path=opt/include/libxml2/libxml/DOCBparser.h
+file path=opt/include/libxml2/libxml/HTMLparser.h
+file path=opt/include/libxml2/libxml/HTMLtree.h
+file path=opt/include/libxml2/libxml/SAX.h
+file path=opt/include/libxml2/libxml/SAX2.h
+file path=opt/include/libxml2/libxml/c14n.h
+file path=opt/include/libxml2/libxml/catalog.h
+file path=opt/include/libxml2/libxml/chvalid.h
+file path=opt/include/libxml2/libxml/debugXML.h
+file path=opt/include/libxml2/libxml/dict.h
+file path=opt/include/libxml2/libxml/encoding.h
+file path=opt/include/libxml2/libxml/entities.h
+file path=opt/include/libxml2/libxml/globals.h
+file path=opt/include/libxml2/libxml/hash.h
+file path=opt/include/libxml2/libxml/list.h
+file path=opt/include/libxml2/libxml/nanoftp.h
+file path=opt/include/libxml2/libxml/nanohttp.h
+file path=opt/include/libxml2/libxml/parser.h
+file path=opt/include/libxml2/libxml/parserInternals.h
+file path=opt/include/libxml2/libxml/pattern.h
+file path=opt/include/libxml2/libxml/relaxng.h
+file path=opt/include/libxml2/libxml/schemasInternals.h
+file path=opt/include/libxml2/libxml/schematron.h
+file path=opt/include/libxml2/libxml/threads.h
+file path=opt/include/libxml2/libxml/tree.h
+file path=opt/include/libxml2/libxml/uri.h
+file path=opt/include/libxml2/libxml/valid.h
+file path=opt/include/libxml2/libxml/xinclude.h
+file path=opt/include/libxml2/libxml/xlink.h
+file path=opt/include/libxml2/libxml/xmlIO.h
+file path=opt/include/libxml2/libxml/xmlautomata.h
+file path=opt/include/libxml2/libxml/xmlerror.h
+file path=opt/include/libxml2/libxml/xmlexports.h
+file path=opt/include/libxml2/libxml/xmlmemory.h
+file path=opt/include/libxml2/libxml/xmlmodule.h
+file path=opt/include/libxml2/libxml/xmlreader.h
+file path=opt/include/libxml2/libxml/xmlregexp.h
+file path=opt/include/libxml2/libxml/xmlsave.h
+file path=opt/include/libxml2/libxml/xmlschemas.h
+file path=opt/include/libxml2/libxml/xmlschemastypes.h
+file path=opt/include/libxml2/libxml/xmlstring.h
+file path=opt/include/libxml2/libxml/xmlunicode.h
+file path=opt/include/libxml2/libxml/xmlversion.h
+file path=opt/include/libxml2/libxml/xmlwriter.h
+file path=opt/include/libxml2/libxml/xpath.h
+file path=opt/include/libxml2/libxml/xpathInternals.h
+file path=opt/include/libxml2/libxml/xpointer.h
+file path=opt/include/linenoise.h
+file path=opt/include/lsa/ad-types.h
+file path=opt/include/lsa/ad.h
+file path=opt/include/lsa/internal/lsaadprovider.h
+file path=opt/include/lsa/internal/lsadatablob.h
+file path=opt/include/lsa/internal/lsadef.h
+file path=opt/include/lsa/internal/lsaipc-common.h
+file path=opt/include/lsa/internal/lsaipc-privilege.h
+file path=opt/include/lsa/internal/lsaipc.h
+file path=opt/include/lsa/internal/lsalist.h
+file path=opt/include/lsa/internal/lsalocalprovider.h
+file path=opt/include/lsa/internal/lsaprivilege-internal.h
+file path=opt/include/lsa/internal/lsasrvapi.h
+file path=opt/include/lsa/internal/lsasrvcred.h
+file path=opt/include/lsa/internal/lsasrvutils.h
+file path=opt/include/lsa/internal/lsasystem.h
+file path=opt/include/lsa/internal/lsautils.h
+file path=opt/include/lsa/internal/lwsecurityidentifier.h
+file path=opt/include/lsa/internal/machinepwdinfo-impl.h
+file path=opt/include/lsa/internal/xpg_socket.h
+file path=opt/include/lsa/lsa.h
+file path=opt/include/lsa/lsapstore-api.h
+file path=opt/include/lsa/lsapstore-plugin.h
+file path=opt/include/lsa/lsapstore-types.h
+file path=opt/include/lsa/privilege.h
+file path=opt/include/lsa/provider.h
+file path=opt/include/lw/affinity.h
+file path=opt/include/lw/atomic.h
+file path=opt/include/lw/attrs.h
+file path=opt/include/lw/base.h
+file path=opt/include/lw/dscache.h
+file path=opt/include/lw/errno.h
+file path=opt/include/lw/hash.h
+file path=opt/include/lw/lm.h
+file path=opt/include/lw/lmaccess.h
+file path=opt/include/lw/lmcreds.h
+file path=opt/include/lw/lmcrypt.h
+file path=opt/include/lw/lmdebug.h
+file path=opt/include/lw/lmerr.h
+file path=opt/include/lw/lmjoin.h
+file path=opt/include/lw/lmmem.h
+file path=opt/include/lw/lmserver.h
+file path=opt/include/lw/lmshare.h
+file path=opt/include/lw/lmwksta.h
+file path=opt/include/lw/mapsecurity-plugin.h
+file path=opt/include/lw/mapsecurity-types.h
+file path=opt/include/lw/mapsecurity.h
+file path=opt/include/lw/ntstatus.h
+file path=opt/include/lw/rbtree.h
+file path=opt/include/lw/rpc/common.h
+file path=opt/include/lw/rpc/dssetup.h
+file path=opt/include/lw/rpc/krb5pac.h
+file path=opt/include/lw/rpc/lsa.h
+file path=opt/include/lw/rpc/netlogon.h
+file path=opt/include/lw/rpc/samr.h
+file path=opt/include/lw/rpc/wkssvc.h
+file path=opt/include/lw/rpcstatus.h
+file path=opt/include/lw/rtlgoto.h
+file path=opt/include/lw/rtllog.h
+file path=opt/include/lw/rtlmemory.h
+file path=opt/include/lw/rtlstring.h
+file path=opt/include/lw/safeint.h
+file path=opt/include/lw/security-api.h
+file path=opt/include/lw/security-types.h
+file path=opt/include/lw/svcm.h
+file path=opt/include/lw/swab.h
+file path=opt/include/lw/threadpool.h
+file path=opt/include/lw/types.h
+file path=opt/include/lw/winerror.h
+file path=opt/include/lwadvapi.h
+file path=opt/include/lwbuffer.h
+file path=opt/include/lwdef.h
+file path=opt/include/lwdlinked-list.h
+file path=opt/include/lwdns.h
+file path=opt/include/lwdscache.h
+file path=opt/include/lwerror.h
+file path=opt/include/lwexc.h
+file path=opt/include/lwfile.h
+file path=opt/include/lwhash.h
+file path=opt/include/lwio/io-types-posix.h
+file path=opt/include/lwio/io-types.h
+file path=opt/include/lwio/ioapi.h
+file path=opt/include/lwio/iodriver.h
+file path=opt/include/lwio/iortl.h
+file path=opt/include/lwio/lmconnection.h
+file path=opt/include/lwio/lmfile.h
+file path=opt/include/lwio/lmsession.h
+file path=opt/include/lwio/lmshare.h
+file path=opt/include/lwio/lwconnectioninfo.h
+file path=opt/include/lwio/lwfileinfo.h
+file path=opt/include/lwio/lwio.h
+file path=opt/include/lwio/lwiodevctl.h
+file path=opt/include/lwio/lwiofsctl.h
+file path=opt/include/lwio/lwsessioninfo.h
+file path=opt/include/lwio/lwshareinfo.h
+file path=opt/include/lwio/lwzct.h
+file path=opt/include/lwio/ntfileapi.h
+file path=opt/include/lwio/smbfileapi.h
+file path=opt/include/lwio/srvshareapi.h
+file path=opt/include/lwio/srvtransportapi.h
+file path=opt/include/lwkrb5.h
+file path=opt/include/lwldap-error.h
+file path=opt/include/lwldap.h
+file path=opt/include/lwmem.h
+file path=opt/include/lwmsg/archive.h
+file path=opt/include/lwmsg/assoc.h
+file path=opt/include/lwmsg/buffer.h
+file path=opt/include/lwmsg/call.h
+file path=opt/include/lwmsg/common.h
+file path=opt/include/lwmsg/connection.h
+file path=opt/include/lwmsg/context.h
+file path=opt/include/lwmsg/data.h
+file path=opt/include/lwmsg/lwmsg.h
+file path=opt/include/lwmsg/message.h
+file path=opt/include/lwmsg/peer.h
+file path=opt/include/lwmsg/protocol.h
+file path=opt/include/lwmsg/security.h
+file path=opt/include/lwmsg/session.h
+file path=opt/include/lwmsg/status.h
+file path=opt/include/lwmsg/time.h
+file path=opt/include/lwmsg/type.h
+file path=opt/include/lwnet-plugin.h
+file path=opt/include/lwnet.h
+file path=opt/include/lwprintf.h
+file path=opt/include/lwptimer.h
+file path=opt/include/lwrpcrt/lwrpcrt.h
+file path=opt/include/lwsecurityidentifier.h
+file path=opt/include/lwsid.h
+file path=opt/include/lwsm/lwsm.h
+file path=opt/include/lwstr.h
+file path=opt/include/lwtime.h
+file path=opt/include/ntlm/gssntlm.h
+file path=opt/include/ntlm/sspintlm.h
+file path=opt/include/openssl/aes.h
+file path=opt/include/openssl/asn1.h
+file path=opt/include/openssl/asn1_mac.h
+file path=opt/include/openssl/asn1t.h
+file path=opt/include/openssl/bio.h
+file path=opt/include/openssl/blowfish.h
+file path=opt/include/openssl/bn.h
+file path=opt/include/openssl/buffer.h
+file path=opt/include/openssl/camellia.h
+file path=opt/include/openssl/cast.h
+file path=opt/include/openssl/cmac.h
+file path=opt/include/openssl/cms.h
+file path=opt/include/openssl/comp.h
+file path=opt/include/openssl/conf.h
+file path=opt/include/openssl/conf_api.h
+file path=opt/include/openssl/crypto.h
+file path=opt/include/openssl/des.h
+file path=opt/include/openssl/des_old.h
+file path=opt/include/openssl/dh.h
+file path=opt/include/openssl/dsa.h
+file path=opt/include/openssl/dso.h
+file path=opt/include/openssl/dtls1.h
+file path=opt/include/openssl/e_os2.h
+file path=opt/include/openssl/ebcdic.h
+file path=opt/include/openssl/ec.h
+file path=opt/include/openssl/ecdh.h
+file path=opt/include/openssl/ecdsa.h
+file path=opt/include/openssl/engine.h
+file path=opt/include/openssl/err.h
+file path=opt/include/openssl/evp.h
+file path=opt/include/openssl/hmac.h
+file path=opt/include/openssl/idea.h
+file path=opt/include/openssl/krb5_asn.h
+file path=opt/include/openssl/kssl.h
+file path=opt/include/openssl/lhash.h
+file path=opt/include/openssl/md4.h
+file path=opt/include/openssl/md5.h
+file path=opt/include/openssl/mdc2.h
+file path=opt/include/openssl/modes.h
+file path=opt/include/openssl/obj_mac.h
+file path=opt/include/openssl/objects.h
+file path=opt/include/openssl/ocsp.h
+file path=opt/include/openssl/opensslconf.h
+file path=opt/include/openssl/opensslv.h
+file path=opt/include/openssl/ossl_typ.h
+file path=opt/include/openssl/pem.h
+file path=opt/include/openssl/pem2.h
+file path=opt/include/openssl/pkcs12.h
+file path=opt/include/openssl/pkcs7.h
+file path=opt/include/openssl/pqueue.h
+file path=opt/include/openssl/rand.h
+file path=opt/include/openssl/rc2.h
+file path=opt/include/openssl/rc4.h
+file path=opt/include/openssl/ripemd.h
+file path=opt/include/openssl/rsa.h
+file path=opt/include/openssl/safestack.h
+file path=opt/include/openssl/seed.h
+file path=opt/include/openssl/sha.h
+file path=opt/include/openssl/srp.h
+file path=opt/include/openssl/srtp.h
+file path=opt/include/openssl/ssl.h
+file path=opt/include/openssl/ssl2.h
+file path=opt/include/openssl/ssl23.h
+file path=opt/include/openssl/ssl3.h
+file path=opt/include/openssl/stack.h
+file path=opt/include/openssl/symhacks.h
+file path=opt/include/openssl/tls1.h
+file path=opt/include/openssl/ts.h
+file path=opt/include/openssl/txt_db.h
+file path=opt/include/openssl/ui.h
+file path=opt/include/openssl/ui_compat.h
+file path=opt/include/openssl/whrlpool.h
+file path=opt/include/openssl/x509.h
+file path=opt/include/openssl/x509_vfy.h
+file path=opt/include/openssl/x509v3.h
+file path=opt/include/popt.h
+file path=opt/include/profile.h
+file path=opt/include/reg/lwntreg.h
+file path=opt/include/reg/lwreg.h
+file path=opt/include/reg/reg.h
+file path=opt/include/reg/regutil.h
+file path=opt/include/rsys-def.h
+file path=opt/include/rsys-logging.h
+file path=opt/include/rsys-system.h
+file path=opt/include/rsys-utils.h
+file path=opt/include/sasl/hmac-md5.h
+file path=opt/include/sasl/md5.h
+file path=opt/include/sasl/md5global.h
+file path=opt/include/sasl/prop.h
+file path=opt/include/sasl/sasl.h
+file path=opt/include/sasl/saslplug.h
+file path=opt/include/sasl/saslutil.h
+file path=opt/include/schannel.h
+file path=opt/include/schtypes.h
+file path=opt/include/slapi-plugin.h
+file path=opt/include/sqlite3.h
+file path=opt/include/sqlite3ext.h
+file path=opt/include/tchar.h
+file path=opt/include/tdb.h
+file path=opt/include/toml.h
+file path=opt/include/utf8.h
+file path=opt/include/uuid/uuid.h
+file path=opt/include/wc16printf.h
+file path=opt/include/wc16str.h
+file path=opt/include/wchar16.h
+file path=opt/lib/$(MACH64)/amd64/apache2.4/mod_auth_kerb.so
+file path=opt/lib/$(MACH64)/amd64/gss/libgssapi_ntlm.so
+file path=opt/lib/$(MACH64)/amd64/krb5/plugins/libkrb5/liblwnet_service_locator.so
+file path=opt/lib/$(MACH64)/amd64/krb5/plugins/preauth/pacreq.so
+file path=opt/lib/$(MACH64)/amd64/krb5/plugins/preauth/pkinit.so
+link path=opt/lib/$(MACH64)/amd64/libadtool.so target=libadtool.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libadtool.so.0 target=libadtool.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libadtool.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libbtkrb5.so target=libbtkrb5.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libbtkrb5.so.0 target=libbtkrb5.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libbtkrb5.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libcentutils.so target=libcentutils.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libcentutils.so.0 target=libcentutils.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libcentutils.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libcom_err.so target=libcom_err.so.3.0
+link path=opt/lib/$(MACH64)/amd64/libcom_err.so.3 target=libcom_err.so.3.0
+file path=opt/lib/$(MACH64)/amd64/libcom_err.so.3.0
+link path=opt/lib/$(MACH64)/amd64/libcrypto.so target=libcrypto.so.1.0.0
+file path=opt/lib/$(MACH64)/amd64/libcrypto.so.1.0.0
+link path=opt/lib/$(MACH64)/amd64/libcurl.so target=libcurl.so.4.2.0
+link path=opt/lib/$(MACH64)/amd64/libcurl.so.4 target=libcurl.so.4.2.0
+file path=opt/lib/$(MACH64)/amd64/libcurl.so.4.2.0
+link path=opt/lib/$(MACH64)/amd64/libdcerpc.so target=libdcerpc.so.1.2.0
+link path=opt/lib/$(MACH64)/amd64/libdcerpc.so.1 target=libdcerpc.so.1.2.0
+file path=opt/lib/$(MACH64)/amd64/libdcerpc.so.1.2.0
+link path=opt/lib/$(MACH64)/amd64/libdomainjoin.so target=libdomainjoin.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libdomainjoin.so.0 \
+    target=libdomainjoin.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libdomainjoin.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libdsapi.so target=libdsapi.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libdsapi.so.0 target=libdsapi.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libdsapi.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libeventlog.so target=libeventlog.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libeventlog.so.0 target=libeventlog.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libeventlog.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libeventlog_norpc.so \
+    target=libeventlog_norpc.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libeventlog_norpc.so.0 \
+    target=libeventlog_norpc.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libeventlog_norpc.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libeventlogutils.so \
+    target=libeventlogutils.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libeventlogutils.so.0 \
+    target=libeventlogutils.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libeventlogutils.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libgssapi_krb5.so target=libgssapi_krb5.so.2.2
+link path=opt/lib/$(MACH64)/amd64/libgssapi_krb5.so.2 \
+    target=libgssapi_krb5.so.2.2
+file path=opt/lib/$(MACH64)/amd64/libgssapi_krb5.so.2.2
+link path=opt/lib/$(MACH64)/amd64/libgssrpc.so target=libgssrpc.so.4.1
+link path=opt/lib/$(MACH64)/amd64/libgssrpc.so.4 target=libgssrpc.so.4.1
+file path=opt/lib/$(MACH64)/amd64/libgssrpc.so.4.1
+link path=opt/lib/$(MACH64)/amd64/libiconv.so target=libiconv.so.2.5.0
+link path=opt/lib/$(MACH64)/amd64/libiconv.so.2 target=libiconv.so.2.5.0
+file path=opt/lib/$(MACH64)/amd64/libiconv.so.2.5.0
+link path=opt/lib/$(MACH64)/amd64/libiomgr.so target=libiomgr.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libiomgr.so.0 target=libiomgr.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libiomgr.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libiotest.sys.so
+link path=opt/lib/$(MACH64)/amd64/libk5crypto.so target=libk5crypto.so.3.1
+link path=opt/lib/$(MACH64)/amd64/libk5crypto.so.3 target=libk5crypto.so.3.1
+file path=opt/lib/$(MACH64)/amd64/libk5crypto.so.3.1
+link path=opt/lib/$(MACH64)/amd64/libkadm5srv_mit.so \
+    target=libkadm5srv_mit.so.8.0
+link path=opt/lib/$(MACH64)/amd64/libkadm5srv_mit.so.8 \
+    target=libkadm5srv_mit.so.8.0
+file path=opt/lib/$(MACH64)/amd64/libkadm5srv_mit.so.8.0
+link path=opt/lib/$(MACH64)/amd64/libkdb5.so target=libkdb5.so.5.0
+link path=opt/lib/$(MACH64)/amd64/libkdb5.so.5 target=libkdb5.so.5.0
+file path=opt/lib/$(MACH64)/amd64/libkdb5.so.5.0
+link path=opt/lib/$(MACH64)/amd64/libkrb5.so target=libkrb5.so.3.3
+link path=opt/lib/$(MACH64)/amd64/libkrb5.so.3 target=libkrb5.so.3.3
+file path=opt/lib/$(MACH64)/amd64/libkrb5.so.3.3
+link path=opt/lib/$(MACH64)/amd64/libkrb5support.so target=libkrb5support.so.0.1
+link path=opt/lib/$(MACH64)/amd64/libkrb5support.so.0 \
+    target=libkrb5support.so.0.1
+file path=opt/lib/$(MACH64)/amd64/libkrb5support.so.0.1
+link path=opt/lib/$(MACH64)/amd64/liblber-2.4.so.2 target=liblber-2.4.so.2.4.2
+file path=opt/lib/$(MACH64)/amd64/liblber-2.4.so.2.4.2
+link path=opt/lib/$(MACH64)/amd64/liblber.so target=liblber-2.4.so.2.4.2
+link path=opt/lib/$(MACH64)/amd64/libldap-2.4.so.2 target=libldap-2.4.so.2.4.2
+file path=opt/lib/$(MACH64)/amd64/libldap-2.4.so.2.4.2
+link path=opt/lib/$(MACH64)/amd64/libldap.so target=libldap-2.4.so.2.4.2
+link path=opt/lib/$(MACH64)/amd64/libldap_r-2.4.so.2 \
+    target=libldap_r-2.4.so.2.4.2
+file path=opt/lib/$(MACH64)/amd64/libldap_r-2.4.so.2.4.2
+link path=opt/lib/$(MACH64)/amd64/libldap_r.so target=libldap_r-2.4.so.2.4.2
+link path=opt/lib/$(MACH64)/amd64/liblinenoise-mob.so \
+    target=liblinenoise-mob.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblinenoise-mob.so.0 \
+    target=liblinenoise-mob.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblinenoise-mob.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsaauth.so target=liblsaauth.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsaauth.so.0 target=liblsaauth.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblsaauth.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsaclient.so target=liblsaclient.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsaclient.so.0 target=liblsaclient.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblsaclient.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsaclient_ntlm.so \
+    target=liblsaclient_ntlm.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsaclient_ntlm.so.0 \
+    target=liblsaclient_ntlm.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblsaclient_ntlm.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsaclientthr.so \
+    target=liblsaclientthr.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsaclientthr.so.0 \
+    target=liblsaclientthr.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblsaclientthr.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsacommon.so target=liblsacommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsacommon.so.0 target=liblsacommon.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblsacommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsagsswrap.so target=liblsagsswrap.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsagsswrap.so.0 \
+    target=liblsagsswrap.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblsagsswrap.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsapstore.so target=liblsapstore.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsapstore.so.0 target=liblsapstore.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblsapstore.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsarpc.so target=liblsarpc.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsarpc.so.0 target=liblsarpc.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblsarpc.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsaserverapi.so \
+    target=liblsaserverapi.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblsaserverapi.so.0 \
+    target=liblsaserverapi.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblsaserverapi.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwadvapi.so target=liblwadvapi.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwadvapi.so.0 target=liblwadvapi.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwadvapi.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwadvapi_nothr.so \
+    target=liblwadvapi_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwadvapi_nothr.so.0 \
+    target=liblwadvapi_nothr.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwadvapi_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwbase.so target=liblwbase.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwbase.so.0 target=liblwbase.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwbase.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwbase_nothr.so \
+    target=liblwbase_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwbase_nothr.so.0 \
+    target=liblwbase_nothr.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwbase_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwdns.so target=liblwdns.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwdns.so.0 target=liblwdns.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwdns.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwioclient.so target=liblwioclient.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwioclient.so.0 \
+    target=liblwioclient.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwioclient.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwiocommon.so target=liblwiocommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwiocommon.so.0 \
+    target=liblwiocommon.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwiocommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwioshareinfo.so \
+    target=liblwioshareinfo.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwioshareinfo.so.0 \
+    target=liblwioshareinfo.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwioshareinfo.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwiosmbcommon.so \
+    target=liblwiosmbcommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwiosmbcommon.so.0 \
+    target=liblwiosmbcommon.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwiosmbcommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwmsg.so target=liblwmsg.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwmsg.so.0 target=liblwmsg.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwmsg.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwmsg_nothr.so \
+    target=liblwmsg_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwmsg_nothr.so.0 \
+    target=liblwmsg_nothr.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwmsg_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwnetapi.so target=liblwnetapi.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwnetapi.so.0 target=liblwnetapi.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwnetapi.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwnetclientapi.so \
+    target=liblwnetclientapi.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwnetclientapi.so.0 \
+    target=liblwnetclientapi.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwnetclientapi.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwnetcommon.so \
+    target=liblwnetcommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwnetcommon.so.0 \
+    target=liblwnetcommon.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwnetcommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwsm.so target=liblwsm.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwsm.so.0 target=liblwsm.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwsm.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwsmcommon.so target=liblwsmcommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/liblwsmcommon.so.0 \
+    target=liblwsmcommon.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/liblwsmcommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libntlmserver.so target=libntlmserver.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libntlmserver.so.0 \
+    target=libntlmserver.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libntlmserver.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libpopt.so target=libpopt.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libpopt.so.0 target=libpopt.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libpopt.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libregclient.so target=libregclient.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libregclient.so.0 target=libregclient.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libregclient.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libregcommon.so target=libregcommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libregcommon.so.0 target=libregcommon.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libregcommon.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/librsutils.so target=librsutils.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/librsutils.so.0 target=librsutils.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/librsutils.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libsasl2.so target=libsasl2.so.2.0.23
+link path=opt/lib/$(MACH64)/amd64/libsasl2.so.2 target=libsasl2.so.2.0.23
+file path=opt/lib/$(MACH64)/amd64/libsasl2.so.2.0.23
+link path=opt/lib/$(MACH64)/amd64/libschannel.so target=libschannel.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libschannel.so.0 target=libschannel.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libschannel.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libsqlite3.so target=libsqlite3.so.0.8.6
+link path=opt/lib/$(MACH64)/amd64/libsqlite3.so.0 target=libsqlite3.so.0.8.6
+file path=opt/lib/$(MACH64)/amd64/libsqlite3.so.0.8.6
+link path=opt/lib/$(MACH64)/amd64/libssl.so target=libssl.so.1.0.0
+file path=opt/lib/$(MACH64)/amd64/libssl.so.1.0.0
+link path=opt/lib/$(MACH64)/amd64/libtdb.so target=libtdb.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libtdb.so.0 target=libtdb.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libtdb.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libtomlc99.so target=libtomlc99.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libtomlc99.so.0 target=libtomlc99.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libtomlc99.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libusermonitor_encoding.so \
+    target=libusermonitor_encoding.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libusermonitor_encoding.so.0 \
+    target=libusermonitor_encoding.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libusermonitor_encoding.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libuuid.so target=libuuid.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libuuid.so.0 target=libuuid.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libuuid.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libwbclient.so target=libwbclient.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libwbclient.so.0 target=libwbclient.so.0.0.0
+file path=opt/lib/$(MACH64)/amd64/libwbclient.so.0.0.0
+link path=opt/lib/$(MACH64)/amd64/libxml2.so target=libxml2.so.2.6.29
+link path=opt/lib/$(MACH64)/amd64/libxml2.so.2 target=libxml2.so.2.6.29
+file path=opt/lib/$(MACH64)/amd64/libxml2.so.2.6.29
+file path=opt/lib/$(MACH64)/amd64/lsa-provider/ad_open.so
+file path=opt/lib/$(MACH64)/amd64/lsa-provider/local.so
+file path=opt/lib/$(MACH64)/amd64/lsa-rpc/dssetup.so
+file path=opt/lib/$(MACH64)/amd64/lsa-rpc/lsa.so
+file path=opt/lib/$(MACH64)/amd64/lsa-rpc/samr.so
+file path=opt/lib/$(MACH64)/amd64/lsa-rpc/wkssvc.so
+file path=opt/lib/$(MACH64)/amd64/lw-map-sec/lsass.so
+file path=opt/lib/$(MACH64)/amd64/lw-pstore/samba.so
+file path=opt/lib/$(MACH64)/amd64/lw-svcm/dcerpc.so
+file path=opt/lib/$(MACH64)/amd64/lw-svcm/eventlog.so
+file path=opt/lib/$(MACH64)/amd64/lw-svcm/lsass.so
+file path=opt/lib/$(MACH64)/amd64/lw-svcm/lwio.so
+file path=opt/lib/$(MACH64)/amd64/lw-svcm/lwreg-memory.so
+file path=opt/lib/$(MACH64)/amd64/lw-svcm/lwreg-sqlite.so
+link path=opt/lib/$(MACH64)/amd64/lw-svcm/lwreg.so target=lwreg-sqlite.so
+file path=opt/lib/$(MACH64)/amd64/lw-svcm/netlogon.so
+file path=opt/lib/$(MACH64)/amd64/lw-svcm/reapsysl.so
+file path=opt/lib/$(MACH64)/amd64/lw-svcm/usermonitor.so
+file path=opt/lib/$(MACH64)/amd64/lwicompat_v4.so
+file path=opt/lib/$(MACH64)/amd64/lwio-driver/rdr.so
+file path=opt/lib/$(MACH64)/amd64/netlogon/SiteName.so
+file path=opt/lib/$(MACH64)/amd64/pkgconfig/sqlite3.pc
+link path=opt/lib/$(MACH64)/amd64/sasl2/libgssapiv2.so \
+    target=libgssapiv2.so.2.0.23
+link path=opt/lib/$(MACH64)/amd64/sasl2/libgssapiv2.so.2 \
+    target=libgssapiv2.so.2.0.23
+file path=opt/lib/$(MACH64)/amd64/sasl2/libgssapiv2.so.2.0.23
+link path=opt/lib/$(MACH64)/amd64/sasl2/libgssspnego.so \
+    target=libgssspnego.so.2.0.23
+link path=opt/lib/$(MACH64)/amd64/sasl2/libgssspnego.so.2 \
+    target=libgssspnego.so.2.0.23
+file path=opt/lib/$(MACH64)/amd64/sasl2/libgssspnego.so.2.0.23
+link path=opt/lib/$(MACH64)/libiconv.so target=libiconv.so.2.5.0
+link path=opt/lib/$(MACH64)/libiconv.so.2 target=libiconv.so.2.5.0
+file path=opt/lib/$(MACH64)/libiconv.so.2.5.0
+link path=opt/lib/$(MACH64)/liblsaauth.so target=liblsaauth.so.0.0.0
+link path=opt/lib/$(MACH64)/liblsaauth.so.0 target=liblsaauth.so.0.0.0
+file path=opt/lib/$(MACH64)/liblsaauth.so.0.0.0
+link path=opt/lib/$(MACH64)/liblsaclient.so target=liblsaclient.so.0.0.0
+link path=opt/lib/$(MACH64)/liblsaclient.so.0 target=liblsaclient.so.0.0.0
+file path=opt/lib/$(MACH64)/liblsaclient.so.0.0.0
+link path=opt/lib/$(MACH64)/liblsacommon.so target=liblsacommon.so.0.0.0
+link path=opt/lib/$(MACH64)/liblsacommon.so.0 target=liblsacommon.so.0.0.0
+file path=opt/lib/$(MACH64)/liblsacommon.so.0.0.0
+link path=opt/lib/$(MACH64)/liblwadvapi_nothr.so \
+    target=liblwadvapi_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/liblwadvapi_nothr.so.0 \
+    target=liblwadvapi_nothr.so.0.0.0
+file path=opt/lib/$(MACH64)/liblwadvapi_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/liblwbase.so target=liblwbase.so.0.0.0
+link path=opt/lib/$(MACH64)/liblwbase.so.0 target=liblwbase.so.0.0.0
+file path=opt/lib/$(MACH64)/liblwbase.so.0.0.0
+link path=opt/lib/$(MACH64)/liblwbase_nothr.so target=liblwbase_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/liblwbase_nothr.so.0 target=liblwbase_nothr.so.0.0.0
+file path=opt/lib/$(MACH64)/liblwbase_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/liblwmsg.so target=liblwmsg.so.0.0.0
+link path=opt/lib/$(MACH64)/liblwmsg.so.0 target=liblwmsg.so.0.0.0
+file path=opt/lib/$(MACH64)/liblwmsg.so.0.0.0
+link path=opt/lib/$(MACH64)/liblwmsg_nothr.so target=liblwmsg_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/liblwmsg_nothr.so.0 target=liblwmsg_nothr.so.0.0.0
+file path=opt/lib/$(MACH64)/liblwmsg_nothr.so.0.0.0
+link path=opt/lib/$(MACH64)/libpopt.so target=libpopt.so.0.0.0
+link path=opt/lib/$(MACH64)/libpopt.so.0 target=libpopt.so.0.0.0
+file path=opt/lib/$(MACH64)/libpopt.so.0.0.0
+link path=opt/lib/$(MACH64)/libuuid.so target=libuuid.so.0.0.0
+link path=opt/lib/$(MACH64)/libuuid.so.0 target=libuuid.so.0.0.0
+file path=opt/lib/$(MACH64)/libuuid.so.0.0.0
+file path=opt/lib/apache2.4/mod_auth_kerb.so
+file path=opt/lib/gss/libgssapi_ntlm.so
+file path=opt/lib/krb5/plugins/libkrb5/liblwnet_service_locator.so
+file path=opt/lib/krb5/plugins/preauth/pacreq.so
+file path=opt/lib/krb5/plugins/preauth/pkinit.so
+link path=opt/lib/libadtool.so target=libadtool.so.0.0.0
+link path=opt/lib/libadtool.so.0 target=libadtool.so.0.0.0
+file path=opt/lib/libadtool.so.0.0.0
+link path=opt/lib/libbtkrb5.so target=libbtkrb5.so.0.0.0
+link path=opt/lib/libbtkrb5.so.0 target=libbtkrb5.so.0.0.0
+file path=opt/lib/libbtkrb5.so.0.0.0
+link path=opt/lib/libcentutils.so target=libcentutils.so.0.0.0
+link path=opt/lib/libcentutils.so.0 target=libcentutils.so.0.0.0
+file path=opt/lib/libcentutils.so.0.0.0
+link path=opt/lib/libcom_err.so target=libcom_err.so.3.0
+link path=opt/lib/libcom_err.so.3 target=libcom_err.so.3.0
+file path=opt/lib/libcom_err.so.3.0
+link path=opt/lib/libcrypto.so target=libcrypto.so.1.0.0
+file path=opt/lib/libcrypto.so.1.0.0
+link path=opt/lib/libcurl.so target=libcurl.so.4.2.0
+link path=opt/lib/libcurl.so.4 target=libcurl.so.4.2.0
+file path=opt/lib/libcurl.so.4.2.0
+link path=opt/lib/libdcerpc.so target=libdcerpc.so.1.2.0
+link path=opt/lib/libdcerpc.so.1 target=libdcerpc.so.1.2.0
+file path=opt/lib/libdcerpc.so.1.2.0
+link path=opt/lib/libdomainjoin.so target=libdomainjoin.so.0.0.0
+link path=opt/lib/libdomainjoin.so.0 target=libdomainjoin.so.0.0.0
+file path=opt/lib/libdomainjoin.so.0.0.0
+link path=opt/lib/libdsapi.so target=libdsapi.so.0.0.0
+link path=opt/lib/libdsapi.so.0 target=libdsapi.so.0.0.0
+file path=opt/lib/libdsapi.so.0.0.0
+link path=opt/lib/libeventlog.so target=libeventlog.so.0.0.0
+link path=opt/lib/libeventlog.so.0 target=libeventlog.so.0.0.0
+file path=opt/lib/libeventlog.so.0.0.0
+link path=opt/lib/libeventlog_norpc.so target=libeventlog_norpc.so.0.0.0
+link path=opt/lib/libeventlog_norpc.so.0 target=libeventlog_norpc.so.0.0.0
+file path=opt/lib/libeventlog_norpc.so.0.0.0
+link path=opt/lib/libeventlogutils.so target=libeventlogutils.so.0.0.0
+link path=opt/lib/libeventlogutils.so.0 target=libeventlogutils.so.0.0.0
+file path=opt/lib/libeventlogutils.so.0.0.0
+link path=opt/lib/libgssapi_krb5.so target=libgssapi_krb5.so.2.2
+link path=opt/lib/libgssapi_krb5.so.2 target=libgssapi_krb5.so.2.2
+file path=opt/lib/libgssapi_krb5.so.2.2
+link path=opt/lib/libgssrpc.so target=libgssrpc.so.4.1
+link path=opt/lib/libgssrpc.so.4 target=libgssrpc.so.4.1
+file path=opt/lib/libgssrpc.so.4.1
+link path=opt/lib/libiconv.so target=libiconv.so.2.5.0
+link path=opt/lib/libiconv.so.2 target=libiconv.so.2.5.0
+file path=opt/lib/libiconv.so.2.5.0
+link path=opt/lib/libiomgr.so target=libiomgr.so.0.0.0
+link path=opt/lib/libiomgr.so.0 target=libiomgr.so.0.0.0
+file path=opt/lib/libiomgr.so.0.0.0
+file path=opt/lib/libiotest.sys.so
+link path=opt/lib/libk5crypto.so target=libk5crypto.so.3.1
+link path=opt/lib/libk5crypto.so.3 target=libk5crypto.so.3.1
+file path=opt/lib/libk5crypto.so.3.1
+link path=opt/lib/libkadm5srv_mit.so target=libkadm5srv_mit.so.8.0
+link path=opt/lib/libkadm5srv_mit.so.8 target=libkadm5srv_mit.so.8.0
+file path=opt/lib/libkadm5srv_mit.so.8.0
+link path=opt/lib/libkdb5.so target=libkdb5.so.5.0
+link path=opt/lib/libkdb5.so.5 target=libkdb5.so.5.0
+file path=opt/lib/libkdb5.so.5.0
+link path=opt/lib/libkrb5.so target=libkrb5.so.3.3
+link path=opt/lib/libkrb5.so.3 target=libkrb5.so.3.3
+file path=opt/lib/libkrb5.so.3.3
+link path=opt/lib/libkrb5support.so target=libkrb5support.so.0.1
+link path=opt/lib/libkrb5support.so.0 target=libkrb5support.so.0.1
+file path=opt/lib/libkrb5support.so.0.1
+link path=opt/lib/liblber-2.4.so.2 target=liblber-2.4.so.2.4.2
+file path=opt/lib/liblber-2.4.so.2.4.2
+link path=opt/lib/liblber.so target=liblber-2.4.so.2.4.2
+link path=opt/lib/libldap-2.4.so.2 target=libldap-2.4.so.2.4.2
+file path=opt/lib/libldap-2.4.so.2.4.2
+link path=opt/lib/libldap.so target=libldap-2.4.so.2.4.2
+link path=opt/lib/libldap_r-2.4.so.2 target=libldap_r-2.4.so.2.4.2
+file path=opt/lib/libldap_r-2.4.so.2.4.2
+link path=opt/lib/libldap_r.so target=libldap_r-2.4.so.2.4.2
+link path=opt/lib/liblinenoise-mob.so target=liblinenoise-mob.so.0.0.0
+link path=opt/lib/liblinenoise-mob.so.0 target=liblinenoise-mob.so.0.0.0
+file path=opt/lib/liblinenoise-mob.so.0.0.0
+link path=opt/lib/liblsaauth.so target=liblsaauth.so.0.0.0
+link path=opt/lib/liblsaauth.so.0 target=liblsaauth.so.0.0.0
+file path=opt/lib/liblsaauth.so.0.0.0
+link path=opt/lib/liblsaclient.so target=liblsaclient.so.0.0.0
+link path=opt/lib/liblsaclient.so.0 target=liblsaclient.so.0.0.0
+file path=opt/lib/liblsaclient.so.0.0.0
+link path=opt/lib/liblsaclient_ntlm.so target=liblsaclient_ntlm.so.0.0.0
+link path=opt/lib/liblsaclient_ntlm.so.0 target=liblsaclient_ntlm.so.0.0.0
+file path=opt/lib/liblsaclient_ntlm.so.0.0.0
+link path=opt/lib/liblsaclientthr.so target=liblsaclientthr.so.0.0.0
+link path=opt/lib/liblsaclientthr.so.0 target=liblsaclientthr.so.0.0.0
+file path=opt/lib/liblsaclientthr.so.0.0.0
+link path=opt/lib/liblsacommon.so target=liblsacommon.so.0.0.0
+link path=opt/lib/liblsacommon.so.0 target=liblsacommon.so.0.0.0
+file path=opt/lib/liblsacommon.so.0.0.0
+link path=opt/lib/liblsagsswrap.so target=liblsagsswrap.so.0.0.0
+link path=opt/lib/liblsagsswrap.so.0 target=liblsagsswrap.so.0.0.0
+file path=opt/lib/liblsagsswrap.so.0.0.0
+link path=opt/lib/liblsapstore.so target=liblsapstore.so.0.0.0
+link path=opt/lib/liblsapstore.so.0 target=liblsapstore.so.0.0.0
+file path=opt/lib/liblsapstore.so.0.0.0
+link path=opt/lib/liblsarpc.so target=liblsarpc.so.0.0.0
+link path=opt/lib/liblsarpc.so.0 target=liblsarpc.so.0.0.0
+file path=opt/lib/liblsarpc.so.0.0.0
+link path=opt/lib/liblsaserverapi.so target=liblsaserverapi.so.0.0.0
+link path=opt/lib/liblsaserverapi.so.0 target=liblsaserverapi.so.0.0.0
+file path=opt/lib/liblsaserverapi.so.0.0.0
+link path=opt/lib/liblwadvapi.so target=liblwadvapi.so.0.0.0
+link path=opt/lib/liblwadvapi.so.0 target=liblwadvapi.so.0.0.0
+file path=opt/lib/liblwadvapi.so.0.0.0
+link path=opt/lib/liblwadvapi_nothr.so target=liblwadvapi_nothr.so.0.0.0
+link path=opt/lib/liblwadvapi_nothr.so.0 target=liblwadvapi_nothr.so.0.0.0
+file path=opt/lib/liblwadvapi_nothr.so.0.0.0
+link path=opt/lib/liblwbase.so target=liblwbase.so.0.0.0
+link path=opt/lib/liblwbase.so.0 target=liblwbase.so.0.0.0
+file path=opt/lib/liblwbase.so.0.0.0
+link path=opt/lib/liblwbase_nothr.so target=liblwbase_nothr.so.0.0.0
+link path=opt/lib/liblwbase_nothr.so.0 target=liblwbase_nothr.so.0.0.0
+file path=opt/lib/liblwbase_nothr.so.0.0.0
+link path=opt/lib/liblwdns.so target=liblwdns.so.0.0.0
+link path=opt/lib/liblwdns.so.0 target=liblwdns.so.0.0.0
+file path=opt/lib/liblwdns.so.0.0.0
+link path=opt/lib/liblwioclient.so target=liblwioclient.so.0.0.0
+link path=opt/lib/liblwioclient.so.0 target=liblwioclient.so.0.0.0
+file path=opt/lib/liblwioclient.so.0.0.0
+link path=opt/lib/liblwiocommon.so target=liblwiocommon.so.0.0.0
+link path=opt/lib/liblwiocommon.so.0 target=liblwiocommon.so.0.0.0
+file path=opt/lib/liblwiocommon.so.0.0.0
+link path=opt/lib/liblwioshareinfo.so target=liblwioshareinfo.so.0.0.0
+link path=opt/lib/liblwioshareinfo.so.0 target=liblwioshareinfo.so.0.0.0
+file path=opt/lib/liblwioshareinfo.so.0.0.0
+link path=opt/lib/liblwiosmbcommon.so target=liblwiosmbcommon.so.0.0.0
+link path=opt/lib/liblwiosmbcommon.so.0 target=liblwiosmbcommon.so.0.0.0
+file path=opt/lib/liblwiosmbcommon.so.0.0.0
+link path=opt/lib/liblwmsg.so target=liblwmsg.so.0.0.0
+link path=opt/lib/liblwmsg.so.0 target=liblwmsg.so.0.0.0
+file path=opt/lib/liblwmsg.so.0.0.0
+link path=opt/lib/liblwmsg_nothr.so target=liblwmsg_nothr.so.0.0.0
+link path=opt/lib/liblwmsg_nothr.so.0 target=liblwmsg_nothr.so.0.0.0
+file path=opt/lib/liblwmsg_nothr.so.0.0.0
+link path=opt/lib/liblwnetapi.so target=liblwnetapi.so.0.0.0
+link path=opt/lib/liblwnetapi.so.0 target=liblwnetapi.so.0.0.0
+file path=opt/lib/liblwnetapi.so.0.0.0
+link path=opt/lib/liblwnetclientapi.so target=liblwnetclientapi.so.0.0.0
+link path=opt/lib/liblwnetclientapi.so.0 target=liblwnetclientapi.so.0.0.0
+file path=opt/lib/liblwnetclientapi.so.0.0.0
+link path=opt/lib/liblwnetcommon.so target=liblwnetcommon.so.0.0.0
+link path=opt/lib/liblwnetcommon.so.0 target=liblwnetcommon.so.0.0.0
+file path=opt/lib/liblwnetcommon.so.0.0.0
+link path=opt/lib/liblwsm.so target=liblwsm.so.0.0.0
+link path=opt/lib/liblwsm.so.0 target=liblwsm.so.0.0.0
+file path=opt/lib/liblwsm.so.0.0.0
+link path=opt/lib/liblwsmcommon.so target=liblwsmcommon.so.0.0.0
+link path=opt/lib/liblwsmcommon.so.0 target=liblwsmcommon.so.0.0.0
+file path=opt/lib/liblwsmcommon.so.0.0.0
+link path=opt/lib/libntlmserver.so target=libntlmserver.so.0.0.0
+link path=opt/lib/libntlmserver.so.0 target=libntlmserver.so.0.0.0
+file path=opt/lib/libntlmserver.so.0.0.0
+link path=opt/lib/libpopt.so target=libpopt.so.0.0.0
+link path=opt/lib/libpopt.so.0 target=libpopt.so.0.0.0
+file path=opt/lib/libpopt.so.0.0.0
+link path=opt/lib/libregclient.so target=libregclient.so.0.0.0
+link path=opt/lib/libregclient.so.0 target=libregclient.so.0.0.0
+file path=opt/lib/libregclient.so.0.0.0
+link path=opt/lib/libregcommon.so target=libregcommon.so.0.0.0
+link path=opt/lib/libregcommon.so.0 target=libregcommon.so.0.0.0
+file path=opt/lib/libregcommon.so.0.0.0
+link path=opt/lib/librsutils.so target=librsutils.so.0.0.0
+link path=opt/lib/librsutils.so.0 target=librsutils.so.0.0.0
+file path=opt/lib/librsutils.so.0.0.0
+link path=opt/lib/libsasl2.so target=libsasl2.so.2.0.23
+link path=opt/lib/libsasl2.so.2 target=libsasl2.so.2.0.23
+file path=opt/lib/libsasl2.so.2.0.23
+link path=opt/lib/libschannel.so target=libschannel.so.0.0.0
+link path=opt/lib/libschannel.so.0 target=libschannel.so.0.0.0
+file path=opt/lib/libschannel.so.0.0.0
+link path=opt/lib/libsqlite3.so target=libsqlite3.so.0.8.6
+link path=opt/lib/libsqlite3.so.0 target=libsqlite3.so.0.8.6
+file path=opt/lib/libsqlite3.so.0.8.6
+link path=opt/lib/libssl.so target=libssl.so.1.0.0
+file path=opt/lib/libssl.so.1.0.0
+link path=opt/lib/libtdb.so target=libtdb.so.0.0.0
+link path=opt/lib/libtdb.so.0 target=libtdb.so.0.0.0
+file path=opt/lib/libtdb.so.0.0.0
+link path=opt/lib/libtomlc99.so target=libtomlc99.so.0.0.0
+link path=opt/lib/libtomlc99.so.0 target=libtomlc99.so.0.0.0
+file path=opt/lib/libtomlc99.so.0.0.0
+link path=opt/lib/libusermonitor_encoding.so \
+    target=libusermonitor_encoding.so.0.0.0
+link path=opt/lib/libusermonitor_encoding.so.0 \
+    target=libusermonitor_encoding.so.0.0.0
+file path=opt/lib/libusermonitor_encoding.so.0.0.0
+link path=opt/lib/libuuid.so target=libuuid.so.0.0.0
+link path=opt/lib/libuuid.so.0 target=libuuid.so.0.0.0
+file path=opt/lib/libuuid.so.0.0.0
+link path=opt/lib/libwbclient.so target=libwbclient.so.0.0.0
+link path=opt/lib/libwbclient.so.0 target=libwbclient.so.0.0.0
+file path=opt/lib/libwbclient.so.0.0.0
+link path=opt/lib/libxml2.so target=libxml2.so.2.6.29
+link path=opt/lib/libxml2.so.2 target=libxml2.so.2.6.29
+file path=opt/lib/libxml2.so.2.6.29
+file path=opt/lib/lsa-provider/ad_open.so
+file path=opt/lib/lsa-provider/local.so
+file path=opt/lib/lsa-rpc/dssetup.so
+file path=opt/lib/lsa-rpc/lsa.so
+file path=opt/lib/lsa-rpc/samr.so
+file path=opt/lib/lsa-rpc/wkssvc.so
+file path=opt/lib/lw-map-sec/lsass.so
+file path=opt/lib/lw-pstore/samba.so
+file path=opt/lib/lw-svcm/dcerpc.so
+file path=opt/lib/lw-svcm/eventlog.so
+file path=opt/lib/lw-svcm/lsass.so
+file path=opt/lib/lw-svcm/lwio.so
+file path=opt/lib/lw-svcm/lwreg-memory.so
+file path=opt/lib/lw-svcm/lwreg-sqlite.so
+link path=opt/lib/lw-svcm/lwreg.so target=lwreg-sqlite.so
+file path=opt/lib/lw-svcm/netlogon.so
+file path=opt/lib/lw-svcm/reapsysl.so
+file path=opt/lib/lw-svcm/usermonitor.so
+file path=opt/lib/lwicompat_v4.so
+file path=opt/lib/lwio-driver/rdr.so
+file path=opt/lib/netlogon/SiteName.so
+file path=opt/lib/pkgconfig/sqlite3.pc
+link path=opt/lib/sasl2/libgssapiv2.so target=libgssapiv2.so.2.0.23
+link path=opt/lib/sasl2/libgssapiv2.so.2 target=libgssapiv2.so.2.0.23
+file path=opt/lib/sasl2/libgssapiv2.so.2.0.23
+link path=opt/lib/sasl2/libgssspnego.so target=libgssspnego.so.2.0.23
+link path=opt/lib/sasl2/libgssspnego.so.2 target=libgssspnego.so.2.0.23
+file path=opt/lib/sasl2/libgssspnego.so.2.0.23
+file path=opt/libexec/ConfigureLogin
+file path=opt/libexec/conf2reg
+file path=opt/libexec/gpcron
+file path=opt/libexec/init-base.sh
+file path=opt/libexec/lwkill.sh
+file path=opt/libexec/lwma
+file path=opt/libexec/offline-join.pl
+file path=opt/libexec/pbis-support.pl
+file path=opt/libexec/reg61sed.sh
+file path=opt/libexec/regupgr61.sh
+link path=opt/likewise/bin/domainjoin-cli \
+    target=/opt/bin/$(MACH64)/domainjoin-cli
+link path=opt/likewise/bin/kdestroy target=/opt/bin/$(MACH64)/kdestroy
+link path=opt/likewise/bin/kinit target=/opt/bin/$(MACH64)/kinit
+link path=opt/likewise/bin/klist target=/opt/bin/$(MACH64)/klist
+link path=opt/likewise/bin/ktutil target=/opt/bin/$(MACH64)/ktutil
+link path=opt/likewise/bin/kvno target=/opt/bin/$(MACH64)/kvno
+link path=opt/likewise/bin/lw-ad-cache target=/opt/bin/$(MACH64)/ad-cache
+link path=opt/likewise/bin/lw-add-group target=/opt/bin/$(MACH64)/add-group
+link path=opt/likewise/bin/lw-add-user target=/opt/bin/$(MACH64)/add-user
+link path=opt/likewise/bin/lw-adtool target=/opt/bin/$(MACH64)/adtool
+link path=opt/likewise/bin/lw-del-group target=/opt/bin/$(MACH64)/del-group
+link path=opt/likewise/bin/lw-del-user target=/opt/bin/$(MACH64)/del-user
+link path=opt/likewise/bin/lw-enum-groups target=/opt/bin/$(MACH64)/enum-groups
+link path=opt/likewise/bin/lw-enum-members \
+    target=/opt/bin/$(MACH64)/enum-members
+link path=opt/likewise/bin/lw-enum-objects \
+    target=/opt/bin/$(MACH64)/enum-objects
+link path=opt/likewise/bin/lw-enum-users target=/opt/bin/$(MACH64)/enum-users
+link path=opt/likewise/bin/lw-eventlog-cli \
+    target=/opt/bin/$(MACH64)/eventlog-cli
+link path=opt/likewise/bin/lw-find-by-sid target=/opt/bin/$(MACH64)/find-by-sid
+link path=opt/likewise/bin/lw-find-group-by-id \
+    target=/opt/bin/$(MACH64)/find-group-by-id
+link path=opt/likewise/bin/lw-find-group-by-name \
+    target=/opt/bin/$(MACH64)/find-group-by-name
+link path=opt/likewise/bin/lw-find-objects \
+    target=/opt/bin/$(MACH64)/find-objects
+link path=opt/likewise/bin/lw-find-user-by-id \
+    target=/opt/bin/$(MACH64)/find-user-by-id
+link path=opt/likewise/bin/lw-find-user-by-name \
+    target=/opt/bin/$(MACH64)/find-user-by-name
+link path=opt/likewise/bin/lw-get-dc-list target=/opt/bin/$(MACH64)/get-dc-list
+link path=opt/likewise/bin/lw-get-dc-name target=/opt/bin/$(MACH64)/get-dc-name
+link path=opt/likewise/bin/lw-get-dc-time target=/opt/bin/$(MACH64)/get-dc-time
+link path=opt/likewise/bin/lw-get-metrics target=/opt/bin/$(MACH64)/get-metrics
+link path=opt/likewise/bin/lw-get-status target=/opt/bin/$(MACH64)/get-status
+link path=opt/likewise/bin/lw-list-groups-for-user \
+    target=/opt/bin/$(MACH64)/list-groups-for-user
+link path=opt/likewise/bin/lw-lsa target=/opt/bin/$(MACH64)/lsa
+link path=opt/likewise/bin/lw-mod-group target=/opt/bin/$(MACH64)/mod-group
+link path=opt/likewise/bin/lw-mod-user target=/opt/bin/$(MACH64)/mod-user
+link path=opt/likewise/bin/lw-query-member-of \
+    target=/opt/bin/$(MACH64)/query-member-of
+link path=opt/likewise/bin/lw-update-dns target=/opt/bin/$(MACH64)/update-dns
+link path=opt/likewise/bin/lw-ypcat target=/opt/bin/$(MACH64)/ypcat
+link path=opt/likewise/bin/lw-ypmatch target=/opt/bin/$(MACH64)/ypmatch
+link path=opt/likewise/bin/lwconfig target=/opt/bin/$(MACH64)/config
+link path=opt/likewise/bin/lwio-copy target=/opt/bin/$(MACH64)/lwio-copy
+link path=opt/likewise/bin/lwregshell target=/opt/bin/$(MACH64)/regshell
+link path=opt/likewise/bin/lwsm target=/opt/bin/$(MACH64)/lwsm
+link path=opt/likewise/bin/passwd target=/opt/bin/$(MACH64)/passwd
+link path=opt/likewise/bin/samba-interop-install \
+    target=/opt/bin/$(MACH64)/samba-interop-install
+link path=opt/likewise/bin/sqlite3 target=/opt/bin/$(MACH64)/sqlite3
+file path=opt/mib/likewise-platform.mib
+file path=opt/pbis/docs/html/lsass/ad_8h.html
+file path=opt/pbis/docs/html/lsass/ad_8h.js
+file path=opt/pbis/docs/html/lsass/annotated.html
+file path=opt/pbis/docs/html/lsass/annotated_dup.js
+file path=opt/pbis/docs/html/lsass/bc_s.png
+file path=opt/pbis/docs/html/lsass/bdwn.png
+file path=opt/pbis/docs/html/lsass/classes.html
+file path=opt/pbis/docs/html/lsass/closed.png
+file path=opt/pbis/docs/html/lsass/dir_113840cd97157d66f7e356519f051383.html
+file path=opt/pbis/docs/html/lsass/dir_113840cd97157d66f7e356519f051383.js
+file path=opt/pbis/docs/html/lsass/dir_187313c96afb6d65b2d41b1446a9c78b.html
+file path=opt/pbis/docs/html/lsass/dir_187313c96afb6d65b2d41b1446a9c78b.js
+file path=opt/pbis/docs/html/lsass/dir_332911430c28895ff91d6183412430e6.html
+file path=opt/pbis/docs/html/lsass/dir_332911430c28895ff91d6183412430e6.js
+file path=opt/pbis/docs/html/lsass/dir_e1acbdb77a35228cdd7286a211b935a5.html
+file path=opt/pbis/docs/html/lsass/dir_e1acbdb77a35228cdd7286a211b935a5.js
+file path=opt/pbis/docs/html/lsass/doc.png
+file path=opt/pbis/docs/html/lsass/doxygen.css
+file path=opt/pbis/docs/html/lsass/doxygen.png
+file path=opt/pbis/docs/html/lsass/dynsections.js
+file path=opt/pbis/docs/html/lsass/files.html
+file path=opt/pbis/docs/html/lsass/files_dup.js
+file path=opt/pbis/docs/html/lsass/folderclosed.png
+file path=opt/pbis/docs/html/lsass/folderopen.png
+file path=opt/pbis/docs/html/lsass/functions.html
+file path=opt/pbis/docs/html/lsass/functions_vars.html
+file path=opt/pbis/docs/html/lsass/globals.html
+file path=opt/pbis/docs/html/lsass/globals_defs.html
+file path=opt/pbis/docs/html/lsass/globals_enum.html
+file path=opt/pbis/docs/html/lsass/globals_eval.html
+file path=opt/pbis/docs/html/lsass/globals_func.html
+file path=opt/pbis/docs/html/lsass/globals_type.html
+file path=opt/pbis/docs/html/lsass/group__ad.html
+file path=opt/pbis/docs/html/lsass/group__ad.js
+file path=opt/pbis/docs/html/lsass/group__lsa.html
+file path=opt/pbis/docs/html/lsass/group__lsa.js
+file path=opt/pbis/docs/html/lsass/index.html
+file path=opt/pbis/docs/html/lsass/jquery.js
+file path=opt/pbis/docs/html/lsass/lsa_8h.html
+file path=opt/pbis/docs/html/lsass/lsa_8h.js
+file path=opt/pbis/docs/html/lsass/menu.js
+file path=opt/pbis/docs/html/lsass/menudata.js
+file path=opt/pbis/docs/html/lsass/modules.html
+file path=opt/pbis/docs/html/lsass/modules.js
+file path=opt/pbis/docs/html/lsass/nav_f.png
+file path=opt/pbis/docs/html/lsass/nav_g.png
+file path=opt/pbis/docs/html/lsass/nav_h.png
+file path=opt/pbis/docs/html/lsass/navtree.css
+file path=opt/pbis/docs/html/lsass/navtree.js
+file path=opt/pbis/docs/html/lsass/navtreedata.js
+file path=opt/pbis/docs/html/lsass/navtreeindex0.js
+file path=opt/pbis/docs/html/lsass/open.png
+file path=opt/pbis/docs/html/lsass/resize.js
+file path=opt/pbis/docs/html/lsass/splitbar.png
+file path=opt/pbis/docs/html/lsass/structLSA__SECURITY__OBJECT.html
+file path=opt/pbis/docs/html/lsass/structLSA__SECURITY__OBJECT.js
+file path=opt/pbis/docs/html/lsass/structLSA__SECURITY__OBJECT__GROUP__INFO.html
+file path=opt/pbis/docs/html/lsass/structLSA__SECURITY__OBJECT__GROUP__INFO.js
+file path=opt/pbis/docs/html/lsass/structLSA__SECURITY__OBJECT__USER__INFO.html
+file path=opt/pbis/docs/html/lsass/structLSA__SECURITY__OBJECT__USER__INFO.js
+file path=opt/pbis/docs/html/lsass/sync_off.png
+file path=opt/pbis/docs/html/lsass/sync_on.png
+file path=opt/pbis/docs/html/lsass/tab_a.png
+file path=opt/pbis/docs/html/lsass/tab_b.png
+file path=opt/pbis/docs/html/lsass/tab_h.png
+file path=opt/pbis/docs/html/lsass/tab_s.png
+file path=opt/pbis/docs/html/lsass/tabs.css
+file path=opt/pbis/docs/html/lsass/unionLSA__QUERY__ITEM.html
+file path=opt/pbis/docs/html/lsass/unionLSA__QUERY__ITEM.js
+file path=opt/pbis/docs/html/lsass/unionLSA__QUERY__LIST.html
+file path=opt/pbis/docs/html/lsass/unionLSA__QUERY__LIST.js
+file path=opt/pbis/docs/html/lwbase/annotated.html
+file path=opt/pbis/docs/html/lwbase/annotated_dup.js
+file path=opt/pbis/docs/html/lwbase/bc_s.png
+file path=opt/pbis/docs/html/lwbase/bdwn.png
+file path=opt/pbis/docs/html/lwbase/classes.html
+file path=opt/pbis/docs/html/lwbase/closed.png
+file path=opt/pbis/docs/html/lwbase/dir_0b89980f6c82032af7a00978fb0d49e8.html
+file path=opt/pbis/docs/html/lwbase/dir_0b89980f6c82032af7a00978fb0d49e8.js
+file path=opt/pbis/docs/html/lwbase/doc.png
+file path=opt/pbis/docs/html/lwbase/doxygen.css
+file path=opt/pbis/docs/html/lwbase/doxygen.png
+file path=opt/pbis/docs/html/lwbase/dynsections.js
+file path=opt/pbis/docs/html/lwbase/files.html
+file path=opt/pbis/docs/html/lwbase/files_dup.js
+file path=opt/pbis/docs/html/lwbase/folderclosed.png
+file path=opt/pbis/docs/html/lwbase/folderopen.png
+file path=opt/pbis/docs/html/lwbase/functions.html
+file path=opt/pbis/docs/html/lwbase/functions_vars.html
+file path=opt/pbis/docs/html/lwbase/globals.html
+file path=opt/pbis/docs/html/lwbase/globals_defs.html
+file path=opt/pbis/docs/html/lwbase/globals_enum.html
+file path=opt/pbis/docs/html/lwbase/globals_eval.html
+file path=opt/pbis/docs/html/lwbase/globals_func.html
+file path=opt/pbis/docs/html/lwbase/globals_type.html
+file path=opt/pbis/docs/html/lwbase/group__hashmap.html
+file path=opt/pbis/docs/html/lwbase/group__hashmap.js
+file path=opt/pbis/docs/html/lwbase/group__hashtable.html
+file path=opt/pbis/docs/html/lwbase/group__hashtable.js
+file path=opt/pbis/docs/html/lwbase/group__hashutil.html
+file path=opt/pbis/docs/html/lwbase/group__hashutil.js
+file path=opt/pbis/docs/html/lwbase/group__svcm.html
+file path=opt/pbis/docs/html/lwbase/group__svcm.js
+file path=opt/pbis/docs/html/lwbase/group__threadpool.html
+file path=opt/pbis/docs/html/lwbase/group__threadpool.js
+file path=opt/pbis/docs/html/lwbase/hash_8h.html
+file path=opt/pbis/docs/html/lwbase/hash_8h.js
+file path=opt/pbis/docs/html/lwbase/index.html
+file path=opt/pbis/docs/html/lwbase/jquery.js
+file path=opt/pbis/docs/html/lwbase/menu.js
+file path=opt/pbis/docs/html/lwbase/menudata.js
+file path=opt/pbis/docs/html/lwbase/modules.html
+file path=opt/pbis/docs/html/lwbase/modules.js
+file path=opt/pbis/docs/html/lwbase/nav_f.png
+file path=opt/pbis/docs/html/lwbase/nav_g.png
+file path=opt/pbis/docs/html/lwbase/nav_h.png
+file path=opt/pbis/docs/html/lwbase/navtree.css
+file path=opt/pbis/docs/html/lwbase/navtree.js
+file path=opt/pbis/docs/html/lwbase/navtreedata.js
+file path=opt/pbis/docs/html/lwbase/navtreeindex0.js
+file path=opt/pbis/docs/html/lwbase/navtreeindex1.js
+file path=opt/pbis/docs/html/lwbase/open.png
+file path=opt/pbis/docs/html/lwbase/resize.js
+file path=opt/pbis/docs/html/lwbase/splitbar.png
+file path=opt/pbis/docs/html/lwbase/structACCESS__ALLOWED__ACE.html
+file path=opt/pbis/docs/html/lwbase/structACCESS__ALLOWED__ACE.js
+file path=opt/pbis/docs/html/lwbase/structACCESS__ALLOWED__CALLBACK__ACE.html
+file path=opt/pbis/docs/html/lwbase/structACCESS__ALLOWED__CALLBACK__ACE.js
+file path=opt/pbis/docs/html/lwbase/structACCESS__ALLOWED__OBJECT__ACE.html
+file path=opt/pbis/docs/html/lwbase/structACCESS__ALLOWED__OBJECT__ACE.js
+file path=opt/pbis/docs/html/lwbase/structACCESS__DENIED__ACE.html
+file path=opt/pbis/docs/html/lwbase/structACCESS__DENIED__ACE.js
+file path=opt/pbis/docs/html/lwbase/structACCESS__DENIED__CALLBACK__ACE.html
+file path=opt/pbis/docs/html/lwbase/structACCESS__DENIED__CALLBACK__ACE.js
+file path=opt/pbis/docs/html/lwbase/structACCESS__DENIED__OBJECT__ACE.html
+file path=opt/pbis/docs/html/lwbase/structACCESS__DENIED__OBJECT__ACE.js
+file path=opt/pbis/docs/html/lwbase/structACCESS__TOKEN__CREATE__INFORMATION.html
+file path=opt/pbis/docs/html/lwbase/structACCESS__TOKEN__CREATE__INFORMATION.js
+file path=opt/pbis/docs/html/lwbase/structACE__HEADER.html
+file path=opt/pbis/docs/html/lwbase/structACE__HEADER.js
+file path=opt/pbis/docs/html/lwbase/structGENERIC__MAPPING.html
+file path=opt/pbis/docs/html/lwbase/structGENERIC__MAPPING.js
+file path=opt/pbis/docs/html/lwbase/structLUID__AND__ATTRIBUTES.html
+file path=opt/pbis/docs/html/lwbase/structLUID__AND__ATTRIBUTES.js
+file path=opt/pbis/docs/html/lwbase/structLW__ANSI__STRING.html
+file path=opt/pbis/docs/html/lwbase/structLW__ANSI__STRING.js
+file path=opt/pbis/docs/html/lwbase/structLW__GUID.html
+file path=opt/pbis/docs/html/lwbase/structLW__GUID.js
+file path=opt/pbis/docs/html/lwbase/structLW__HASHMAP__ITER.html
+file path=opt/pbis/docs/html/lwbase/structLW__HASHMAP__ITER.js
+file path=opt/pbis/docs/html/lwbase/structLW__HASHMAP__PAIR.html
+file path=opt/pbis/docs/html/lwbase/structLW__HASHMAP__PAIR.js
+file path=opt/pbis/docs/html/lwbase/structLW__HASHTABLE__ITER.html
+file path=opt/pbis/docs/html/lwbase/structLW__HASHTABLE__ITER.js
+file path=opt/pbis/docs/html/lwbase/structLW__HASHTABLE__NODE.html
+file path=opt/pbis/docs/html/lwbase/structLW__HASHTABLE__NODE.js
+file path=opt/pbis/docs/html/lwbase/structLW__LUID.html
+file path=opt/pbis/docs/html/lwbase/structLW__LUID.js
+file path=opt/pbis/docs/html/lwbase/structLW__MAP__SECURITY__NTLM__LOGON__INFO.html
+file path=opt/pbis/docs/html/lwbase/structLW__MAP__SECURITY__NTLM__LOGON__INFO.js
+file path=opt/pbis/docs/html/lwbase/structLW__MAP__SECURITY__NTLM__LOGON__RESULT.html
+file path=opt/pbis/docs/html/lwbase/structLW__MAP__SECURITY__NTLM__LOGON__RESULT.js
+file path=opt/pbis/docs/html/lwbase/structLW__MAP__SECURITY__PLUGIN__INTERFACE.html
+file path=opt/pbis/docs/html/lwbase/structLW__MAP__SECURITY__PLUGIN__INTERFACE.js
+file path=opt/pbis/docs/html/lwbase/structLW__RTL__LOG__CONTROL.html
+file path=opt/pbis/docs/html/lwbase/structLW__RTL__LOG__CONTROL.js
+file path=opt/pbis/docs/html/lwbase/structLW__SVCM__MODULE.html
+file path=opt/pbis/docs/html/lwbase/structLW__SVCM__MODULE.js
+file path=opt/pbis/docs/html/lwbase/structLW__UNICODE__STRING.html
+file path=opt/pbis/docs/html/lwbase/structLW__UNICODE__STRING.js
+file path=opt/pbis/docs/html/lwbase/structPRIVILEGE__SET.html
+file path=opt/pbis/docs/html/lwbase/structPRIVILEGE__SET.js
+file path=opt/pbis/docs/html/lwbase/structSECURITY__QUALITY__OF__SERVICE.html
+file path=opt/pbis/docs/html/lwbase/structSECURITY__QUALITY__OF__SERVICE.js
+file path=opt/pbis/docs/html/lwbase/structSID.html
+file path=opt/pbis/docs/html/lwbase/structSID.js
+file path=opt/pbis/docs/html/lwbase/structSID__AND__ATTRIBUTES.html
+file path=opt/pbis/docs/html/lwbase/structSID__AND__ATTRIBUTES.js
+file path=opt/pbis/docs/html/lwbase/structSID__IDENTIFIER__AUTHORITY.html
+file path=opt/pbis/docs/html/lwbase/structSID__IDENTIFIER__AUTHORITY.js
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__ALARM__ACE.html
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__ALARM__ACE.js
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__ALARM__CALLBACK__ACE.html
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__ALARM__CALLBACK__ACE.js
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__ALARM__OBJECT__ACE.html
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__ALARM__OBJECT__ACE.js
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__AUDIT__ACE.html
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__AUDIT__ACE.js
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__AUDIT__CALLBACK__ACE.html
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__AUDIT__CALLBACK__ACE.js
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__AUDIT__OBJECT__ACE.html
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__AUDIT__OBJECT__ACE.js
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__MANDATORY__LABEL__ACE.html
+file path=opt/pbis/docs/html/lwbase/structSYSTEM__MANDATORY__LABEL__ACE.js
+file path=opt/pbis/docs/html/lwbase/structTOKEN__DEFAULT__DACL.html
+file path=opt/pbis/docs/html/lwbase/structTOKEN__DEFAULT__DACL.js
+file path=opt/pbis/docs/html/lwbase/structTOKEN__GROUPS.html
+file path=opt/pbis/docs/html/lwbase/structTOKEN__GROUPS.js
+file path=opt/pbis/docs/html/lwbase/structTOKEN__OWNER.html
+file path=opt/pbis/docs/html/lwbase/structTOKEN__OWNER.js
+file path=opt/pbis/docs/html/lwbase/structTOKEN__PRIMARY__GROUP.html
+file path=opt/pbis/docs/html/lwbase/structTOKEN__PRIMARY__GROUP.js
+file path=opt/pbis/docs/html/lwbase/structTOKEN__PRIVILEGES.html
+file path=opt/pbis/docs/html/lwbase/structTOKEN__PRIVILEGES.js
+file path=opt/pbis/docs/html/lwbase/structTOKEN__UNIX.html
+file path=opt/pbis/docs/html/lwbase/structTOKEN__UNIX.js
+file path=opt/pbis/docs/html/lwbase/structTOKEN__USER.html
+file path=opt/pbis/docs/html/lwbase/structTOKEN__USER.js
+file path=opt/pbis/docs/html/lwbase/svcm_8h.html
+file path=opt/pbis/docs/html/lwbase/svcm_8h.js
+file path=opt/pbis/docs/html/lwbase/sync_off.png
+file path=opt/pbis/docs/html/lwbase/sync_on.png
+file path=opt/pbis/docs/html/lwbase/tab_a.png
+file path=opt/pbis/docs/html/lwbase/tab_b.png
+file path=opt/pbis/docs/html/lwbase/tab_h.png
+file path=opt/pbis/docs/html/lwbase/tab_s.png
+file path=opt/pbis/docs/html/lwbase/tabs.css
+file path=opt/pbis/docs/html/lwbase/threadpool_8h.html
+file path=opt/pbis/docs/html/lwbase/threadpool_8h.js
+file path=opt/pbis/docs/html/lwmsg/annotated.html
+file path=opt/pbis/docs/html/lwmsg/annotated_dup.js
+file path=opt/pbis/docs/html/lwmsg/arch.html
+file path=opt/pbis/docs/html/lwmsg/arch.js
+file path=opt/pbis/docs/html/lwmsg/arch_rep.html
+file path=opt/pbis/docs/html/lwmsg/arch_sess.html
+file path=opt/pbis/docs/html/lwmsg/archive_8h.html
+file path=opt/pbis/docs/html/lwmsg/archive_8h.js
+file path=opt/pbis/docs/html/lwmsg/assoc_8h.html
+file path=opt/pbis/docs/html/lwmsg/assoc_8h.js
+file path=opt/pbis/docs/html/lwmsg/bc_s.png
+file path=opt/pbis/docs/html/lwmsg/bdwn.png
+file path=opt/pbis/docs/html/lwmsg/buffer_8h.html
+file path=opt/pbis/docs/html/lwmsg/buffer_8h.js
+file path=opt/pbis/docs/html/lwmsg/call_8h.html
+file path=opt/pbis/docs/html/lwmsg/call_8h.js
+file path=opt/pbis/docs/html/lwmsg/classes.html
+file path=opt/pbis/docs/html/lwmsg/closed.png
+file path=opt/pbis/docs/html/lwmsg/common_8h.html
+file path=opt/pbis/docs/html/lwmsg/common_8h.js
+file path=opt/pbis/docs/html/lwmsg/connection_8h.html
+file path=opt/pbis/docs/html/lwmsg/connection_8h.js
+file path=opt/pbis/docs/html/lwmsg/context_8h.html
+file path=opt/pbis/docs/html/lwmsg/context_8h.js
+file path=opt/pbis/docs/html/lwmsg/data_8h.html
+file path=opt/pbis/docs/html/lwmsg/data_8h.js
+file path=opt/pbis/docs/html/lwmsg/deprecated.html
+file path=opt/pbis/docs/html/lwmsg/dir_114d180d7018a01bcb854a772830be0b.html
+file path=opt/pbis/docs/html/lwmsg/dir_315ef185ca6f3537c287f5b03bfe59dd.html
+file path=opt/pbis/docs/html/lwmsg/dir_d412498183f645de70132fc705130629.html
+file path=opt/pbis/docs/html/lwmsg/dir_d412498183f645de70132fc705130629.js
+file path=opt/pbis/docs/html/lwmsg/dir_daa769a4473f29d9b57b2c2e9b77dc15.html
+file path=opt/pbis/docs/html/lwmsg/dir_daa769a4473f29d9b57b2c2e9b77dc15.js
+file path=opt/pbis/docs/html/lwmsg/dir_e1acbdb77a35228cdd7286a211b935a5.html
+file path=opt/pbis/docs/html/lwmsg/doc.png
+file path=opt/pbis/docs/html/lwmsg/doxygen.css
+file path=opt/pbis/docs/html/lwmsg/doxygen.png
+file path=opt/pbis/docs/html/lwmsg/dynsections.js
+file path=opt/pbis/docs/html/lwmsg/example_fserv.html
+file path=opt/pbis/docs/html/lwmsg/example_fserv.js
+file path=opt/pbis/docs/html/lwmsg/example_fserv_layout.html
+file path=opt/pbis/docs/html/lwmsg/example_fserv_layout.js
+file path=opt/pbis/docs/html/lwmsg/example_fserv_walkthrough.html
+file path=opt/pbis/docs/html/lwmsg/example_fserv_walkthrough.js
+file path=opt/pbis/docs/html/lwmsg/example_fserv_walkthrough_client.html
+file path=opt/pbis/docs/html/lwmsg/example_fserv_walkthrough_common.html
+file path=opt/pbis/docs/html/lwmsg/example_fserv_walkthrough_server.html
+file path=opt/pbis/docs/html/lwmsg/fcat_c.html
+file path=opt/pbis/docs/html/lwmsg/files.html
+file path=opt/pbis/docs/html/lwmsg/files_dup.js
+file path=opt/pbis/docs/html/lwmsg/folderclosed.png
+file path=opt/pbis/docs/html/lwmsg/folderopen.png
+file path=opt/pbis/docs/html/lwmsg/fserv_client_c.html
+file path=opt/pbis/docs/html/lwmsg/fserv_h.html
+file path=opt/pbis/docs/html/lwmsg/fserver_c.html
+file path=opt/pbis/docs/html/lwmsg/fserver_dispatch_c.html
+file path=opt/pbis/docs/html/lwmsg/fsink_c.html
+file path=opt/pbis/docs/html/lwmsg/functions.html
+file path=opt/pbis/docs/html/lwmsg/functions_vars.html
+file path=opt/pbis/docs/html/lwmsg/globals.html
+file path=opt/pbis/docs/html/lwmsg/globals_defs.html
+file path=opt/pbis/docs/html/lwmsg/globals_dup.js
+file path=opt/pbis/docs/html/lwmsg/globals_enum.html
+file path=opt/pbis/docs/html/lwmsg/globals_eval.html
+file path=opt/pbis/docs/html/lwmsg/globals_func.html
+file path=opt/pbis/docs/html/lwmsg/globals_type.html
+file path=opt/pbis/docs/html/lwmsg/group__archive.html
+file path=opt/pbis/docs/html/lwmsg/group__archive.js
+file path=opt/pbis/docs/html/lwmsg/group__assoc.html
+file path=opt/pbis/docs/html/lwmsg/group__assoc.js
+file path=opt/pbis/docs/html/lwmsg/group__buffer.html
+file path=opt/pbis/docs/html/lwmsg/group__buffer.js
+file path=opt/pbis/docs/html/lwmsg/group__call.html
+file path=opt/pbis/docs/html/lwmsg/group__call.js
+file path=opt/pbis/docs/html/lwmsg/group__common.html
+file path=opt/pbis/docs/html/lwmsg/group__common.js
+file path=opt/pbis/docs/html/lwmsg/group__connect.html
+file path=opt/pbis/docs/html/lwmsg/group__connect.js
+file path=opt/pbis/docs/html/lwmsg/group__context.html
+file path=opt/pbis/docs/html/lwmsg/group__context.js
+file path=opt/pbis/docs/html/lwmsg/group__data.html
+file path=opt/pbis/docs/html/lwmsg/group__data.js
+file path=opt/pbis/docs/html/lwmsg/group__peer.html
+file path=opt/pbis/docs/html/lwmsg/group__peer.js
+file path=opt/pbis/docs/html/lwmsg/group__protocol.html
+file path=opt/pbis/docs/html/lwmsg/group__protocol.js
+file path=opt/pbis/docs/html/lwmsg/group__public.html
+file path=opt/pbis/docs/html/lwmsg/group__public.js
+file path=opt/pbis/docs/html/lwmsg/group__security.html
+file path=opt/pbis/docs/html/lwmsg/group__security.js
+file path=opt/pbis/docs/html/lwmsg/group__session.html
+file path=opt/pbis/docs/html/lwmsg/group__session.js
+file path=opt/pbis/docs/html/lwmsg/group__status.html
+file path=opt/pbis/docs/html/lwmsg/group__status.js
+file path=opt/pbis/docs/html/lwmsg/group__types.html
+file path=opt/pbis/docs/html/lwmsg/group__types.js
+file path=opt/pbis/docs/html/lwmsg/index.html
+file path=opt/pbis/docs/html/lwmsg/jquery.js
+file path=opt/pbis/docs/html/lwmsg/menu.js
+file path=opt/pbis/docs/html/lwmsg/menudata.js
+file path=opt/pbis/docs/html/lwmsg/message_8h.html
+file path=opt/pbis/docs/html/lwmsg/message_8h.js
+file path=opt/pbis/docs/html/lwmsg/modules.html
+file path=opt/pbis/docs/html/lwmsg/modules.js
+file path=opt/pbis/docs/html/lwmsg/nav_f.png
+file path=opt/pbis/docs/html/lwmsg/nav_g.png
+file path=opt/pbis/docs/html/lwmsg/nav_h.png
+file path=opt/pbis/docs/html/lwmsg/navtree.css
+file path=opt/pbis/docs/html/lwmsg/navtree.js
+file path=opt/pbis/docs/html/lwmsg/navtreedata.js
+file path=opt/pbis/docs/html/lwmsg/navtreeindex0.js
+file path=opt/pbis/docs/html/lwmsg/navtreeindex1.js
+file path=opt/pbis/docs/html/lwmsg/navtreeindex2.js
+file path=opt/pbis/docs/html/lwmsg/open.png
+file path=opt/pbis/docs/html/lwmsg/pages.html
+file path=opt/pbis/docs/html/lwmsg/peer_8h.html
+file path=opt/pbis/docs/html/lwmsg/peer_8h.js
+file path=opt/pbis/docs/html/lwmsg/protocol_8h.html
+file path=opt/pbis/docs/html/lwmsg/protocol_8h.js
+file path=opt/pbis/docs/html/lwmsg/protocol_c.html
+file path=opt/pbis/docs/html/lwmsg/protocol_h.html
+file path=opt/pbis/docs/html/lwmsg/protocol_server_h.html
+file path=opt/pbis/docs/html/lwmsg/resize.js
+file path=opt/pbis/docs/html/lwmsg/security_8h.html
+file path=opt/pbis/docs/html/lwmsg/security_8h.js
+file path=opt/pbis/docs/html/lwmsg/session_8h.html
+file path=opt/pbis/docs/html/lwmsg/session_8h.js
+file path=opt/pbis/docs/html/lwmsg/splitbar.png
+file path=opt/pbis/docs/html/lwmsg/status_8h.html
+file path=opt/pbis/docs/html/lwmsg/status_8h.js
+file path=opt/pbis/docs/html/lwmsg/structLWMsgBuffer.html
+file path=opt/pbis/docs/html/lwmsg/structLWMsgBuffer.js
+file path=opt/pbis/docs/html/lwmsg/structLWMsgMessage.html
+file path=opt/pbis/docs/html/lwmsg/structLWMsgMessage.js
+file path=opt/pbis/docs/html/lwmsg/structLWMsgParams.html
+file path=opt/pbis/docs/html/lwmsg/structLWMsgParams.js
+file path=opt/pbis/docs/html/lwmsg/structLWMsgTypeClass.html
+file path=opt/pbis/docs/html/lwmsg/structLWMsgTypeClass.js
+file path=opt/pbis/docs/html/lwmsg/sync_off.png
+file path=opt/pbis/docs/html/lwmsg/sync_on.png
+file path=opt/pbis/docs/html/lwmsg/tab_a.png
+file path=opt/pbis/docs/html/lwmsg/tab_b.png
+file path=opt/pbis/docs/html/lwmsg/tab_h.png
+file path=opt/pbis/docs/html/lwmsg/tab_s.png
+file path=opt/pbis/docs/html/lwmsg/tabs.css
+file path=opt/pbis/docs/html/lwsm/annotated.html
+file path=opt/pbis/docs/html/lwsm/annotated_dup.js
+file path=opt/pbis/docs/html/lwsm/bc_s.png
+file path=opt/pbis/docs/html/lwsm/bdwn.png
+file path=opt/pbis/docs/html/lwsm/classes.html
+file path=opt/pbis/docs/html/lwsm/closed.png
+file path=opt/pbis/docs/html/lwsm/dir_04b54bafe3d84736898ae512d55ed3e5.html
+file path=opt/pbis/docs/html/lwsm/dir_04b54bafe3d84736898ae512d55ed3e5.js
+file path=opt/pbis/docs/html/lwsm/doc.png
+file path=opt/pbis/docs/html/lwsm/doxygen.css
+file path=opt/pbis/docs/html/lwsm/doxygen.png
+file path=opt/pbis/docs/html/lwsm/dynsections.js
+file path=opt/pbis/docs/html/lwsm/files.html
+file path=opt/pbis/docs/html/lwsm/files_dup.js
+file path=opt/pbis/docs/html/lwsm/folderclosed.png
+file path=opt/pbis/docs/html/lwsm/folderopen.png
+file path=opt/pbis/docs/html/lwsm/functions.html
+file path=opt/pbis/docs/html/lwsm/functions_vars.html
+file path=opt/pbis/docs/html/lwsm/globals.html
+file path=opt/pbis/docs/html/lwsm/globals_enum.html
+file path=opt/pbis/docs/html/lwsm/globals_eval.html
+file path=opt/pbis/docs/html/lwsm/globals_func.html
+file path=opt/pbis/docs/html/lwsm/globals_type.html
+file path=opt/pbis/docs/html/lwsm/group__client.html
+file path=opt/pbis/docs/html/lwsm/group__client.js
+file path=opt/pbis/docs/html/lwsm/index.html
+file path=opt/pbis/docs/html/lwsm/jquery.js
+file path=opt/pbis/docs/html/lwsm/lwsm_8h.html
+file path=opt/pbis/docs/html/lwsm/lwsm_8h.js
+file path=opt/pbis/docs/html/lwsm/menu.js
+file path=opt/pbis/docs/html/lwsm/menudata.js
+file path=opt/pbis/docs/html/lwsm/modules.html
+file path=opt/pbis/docs/html/lwsm/modules.js
+file path=opt/pbis/docs/html/lwsm/nav_f.png
+file path=opt/pbis/docs/html/lwsm/nav_g.png
+file path=opt/pbis/docs/html/lwsm/nav_h.png
+file path=opt/pbis/docs/html/lwsm/navtree.css
+file path=opt/pbis/docs/html/lwsm/navtree.js
+file path=opt/pbis/docs/html/lwsm/navtreedata.js
+file path=opt/pbis/docs/html/lwsm/navtreeindex0.js
+file path=opt/pbis/docs/html/lwsm/open.png
+file path=opt/pbis/docs/html/lwsm/resize.js
+file path=opt/pbis/docs/html/lwsm/splitbar.png
+file path=opt/pbis/docs/html/lwsm/structLW__SERVICE__INFO.html
+file path=opt/pbis/docs/html/lwsm/structLW__SERVICE__INFO.js
+file path=opt/pbis/docs/html/lwsm/structLW__SERVICE__STATUS.html
+file path=opt/pbis/docs/html/lwsm/structLW__SERVICE__STATUS.js
+file path=opt/pbis/docs/html/lwsm/sync_off.png
+file path=opt/pbis/docs/html/lwsm/sync_on.png
+file path=opt/pbis/docs/html/lwsm/tab_a.png
+file path=opt/pbis/docs/html/lwsm/tab_b.png
+file path=opt/pbis/docs/html/lwsm/tab_h.png
+file path=opt/pbis/docs/html/lwsm/tab_s.png
+file path=opt/pbis/docs/html/lwsm/tabs.css
+file path=opt/pbis/share/config/accounts.reg
+file path=opt/pbis/share/config/dcerpcd.reg
+file path=opt/pbis/share/config/eventlogd.reg
+file path=opt/pbis/share/config/lsassd.reg
+file path=opt/pbis/share/config/lwiod.reg
+file path=opt/pbis/share/config/lwreg.reg
+file path=opt/pbis/share/config/netlogond.reg
+file path=opt/pbis/share/config/privileges.reg
+file path=opt/pbis/share/config/rdr.reg
+file path=opt/pbis/share/config/reapsysl.reg
+file path=opt/pbis/share/config/usermonitor.reg
+file path=opt/pbis/share/dcerpc/idl.cat
+file path=opt/sbin/$(MACH64)/lw-svcm-wrap
+file path=opt/sbin/$(MACH64)/lwsmd
+file path=opt/sbin/lw-svcm-wrap
+file path=opt/sbin/lwsmd
+file path=opt/share/man/man7/pbis.7
+file path=opt/share/man/man8/adtool.8
+file path=opt/share/man/man8/domainjoin-cli.8
+file path=opt/ssl/misc/CA.pl
+file path=opt/ssl/misc/CA.sh
+file path=opt/ssl/misc/c_hash
+file path=opt/ssl/misc/c_info
+file path=opt/ssl/misc/c_issuer
+file path=opt/ssl/misc/c_name
+file path=opt/ssl/openssl.cnf
+link path=usr/bin/domainjoin-cli target=/opt/bin/$(MACH64)/domainjoin-cli
+link path=usr/bin/pbis target=/opt/bin/$(MACH64)/lsa
+file path=usr/lib/$(MACH64)/nss_lsass.so.1
+file path=usr/lib/nss_lsass.so.1
+file path=usr/lib/security/$(MACH64)/pam_lsass.so
+file path=usr/lib/security/pam_lsass.so
+file path=var/lib/pbis/lwconfig.xml
+file path=var/lib/pbis/lwreport.xml

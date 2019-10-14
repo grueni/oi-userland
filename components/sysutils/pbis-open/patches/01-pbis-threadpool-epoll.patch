@@ -1,0 +1,11 @@
+--- pbis-open-9.1.0/lwbase/src/threadpool-epoll.c.~1~	2019-09-13 17:41:10.000000000 +0000
++++ pbis-open-9.1.0/lwbase/src/threadpool-epoll.c	2019-10-14 11:48:58.446576919 +0000
+@@ -159,7 +159,7 @@
+     )
+ {
+     NTSTATUS status = STATUS_SUCCESS;
+-    __uint32_t events = 0;
++    uint32_t events = 0;
+     struct epoll_event event;
+ 
+     if ((pTask->EventWait & FD_EVENTS) != (pTask->EventLastWait & FD_EVENTS) && pTask->Fd >= 0)
