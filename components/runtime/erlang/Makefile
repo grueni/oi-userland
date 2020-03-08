@@ -29,14 +29,13 @@ include ../../../make-rules/shared-macros.mk
 PATH=$(JAVA_HOME)/bin:$(USRBINDIR)
 
 COMPONENT_NAME=           erlang
-COMPONENT_VERSION=        19.3
-COMPONENT_REVISION=       1
+COMPONENT_VERSION=        22.2
 COMPONENT_FMRI=           runtime/erlang
 COMPONENT_PROJECT_URL=    http://www.erlang.org/
 COMPONENT_SRC_NAME=       otp_src
 COMPONENT_SRC=            $(COMPONENT_SRC_NAME)_$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=        $(COMPONENT_SRC).tar.gz
-COMPONENT_ARCHIVE_HASH=   sha256:fe4a00651db39b8542b04530a48d24b2f2e7e0b77cbe93d728c9f05325bdfe83
+COMPONENT_ARCHIVE_HASH=   sha256:89c2480cdac566065577c82704a48e10f89cf2e6ca5ab99e1cf80027784c678f
 COMPONENT_ARCHIVE_URL=    $(COMPONENT_PROJECT_URL)download/$(COMPONENT_ARCHIVE)
 COMPONENT_CLASSIFICATION= Development/Other Languages
 COMPONENT_LICENSE=        Apache-2.0
@@ -49,7 +48,7 @@ COMPONENT_NAME_1=	otp_doc_man
 COMPONENT_SRC_1=	$(COMPONENT_NAME_1)_$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE_1=	$(COMPONENT_SRC_1).tar.gz
 COMPONENT_ARCHIVE_HASH_1=	\
-    sha256:f8192ffdd7367083c055695eeddf198155da43dcc221aed1d870d1e3871dd95c
+    sha256:aad7e3795a44091aa33a460e3fdc94efe8757639caeba0b5ba7d79bd91c972b3
 COMPONENT_ARCHIVE_URL_1=	$(COMPONENT_PROJECT_URL)download/$(COMPONENT_ARCHIVE_1)
 UNPACK_ARGS_1=	-r $(COMPONENT_SRC_1)
 PKG_PROTO_DIRS +=	$(COMPONENT_SRC_1)
@@ -59,7 +58,7 @@ COMPONENT_NAME_2=	otp_doc_html
 COMPONENT_SRC_2=	$(COMPONENT_NAME_2)_$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE_2=	$(COMPONENT_SRC_2).tar.gz
 COMPONENT_ARCHIVE_HASH_2=	\
-    sha256:dc3e3a82d1aba7f0deac1ddb81b7d6f8dee9a75e1d42b90c677a2b645f19a00c
+    sha256:09d41810d79fafde293feb48ebb249940eca6f9f5733abb235e37d06b8f482e3
 COMPONENT_ARCHIVE_URL_2=	$(COMPONENT_PROJECT_URL)download/$(COMPONENT_ARCHIVE_2)
 UNPACK_ARGS_2=	-r $(COMPONENT_SRC_2)
 PKG_PROTO_DIRS +=	$(COMPONENT_SRC_2)
@@ -70,7 +69,7 @@ include $(WS_MAKE_RULES)/ips.mk
 
 SYSTEM_TEST_TARGET= configure $(SYSTEM_TEST_64)
 
-CFLAGS += -std=c99 -D_XOPEN_SOURCE=600 -D__EXTENSIONS__
+CFLAGS += -std=gnu11 -D_XOPEN_SOURCE=600 -D__EXTENSIONS__
 
 # Fix 64-bit linking.
 LDFLAGS += $(CC_BITS)
@@ -79,14 +78,16 @@ CXXFLAGS += -std=c++11
 
 CONFIGURE_OPTIONS.64 += --with-wx-config=/usr/bin/$(MACH64)/wx-config
 CONFIGURE_OPTIONS += CPPFLAGS="$(CPPFLAGS) -I/usr/include/gd2"
-CONFIGURE_OPTIONS += --enable-smp-support
-CONFIGURE_OPTIONS += --enable-threads
+#CONFIGURE_OPTIONS += --enable-smp-support
+#CONFIGURE_OPTIONS += --enable-threads
 # The HiPE portion is a bit sensitive, and only seems to work 64-bit on
 # amd64 (thus the variant.arch tagging in erlang.p5m). erts/config.log
 # can be very interesting if issues occur.
 CONFIGURE_OPTIONS += --enable-hipe
-CONFIGURE_OPTIONS += --with-ssl
+CONFIGURE_OPTIONS += --with-ssl=$(USRDIR)
+CONFIGURE_OPTIONS += --with-ssl-rpath=no
 CONFIGURE_OPTIONS += --enable-dynamic-ssl-lib
+
 
 # Erlang doesn't appear to like ASLR: it uses mmap() with MAP_FIXED, and
 # makes assumptions about memory layout that aren't true on Solaris x86,
